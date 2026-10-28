@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>data_description</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# Data description
+
+[![Order Header Pos Data](https://img.shields.io/badge/Order-Header%20and%20Pos-%23352898?style=flat&labelColor=%2315934E)](data/data-example/raw/001_order_header_pos_data.csv)
+[![Product Master Data](https://img.shields.io/badge/Product-Master-%23352898?style=flat&labelColor=%2315934E)](data/data-example/raw/002_product_master_data.csv)
+[![Product Price Data](https://img.shields.io/badge/Product-Prices-%23352898?style=flat&labelColor=%2315934E)](data/data-example/raw/003_product_price_data.csv)
+[![Customer Master Data](https://img.shields.io/badge/Customer-Master-%23352898?style=flat&labelColor=%2315934E)](data/data-example/raw/004_customer_master_data.csv)
+[![Customer Industry Mapping Data](https://img.shields.io/badge/Customer-Industry%20Mapping-%23352898?style=flat&labelColor=%2315934E)](data/data-example/raw/005_customer_industry_mapping_data.csv)
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#order-header-and-position-data">Order: Header and position data</a></li>
+<li><a href="#product-master-data">Product: Master data</a></li>
+<li><a href="#product-price-data">Product: Price data</a></li>
+<li><a href="#customer-master-data">Customer: Master data</a></li>
+<li><a href="#customer-industry-mapping-data">Customer: Industry mapping data</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>...</p>
+<hr />
+<h2 id="order-header-and-position-data">Order: Header and position data</h2>
+<p><strong>Data file:</strong> <code>data/data-example/raw/001_order_header_pos_data.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SALESORDER</code></td>
+<td>Sales order ID (number)</td>
+</tr>
+<tr>
+<td><code>SALESORDERTYPE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>OVERALLSDPROCESSSTATUS</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SDDOCUMENTREASON</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>OVERALLSDDOCUMENTREJECTIONSTS</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SALESORDERDATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SOLDTOPARTY</code></td>
+<td>Customer ID</td>
+</tr>
+<tr>
+<td><code>TOTALNETAMOUNT</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TRANSACTIONCURRENCY</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>SALESORDERITEM</code></td>
+<td>Position number, of the ordered items</td>
+</tr>
+<tr>
+<td><code>MATERIAL</code></td>
+<td>Product ID (number)</td>
+</tr>
+<tr>
+<td><code>CONFDDELIVQTYINORDERQTYUNIT</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="product-master-data">Product: Master data</h2>
+<p><strong>Data file:</strong> <code>data/data-example/raw/002_product_master_data.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PRODUCT</code></td>
+<td>Product ID (number)</td>
+</tr>
+<tr>
+<td><code>PRODUCTGROUP</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TO_PLANT_BASEUNIT</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>TO_PRODUCTBASICTEXT_LONGTEXT</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="product-price-data">Product: Price data</h2>
+<p><strong>Data file:</strong> <code>data/data-example/raw/003_product_price_data.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MATERIAL</code></td>
+<td>Product ID (number)</td>
+</tr>
+<tr>
+<td><code>CONDITIONVALIDITYSTARTDATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CONDITIONVALIDITYENDDATE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CUSTOMERPRICEGROUP</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CUSTOMER</code></td>
+<td>Customer ID</td>
+</tr>
+<tr>
+<td><code>CONDITIONTYPE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CONDITIONRATEVALUE</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CONDITIONRATEVALUEUNIT</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="customer-master-data">Customer: Master data</h2>
+<p><strong>Data file:</strong> <code>data/data-example/raw/004_customer_master_data.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CUSTOMER</code></td>
+<td>Customer ID</td>
+</tr>
+<tr>
+<td><code>CUSTOMERFULLNAME</code></td>
+<td>Full name of the customer</td>
+</tr>
+<tr>
+<td><code>POSTALCODE</code></td>
+<td>Postal code of the customer</td>
+</tr>
+<tr>
+<td><code>INDUSTRY</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>CUSTOMERPRICEGROUP</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="customer-industry-mapping-data">Customer: Industry mapping data</h2>
+<p><strong>Data file:</strong> <code>data/data-example/raw/005_customer_industry_mapping_data.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INDUSTRY</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>INDUSTRYNAME</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+    </main>
+</body>
+</html>

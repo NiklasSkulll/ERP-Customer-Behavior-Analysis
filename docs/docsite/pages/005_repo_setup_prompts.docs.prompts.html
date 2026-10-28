@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>005_repo_setup_prompts</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# Prompts used for setting up this GitHub-Repo
+
+[![GPT-6 Astra](https://img.shields.io/badge/GPT--6%20Astra-OpenAI%20model-%23352898?style=flat&labelColor=%2315934E)](https://developers.openai.com/api/docs/models/gpt-6-astra)
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#prompts-to-create-the-pre-commit-hook">Prompts to create the pre-commit hook</a></li>
+<li><a href="#prompts-to-setup-the-repo">Prompts to setup the repo</a><ul>
+<li><a href="#prompt-to-clean-up-the-headings-and-links-from-the-tables-of-content">Prompt to clean up the headings and links from the tables of content</a></li>
+<li><a href="#prompt-to-update-and-write-the-readmemd">Prompt to update and write the README.md</a></li>
+<li><a href="#prompt-to-analyse-the-git-lfs-setup-and-setup-the-uv-environment">Prompt to analyse the Git LFS setup and setup the uv environment</a></li>
+<li><a href="#prompt-to-setup-mcp-serena-for-this-project">Prompt to setup MCP Serena for this project</a></li>
+</ul>
+</li>
+<li><a href="#prompt-to-clean-up-the-repo">Prompt to clean up the repo</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+<hr />
+<h2 id="prompts-to-create-the-pre-commit-hook">Prompts to create the pre-commit hook</h2>
+<blockquote>
+<p>The pre-commit <code>.githooks/pre-commit</code> hook got created all in one chat.</p>
+</blockquote>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6 Astra (OpenAI, 2026c)</p>
+<blockquote>
+<p>An existing chat with a question about the <code>.gitignore</code> file was used to create this hook (see initial prompt below).</p>
+</blockquote>
+<p><strong>Initial Prompt:</strong></p>
+<pre><code class="language-markdown">**Topic:** GitHub/Git/Programming
+
+**Task:** I am setting up a repo, where I anaylse big data with Python in Jupyter notebooks. Below is my current `.gitignore` file. Do I need for this repo additions in my `.gitignore`? If so, which and why?
+
+# Production notebooks and python files
+src/.notebooks/
+
+# Production data and all derived artifacts stored here
+data/data-prd/
+outputs/.exports/
+
+# Logging files
+*.log
+
+# Environments
+.env
+.venv
+env/.env
+venv/
+ENV/.env
+
+# MCP: Serena
+.serena/cache/
+.serena/logs/
+.serena/project.local.yml
+</code></pre>
+<p><strong>Prompt to create this hook:</strong></p>
+<pre><code class="language-markdown">I wanted a clear structure and have a `env/.env` and `env/.env.example` file.
+
+**This below would ignore the env example file:**
+- `env/`
+- `ENV/`
+
+Thats why I wrote `env/.env` and `ENV/.env`.
+
+**And these Folders shouldn't be pushed. NEVER:**
+- `src/.notebooks/`
+- `data/data-prd/`
+- `outputs/.exports/`
+
+Is there a way to make sure this never happens? Like, e.g. with a pre-commit hook? If so, how can I add such a precommit hook check?
+</code></pre>
+<hr />
+<h2 id="prompts-to-setup-the-repo">Prompts to setup the repo</h2>
+<blockquote>
+<p>This clean up got done in one chat.</p>
+</blockquote>
+<h3 id="prompt-to-clean-up-the-headings-and-links-from-the-tables-of-content">Prompt to clean up the headings and links from the tables of content</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6.1 Sol (Codex)</p>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Look at my whole project and analyse it so you got the context. This isnt a GitHub repo yet. We need to make some clean-up for the initial push.
+1. Analyse the repo so that you know everything. Ignore the AGENTS.md instructions for now.
+2. Then look at all my table of contents links/missing links and their wording. Correct the wording if its wrong and create the missing GitHub-Style links for the headings. DONT change ANYTHING ELSE.
+</code></pre>
+<h3 id="prompt-to-update-and-write-the-readmemd">Prompt to update and write the README.md</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6.1 Sol (Codex)</p>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Now, Look at my README.md Its quiet empty. Improve it with the current best pratices. Use links to setup, docs if nessessary
+</code></pre>
+<h3 id="prompt-to-analyse-the-git-lfs-setup-and-setup-the-uv-environment">Prompt to analyse the Git LFS setup and setup the uv environment</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6.1 Sol (Codex)</p>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Like this .gitattributes? If so. Help me set up my uv. Look at my doc (uv and python is installed), and tell me in chat what commands do I need and what packages do I ned to add for my repo? Look at my project (like pandas, or plotly for diagrams) what would I need and what do I need for my scripts to work. ALl this can I now set up
+</code></pre>
+<h3 id="prompt-to-setup-mcp-serena-for-this-project">Prompt to setup MCP Serena for this project</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6.1 Sol (Codex)</p>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp setup docu. I ned to setup my repo with it now and run the index/onboarding. Tell me in chat aswell: What commands do I need to do?
+</code></pre>
+<hr />
+<h3 id="prompt-to-clean-up-the-repo">Prompt to clean up the repo</h3>
+<blockquote>
+<p>The same chat as the initial setup file got created in <a href="004_setup_files_creation_prompts.docs.prompts.html#prompt-to-create-a-initial-start-script">004_setup_files_creation_prompts.md</a>, was used for this clean up.</p>
+</blockquote>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6.1 Sol (Codex)</p>
+<blockquote>
+<p>The config files in <code>src/config</code> (<code>src/config/__init__.py</code>, <code>src/config/_base.py</code>, <code>src/config/example.py</code> and <code>src/config/production.py</code>) got created with this prompt and follow up iteration.</p>
+</blockquote>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">**Great now, lets focus one these, step-by-step:**
+- _Several details need fixing alongside the script:_
+    - All five hooks are tracked as 100644. **-&gt;** What do I need to choose/do here, or is it covered by the initial setup file?
+    - The notebook conversion guide uses scripts/ instead of setup/ **-&gt;** Update this guide
+    - env/.env.example is empty, so creating a local .env currently provides no benefit.
+    - No minimum uv version is declared. **-&gt;** is this important? If so, lets choose my current version, or? Can we declare this?
+    - The README incorrectly says dependency files are empty and recommends Python 3.11. **-&gt;** we do this later, like the serena correction
+</code></pre>
+<hr />
+<h2 id="bibliography">Bibliography</h2>
+<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+    </main>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>create_raw_python_files</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# Create raw Python files from Jupyter notebooks
+
+This guide explains how to generate Python mirror files using the project's `notebook_to_raw_python.py` script within the uv-managed environment. The script uses `nbconvert` internally.
+
+The notebooks remain authoritative. Generated mirrors support read-only code navigation and inspection through MCP Serena.
+
+> The environment setup uses uv, and the conversion script uses nbconvert to export notebooks as Python files (Astral, n.d.; Jupyter Development Team, n.d.a, n.d.b). The script's command-line interface, mirror naming convention, and read-only workflow are project-specific.
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#convert-jupyter-notebooks-to-raw-python-files">Convert Jupyter notebooks to raw Python files</a><ul>
+<li><a href="#before-converting">Before converting</a></li>
+<li><a href="#convert-one-notebook">Convert one notebook</a></li>
+<li><a href="#convert-all-notebooks">Convert all notebooks</a></li>
+<li><a href="#view-command-line-help">View command-line help</a></li>
+<li><a href="#maintain-the-generated-mirrors">Maintain the generated mirrors</a></li>
+</ul>
+</li>
+<li><a href="#conversion-results-and-errors">Conversion results and errors</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+<hr />
+<h2 id="convert-jupyter-notebooks-to-raw-python-files">Convert Jupyter notebooks to raw Python files</h2>
+<p>Run the examples below from the repository root using <code>setup/notebook_to_raw_python.py</code>. The script determines the repository root from its own location, then reads notebooks from <code>src/notebooks</code> and writes mirrors to <code>src/raw-notebooks</code>. Each mirror retains the notebook's base name with an added <code>_mirror</code> suffix and a <code>.py</code> extension.</p>
+<p><strong>Subdirectory structure is preserved:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Source notebook</strong></th>
+<th><strong>Generated mirror</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/notebooks/01_Phase.ipynb</code></td>
+<td><code>src/raw-notebooks/01_Phase_mirror.py</code></td>
+</tr>
+<tr>
+<td><code>src/notebooks/analysis/02_Model.ipynb</code></td>
+<td><code>src/raw-notebooks/analysis/02_Model_mirror.py</code></td>
+</tr>
+</tbody>
+</table>
+<p>Output directories are created automatically when needed.</p>
+<h3 id="before-converting">Before converting</h3>
+<blockquote>
+<p><strong>Before the first conversion:</strong> Follow the <a href="../../../manage_uv_environment.md">environment guide</a> to prepare the project environment and ensure <code>nbconvert</code> is installed. Run all conversion commands below from the repository root.</p>
+</blockquote>
+<p>Save the notebooks first. Conversion reads the saved files on disk. It does not save open notebooks, execute cells, or modify source notebooks.</p>
+<p><strong>Mirrors are generated files:</strong> agents may read them but must not edit or regenerate them. Run conversion yourself after notebook changes and before asking Serena to inspect the updated code.</p>
+<h3 id="convert-one-notebook">Convert one notebook</h3>
+<p><strong>Pass a notebook path relative to <code>src/notebooks</code>:</strong></p>
+<pre><code class="language-bash">uv run --locked python setup/notebook_to_raw_python.py --file 01_Phase.ipynb
+</code></pre>
+<p><strong>For a notebook in a subdirectory:</strong></p>
+<pre><code class="language-bash">uv run --locked python setup/notebook_to_raw_python.py --file analysis/02_Model.ipynb
+</code></pre>
+<p>Do not prefix relative <code>--file</code> paths with <code>src/notebooks/</code>. The script adds that directory itself.</p>
+<p>Absolute paths are also accepted, provided they point to an existing <code>.ipynb</code> file inside <code>src/notebooks</code>. Paths that resolve outside that directory are rejected.</p>
+<h3 id="convert-all-notebooks">Convert all notebooks</h3>
+<pre><code class="language-bash">uv run --locked python setup/notebook_to_raw_python.py --all-files
+</code></pre>
+<p>This recursively finds and converts notebooks beneath <code>src/notebooks</code>, excluding <code>.ipynb_checkpoints</code> directories. Explicitly selecting a checkpoint notebook with <code>--file</code> is also rejected.</p>
+<p>Each run requires exactly one conversion mode: <code>--file</code> or <code>--all-files</code>. They cannot be combined.</p>
+<h3 id="view-command-line-help">View command-line help</h3>
+<pre><code class="language-bash">uv run --locked python setup/notebook_to_raw_python.py --help
+</code></pre>
+<h3 id="maintain-the-generated-mirrors">Maintain the generated mirrors</h3>
+<p>Mirror names and output locations are assigned automatically. No output-name or output-directory arguments are needed.</p>
+<p>Successful conversion replaces the corresponding mirror. The script writes to a temporary file before replacing the destination, so a failed conversion or write leaves an existing mirror intact.</p>
+<p><strong>The script does not detect unchanged notebooks:</strong> <code>--all-files</code> re-exports every selected notebook.</p>
+<p>After renaming or deleting a notebook, manually remove its obsolete mirror. The script does not clean up stale mirrors. Markdown cells may appear as comments in the generated Python files.</p>
+<hr />
+<h2 id="conversion-results-and-errors">Conversion results and errors</h2>
+<p>The script prints a <code>Converted:</code> message for each successful export and a <code>Failed:</code> message for each notebook that could not be converted.</p>
+<p>If one notebook fails during conversion, the script continues processing the remaining selected notebooks. Successful exports remain in place. The batch is not rolled back. After processing, the script reports the number of successful and failed conversions and the output directory.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Exit code</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>All selected notebooks were converted successfully or help was displayed.</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>A setup or discovery error occurred or at least one notebook failed to convert.</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Invalid command-line arguments or an invalid explicit notebook selection.</td>
+</tr>
+</tbody>
+</table>
+<p>Common causes of failure include a missing <code>src/notebooks</code> directory, no notebooks found with <code>--all-files</code>, a missing <code>nbconvert</code> dependency, invalid notebook contents, or output permission problems.</p>
+<p>Startup errors stop the script before the conversion summary is printed. If <code>uv</code> fails before launching Python, its own error and exit status apply.</p>
+<hr />
+<h2 id="bibliography">Bibliography</h2>
+<p>See <a href="../../../../literature/bibliography.md">docs/literature/bibliography.md</a>.</p>
+    </main>
+</body>
+</html>

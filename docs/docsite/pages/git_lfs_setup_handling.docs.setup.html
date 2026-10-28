@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>git_lfs_setup_handling</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# Set up and use Git LFS
+
+This guide explains how to install Git Large File Storage (Git LFS), configure tracking for CSV files, Parquet files and Jupyter notebooks and work with those files in the repository.
+
+Git LFS stores file contents separately from ordinary Git objects and commits small pointer files to the repository. This reduces the growth of ordinary Git history when large files change. A normal clone still downloads the LFS files needed for the checked-out revision.
+
+> The installation, tracking and file-handling commands follow the official Git LFS and GitHub documentation (GitHub, n.d.-a, n.d.-b; Git LFS,n.d.-a, n.d.-b, n.d.-c, n.d.-d).
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#install-and-initialize-git-lfs">Install and initialize Git LFS</a></li>
+<li><a href="#configure-repository-tracking">Configure repository tracking</a></li>
+<li><a href="#convert-files-already-tracked-by-git">Convert files already tracked by Git</a></li>
+<li><a href="#commit-the-setup">Commit the setup</a></li>
+<li><a href="#add-or-update-files">Add or update files</a></li>
+<li><a href="#clone-and-retrieve-lfs-files">Clone and retrieve LFS files</a></li>
+<li><a href="#useful-commands">Useful commands</a></li>
+<li><a href="#storage-and-download-usage">Storage and download usage</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Git LFS is installed separately from the project.</p>
+<p>Run repository-specific commands from the repository root. Git LFS tracking rules are stored in <code>.gitattributes</code>, which must be committed so collaborators use the same rules.</p>
+<p>Tracking patterns select files by name or path, not by size. For example, <code>*.csv</code> matches small CSV files as well as large ones.</p>
+<hr />
+<h2 id="install-and-initialize-git-lfs">Install and initialize Git LFS</h2>
+<p><strong>Install Git LFS on Ubuntu or Debian under WSL:</strong></p>
+<pre><code class="language-bash">sudo apt update
+sudo apt install git-lfs
+</code></pre>
+<p><strong>Initialize Git LFS for your user account and check the installed version:</strong></p>
+<pre><code class="language-bash">git lfs install
+git lfs version
+</code></pre>
+<p>Initialize Git LFS once per user account in each environment where you use Git. If you use both Windows Git and Git inside WSL, configure each environment separately.</p>
+<p>Use a maintained version with current security fixes. Distribution packages may lag behind upstream releases. Consult the official installation instructions if you need a newer version.</p>
+<hr />
+<h2 id="configure-repository-tracking">Configure repository tracking</h2>
+<p><strong>Track CSV and Parquet files:</strong></p>
+<pre><code class="language-bash">git lfs track &quot;*.csv&quot;
+git lfs track &quot;*.parquet&quot;
+</code></pre>
+<p><strong>To also track all Jupyter notebooks:</strong></p>
+<pre><code class="language-bash">git lfs track &quot;*.ipynb&quot;
+</code></pre>
+<p>Keep the patterns quoted so the shell passes them unchanged to Git LFS. These extension patterns apply throughout the repository, including subdirectories. Tracking all notebooks is optional. Small, frequently edited notebooks can remain in ordinary Git.</p>
+<p><strong>If only selected notebooks need LFS, use their paths instead of the <code>*.ipynb</code> rule:</strong></p>
+<pre><code class="language-bash">git lfs track &quot;src/notebooks/01_Phase.ipynb&quot;
+</code></pre>
+<p>Choose either the broad notebook rule or specific notebook paths according to the repository's needs.</p>
+<p>Generated Python mirror files in <code>src/raw-notebooks</code> remain in ordinary Git unless separately configured for LFS.</p>
+<p><strong>Review the tracking rules and stage them:</strong></p>
+<pre><code class="language-bash">git lfs track
+git add .gitattributes
+</code></pre>
+<hr />
+<h2 id="convert-files-already-tracked-by-git">Convert files already tracked by Git</h2>
+<p>Skip this section if none of the matching files are already tracked by Git. Adding tracking rules does not automatically convert every existing tracked file.</p>
+<p><strong>To apply the rules to files in the current working tree, re-stage them:</strong></p>
+<pre><code class="language-bash">git add --renormalize .
+</code></pre>
+<p><strong>Start the setup with a clean working tree:</strong> This command can also stage unrelated changes to tracked files and apply other attributes configured in the repository.</p>
+<p>This operation prepares the current file versions for LFS storage in the next commit. It does not remove large file contents from earlier commits.</p>
+<p>Moving historical versions into LFS requires a separate migration using <code>git lfs migrate</code>. Such a migration can rewrite commit history and should be planned with collaborators.</p>
+<p>New, untracked files are not included by <code>--renormalize</code>; add them explicitly with <code>git add</code>.</p>
+<hr />
+<h2 id="commit-the-setup">Commit the setup</h2>
+<p><strong>Review the staged changes and LFS status:</strong></p>
+<pre><code class="language-bash">git status
+git diff --cached --stat
+git lfs status
+</code></pre>
+<p><strong>Commit and push the tracking rules and any converted files:</strong></p>
+<pre><code class="language-bash">git commit -m &quot;chore: configure Git LFS tracking&quot;
+git push
+</code></pre>
+<p>Git LFS uploads the required file contents as part of the normal push workflow.</p>
+<hr />
+<h2 id="add-or-update-files">Add or update files</h2>
+<p>Save your datasets and notebooks, then use normal Git commands.</p>
+<p><strong>Example - replace these paths with the files you want to commit:</strong></p>
+<pre><code class="language-bash">git add data/data-example/raw/example.csv
+git add data/data-example/raw/example.parquet
+git add src/notebooks/01_Phase.ipynb
+</code></pre>
+<p><strong>Review, commit and push:</strong></p>
+<pre><code class="language-bash">git lfs status
+git diff --cached --stat
+git commit -m &quot;data: update datasets and analysis notebook&quot;
+git push
+</code></pre>
+<p>Files matching the committed LFS rules are stored through Git LFS. Other files are stored normally by Git.</p>
+<hr />
+<h2 id="clone-and-retrieve-lfs-files">Clone and retrieve LFS files</h2>
+<p><strong>Collaborators should install Git LFS and run <code>git lfs install</code> before cloning:</strong></p>
+<pre><code class="language-bash">git lfs install
+git clone &lt;repository-url&gt;
+</code></pre>
+<p>With automatic LFS downloads enabled, cloning retrieves the file contents needed for the checked-out revision.</p>
+<p><strong>If a repository was cloned before Git LFS was configured and contains pointer files instead of actual datasets or notebooks, install Git LFS, then run these commands inside the repository:</strong></p>
+<pre><code class="language-bash">git lfs install
+git lfs pull
+</code></pre>
+<p><code>git lfs pull</code> downloads LFS content for the checked-out revision and updates the working files. It does not advance the branch to newer commits.</p>
+<p>If content cannot be downloaded, check repository access, network connectivity, whether the LFS objects were uploaded and the repository owner's LFS usage limits.</p>
+<hr />
+<h2 id="useful-commands">Useful commands</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Command</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git lfs version</code></td>
+<td>Show the installed Git LFS version.</td>
+</tr>
+<tr>
+<td><code>git lfs track</code></td>
+<td>List configured tracking patterns.</td>
+</tr>
+<tr>
+<td><code>git lfs ls-files</code></td>
+<td>List LFS files in the current repository state.</td>
+</tr>
+<tr>
+<td><code>git lfs status</code></td>
+<td>Show LFS changes relevant to staging, committing, and pushing.</td>
+</tr>
+<tr>
+<td><code>git lfs pull</code></td>
+<td>Download and check out LFS content for the current revision.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="storage-and-download-usage">Storage and download usage</h2>
+<p>GitHub applies separate storage and download allowances to Git LFS.</p>
+<p>Each changed version of an LFS file counts as another complete file in storage. Small edits to a large dataset or notebook can therefore increase storage usage substantially.</p>
+<p>Downloads count toward the repository owner's LFS bandwidth usage, including downloads by collaborators and automated workflows. Check the current GitHub allowances and billing settings before storing large or frequently regenerated datasets.</p>
+<hr />
+<h2 id="bibliography">Bibliography</h2>
+<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+    </main>
+</body>
+</html>

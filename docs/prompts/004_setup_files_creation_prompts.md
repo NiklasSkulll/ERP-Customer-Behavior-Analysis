@@ -16,6 +16,7 @@
     - [Initial prompts to create the first setup version](#initial-prompts-to-create-the-first-setup-version-1)
     - [Prompts used for development](#prompts-used-for-development-1)
 - [Prompts to create a Python file for converting notebooks to raw Python files](#prompts-to-create-a-python-file-for-converting-notebooks-to-raw-python-files)
+- [Prompt to create a initial start script](#prompt-to-create-a-initial-start-script)
 - [Bibliography](#bibliography)
 
 ---
@@ -355,6 +356,33 @@ def main() -> int:
     src_root = project_root / "src"
     source_dir = src_root / "notebooks"
     target_dir = src_root / "raw-notebooks"
+```
+
+---
+
+## Prompt to create a initial start script
+
+> This setup `setup/initial_setup.sh` got created all in one chat.
+
+**AI model (model name (source)):**
+- GPT-6.1 Sol (Codex)
+
+> After the following prompt, comprehension questions were asked.
+
+**Prompt:**
+```markdown
+Ignore my `AGENTS.md` for now and dont add anything in the `BACKLOG.md` or `HANDOVER.md` file.
+
+**Analyse my repo:**
+- You can use the MCP serena memory files for it.
+- Look at my setup in `setup` and `docs/setup` and gather all information you need, so that you know, what a developer has to do, to setup my repo after cloning.
+
+**I want to have a fast and lazy setup:**
+- I want some initial-setup bash file in `setup`, a developer could run to set up my repo.
+- What I mean is a script, which checks what versions are already installed (Python, uv etc.). Then the script shows a small menu to choose, the installation with the script (installing the needed Python version, etc.).
+- _The script should at the start:_ setup the pre-commit hook git lfs calls to have all files, etc.
+
+Can we do this nice and clean with good messages and colors and so? Analyse all you need and plan it first, then tell me what you want to do and what the script should be called or if there should be more scripts then I tell you if we do this. Find the best practice and best possible way for my repo
 ```
 
 ---

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>README</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# ERP-Customer-Behavior-Analysis
+
+[![Python](https://img.shields.io/badge/Python-3.12-%231D9FD7?style=flat&logo=python&logoColor=%231D9FD7&labelColor=%23082A2E)](pyproject.toml)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-%23F37626?style=flat&logo=jupyter&logoColor=%23F37626&labelColor=%23082A2E)](src/notebooks)
+[![uv](https://img.shields.io/badge/uv-Environment%20Manager-%23DE5FE9?style=flat&logo=uv&logoColor=%23DE5FE9&labelColor=%23082A2E)](uv.lock)
+[![AI Disclosure](https://img.shields.io/badge/AI-Vibe%20Coding-%237F7F7F?style=flat&labelColor=%23082A2E)](AI_TOOL_DISCLOSURE.md)
+
+Detection, typology and explainable description of purchasing changes in B2B wholesale customers using ERP time series data.
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#project-status">Project status</a></li>
+<li><a href="#methodology">Methodology</a></li>
+<li><a href="#getting-started">Getting started</a></li>
+<li><a href="#documentation">Documentation</a></li>
+<li><a href="#project-structure">Project structure</a></li>
+<li><a href="#data-conventions">Data conventions</a></li>
+<li><a href="#data-handling">Data handling</a></li>
+<li><a href="#ai-assistance">AI assistance</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>This bachelor's thesis project investigates how changes in customer purchasing behaviour can be detected, classified into interpretable types, and explained using enterprise resource planning (ERP) order data from a B2B wholesaler.</p>
+<p>Customer-level time series will describe purchasing dimensions such as revenue, order frequency, basket value, assortment breadth, product-group mix, discounts, and contribution margin. The intended result is a traceable description of <strong>what changed, when it changed, and which purchasing dimensions support the assigned change type</strong>.</p>
+<p>The focus is retrospective analysis of purchases observed with the wholesaler. Predicting churn, inferring customers' motives, and deploying a real-time monitoring system are outside the current scope.</p>
+<p>Start with the <a href="fuuckae_framework.docs.framework.html">FUUCKAE framework</a> for the methodology or the <a href="complete_project_plan.docs.project.html">project plan</a> for the research questions, scope, and proposed thesis structure. The framework is written in English and the project plan is in German.</p>
+<hr />
+<h2 id="project-status">Project status</h2>
+<p><strong>Early research and setup stage.</strong> The repository contains the seven-phase framework, project planning, literature notes, prompt records, and utility scripts. The public notebook directories currently contain placeholders; an end-to-end analysis pipeline and evaluation results are not yet included.</p>
+<p><code>pyproject.toml</code> and <code>uv.lock</code> are currently empty placeholders. A reproducible dependency environment still needs to be configured before the analysis can be run.</p>
+<hr />
+<h2 id="methodology">Methodology</h2>
+<p><strong>The <a href="fuuckae_framework.docs.framework.html">FUUCKAE framework</a> organises the work into seven iterative phases:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Phase</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Frame</strong></td>
+<td>Define the analysis context and inspect the ERP datasets.</td>
+</tr>
+<tr>
+<td><strong>2. Understand</strong></td>
+<td>Explore customer histories, purchasing patterns, and data usability.</td>
+</tr>
+<tr>
+<td><strong>3. Unify</strong></td>
+<td>Prepare the data and construct reliable customer time series.</td>
+</tr>
+<tr>
+<td><strong>4. Compare</strong></td>
+<td>Identify candidate changes and describe their timing, magnitude, and persistence.</td>
+</tr>
+<tr>
+<td><strong>5. Knowledge synthesis</strong></td>
+<td>Develop the purchasing-change taxonomy and proposed assignment criteria.</td>
+</tr>
+<tr>
+<td><strong>6. Apply</strong></td>
+<td>Assign change types and explain outcomes using recorded evidence and rules.</td>
+</tr>
+<tr>
+<td><strong>7. Evaluate</strong></td>
+<td>Assess detection, taxonomy applicability, assignment consistency, and explanation quality.</td>
+</tr>
+</tbody>
+</table>
+<p>Candidate detection, taxonomy development, and type assignment are distinct steps. Development evidence and evidence reserved for evaluation are kept separate according to the research claim.</p>
+<h2 id="getting-started">Getting started</h2>
+<ol>
+<li>Read the <a href="fuuckae_framework.docs.framework.html">framework</a> and <a href="data_description.docs.project.html">data description</a> to understand the workflow and expected input tables. The documentation can be read without installing Python dependencies.</li>
+<li>For code execution, use Python 3.11 and uv as the intended tooling. Follow the <a href="manage_uv_environment.docs.setup.html">environment guide</a> once the dependency configuration is populated; <code>uv sync --locked</code> is not a working bootstrap command with the current empty configuration files.</li>
+<li>Review the utility scripts below. Run commands from the project root. Their help commands use only the Python standard library and do not process data or generate files.</li>
+</ol>
+<pre><code class="language-bash">python3 setup/csv_to_parquet.py --help
+python3 setup/notebook_to_raw_python.py --help
+python3 setup/create_documentation_site.py --help
+</code></pre>
+<table>
+<thead>
+<tr>
+<th><strong>Utility</strong></th>
+<th><strong>Purpose</strong></th>
+<th><strong>Execution dependency</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../../setup/csv_to_parquet.py">CSV to Parquet</a></td>
+<td>Convert CSV files directly inside <code>data/data-example/</code> to compressed Parquet files.</td>
+<td><code>duckdb</code></td>
+</tr>
+<tr>
+<td><a href="../../../setup/notebook_to_raw_python.py">Notebook export</a></td>
+<td>Export saved source notebooks as Python mirrors without executing cells. See the <a href="create_raw_python_files.docs.setup.html">conversion guide</a>.</td>
+<td><code>nbconvert</code></td>
+</tr>
+<tr>
+<td><a href="../../../setup/create_documentation_site.py">Documentation site</a></td>
+<td>Generate a local HTML documentation site at <code>docs/docsite/index.html</code>.</td>
+<td><code>markdown</code></td>
+</tr>
+</tbody>
+</table>
+<p>The CSV converter currently scans only the selected directory's immediate CSV files. The <a href="data_description.docs.project.html">data description</a> uses paths under <code>data/data-example/raw/</code>. Those paths need to be aligned before using the converter with that layout.</p>
+<h2 id="documentation">Documentation</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Resource</strong></th>
+<th><strong>Contents</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="fuuckae_framework.docs.framework.html">FUUCKAE framework</a></td>
+<td>Phase procedures, inputs, outputs, completion criteria, and methodological foundations.</td>
+</tr>
+<tr>
+<td><a href="complete_project_plan.docs.project.html">Project plan</a></td>
+<td>Thesis topic, research questions, metrics, scope, and evaluation proposals.</td>
+</tr>
+<tr>
+<td><a href="data_description.docs.project.html">Data description</a></td>
+<td>Expected order, product, price, customer, and industry-mapping tables.</td>
+</tr>
+<tr>
+<td><a href="literature_overview.docs.literature.html">Literature overview</a></td>
+<td>Paper summaries and their relevance to the research question.</td>
+</tr>
+<tr>
+<td><a href="bibliography.docs.literature.html">Bibliography</a> · <a href="../../literature/bibliography.bib">BibTeX</a></td>
+<td>References used throughout the project.</td>
+</tr>
+<tr>
+<td><a href="manage_uv_environment.docs.setup.html">Environment setup</a></td>
+<td>Dependency management and environment activation with uv.</td>
+</tr>
+<tr>
+<td><a href="create_raw_python_files.docs.setup.html">Notebook mirror workflow</a></td>
+<td>Exporting notebooks for read-only code navigation.</td>
+</tr>
+<tr>
+<td><a href="git_lfs_setup_handling.docs.setup.html">Git LFS setup</a></td>
+<td>Tracking and handling large files.</td>
+</tr>
+<tr>
+<td><a href="mcp_serena_setup.docs.setup.html">MCP Serena setup</a></td>
+<td>Optional AI-assisted project navigation and client configuration.</td>
+</tr>
+<tr>
+<td><a href="../../prompts">Prompt records</a></td>
+<td>Prompts used for literature research, framework development, and setup.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="project-structure">Project structure</h2>
+<p><strong>The main documentation and source locations are:</strong></p>
+<pre><code class="language-text">ERP-Customer-Behavior-Analysis/
+├── docs/
+│   ├── framework/          # FUUCKAE methodology
+│   ├── literature/         # Papers, summaries, and references
+│   ├── project/            # Thesis plan and data description
+│   ├── prompts/            # Research and development prompt records
+│   └── setup/              # Tooling and workflow guides
+├── setup/                  # Conversion and documentation utilities
+├── src/
+│   ├── notebooks/          # Authoritative source notebooks
+│   └── raw-notebooks/      # Generated Python mirrors for read-only navigation
+├── env/
+│   └── .env.example        # Local configuration template
+├── pyproject.toml          # Project configuration placeholder
+├── uv.lock                 # Dependency lockfile placeholder
+├── AI_TOOL_DISCLOSURE.md   # AI tool disclosure
+└── README.md
+</code></pre>
+<h2 id="data-conventions">Data conventions</h2>
+<p>Use these conventions for prepared tables and public examples. Original ERP field names are documented in the <a href="data_description.docs.project.html">data description</a>.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Property</strong></th>
+<th><strong>Convention</strong></th>
+<th><strong>Example</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Column separator</strong></td>
+<td>Comma</td>
+<td><code>,</code></td>
+</tr>
+<tr>
+<td><strong>Decimal separator</strong></td>
+<td>Period, without thousands separators</td>
+<td><code>1234.56</code></td>
+</tr>
+<tr>
+<td><strong>Encoding</strong></td>
+<td>UTF-8</td>
+<td>Supports accented characters and umlauts</td>
+</tr>
+<tr>
+<td><strong>Column names</strong></td>
+<td>English, <code>snake_case</code></td>
+<td><code>monthly_revenue</code></td>
+</tr>
+<tr>
+<td><strong>Date format</strong></td>
+<td><code>YYYY-MM-DD</code></td>
+<td><code>2026-10-21</code></td>
+</tr>
+<tr>
+<td><strong>Table structure</strong></td>
+<td>One header row, then one observation per row</td>
+<td>No extra title or total rows</td>
+</tr>
+</tbody>
+</table>
+<h2 id="data-handling">Data handling</h2>
+<p>Public examples should use synthetic data.</p>
+<p><strong>Private production notebooks, datasets, and derived exports are excluded through <a href="../../../.gitignore">.gitignore</a>:</strong>
+- <code>src/.notebooks/</code>
+- <code>data/data-prd/</code>
+- <code>outputs/.exports/</code></p>
+<p>The <a href="../../../.githooks/pre-commit">pre-commit hook</a> checks Git's index for these paths and blocks a commit if any are tracked.</p>
+<p><strong>After initialising a local Git repository, enable the hook with:</strong></p>
+<pre><code class="language-bash">git config core.hooksPath .githooks
+</code></pre>
+<p>Edit source notebooks in <code>src/notebooks/</code>. Python files in <code>src/raw-notebooks/</code> are generated mirrors for read-only inspection; the <a href="create_raw_python_files.docs.setup.html">mirror guide</a> documents their generation.</p>
+<h2 id="ai-assistance">AI assistance</h2>
+<p>AI tools have supported literature research, framework development, and tooling. See the <a href="AI_TOOL_DISCLOSURE.html">AI tool disclosure</a> and <a href="../../prompts">prompt records</a> for the documentation available so far. The disclosure is still being completed.</p>
+<h2 id="license">License</h2>
+<p>No project license file is currently included.</p>
+    </main>
+</body>
+</html>

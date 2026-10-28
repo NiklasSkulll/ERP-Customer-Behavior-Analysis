@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>suggested_commands</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <h1 id="project-commands-run-at-repository-root">Project commands (run at repository root)</h1>
+<ul>
+<li>Synchronize recorded dependencies: <code>uv sync --locked</code>; add dependencies intentionally with <code>uv add PACKAGE</code> or <code>uv add --dev PACKAGE</code> (updates pyproject.toml, uv.lock and environment).</li>
+<li>Data-free script discovery: <code>uv run --locked python setup/csv_to_parquet.py --help</code>, <code>uv run --locked python setup/notebook_to_raw_python.py --help</code>, <code>uv run --locked python setup/create_documentation_site.py --help</code>. Use existing <code>.venv/bin/python</code> for checks that should not synchronize anything.</li>
+<li>Jupyter: <code>uv run --locked jupyter lab</code>; choose project interpreter, not Serena's tool environment.</li>
+<li>Serena index: <code>serena project index</code> only after validating exclusions; memory reference audit: <code>serena memories check</code>.</li>
+<li>CSV utility: <code>setup/csv_to_parquet.py</code> scans immediate <code>data/data-example/*.csv</code> and writes sibling ZSTD Parquet; skips existing output unless --update. Schema docs instead name <code>data/data-example/raw/</code>: resolve mismatch without reading data. Never use --prd as an agent or infer examples are synthetic from directory names.</li>
+<li>Notebook utility (USER-managed only): <code>setup/notebook_to_raw_python.py --all-files</code> or <code>--file RELATIVE.ipynb</code>; output <code>src/raw-notebooks/&lt;stem&gt;_mirror.py</code>, preserving subfolders. Agents may inspect help but never regenerate mirrors.</li>
+<li>Documentation utility: <code>uv run --locked python setup/create_documentation_site.py</code> rebuilds docs/docsite via docs/docsiteTEMP; not executed during onboarding. It recursively discovers Markdown and rewrites links as root-relative, unlike GitHub's document-relative links. Review traversal/exclusions before running.</li>
+<li>No project-specific pytest/formatter/linter/type-check command is currently configured. Do not invent a passing suite.</li>
+</ul>
+    </main>
+</body>
+</html>

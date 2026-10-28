@@ -42,7 +42,7 @@ Start with the [FUUCKAE framework](docs/framework/fuuckae_framework.md) for the 
 
 **Early research and setup stage.** The repository contains the seven-phase framework, project planning, literature notes, prompt records, and utility scripts. The public notebook directories currently contain placeholders; an end-to-end analysis pipeline and evaluation results are not yet included.
 
-`pyproject.toml` and `uv.lock` are currently empty placeholders. A reproducible dependency environment still needs to be configured before the analysis can be run.
+Python dependencies and Jupyter tools are declared in [pyproject.toml](pyproject.toml) and resolved in [uv.lock](uv.lock). The [contributor setup script](setup/initial_setup.sh) prepares the local environment, Git hooks, and Git LFS. Separate example and production configurations are available in [src/config](src/config).
 
 ---
 
@@ -64,14 +64,47 @@ Candidate detection, taxonomy development, and type assignment are distinct step
 
 ## Getting started
 
-1. Read the [framework](docs/framework/fuuckae_framework.md) and [data description](docs/project/data_description.md) to understand the workflow and expected input tables. The documentation can be read without installing Python dependencies.
-2. For code execution, use Python 3.11 and uv as the intended tooling. Follow the [environment guide](docs/setup/manage_uv_environment.md) once the dependency configuration is populated; `uv sync --locked` is not a working bootstrap command with the current empty configuration files.
-3. Review the utility scripts below. Run commands from the project root. Their help commands use only the Python standard library and do not process data or generate files.
+Read the [framework](docs/framework/fuuckae_framework.md) and [data description](docs/project/data_description.md) for the workflow and expected input tables. Documentation can be read without installing Python dependencies.
+
+**After cloning, run the setup script from the repository root:**
+```bash
+bash setup/initial_setup.sh
+```
+
+The script supports Linux, with automatic system-package installation on Ubuntu/Debian, including WSL. Git and an existing clone are required; Python and uv can be installed during setup. Native Windows and macOS setup are not automated by this script.
+
+**Recommended setup:**
+- Detects installed tools and offers to install missing Git LFS, uv, and Python.
+- Makes the existing Git hooks executable and activates them locally with `git config --local core.hooksPath .githooks`.
+- Configures Git LFS locally and downloads files for the checked-out revision, subject to existing LFS download filters.
+- Creates or synchronizes `.venv` from the lockfile, including Jupyter and development tools.
+
+The project selects **Python 3.12** through [.python-version](.python-version) and requires **uv 0.13.1 or newer** through `pyproject.toml`. Setup uses `uv sync --locked`; it does not update dependency versions. It can be rerun after an interrupted setup.
+
+**Optional setup commands:**
+```bash
+bash setup/initial_setup.sh --check     # Inspect setup without changing it
+bash setup/initial_setup.sh --yes       # Approve recommended setup and missing-tool installations
+bash setup/initial_setup.sh --no-color # Disable colored messages
+```
+
+`--check` returns exit code `1` if setup is incomplete. `--yes` stops if conflicting custom Git hooks need approval. See `bash setup/initial_setup.sh --help` for details.
+
+**Start Jupyter from the repository root:**
+```bash
+PYTHONPATH="$PWD/src" uv run --locked jupyter lab
+```
+
+This makes `src/config` importable as `config` from either notebook directory. Select the project interpreter at `.venv/bin/python`. For notebooks run through an editor instead, use the same interpreter and ensure the kernel's `PYTHONPATH` includes the repository's absolute `src` path.
+
+After pulling dependency changes, run `uv sync --locked` again. See the [environment guide](docs/setup/manage_uv_environment.md) for dependency management and activation. Example and production notebook usage is described under [Data handling](#data-handling).
+
+**Utility help commands** use only the Python standard library and do not process data or generate files. Run them from the repository root:
 
 ```bash
-python3 setup/csv_to_parquet.py --help
-python3 setup/notebook_to_raw_python.py --help
-python3 setup/create_documentation_site.py --help
+.venv/bin/python setup/csv_to_parquet.py --help
+.venv/bin/python setup/notebook_to_raw_python.py --help
+.venv/bin/python setup/create_documentation_site.py --help
 ```
 
 | **Utility**                                              | **Purpose**                                                                                                                                 | **Execution dependency** |
@@ -92,6 +125,8 @@ The CSV converter currently scans only the selected directory's immediate CSV fi
 | [Literature overview](docs/literature/literature_overview.md)                                | Paper summaries and their relevance to the research question.                           |
 | [Bibliography](docs/literature/bibliography.md) · [BibTeX](docs/literature/bibliography.bib) | References used throughout the project.                                                 |
 | [Environment setup](docs/setup/manage_uv_environment.md)                                     | Dependency management and environment activation with uv.                               |
+| [Contributor setup script](setup/initial_setup.sh)                                          | Interactive installation, local Git hooks, LFS retrieval, and environment setup.        |
+| [Notebook configurations](src/config)                                                       | Explicit example and production data and output paths.                                 |
 | [Notebook mirror workflow](docs/setup/create_raw_python_files.md)                            | Exporting notebooks for read-only code navigation.                                      |
 | [Git LFS setup](docs/setup/git_lfs_setup_handling.md)                                        | Tracking and handling large files.                                                      |
 | [MCP Serena setup](docs/setup/mcp_serena_setup.md)                                           | Optional AI-assisted project navigation and client configuration.                       |
@@ -108,14 +143,23 @@ ERP-Customer-Behavior-Analysis/
 │   ├── project/            # Thesis plan and data description
 │   ├── prompts/            # Research and development prompt records
 │   └── setup/              # Tooling and workflow guides
-├── setup/                  # Conversion and documentation utilities
+├── setup/                  # Contributor setup, conversion, and documentation utilities
+│   └── initial_setup.sh    # Interactive setup after cloning
 ├── src/
+│   ├── config/             # Shared type and explicit example/production configurations
 │   ├── notebooks/          # Authoritative source notebooks
+│   ├── .notebooks/         # Private production notebook copies (ignored)
 │   └── raw-notebooks/      # Generated Python mirrors for read-only navigation
-├── env/
-│   └── .env.example        # Local configuration template
-├── pyproject.toml          # Project configuration placeholder
-├── uv.lock                 # Dependency lockfile placeholder
+├── data/
+│   ├── data-example/       # Synthetic example inputs and intermediate datasets
+│   └── data-prd/           # Private production inputs and intermediate datasets (ignored)
+├── outputs/
+│   ├── exports/            # Example figures, tables, and other artifacts
+│   └── .exports/           # Private production artifacts (ignored)
+├── .githooks/              # Production-file guard and Git LFS hooks
+├── .python-version        # Project Python version selection
+├── pyproject.toml          # Dependencies and minimum uv version
+├── uv.lock                 # Resolved dependency versions
 ├── AI_TOOL_DISCLOSURE.md   # AI tool disclosure
 └── README.md
 ```
@@ -135,19 +179,37 @@ Use these conventions for prepared tables and public examples. Original ERP fiel
 
 ## Data handling
 
-Public examples should use synthetic data.
+Public examples must use fully synthetic data. The two configurations in `src/config` expose the same properties, so notebook analysis code can use a single `CONFIG` object:
+
+| **Configuration** | **Import** | **`CONFIG.data_dir`** | **`CONFIG.output_dir`** | **`CONFIG.is_production`** |
+| ----------------- | ---------- | --------------------- | ---------------------- | -------------------------- |
+| Example | `from config.example import CONFIG` | `data/data-example/` | `outputs/exports/` | `False` |
+| Production | `from config.production import CONFIG` | `data/data-prd/` | `outputs/.exports/` | `True` |
+
+Paths resolve from the repository root, independently of the notebook's working directory. Configuration imports do not read data or create directories. Neither configuration selects a profile through environment variables or machine detection.
+
+**Workflow across development and production PCs:**
+1. Develop the source notebook in `src/notebooks/` with `from config.example import CONFIG` and fully synthetic inputs.
+2. Pull the source notebook on the production PC and copy it into the ignored `src/.notebooks/` directory.
+3. Change only the private copy's import to `from config.production import CONFIG`. Use a separate kernel for production work.
+4. Read datasets through `CONFIG.data_dir` and save intermediate datasets there or generated artifacts under `CONFIG.output_dir`. Create any required output subdirectories explicitly.
+
+**For example, the same analysis code can use either configuration:**
+```python
+orders = pd.read_parquet(CONFIG.data_dir / "raw/orders.parquet")
+tables_dir = CONFIG.output_dir / "tables"
+tables_dir.mkdir(parents=True, exist_ok=True)
+summary.to_parquet(tables_dir / "summary.parquet", index=False)
+```
+
+This snippet assumes `pandas` is imported as `pd` and `summary` has been computed. Both configurations are version-controlled and contain generic paths; production data and results stay in the ignored directories. The repository does not use an `.env` file for this switch.
 
 **Private production notebooks, datasets, and derived exports are excluded through [.gitignore](.gitignore):**
 - `src/.notebooks/`
 - `data/data-prd/`
 - `outputs/.exports/`
 
-The [pre-commit hook](.githooks/pre-commit) checks Git's index for these paths and blocks a commit if any are tracked.
-
-**After initialising a local Git repository, enable the hook with:**
-```bash
-git config core.hooksPath .githooks
-```
+The [pre-commit hook](.githooks/pre-commit) checks Git's index for these paths and blocks a commit if any are tracked. The contributor setup script activates this guard and the existing LFS hooks locally. The guard checks paths; it does not detect production results embedded in a public notebook. Keep production imports, saved outputs, and analysis results in private notebook copies.
 
 Edit source notebooks in `src/notebooks/`. Python files in `src/raw-notebooks/` are generated mirrors for read-only inspection; the [mirror guide](docs/setup/create_raw_python_files.md) documents their generation.
 

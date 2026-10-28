@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>memory_maintenance</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <h1 id="memory-maintenance">Memory Maintenance</h1>
+<h2 id="discovery-model">Discovery Model</h2>
+<ul>
+<li>Core principle: progressive discovery through references, building a graph of memories.</li>
+<li>Initially, agents are provided with the list of all memories (names only).</li>
+<li>Agents should read <code>mem:core</code> as the top-level entry point (graph root).
+  This memory should contain references to other memories covering major project domains.
+  The referenced memories shall, in turn, shall contain references to even more specific memories, and so on.
+  The depth of the graph shall depend on the project complexity.</li>
+<li>Use topics/folders to group related memories in order to make the content structure explicit.
+  Folders can mirror project structure (e.g. modules like frontend/backend) or topics like debugging, architecture, etc.</li>
+<li>Memory references must use a mem: prefix inside backticks, e.g. <code>mem:frontend/core</code>.
+  The surrounding text should clearly indicate when to read the memory/which content to expect.
+  The text should provide more precise guidance than the memory name alone, 
+  i.e. avoid a reference like "frontend debugging: <code>mem:frontend/debugging</code> and instead make clear which aspects of frontend debugging are covered.</li>
+<li>Memories themselves should not contain information about when to read them; this is the responsibility of the referring memory.</li>
+</ul>
+<h2 id="style">Style</h2>
+<p>Dense agent notes, not prose docs. Prefer invariants, terse bullets. 
+Avoid obvious context, rationale, and examples unless they prevent likely mistakes. 
+Keep guidance durable and generalizable, not task-local.</p>
+<h2 id="addupdate-threshold">Add/update threshold</h2>
+<p>Add or update memories only with stable, non-obvious project conventions that avoid complex rediscovery in the future.
+Do not add: quick-read facts; generic language/framework knowledge; one-off task notes; volatile line-level details; behavior likely to change soon.</p>
+<h2 id="maintenance-actions">Maintenance Actions</h2>
+<ul>
+<li>Renaming memories: References are updated automatically if handled via Serena's memory rename tool.</li>
+<li>Checking for stale memories (e.g. after deletion): Call <code>serena memories check</code> for a report.</li>
+</ul>
+    </main>
+</body>
+</html>

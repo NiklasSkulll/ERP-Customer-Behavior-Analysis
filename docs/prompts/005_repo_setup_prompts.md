@@ -9,7 +9,12 @@
 ## Table of Contents
 
 - [Prompts to create the pre-commit hook](#prompts-to-create-the-pre-commit-hook)
-- [Prompts to clean up the repo](#prompts-to-clean-up-the-repo)
+- [Prompts to setup the repo](#prompts-to-setup-the-repo)
+    - [Prompt to clean up the headings and links from the tables of content](#prompt-to-clean-up-the-headings-and-links-from-the-tables-of-content)
+    - [Prompt to update and write the README.md](#prompt-to-update-and-write-the-readmemd)
+    - [Prompt to analyse the Git LFS setup and setup the uv environment](#prompt-to-analyse-the-git-lfs-setup-and-setup-the-uv-environment)
+    - [Prompt to setup MCP Serena for this project](#prompt-to-setup-mcp-serena-for-this-project)
+- [Prompt to clean up the repo](#prompt-to-clean-up-the-repo)
 - [Bibliography](#bibliography)
 
 ---
@@ -72,7 +77,7 @@ Is there a way to make sure this never happens? Like, e.g. with a pre-commit hoo
 
 ---
 
-## Prompts to clean up the repo
+## Prompts to setup the repo
 
 > This clean up got done in one chat.
 
@@ -116,6 +121,28 @@ Like this .gitattributes? If so. Help me set up my uv. Look at my doc (uv and py
 **Prompt:**
 ```markdown
 No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp setup docu. I ned to setup my repo with it now and run the index/onboarding. Tell me in chat aswell: What commands do I need to do?
+```
+
+---
+
+### Prompt to clean up the repo
+
+> The same chat as the initial setup file got created in [004_setup_files_creation_prompts.md](docs/prompts/004_setup_files_creation_prompts.md#prompt-to-create-a-initial-start-script), was used for this clean up.
+
+**AI model (model name (source)):**
+- GPT-6.1 Sol (Codex)
+
+> The config files in `src/config` (`src/config/__init__.py`, `src/config/_base.py`, `src/config/example.py` and `src/config/production.py`) got created with this prompt and follow up iteration.
+
+**Prompt:**
+```markdown
+**Great now, lets focus one these, step-by-step:**
+- _Several details need fixing alongside the script:_
+    - All five hooks are tracked as 100644. **->** What do I need to choose/do here, or is it covered by the initial setup file?
+    - The notebook conversion guide uses scripts/ instead of setup/ **->** Update this guide
+    - env/.env.example is empty, so creating a local .env currently provides no benefit.
+    - No minimum uv version is declared. **->** is this important? If so, lets choose my current version, or? Can we declare this?
+    - The README incorrectly says dependency files are empty and recommends Python 3.11. **->** we do this later, like the serena correction
 ```
 
 ---

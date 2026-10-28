@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>mcp_serena_setup</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# MCP Serena setup
+
+**Serena** is an MCP server that helps AI coding assistants navigate, understand and edit this repository's Python code and Markdown documentation. This guide covers installation in WSL, project configuration, connecting AI clients and onboarding, including the notebook mirror workflow and production-data exclusions.
+
+This guide draws on the official Serena repository and the documentation for Serena, Claude Code and Codex (Anthropic, n.d.a, n.d.b; OpenAI, n.d.; Oraios AI, 2026; Oraios AI & Oraios Software, n.d.a, n.d.b). The notebook mirror workflow, production-data exclusions and session instructions are project-specific adaptations.
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#workflow">Workflow</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#setup">Setup</a><ul>
+<li><a href="#initialize-mcp-serena">Initialize MCP Serena</a></li>
+<li><a href="#prepare-notebook-mirrors">Prepare notebook mirrors</a></li>
+<li><a href="#index-the-project-for-mcp-serena">Index the project for MCP Serena</a></li>
+<li><a href="#connect-an-ai-client">Connect an AI client</a><ul>
+<li><a href="#connect-codex-cli">Connect Codex CLI</a></li>
+<li><a href="#connect-claude-code">Connect Claude Code</a></li>
+<li><a href="#connect-codex-via-vscode">Connect Codex via VSCode</a></li>
+<li><a href="#connect-claude-code-via-vscode">Connect Claude Code via VSCode</a></li>
+</ul>
+</li>
+<li><a href="#onboarding">Onboarding</a></li>
+</ul>
+</li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+<hr />
+<h2 id="workflow">Workflow</h2>
+<ol>
+<li>Initialize the project.</li>
+<li>Apply the project configuration.</li>
+<li>Check exclusions and prepare the Python mirrors.</li>
+<li>Index the project.</li>
+<li>Connect the AI client.</li>
+<li>Perform onboarding.</li>
+</ol>
+<hr />
+<h2 id="installation">Installation</h2>
+<p>Run these commands inside WSL. Install <code>uv</code> first using its official installation instructions if it is not already available.</p>
+<p><strong>Install Serena (Oraios AI &amp; Oraios Software, n.d.b):</strong></p>
+<pre><code class="language-bash">uv tool install -p 3.13 serena-agent
+serena init
+serena --version
+</code></pre>
+<p><strong>For an existing installation, update Serena instead (Oraios AI &amp; Oraios Software, n.d.b):</strong></p>
+<pre><code class="language-bash">uv tool upgrade serena-agent
+serena --version
+</code></pre>
+<p>These instructions were validated with <em>Serena 2.0.0</em> and <em>Python 3.13</em>.</p>
+<hr />
+<h2 id="setup">Setup</h2>
+<h3 id="initialize-mcp-serena">Initialize MCP Serena</h3>
+<p>Before indexing or connecting an AI client, apply the settings in <a href="#configuration">Configuration</a>, including all production-data exclusions. If the configuration file for MCP Serena <code>.serena/project.yml</code> already exists, edit that file instead of initializing the project again. Merge the settings without duplicating YAML keys (Oraios AI &amp; Oraios Software, n.d.b).</p>
+<p><strong>Initialize MCP Serena in the project root (Oraios AI &amp; Oraios Software, n.d.b):</strong></p>
+<pre><code class="language-bash">serena project create --name ERP-Customer-Behavior-Analysis --language python --language markdown
+</code></pre>
+<h3 id="prepare-notebook-mirrors">Prepare notebook mirrors</h3>
+<ul>
+<li>Source notebooks: <code>src/notebooks/</code></li>
+<li>Read-only Python mirrors: <code>src/raw-notebooks/</code></li>
+<li>Refresh mirrors using the repository's existing export workflow in <a href="../../setup/Create_raw_Python_files.md">docs/setup/Create_raw_Python_files.md</a> before initial indexing and after notebook changes.</li>
+<li>Keep <code>src/raw-notebooks/</code> accessible to Serena.</li>
+<li>Agents must not regenerate or edit mirrors.</li>
+</ul>
+<p>The notebooks remain authoritative. Mirrors support Python navigation but do not provide access to notebook outputs or guarantee that every notebook cell is represented as a navigable symbol.</p>
+<h3 id="index-the-project-for-mcp-serena">Index the project for MCP Serena</h3>
+<p><strong>Index the project in the project root (Oraios AI &amp; Oraios Software, n.d.b):</strong></p>
+<pre><code class="language-bash">serena project index
+</code></pre>
+<h3 id="connect-an-ai-client">Connect an AI client</h3>
+<p>Configure the AI client's MCP settings to launch the following executable with the arguments shown below. Replace USER and the repository path with their actual WSL values. After changing Serena's configuration, fully exit and reopen the CLI session. For the Codex VSCode extension, use Restart extension. Do not repeat registration for ordinary restarts.</p>
+<h4 id="connect-codex-cli">Connect Codex CLI</h4>
+<p><strong>Register Serena once (OpenAI, n.d.):</strong></p>
+<pre><code class="language-bash">cd /home/USER/projects/ERP-Customer-Behavior-Analysis
+codex mcp add serena -- /home/USER/.local/bin/serena start-mcp-server --project &quot;$PWD&quot; --context codex
+</code></pre>
+<p><strong>Check the registration and start Codex (OpenAI, n.d.):</strong></p>
+<pre><code class="language-bash">codex mcp list
+codex
+</code></pre>
+<p>Inside Codex, enter <code>/mcp</code> to check the active server (OpenAI, n.d.).</p>
+<h4 id="connect-claude-code">Connect Claude Code</h4>
+<p><strong>Register Serena once (Anthropic, n.d.a):</strong></p>
+<pre><code class="language-bash">cd /home/USER/projects/ERP-Customer-Behavior-Analysis
+claude mcp add --transport stdio --scope local serena -- /home/USER/.local/bin/serena start-mcp-server --project &quot;$PWD&quot; --context claude-code
+</code></pre>
+<p><strong>Start Claude Code (Anthropic, n.d.a):</strong></p>
+<pre><code class="language-bash">claude
+</code></pre>
+<p>Inside Claude Code, enter <code>/mcp</code> to check the active server (Anthropic, n.d.a).</p>
+<h4 id="connect-codex-via-vscode">Connect Codex via VSCode</h4>
+<p><strong>Setup from official source (OpenAI, n.d.):</strong>
+1. Open Codex Extension (<code>gear menu</code>), then go to <code>MCP servers - Add server</code>.
+2. Select <code>STDIO</code>.
+3. Enter information from table below.
+4. Save, then select Restart extension. This is the documented extension-only setup.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td><code>serena</code></td>
+</tr>
+<tr>
+<td><strong>Command</strong></td>
+<td><code>/home/USER/.local/bin/serena</code></td>
+</tr>
+<tr>
+<td><strong>Arguments</strong></td>
+<td><code>start-mcp-server</code>, <code>--project</code>, your repository's absolute WSL path, <code>--context</code>, <code>codex</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Alternatively, edit <code>~/.codex/config.toml</code> inside WSL and add (OpenAI, n.d.):</strong></p>
+<pre><code class="language-toml">[mcp_servers.serena]
+command = &quot;/home/USER/.local/bin/serena&quot;
+args = [
+  &quot;start-mcp-server&quot;,
+  &quot;--project&quot;,
+  &quot;/home/USER/projects/ERP-Customer-Behavior-Analysis&quot;,
+  &quot;--context&quot;,
+  &quot;codex&quot;
+]
+</code></pre>
+<p>Use either the extension UI or the TOML configuration. If <code>[mcp_servers.serena]</code> already exists, update it instead of adding a duplicate. Replace the example repository path, save and restart the extension. Codex CLI is not required (OpenAI, n.d.).</p>
+<h4 id="connect-claude-code-via-vscode">Connect Claude Code via VSCode</h4>
+<p><strong>Setup from official source (Anthropic, n.d.b):</strong>
+1. Open the Claude Code extension.
+2. Enter <code>/mcp</code> in its chat panel and select the option to add a server.
+3. Select <code>STDIO</code> and enter the information below.
+4. Choose project scope to save the configuration in the repository's <code>.mcp.json</code>.
+5. Start a new conversation, enter <code>/mcp</code> and confirm that <code>serena</code> shows <em>Connected</em>.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Value</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td><code>serena</code></td>
+</tr>
+<tr>
+<td><strong>Command</strong></td>
+<td><code>/home/USER/.local/bin/serena</code></td>
+</tr>
+<tr>
+<td><strong>Arguments</strong></td>
+<td><code>start-mcp-server</code>, <code>--project</code>, your repository's absolute WSL path, <code>--context</code>, <code>claude-code</code></td>
+</tr>
+</tbody>
+</table>
+<p>Adding servers through the extension's <code>/mcp</code> dialog requires <em>Claude Code version 2.1.261 or later</em> (Anthropic, n.d.b).</p>
+<p><strong>Alternatively, create or edit <code>.mcp.json</code> in the repository root:</strong></p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;serena&quot;: {
+      &quot;type&quot;: &quot;stdio&quot;,
+      &quot;command&quot;: &quot;/home/USER/.local/bin/serena&quot;,
+      &quot;args&quot;: [
+        &quot;start-mcp-server&quot;,
+        &quot;--project&quot;,
+        &quot;/home/USER/projects/ERP-Customer-Behavior-Analysis&quot;,
+        &quot;--context&quot;,
+        &quot;claude-code&quot;
+      ]
+    }
+  }
+}
+</code></pre>
+<p>Use either the extension UI or the JSON configuration. If <code>.mcp.json</code> already contains other servers, add <code>serena</code> to the existing <code>mcpServers</code> object without replacing those entries. Start a new conversation and approve the project MCP server if prompted. Enter <code>/mcp</code> to check the connection or reconnect Serena. If Serena was already registered through Claude Code CLI for this repository, use that existing registration instead of adding a duplicate. No separate CLI installation is required for the extension setup (Anthropic, n.d.a, n.d.b).</p>
+<h3 id="onboarding">Onboarding</h3>
+<p>Onboarding is performed by the connected AI agent using Serena, resulting in <a href="../../../.serena/memories/">.serena/memories/</a> files (Oraios AI &amp; Oraios Software, n.d.b).</p>
+<p><strong>Once connected, ask the agent to:</strong></p>
+<blockquote>
+<p>Onboard this repository using Serena. First follow the startup sequence in <code>AGENTS.md</code>. Inspect the project structure, dependency files, Python modules, notebooks and Markdown documentation. Do not execute notebooks or regenerate data.</p>
+<p>Identify the analysis environment and Jupyter kernel, data inputs, preprocessing steps, analysis entry points, outputs and existing validation commands. Distinguish confirmed facts from assumptions. Follow Serena's memory-maintenance instructions. Create concise memories covering the project overview, useful commands, analysis workflow and conventions. Reference <code>HANDOVER.md</code> and <code>BACKLOG.md</code> rather than duplicating their contents.</p>
+<p>Production data and production-derived artifacts are stored exclusively in <code>outputs/.exports/</code>, <code>src/.notebooks/</code>, and <code>data/data-prd/</code>. Do not inspect these directories. Notebooks in <code>src/notebooks/</code> contain no production data or production-derived outputs and may be inspected, including their saved outputs.</p>
+<p>Finish by reporting what you inspected, what remains unknown, and whether Python symbol navigation and Markdown heading navigation work.</p>
+</blockquote>
+<hr />
+<h2 id="configuration">Configuration</h2>
+<p><strong>Change these properties (Oraios AI &amp; Oraios Software, n.d.a):</strong></p>
+<pre><code class="language-yml">project_name: &quot;ERP-Customer-Behavior-Analysis&quot;
+
+language_backend: LSP
+language_servers:
+  - python
+  - markdown
+
+agent_interface: REPL
+
+encoding: &quot;utf-8&quot;
+ignore_all_files_in_gitignore: true
+
+ignored_paths:
+  - &quot;data/data-prd/**&quot;
+  - &quot;outputs/.exports/**&quot;
+  - &quot;src/.notebooks/**&quot;
+  - &quot;.env&quot;
+  - &quot;**/.env&quot;
+  - &quot;.venv/**&quot;
+  - &quot;venv/**&quot;
+  - &quot;**/__pycache__/**&quot;
+  - &quot;**/.ipynb_checkpoints/**&quot;
+  - &quot;.serena/cache/**&quot;
+  - &quot;.serena/logs/**&quot;
+
+read_only: false
+
+initial_prompt: |
+  This repository supports a bachelor's thesis on detecting,
+  classifying and explaining changes in B2B wholesale customers'
+  purchasing behavior using ERP-derived time series.
+
+  Session workflow:
+  - Read AGENTS.md first, then the newest HANDOVER.md entry in full,
+    then BACKLOG.md and relevant Serena memories.
+  - Report missing files or template-only sections honestly.
+  - Follow AGENTS.md for end-of-session updates.
+  - Store durable technical knowledge in Serena memories, session
+    history in HANDOVER.md and task status in BACKLOG.md.
+
+  Production-data boundary:
+  - Never inspect, load, search, execute against, or modify
+    data/data-prd/ or production data located elsewhere.
+  - This also applies to production-derived profiles, aggregates,
+    notebook outputs, plots, reports, logs, and model artifacts.
+  - Do not copy production information into chat responses, code
+    examples, documentation, handovers, or Serena memories.
+  - Do not bypass exclusions through Python, shell commands,
+    alternative tools, symlinks, or Git history.
+  - Work only with code, approved data-free schema documentation,
+    and explicitly identified fully synthetic fixtures.
+  - Modified or pseudonymized real records are not fully synthetic.
+  - If a task requires production access, stop and request a
+    synthetic reproduction or data-free specification.
+  - Production data and derived artifacts are stored exclusively in
+    outputs/.exports/, src/.notebooks/ and data/data-prd/.
+  - Notebooks in src/notebooks/ contain no production data or
+    production-derived outputs. Their saved outputs may be inspected.
+
+  Development:
+  - Use Serena's tools for efficient Python and Markdown navigation,
+    inspection and editing, subject to the file restrictions below.
+  - When executing project scripts, tests or notebooks, use the project's
+    configured Python environment or Jupyter kernel, even when execution
+    is initiated through a Serena tool.
+  - Before running code, confirm that it uses only explicitly identified
+    fully synthetic inputs or requires no data, and cannot access
+    production sources.
+  - Do not execute notebooks or regenerate datasets during onboarding.
+
+  Notebook editing:
+  - For notebook-related changes, edit only the source notebooks in
+    src/notebooks/.
+  - Python files in src/raw-notebooks/ are read-only mirrors of notebook
+    code. Use them for navigation and inspection only.
+  - Never edit, overwrite, regenerate, delete or synchronize these mirror
+    files. Their generation is handled separately by the user.
+  - If a mirror differs from its source notebook, treat the notebook as
+    authoritative and report the mismatch.
+  - These rules do not authorize reading saved notebook outputs or
+    embedded content derived from production data.
+</code></pre>
+<p><strong>Explanation of this configuration (Oraios AI &amp; Oraios Software, n.d.a):</strong>
+- <code>agent_interface: REPL</code>: Lets the agent combine Serena operations in one call. It does not connect Serena to the Jupyter kernel.
+- <code>read_only: false</code>: Allows normal editing and memory updates.
+- <code>ignore_all_files_in_gitignore: true</code>: Ignores all files, which are defined in the <code>.gitignore</code>. Important ignores are defined under <code>ignored_paths</code> as well.
+- Ignore rules filter Serena's project operations. They are not filesystem access controls. Likewise, the read-only mirror policy is an agent instruction, not a per-directory permission enforced by <code>read_only: false</code>.</p>
+<hr />
+<h2 id="bibliography">Bibliography</h2>
+<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+    </main>
+</body>
+</html>

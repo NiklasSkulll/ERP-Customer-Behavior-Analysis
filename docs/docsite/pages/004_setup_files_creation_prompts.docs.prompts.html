@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>004_setup_files_creation_prompts</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# Prompts used for creating the setup files
+
+[![GPT-6 Astra](https://img.shields.io/badge/GPT--6%20Astra-OpenAI%20model-%23352898?style=flat&labelColor=%2315934E)](https://developers.openai.com/api/docs/models/gpt-6-astra)
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#prompts-to-create-a-python-file-for-converting-csv-to-parquet">Prompts to create a Python file for converting CSV to Parquet</a><ul>
+<li><a href="#initial-prompts-to-create-the-first-setup-version">Initial prompts to create the first setup version</a></li>
+<li><a href="#prompt-used-to-understand-the-python-script">Prompt used to understand the Python script</a></li>
+<li><a href="#prompts-used-for-development">Prompts used for development</a></li>
+</ul>
+</li>
+<li><a href="#prompts-to-create-a-python-file-for-creating-the-documenation-sites">Prompts to create a Python file for creating the documentation sites</a><ul>
+<li><a href="#initial-prompts-to-create-the-first-setup-version-1">Initial prompts to create the first setup version</a></li>
+<li><a href="#prompts-used-for-development-1">Prompts used for development</a></li>
+</ul>
+</li>
+<li><a href="#prompts-to-create-a-python-file-for-converting-notebooks-to-raw-python-files">Prompts to create a Python file for converting notebooks to raw Python files</a></li>
+<li><a href="#prompt-to-create-a-initial-start-script">Prompt to create a initial start script</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+<hr />
+<h2 id="prompts-to-create-a-python-file-for-converting-csv-to-parquet">Prompts to create a Python file for converting CSV to Parquet</h2>
+<blockquote>
+<p>This setup <code>setup/csv_to_parquet.py</code> got created all in one chat.</p>
+</blockquote>
+<h3 id="initial-prompts-to-create-the-first-setup-version">Initial prompts to create the first setup version</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6 Astra (OpenAI, 2026c)</p>
+<blockquote>
+<p>An existing chat with a question about csv file format was used to create this setup (see initial prompt below).</p>
+</blockquote>
+<p><strong>Initial Prompt:</strong></p>
+<pre><code class="language-markdown">**Topic:** Programming, GitHub, Data analysis
+
+**Background:** I have a programming project and I'm doing the repo and documentation. I want to analyze data using Python notebooks.
+
+**Task:**
+- What's the best practice for CSV files? For example, if I convert an Excel worksheet to CSV, I can separate the values with `;` or `,`. What would be best in my case?
+</code></pre>
+<p><strong>Prompt to prepare the script creation:</strong></p>
+<pre><code class="language-markdown">I'm working with big data in my project and have CSV files. I've heard that Parquet files are better than CSV files. Can I convert them to Parquet without too much effort? Does that make sense?
+</code></pre>
+<p><strong>Prompt to create the script:</strong></p>
+<pre><code class="language-markdown">Ok thanks. Now I want to create a python script file in `setup/csv_to_parquet.py` to convert all my CSV files to Parquet files.
+
+Can I have something like params in such a script aswell? For this logic: &quot;Standard is to convert all files in `data/data-example/*.csv` but when starting the script with e.g. `--prd` it converts all CSV files in `data/data-prd/*.csv` instead using the example path.
+
+Please create the script.
+</code></pre>
+<h3 id="prompt-used-to-understand-the-python-script">Prompt used to understand the Python script</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6 Astra (OpenAI, 2026c)</p>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Explain me every line of this Python script very simple, so that I can edit and understand it.
+
+**Your Script:**
+
+#!/usr/bin/env python3
+&quot;&quot;&quot;Convert project CSV files to Parquet. Requires: pip install duckdb.&quot;&quot;&quot;
+
+import argparse
+from pathlib import Path
+import sys
+
+
+def main() -&gt; int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        &quot;--prd&quot;, action=&quot;store_true&quot;,
+        help=&quot;Read data/data-prd instead of data/data-example.&quot;,
+    )
+    args = parser.parse_args()
+
+    # Resolve paths relative to this script, independent of the working directory.
+    project_root = Path(__file__).resolve().parent.parent
+    source_dir = project_root / &quot;data&quot; / (
+        &quot;data-prd&quot; if args.prd else &quot;data-example&quot;
+    )
+    if not source_dir.is_dir():
+        parser.error(f&quot;Directory does not exist: {source_dir}&quot;)
+    sources = sorted(source_dir.glob(&quot;*.csv&quot;))
+    if not sources:
+        parser.error(f&quot;No CSV files found in: {source_dir}&quot;)
+
+    try:
+        import duckdb
+    except ImportError:
+        parser.error(&quot;Missing dependency. Install it with: python -m pip install duckdb&quot;)
+
+    failures = 0
+    with duckdb.connect() as con:
+        for source in sources:
+            target = source.with_suffix(&quot;.parquet&quot;)
+            if target.exists():
+                print(f&quot;Skipping existing file: {target.name}&quot;)
+                continue
+            try:
+                # DuckDB detects CSV delimiters and column types automatically.
+                con.read_csv(str(source), header=True).write_parquet(
+                    str(target), compression=&quot;zstd&quot;
+                )
+            except duckdb.Error as exc:
+                # Remove an incomplete output so a later run can retry.
+                target.unlink(missing_ok=True)
+                print(f&quot;Failed: {source.name}: {exc}&quot;, file=sys.stderr)
+                failures += 1
+            else:
+                print(f&quot;Converted: {source.name} -&gt; {target.name}&quot;)
+    return 1 if failures else 0
+
+
+if __name__ == &quot;__main__&quot;:
+    raise SystemExit(main())
+
+</code></pre>
+<h3 id="prompts-used-for-development">Prompts used for development</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6 Astra (OpenAI, 2026c)</p>
+<blockquote>
+<p>Below is a prompt that got used to improve and develop the Python setup script. After that, the setup got improved and reviewed step-by-step.</p>
+</blockquote>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Is this `#!/usr/bin/env python3` good for my workspacce with uv (uv.lock) and pyproject.toml? and with `Python 3.12.3`? What I meant is do I need this line in the script? And why?
+[...]
+I added a param called `--update`, so files can be updated by choice. How can I edit this part to include it properly and why? Is it simply by changing the if condition to `target.exists() and not args.update`?
+
+**Part, I added:**
+
+target = source.with_suffix(&quot;.parquet&quot;)
+
+            if target.exists():
+                print(f&quot;Skipping existing file: {target.name}&quot;)
+                continue
+</code></pre>
+<p><strong>Final Prompt:</strong></p>
+<pre><code class="language-markdown">Is this now good and works without failures?
+
+**My current script:**
+
+&quot;&quot;&quot;Convert project CSV files to Parquet. Requires: uv add duckdb.&quot;&quot;&quot;
+
+import argparse
+from pathlib import Path
+import sys
+
+def main() -&gt; int:
+    # Create argument parser and arguments like '--help', '--prd' and '--update'
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        &quot;--prd&quot;, action=&quot;store_true&quot;,
+        help=&quot;Read data/data-prd instead of data/data-example.&quot;,
+    )
+    parser.add_argument(
+        &quot;--update&quot;, action=&quot;store_true&quot;,
+        help=&quot;Update existing parquet files with the CSV file content.&quot;,
+    )
+    args = parser.parse_args()
+
+    # Resolve project root path, relative to this script
+    project_root = Path(__file__).resolve().parent.parent
+
+    # Resolve project data paths as 'source_dir'
+    source_dir = project_root / &quot;data&quot; / (
+        &quot;data-prd&quot; if args.prd else &quot;data-example&quot;
+    )
+    if not source_dir.is_dir():
+        parser.error(f&quot;Directory does not exist: {source_dir}&quot;)
+
+    # Find all CSV files and store in 'sources'
+    sources = sorted(source_dir.glob(&quot;*.csv&quot;))
+    if not sources:
+        parser.error(f&quot;No CSV files found in: {source_dir}&quot;)
+
+    # Import DuckDB package
+    try:
+        import duckdb
+    except ImportError:
+        parser.error(&quot;Missing dependency. Install it with: uv add duckdb&quot;)
+
+    # Initialize the failures count for files that failed conversion
+    failures = 0
+
+    # Opens a DuckDB connection and converts CSV to parquet files
+    with duckdb.connect() as con:
+        for source in sources:
+            target = source.with_suffix(&quot;.parquet&quot;)
+            temp_target = target.with_suffix(&quot;.tmp.parquet&quot;)
+
+            if target.exists() and not args.update:
+                print(f&quot;Skipping existing file: {target.name}&quot;)
+                continue
+
+            try:
+                # Write the new data to a temporary file first
+                con.read_csv(str(source), header=True).write_parquet(
+                    str(temp_target), compression=&quot;zstd&quot;
+                )
+
+                # Replace the final file only after conversion succeeds
+                temp_target.replace(target)
+            except (duckdb.Error, OSError) as exc:
+                # Clean up the temporary file if it exists
+                try:
+                    temp_target.unlink(missing_ok=True)
+                except OSError as cleanup_exc:
+                    print(f&quot;Could not remove temporary file: {cleanup_exc}&quot;, file=sys.stderr)
+
+                print(f&quot;Failed: {source.name}: {exc}&quot;, file=sys.stderr)
+                failures += 1
+            else:
+                # Copy file as target and delete temp or rename temp as target
+                print(f&quot;Converted: {source.name} -&gt; {target.name}&quot;)
+    return 1 if failures else 0
+
+
+if __name__ == &quot;__main__&quot;:
+    raise SystemExit(main())
+
+</code></pre>
+<hr />
+<h2 id="prompts-to-create-a-python-file-for-creating-the-documentation-sites">Prompts to create a Python file for creating the documentation sites</h2>
+<blockquote>
+<p>This setup <code>setup/create_documentation_site.py</code> got created all in one chat.</p>
+</blockquote>
+<h3 id="initial-prompts-to-create-the-first-setup-version_1">Initial prompts to create the first setup version</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6 Astra (OpenAI, 2026c)</p>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">**I have an Idea:** I have a programming repo for my Bachelor Thesis and I am currently setting it up. I need to do a data analysis with Python in Jupyter notebooks. I want to create a Python script in a file `setup/create_documentation_site.py`.
+
+**The script should do the following:**
+- look into `docs` and its subfolders, look for all `md` files.
+- then convert the files to `html` files with nice css.
+- create a overall `index.html` which links all other `html` files, so that I have a nice documentation overview for my repo.
+
+As context I give you my Bachelor Thesis Plan (but I dont think we need this for my script) and a script I did create for my repo to convert CSV to Parquet. **First only tell me:** Is this possible? Yes/No and is it simple? Yes/No and why?
+</code></pre>
+<p><strong>Follow-up-Prompt:</strong></p>
+<pre><code class="language-markdown">I want to do this with you then. Following Python best practices. I dont know the imports I need to do. And I think my logic does not look for documentation in subfolders (see below).
+
+**In addition:** What do you think: does `--update` as param is enough? or not? Do I need a param here?
+
+**Would I start the script with this?**
+
+&quot;&quot;&quot;Convert project documentation Markdown files to HTML and combine to a documentation site.&quot;&quot;&quot;
+
+# import packages...
+
+def main() -&gt; int:
+    # Create argument parser and arguments like '--help' and '--update'
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        &quot;--update&quot;, action=&quot;store_true&quot;,
+        help=&quot;Update existing HTML files with the Markdown files content.&quot;,
+    )
+    args = parser.parse_args()
+
+    # Resolve project root path, relative to this script
+    project_root = Path(__file__).resolve().parent.parent
+
+    # Resolve project data paths as 'source_dir'
+    source_dir = project_root / &quot;docs&quot;
+
+    if not source_dir.is_dir():
+        parser.error(f&quot;Directory does not exist: {source_dir}&quot;)
+
+    # Find all CSV files and store in 'sources'
+    sources = sorted(source_dir.glob(&quot;*.md&quot;))
+    if not sources:
+        parser.error(f&quot;No Markdown files found in: {source_dir} and its subfolders.&quot;)
+
+    target_dir = project_root / &quot;docs&quot; / &quot;docsite&quot;
+</code></pre>
+<h3 id="prompts-used-for-development_1">Prompts used for development</h3>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6 Astra (OpenAI, 2026c)</p>
+<blockquote>
+<p>Below is a prompt that got used to improve and develop the Python setup script, after some questions of understanding. After that, the setup got improved and reviewed step-by-step.</p>
+</blockquote>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Ok and what now? What is the next step for my script and what should I write and why?
+Use current Python best practices.
+</code></pre>
+<hr />
+<h2 id="prompts-to-create-a-python-file-for-converting-notebooks-to-raw-python-files">Prompts to create a Python file for converting notebooks to raw Python files</h2>
+<blockquote>
+<p>This setup <code>setup/notebook_to_raw_python.py</code> got created all in one chat.</p>
+</blockquote>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6 Astra (OpenAI, 2026c)</p>
+<blockquote>
+<p>After the following prompt, comprehension questions were asked.</p>
+</blockquote>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">**Role:** You are an expert in programming with Python and you know all the best practices in creating Python scripts.
+
+**Task:** I have a Python data analysis repo, I am currently setting up. I thought about creating a setup script, which converts my Python notebooks to raw Python mirror files. I once created a documentation to convert it manually (look at `create_raw_python_files.md`). Analyse my other Python setup files (`create_documentation_site.py`, `csv_to_parquet.py`) as reference for my script structure, etc.
+
+How should such a script look like? Below is the begin of the script I want to create. Look and analyse it and improve it. In addition: create the final setup script, for my case.
+
+**In the same place as the other scripts I created `setup/notebook_to_raw_python.py` in my repo:**
+
+&quot;&quot;&quot;Convert project Jupyter notebooks to raw Python files (mirror files).&quot;&quot;&quot;
+
+import argparse
+from pathlib import Path
+import sys
+
+def main() -&gt; int:
+    # Create argument parser and arguments like '--help', '--prd' and '--update'
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        &quot;--all-files&quot;, action=&quot;store_true&quot;,
+        help=&quot;Convert all existing Jupyter notebooks to raw Python files.&quot;,
+    )
+    parser.add_argument(
+        &quot;--file&quot;, action=&quot;store_true&quot;,
+        help=&quot;Convert one specific Jupyter notebooks to a raw Python file.&quot;,
+    )
+    args = parser.parse_args()
+
+    # Resolve project root path, relative to this script
+    project_root = Path(__file__).resolve().parent.parent
+
+    # Resolve project Python and notebook paths as 'source_dir' and 'target_dir'
+    src_root = project_root / &quot;src&quot;
+    source_dir = src_root / &quot;notebooks&quot;
+    target_dir = src_root / &quot;raw-notebooks&quot;
+</code></pre>
+<hr />
+<h2 id="prompt-to-create-a-initial-start-script">Prompt to create a initial start script</h2>
+<blockquote>
+<p>This setup <code>setup/initial_setup.sh</code> got created all in one chat.</p>
+</blockquote>
+<p><strong>AI model (model name (source)):</strong>
+- GPT-6.1 Sol (Codex)</p>
+<blockquote>
+<p>After the following prompt, comprehension questions were asked.</p>
+</blockquote>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Ignore my `AGENTS.md` for now and dont add anything in the `BACKLOG.md` or `HANDOVER.md` file.
+
+**Analyse my repo:**
+- You can use the MCP serena memory files for it.
+- Look at my setup in `setup` and `docs/setup` and gather all information you need, so that you know, what a developer has to do, to setup my repo after cloning.
+
+**I want to have a fast and lazy setup:**
+- I want some initial-setup bash file in `setup`, a developer could run to set up my repo.
+- What I mean is a script, which checks what versions are already installed (Python, uv etc.). Then the script shows a small menu to choose, the installation with the script (installing the needed Python version, etc.).
+- _The script should at the start:_ setup the pre-commit hook git lfs calls to have all files, etc.
+
+Can we do this nice and clean with good messages and colors and so? Analyse all you need and plan it first, then tell me what you want to do and what the script should be called or if there should be more scripts then I tell you if we do this. Find the best practice and best possible way for my repo
+</code></pre>
+<hr />
+<h2 id="bibliography">Bibliography</h2>
+<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+    </main>
+</body>
+</html>

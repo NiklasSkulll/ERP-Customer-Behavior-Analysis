@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>complete_project_plan</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <h1 id="bachelorarbeit-finales-thema-ausformuliert">Bachelorarbeit finales Thema ausformuliert</h1>
+<p>WIE VIEL AUFTRÄGE PRO MONAT HAT JEDER KUNDE? WIE VIELE DAVON SIND VALIDE?</p>
+<hr />
+<h2 id="1-titel-der-bachelorarbeit">1. Titel der Bachelorarbeit</h2>
+<p><strong>Deutscher Titel:</strong>
+- Erkennung und Typisierung erklärbarer Kaufverhaltensveränderungen bei B2B-Großhandelskunden auf Basis von ERP-Zeitreihendaten</p>
+<p><strong>Englischer Titel:</strong>
+- Detection and Typology of Explainable Purchase Behavior Changes in B2B Wholesale Customers Using ERP Time Series Data</p>
+<hr />
+<h2 id="2-kurzbeschreibung-des-themas">2. Kurzbeschreibung des Themas</h2>
+<p>Die Bachelorarbeit untersucht, wie sich Kaufverhaltensveränderungen bei B2B-Großhandelskunden anhand von ERP-Auftragsdaten automatisch erkennen, typisieren und erklärbar beschreiben lassen.</p>
+<p>Im Mittelpunkt steht nicht nur die Frage, dass sich das Verhalten eines Kunden verändert, sondern was sich verändert. Dazu werden aus ERP-Daten kundenbezogene Zeitreihen gebildet, etwa zu Umsatz, Bestellfrequenz, Sortimentsbreite, Rabattquote, Warengruppenmix und Deckungsbeitrag. Erkannte Veränderungen sollen anschließend in interpretierbare Veränderungstypen eingeordnet und durch Feature-Contribution-Analysen nachvollziehbar erklärt werden.</p>
+<p><strong>Die Arbeit verbindet drei Beiträge:</strong>
+1. eine Taxonomie von Verhaltensveränderungstypen aus ERP-Zeitreihendaten.
+2. ein automatisches Erkennungs- und Klassifikationssystem für diese Typen.
+3. eine erklärbare Feature-Contribution-Analyse pro erkannter Veränderung.</p>
+<p>Der Anwendungskontext ist der B2B-Großhandel. Der Fokus liegt auf Verhaltensveränderungen auf Einzelkundenebene, zeitlich, multivariat, typisiert und erklärbar.</p>
+<hr />
+<h2 id="3-hintergrund-und-problemstellung">3. Hintergrund und Problemstellung</h2>
+<p>Kundenverhalten im B2B-Großhandel lässt sich nicht direkt beobachten, hinterlässt jedoch Spuren in Bestelldaten. Jede Bestellung erzeugt Datenpunkte, aus denen sich aussagekräftige Kennzahlen ableiten lassen. Diese Kennzahlen beschreiben, wie ein Kunde einkauft, wie oft er bestellt, welche Warengruppen er nutzt, wie stark er rabattabhängig ist und wie profitabel er für das Unternehmen ist.</p>
+<p>Unternehmen im Großhandel haben viele Geschäftskunden. Manche Kunden kaufen plötzlich weniger, andere kaufen andere Produkte, wieder andere fordern zunehmend höhere Rabatte. Solche Veränderungen fallen häufig erst spät auf. Die Arbeit setzt genau hier an: Sie entwickelt ein System, das Veränderungen im Kaufverhalten frühzeitig aus Bestelldaten erkennt, benennt und erklärt, damit der Vertrieb rechtzeitig reagieren kann.</p>
+<p>Dabei ist wichtig, dass nicht ein einzelner Wert isoliert betrachtet wird. Der Kern der Arbeit besteht darin, mehrdimensionale Muster aus mehreren Kennzahlen gleichzeitig zu analysieren. Ein Kunde kann beispielsweise gleichzeitig seltener bestellen, weniger Warengruppen kaufen und eine höhere Rabattquote aufweisen. Genau solche kombinierten Veränderungen sollen erkannt, typisiert und nachvollziehbar beschrieben werden.</p>
+<p>Das Thema grenzt sich klar von reiner Churn Prediction und statischer Kundensegmentierung ab. Es geht nicht darum, vorherzusagen, ob ein Kunde abwandert, sondern darum, signifikante Veränderungen im aktuellen oder vergangenen Kaufverhalten zu erkennen und verständlich einzuordnen.</p>
+<hr />
+<h2 id="4-ziel-der-arbeit">4. Ziel der Arbeit</h2>
+<p>Ziel der Bachelorarbeit ist die Entwicklung und Evaluation eines methodischen Ansatzes zur Erkennung, Typisierung und erklärbaren Beschreibung von Kaufverhaltensveränderungen bei B2B-Großhandelskunden auf Basis von ERP-Zeitreihendaten.</p>
+<p>Dazu sollen aus ERP-Auftragsdaten kundenbezogene Zeitreihen erstellt werden. Auf dieser Grundlage sollen relevante Veränderungen identifiziert und in interpretierbare Typen eingeordnet werden. Für jede erkannte Veränderung soll außerdem nachvollziehbar dargestellt werden, welche Kennzahlen sich besonders stark verändert haben.</p>
+<p><strong>Die Arbeit verfolgt damit drei Ziele:</strong>
+1. <em>Konzeptioneller Beitrag:</em>
+    - Entwicklung einer Taxonomie von Verhaltensveränderungstypen auf Basis von ERP-Merkmalen.
+2. <em>Methodischer Beitrag:</em>
+    - Automatische Erkennung und Klassifikation dieser Typen pro Kunde und Zeitfenster.
+3. <em>Erklärbarkeits-Beitrag:</em>
+    - Darstellung, welche Feature-Dimensionen zu einer erkannten Veränderung beitragen.</p>
+<hr />
+<h2 id="5-zentrale-forschungsfrage-und-unterfragen">5. Zentrale Forschungsfrage und Unterfragen</h2>
+<p><strong>Zentrale Forschungsfrage:</strong>
+- Welche Typen signifikanter Kaufverhaltensveränderungen lassen sich bei B2B-Großhandelskunden anhand von ERP-Auftragsdaten automatisch erkennen, klassifizieren und erklärbar beschreiben?</p>
+<p><strong>Unterfragen:</strong>
+1. Welche Dimensionen des Kaufverhaltens, beispielsweise Frequenz, Sortimentsbreite, Rabattniveau, Umsatz, Produktgruppenfokus und Deckungsbeitrag, zeigen in realen ERP-Daten relevante Veränderungsmuster?
+2. Welche Kennzahlen aus den Bestelldaten beschreiben das Kaufverhalten eines Kunden am besten?
+3. Welche Detektionsmethode, insbesondere Change Point Detection oder zeitfensterbasierter Profilvergleich, erkennt diese Veränderungen früher und mit geringerer Falschalarmrate?
+4. Lassen sich erkannte Veränderungen in interpretierbare Typen einteilen, die für einen Vertriebskontext handlungsrelevant sind?
+5. Welche Feature-Dimensionen tragen am stärksten zu einer erkannten Veränderung bei und wie lässt sich das erklärbar darstellen?</p>
+<hr />
+<h2 id="6-abgrenzung-des-themas">6. Abgrenzung des Themas</h2>
+<p>Die Arbeit ist klar auf die Erkennung, Typisierung und Erklärung von Kaufverhaltensveränderungen bei B2B-Großhandelskunden ausgerichtet.</p>
+<p><strong>Nicht Gegenstand der Arbeit sind:</strong>
+- Churn-Vorhersage mit einem Label "churned / not churned" als Zielvariable,
+- statische Kundensegmentierung,
+- Vorhersage zukünftiger Veränderungen,
+- kausale Analyse, warum sich Verhalten verändert,
+- Echtzeit-Monitoring oder ein produktives System,
+- produktive Systemintegration,
+- tiefe kausale Analyse,
+- Nutzerstudien mit Vertriebsmitarbeitenden,
+- mehr als zwei Detektionsmethoden im Detail,
+- mehr als fünf bis sieben Veränderungstypen in der Taxonomie.</p>
+<p>Der Fokus liegt auf der Typisierung und Erklärbarkeit von Veränderungen. Die Detektion dient als methodisches Werkzeug. Der Vergleich zwischen Change Point Detection und Fensterprofilen ist ein Nebenaspekt.</p>
+<p>Für die Daten ist außerdem zu beachten, dass zwischen Projektgeschäft und Sortiments- beziehungsweise Bedarfsgeschäft unterschieden werden muss. Ein Projekt liegt vor, wenn einem Auftrag ein Angebot zugrunde liegt und der Umsatz eine bestimmte Größe erreicht. Angebote entstehen bei Projekten, beim Bedarfsgeschäft mit geringerem Umsatz oder bei Kunden, die Verfügbarkeiten abfragen.</p>
+<hr />
+<h2 id="7-datenbasis-der-arbeit">7. Datenbasis der Arbeit</h2>
+<h3 id="71-datenbasis-und-tabellen">7.1 Datenbasis und Tabellen</h3>
+<p><strong>Datenbasis:</strong>
+- <em>Arbeit basiert auf ERP-Auftragsdaten:</em>
+    - Zeitraum sollte mindestens 24 Monate umfassen und pro Kunde auf Monats- oder Wochenbasis aggregiert werden.
+- <em>Aus den Rohdaten werden Kundenprofile als Zeitreihen gebildet:</em>
+    - Eine Zeile beschreibt dabei einen Kunden in einem bestimmten Monat mit allen berechneten Kennzahlen.</p>
+<p><strong>Notwendige Tabellen:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Tabelle / Quelle</strong></th>
+<th><strong>Benötigte Felder</strong></th>
+<th><strong>Zweck</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Auftragskopf</td>
+<td>Kunden-ID, Bestelldatum, Gesamtumsatz, Deckungsbeitrag</td>
+<td>Zeitreihe pro Kunde, Umsatz, Bestellfrequenz, Warenkorbwert, Deckungsbeitrag</td>
+</tr>
+<tr>
+<td>Auftragspositionen</td>
+<td>Artikel-ID, Warengruppe, Menge, Einzelpreis, Rabatt</td>
+<td>Sortimentsbreite, Warengruppenmix, Rabattquote</td>
+</tr>
+<tr>
+<td>Artikelstamm</td>
+<td>Artikel-ID, Warengruppe / Kategorie</td>
+<td>Aggregation auf Warengruppenebene</td>
+</tr>
+<tr>
+<td>Kundenstammdaten</td>
+<td>Unternehmensgröße, Branche</td>
+<td>Branche und Größe für Subgruppenanalysen</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Zusätzlich hilfreiche Tabellen und Daten:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Tabelle / Quelle</strong></th>
+<th><strong>Zweck</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reporting Excel-Tabelle</td>
+<td>Hilfreich für Auswertungen; liegt im Vertriebsordner unter "Reporting"</td>
+</tr>
+<tr>
+<td>ERP-App "Preise verwalten"</td>
+<td>Quelle für Rabattinformationen</td>
+</tr>
+</tbody>
+</table>
+<h3 id="72-mindestanforderungen-an-die-daten">7.2 Mindestanforderungen an die Daten</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Mindestanforderung</strong></th>
+<th><strong>Begründung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mindestens 300 aktive Kunden mit Transaktionshistorie</td>
+<td>Sonst zu wenig Varianz in Veränderungstypen</td>
+</tr>
+<tr>
+<td>Mindestens 24 Monate Daten pro Kunde</td>
+<td>Sonst sind keine stabilen Zeitreihen erkennbar</td>
+</tr>
+<tr>
+<td>Mindestens 4–6 Bestellungen pro Kunde und Jahr</td>
+<td>Zu seltene Käufer erzeugen keine aussagekräftigen Zeitreihen</td>
+</tr>
+<tr>
+<td>Vollständige Warengruppen-Zuordnung</td>
+<td>Ohne Kategorisierung ist keine Sortimentsbreiten-Analyse möglich</td>
+</tr>
+</tbody>
+</table>
+<h3 id="73-auftragskopf">7.3 Auftragskopf</h3>
+<p>Der Auftragskopf enthält die Zusammenfassung einer Bestellung. Jede Zeile entspricht einer Bestellung.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Feld</strong></th>
+<th><strong>Bedeutung</strong></th>
+<th><strong>Verwendung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Kunden-ID</strong></td>
+<td>Eindeutige Nummer zur Identifikation eines Kunden</td>
+<td>Zusammenführung aller Bestellungen eines Kunden</td>
+</tr>
+<tr>
+<td><strong>Bestelldatum</strong></td>
+<td>Datum des Auftragseingangs</td>
+<td>Aufbau von Zeitreihen durch Gruppierung nach Monat</td>
+</tr>
+<tr>
+<td><strong>Gesamtumsatz</strong></td>
+<td>Gesamtbetrag der Bestellung nach Rabatten</td>
+<td>Umsatz-Datenpunkt</td>
+</tr>
+<tr>
+<td><strong>Deckungsbeitrag</strong></td>
+<td>Betrag nach Abzug direkter Kosten (Einkaufspreis der Waren) vom Umsatz</td>
+<td>Bewertung der Profitabilität</td>
+</tr>
+</tbody>
+</table>
+<h3 id="74-auftragspositionen">7.4 Auftragspositionen</h3>
+<p>Die Auftragspositionen enthalten die Detailansicht jeder Bestellung. Jede Zeile entspricht einem einzelnen Artikel innerhalb einer Bestellung.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Feld</strong></th>
+<th><strong>Bedeutung</strong></th>
+<th><strong>Verwendung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bestell-ID</td>
+<td>Verbindung zum Auftragskopf</td>
+<td>Zuordnung einzelner Positionen zu Bestellungen</td>
+</tr>
+<tr>
+<td>Artikel-ID</td>
+<td>Eindeutige Nummer eines Artikels</td>
+<td>Verbindung zum Artikelstamm</td>
+</tr>
+<tr>
+<td>Warengruppe</td>
+<td>Produktkategorie eines Artikels</td>
+<td>Sortimentsbreite und Warengruppenmix</td>
+</tr>
+<tr>
+<td>Menge</td>
+<td>Anzahl bestellter Einheiten</td>
+<td>Analyse von Mengenverschiebungen</td>
+</tr>
+<tr>
+<td>Einzelpreis</td>
+<td>Preis pro Einheit vor Rabatt</td>
+<td>Berechnung des Listenpreises und tatsächlichen Preises</td>
+</tr>
+<tr>
+<td>Rabatt</td>
+<td>Prozentualer Nachlass auf den Listenpreis</td>
+<td>Berechnung der Rabattquote</td>
+</tr>
+</tbody>
+</table>
+<h3 id="75-artikelstamm">7.5 Artikelstamm</h3>
+<p>Der Artikelstamm ist das Produktverzeichnis und dient als Nachschlagetabelle.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Feld</strong></th>
+<th><strong>Bedeutung</strong></th>
+<th><strong>Verwendung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Artikel-ID</td>
+<td>Eindeutige Nummer eines Artikels</td>
+<td>Verbindung mit den Auftragspositionen</td>
+</tr>
+<tr>
+<td>Artikelname</td>
+<td>Name des Artikels</td>
+<td>Beschreibung des Produkts</td>
+</tr>
+<tr>
+<td>Warengruppe / Kategorie</td>
+<td>Zuordnung des Artikels zu einer Produktgruppe</td>
+<td>Aggregation und Analyse auf Warengruppenebene</td>
+</tr>
+</tbody>
+</table>
+<p>Wenn die Warengruppe nicht direkt in der Positionstabelle gespeichert ist, wird die Positionstabelle über die Artikel-ID mit dem Artikelstamm verknüpft.</p>
+<h3 id="76-kundenstammdaten">7.6 Kundenstammdaten</h3>
+<p>Kundenstammdaten enthalten Informationen zum Kunden unabhängig von seinen Bestellungen.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Feld</strong></th>
+<th><strong>Bedeutung</strong></th>
+<th><strong>Verwendung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kunden-ID</td>
+<td>Eindeutige Kundenkennung</td>
+<td>Verbindung zu Bestelldaten</td>
+</tr>
+<tr>
+<td>Kundenname</td>
+<td>Name des Kunden</td>
+<td>Identifikation</td>
+</tr>
+<tr>
+<td>Branche</td>
+<td>Branche des Kunden</td>
+<td>Subgruppenanalyse</td>
+</tr>
+<tr>
+<td>Größe</td>
+<td>Größenklasse des Kunden</td>
+<td>Subgruppenanalyse</td>
+</tr>
+<tr>
+<td>PLZ</td>
+<td>Postleitzahl</td>
+<td>Kundenattribut</td>
+</tr>
+</tbody>
+</table>
+<p>Branche und Größe sind nicht für die Kernerkennung von Verhaltensänderungen notwendig, können aber für Subgruppenanalysen genutzt werden. So kann beispielsweise untersucht werden, ob bestimmte Verhaltenstypen in bestimmten Branchen häufiger auftreten.</p>
+<hr />
+<h2 id="8-relevante-kennzahlen-und-deren-berechnung">8. Relevante Kennzahlen und deren Berechnung</h2>
+<h3 id="81-monatlicher-umsatz">8.1 Monatlicher Umsatz</h3>
+<p><strong>Bedeutung:</strong>
+- Der monatliche Umsatz zeigt, wie viel Geld ein Kunde in einem bestimmten Zeitraum ausgibt.</p>
+<p><strong>Berechnung:</strong>
+- Summe aller Gesamtumsätze pro Kunde und Monat.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragskopf:</em>
+    - <code>Kunden-ID</code>, <code>Bestelldatum</code>, <code>Gesamtumsatz</code></p>
+<p><strong>Relevanz:</strong>
+- Ein sinkender Umsatz ist oft ein erstes Signal, dass sich das Kaufverhalten verändert.</p>
+<h3 id="82-bestellfrequenz">8.2 Bestellfrequenz</h3>
+<p><strong>Bedeutung:</strong>
+- Die Bestellfrequenz zeigt, wie oft ein Kunde pro Monat oder Quartal bestellt.</p>
+<p><strong>Berechnung:</strong>
+- Anzahl der Bestellungen pro Kunde und Monat.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragskopf:</em>
+    - <code>Kunden-ID</code>, <code>Bestelldatum</code></p>
+<p><strong>Relevanz:</strong>
+- Eine sinkende Frequenz kann darauf hindeuten, dass der Kunde Teile seines Bedarfs zu einem Wettbewerber verlagert, aber noch nicht vollständig abgewandert ist.</p>
+<h3 id="83-durchschnittlicher-warenkorbwert">8.3 Durchschnittlicher Warenkorbwert</h3>
+<p><strong>Bedeutung:</strong>
+- Der durchschnittliche Warenkorbwert zeigt, wie viel eine durchschnittliche Bestellung kostet.</p>
+<p><strong>Berechnung:</strong>
+- Gesamtumsatz ÷ Anzahl Bestellungen.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragskopf:</em>
+    - <code>Gesamtumsatz</code>, <code>Bestellfrequenz</code></p>
+<p><strong>Relevanz:</strong>
+- Die Kennzahl unterscheidet zwischen Kunden, die seltener bestellen, und Kunden, die pro Bestellung weniger kaufen.</p>
+<h3 id="84-sortimentsbreite">8.4 Sortimentsbreite</h3>
+<p><strong>Bedeutung:</strong>
+- Die Sortimentsbreite zeigt, aus wie vielen verschiedenen Produktkategorien ein Kunde kauft.</p>
+<p><strong>Berechnung:</strong>
+- Anzahl unterschiedlicher Warengruppen pro Kunde und Monat.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragspositionen:</em>
+    - <code>Warengruppe</code></p>
+<p><strong>Relevanz:</strong>
+- Wenn ein Kunde das Sortiment stark einschränkt, kauft er möglicherweise bestimmte Warengruppen bei einem Wettbewerber.</p>
+<h3 id="85-warengruppenmix">8.5 Warengruppenmix</h3>
+<p><strong>Bedeutung:</strong>
+- Der Warengruppenmix zeigt, welche Produktkategorien ein Kunde kauft und wie sich deren Umsatzanteile verändern.</p>
+<p><strong>Berechnung:</strong>
+- Umsatzanteil je Warengruppe pro Kunde und Monat.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragspositionen:</em>
+    - <code>Warengruppe</code>, <code>Einzelpreis</code>, <code>Menge</code></p>
+<p><strong>Relevanz:</strong>
+- Ein Wechsel der dominanten Warengruppen kann auf eine veränderte Geschäftsstrategie des Kunden hinweisen oder darauf, dass bestimmte Produktgruppen nicht mehr beim betrachteten Unternehmen gekauft werden.</p>
+<h3 id="86-rabattquote">8.6 Rabattquote</h3>
+<p><strong>Bedeutung:</strong>
+- Die Rabattquote zeigt, wie viel Prozent Rabatt ein Kunde im Durchschnitt auf seine Bestellungen erhält.</p>
+<p><strong>Berechnung:</strong>
+- Gesamter Rabattbetrag ÷ gesamter Listenpreis aller Positionen.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragspositionen:</em>
+    - <code>Einzelpreis</code>, <code>Menge</code>, <code>Rabatt</code></p>
+<p><strong>Berechnung des tatsächlichen Preises:</strong>
+- Einzelpreis × Menge × (1 − Rabatt)</p>
+<p><strong>Relevanz:</strong>
+- Eine steigende Rabattquote ist ein Frühwarnzeichen für Preisdruck und potenzielle Abwanderung.</p>
+<p>Die Rabattquote sollte gewichtet berechnet werden, da ein Rabatt auf eine hochpreisige Position stärker ins Gewicht fällt als ein gleicher prozentualer Rabatt auf eine niedrigpreisige Position.</p>
+<h3 id="87-deckungsbeitrag">8.7 Deckungsbeitrag</h3>
+<p><strong>Bedeutung:</strong>
+- Der Deckungsbeitrag zeigt, was nach Abzug direkter Kosten vom Umsatz übrig bleibt.</p>
+<p><strong>Berechnung:</strong>
+- Summe der Deckungsbeiträge pro Kunde und Monat.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragskopf:</em>
+    - <code>Deckungsbeitrag</code></p>
+<p><strong>Relevanz:</strong>
+- Umsatzrückgang ist nicht gleichbedeutend mit Ertragsverlust. Der Deckungsbeitrag zeigt, wie wertvoll ein Kunde wirtschaftlich ist.</p>
+<h3 id="88-db-quote">8.8 DB-Quote</h3>
+<p><strong>Bedeutung:</strong>
+- Die DB-Quote zeigt den Deckungsbeitrag im Verhältnis zum Umsatz (in %).</p>
+<p><strong>Berechnung:</strong>
+- Deckungsbeitrag ÷ Umsatz.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragskopf:</em>
+    - <code>Deckungsbeitrag</code>, <code>Gesamtumsatz</code></p>
+<p><strong>Relevanz:</strong>
+- Ein Kunde kann aus Umsatzsicht stabil wirken, aber durch höhere Rabatte oder veränderte Produktwahl deutlich weniger profitabel werden.</p>
+<h3 id="89-mengenverschiebungen">8.9 Mengenverschiebungen</h3>
+<p><strong>Bedeutung:</strong>
+- Mengenverschiebungen zeigen, ob ein Kunde weniger Einheiten kauft oder ob sich die gekauften Mengen zwischen Produkten verändern.</p>
+<p><strong>Berechnung:</strong>
+- Analyse der bestellten Mengen pro Kunde, Artikel, Warengruppe und Zeitraum.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Auftragspositionen:</em>
+    - <code>Menge</code></p>
+<p><strong>Relevanz:</strong>
+- Mengenverschiebungen können helfen zu unterscheiden, ob ein Kunde weniger kauft oder günstigere Artikel auswählt.</p>
+<h3 id="810-branche-und-groe">8.10 Branche und Größe</h3>
+<p><strong>Bedeutung:</strong>
+- Branche und Größe beschreiben den Kunden als Stammdatenattribute.</p>
+<p><strong>Berechnung:</strong>
+- Keine Berechnung erforderlich; direkte Übernahme aus dem Kundenstamm.</p>
+<p><strong>Benötigte Felder:</strong>
+- <em>Kundenstamm:</em>
+    - <code>Branche</code>, <code>Größe</code></p>
+<p><strong>Relevanz:</strong>
+- Branche und Größe können für Subgruppenanalysen genutzt werden. Unterschiedliche Kundengruppen können unterschiedliche normale Bestellmuster aufweisen.</p>
+<h3 id="811-fertiges-monatsprofil">8.11 Fertiges Monatsprofil</h3>
+<p>Aus den verknüpften Tabellen entsteht pro Kunde und Monat eine Zeile als Kundenprofil.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Monat</strong></th>
+<th><strong>Kunden-ID</strong></th>
+<th style="text-align: right;"><strong>Umsatz</strong></th>
+<th style="text-align: right;"><strong>Frequenz</strong></th>
+<th style="text-align: right;"><strong>Ø Warenkorb</strong></th>
+<th style="text-align: right;"><strong>DB-Quote</strong></th>
+<th style="text-align: right;"><strong>Sortimentsbreite</strong></th>
+<th style="text-align: right;"><strong>Rabattquote</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jan 2024</td>
+<td>K001</td>
+<td style="text-align: right;">2.050 €</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1.025 €</td>
+<td style="text-align: right;">25,9 %</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3,1 %</td>
+</tr>
+<tr>
+<td>Feb 2024</td>
+<td>K001</td>
+<td style="text-align: right;">3.200 €</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1.067 €</td>
+<td style="text-align: right;">24,1 %</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">4,2 %</td>
+</tr>
+<tr>
+<td>Mär 2024</td>
+<td>K001</td>
+<td style="text-align: right;">800 €</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">800 €</td>
+<td style="text-align: right;">18,0 %</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">11,5 %</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="9-methodisches-vorgehen">9. Methodisches Vorgehen</h2>
+<h3 id="91-datenvorbereitung">9.1 Datenvorbereitung</h3>
+<p>Zunächst werden Rohdaten aus dem ERP-System extrahiert und bereinigt. Die Einzeltransaktionen werden pro Kunde und Monat oder Woche aggregiert. Dadurch entstehen Zeitreihen pro Kunde.</p>
+<p><strong>Die Datenvorbereitung umfasst:</strong>
+- Extraktion und Bereinigung der ERP-Daten
+- Verknüpfung von Auftragskopf, Auftragspositionen und Artikelstamm
+- Aggregation auf Monats- oder Wochenbasis
+- Berechnung von Feature-Vektoren pro Kunde
+- Plausibilitätsprüfung, wie viele Kunden die Mindestanforderungen erfüllen</p>
+<p><strong>Berechnete Features sind insbesondere:</strong>
+- Umsatz
+- Bestellfrequenz
+- durchschnittlicher Warenkorbwert
+- Sortimentsbreite
+- Rabattquote
+- Warengruppenmix
+- Deckungsbeitrag
+- DB-Quote</p>
+<h3 id="92-vergleich-alter-und-neuer-zeitraume">9.2 Vergleich alter und neuer Zeiträume</h3>
+<p><strong>Die Zeitreihe eines Kunden wird in zwei Fenster aufgeteilt:</strong>
+- <em>Referenzzeitraum:</em> vorheriger Zeitraum, zum Beispiel Monate 1–6 (1. Jahreshälfte)
+- <em>Beobachtungszeitraum:</em> späterer Zeitraum, zum Beispiel Monate 7–12 (2. Jahreshälfte)</p>
+<p>Für beide Fenster werden Durchschnittswerte der Kennzahlen berechnet. Anschließend wird analysiert, wie stark sich die Kennzahlen verändert haben.</p>
+<p><strong>Beispielhafte Veränderungsanalyse:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Kennzahl</strong></th>
+<th style="text-align: right;"><strong>Vorher</strong></th>
+<th style="text-align: right;"><strong>Nachher</strong></th>
+<th style="text-align: right;"><strong>Veränderung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Umsatz</td>
+<td style="text-align: right;">2.800 €</td>
+<td style="text-align: right;">900 €</td>
+<td style="text-align: right;">−68 %</td>
+</tr>
+<tr>
+<td>Bestellfrequenz</td>
+<td style="text-align: right;">3,2 / Monat</td>
+<td style="text-align: right;">1,1 / Monat</td>
+<td style="text-align: right;">−66 %</td>
+</tr>
+<tr>
+<td>Sortimentsbreite</td>
+<td style="text-align: right;">4 Warengruppen</td>
+<td style="text-align: right;">1 Warengruppe</td>
+<td style="text-align: right;">−75 %</td>
+</tr>
+<tr>
+<td>Rabattquote</td>
+<td style="text-align: right;">5 %</td>
+<td style="text-align: right;">14 %</td>
+<td style="text-align: right;">+9 Prozentpunkte</td>
+</tr>
+</tbody>
+</table>
+<h3 id="93-taxonomie-entwicklung">9.3 Taxonomie-Entwicklung</h3>
+<p>Die Taxonomie wird durch die Sichtung auffälliger Kundenprofile entwickelt. Vorgesehen ist eine manuelle Analyse von 20–30 auffälligen Kundenprofilen. Auf dieser Grundlage werden fünf bis sieben Veränderungstypen mit klaren Kriterien definiert.</p>
+<p>Die Taxonomie bildet einen eigenen konzeptionellen Beitrag der Arbeit.</p>
+<h3 id="94-detektionsansatze">9.4 Detektionsansätze</h3>
+<p><strong>Es werden zwei Detektionsansätze betrachtet:</strong>
+- <em>Ansatz 1 - Change Point Detection:</em>
+    - Change Point Detection erkennt automatisch Zeitpunkte, an denen sich der Verlauf einer Zeitreihe statistisch signifikant verändert. Dies kann auf univariaten oder multivariaten Zeitreihen erfolgen.
+    - Vorgesehene Methode:
+        - PELT über die <code>ruptures</code>-Library
+        - gegebenenfalls BOCPD
+- <em>Ansatz 2 - Rollierende Fensterprofile:</em>
+    - Bei diesem Ansatz werden rollierende Zeitfenster gebildet, zum Beispiel Drei-Monats-Fenster mit Ein-Monats-Shift. Zwischen den Fenstern werden Distanzmaße berechnet.
+    - Mögliche Distanzmaße:
+        - Cosine-Ähnlichkeit
+        - Wasserstein-Distanz</p>
+<p><strong>Ziel:</strong>
+- Erkennung signifikanter Veränderungen zwischen Referenz- und Beobachtungsprofilen.</p>
+<h3 id="95-klassifikation-in-veranderungstypen">9.5 Klassifikation in Veränderungstypen</h3>
+<p><strong>Erkannte Veränderungen werden anschließend typisiert. Dafür sind zwei Varianten vorgesehen:</strong>
+1. <em>Regelbasiert:</em>
+    - Wenn ein Feature um mehr als eine definierte Schwelle steigt oder sinkt, wird ein bestimmter Typ zugewiesen.
+2. <em>Leichtgewichtiges Clustering:</em>
+    - Clustering auf dem Veränderungsvektor, also auf der Differenz zwischen dem Profil vor und nach einem Änderungspunkt.</p>
+<h3 id="96-erklarbarkeit">9.6 Erklärbarkeit</h3>
+<p>Für jede erkannte Veränderung wird analysiert, welche Features besonders stark zur Veränderung beitragen.</p>
+<p><strong>Vorgesehene Ansätze:</strong>
+- Differenzprofil
+- Feature-Contribution-Analyse
+- optional SHAP-Werte auf einem Surrogate Classifier, beispielsweise einem Random Forest auf Cluster-Labels</p>
+<h3 id="97-tools-und-libraries">9.7 Tools und Libraries</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Aufgabe</strong></th>
+<th><strong>Tool / Library</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Datenvorbereitung</td>
+<td><code>pandas</code>, <code>numpy</code></td>
+</tr>
+<tr>
+<td>Change Point Detection</td>
+<td><code>ruptures</code> mit PELT und BOCPD</td>
+</tr>
+<tr>
+<td>Distanzmaße</td>
+<td><code>scipy</code> für Wasserstein, <code>sklearn</code> für Cosine</td>
+</tr>
+<tr>
+<td>Clustering</td>
+<td><code>sklearn</code> mit KMeans oder DBSCAN</td>
+</tr>
+<tr>
+<td>Erklärbarkeit</td>
+<td><code>shap</code>, manuelle Differenzprofile</td>
+</tr>
+<tr>
+<td>Visualisierung</td>
+<td><code>matplotlib</code>, <code>seaborn</code>, <code>plotly</code></td>
+</tr>
+<tr>
+<td>Notebooks</td>
+<td>Jupyter</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="10-taxonomie-der-verhaltensveranderungstypen">10. Taxonomie der Verhaltensveränderungstypen</h2>
+<p>Eine Taxonomie ist eine geordnete Liste von Veränderungstypen. Wenn das System eine Änderung erkennt, soll es diese einem verständlichen Typ zuordnen können.</p>
+<p>Die Typen müssen nicht vollständig trennscharf sein. Ein Kunde kann gleichzeitig einen Umsatzrückgang und eine Sortimentsverengung zeigen. In der Arbeit kann entweder mit Mischtypen gearbeitet oder ein dominanter Typ zugewiesen werden, sofern dies begründet wird.</p>
+<h3 id="101-beispiele-von-verhaltensveranderungstypen">10.1 Beispiele von Verhaltensveränderungstypen</h3>
+<p><strong>Typ 1 - Umsatzrückgang:</strong>
+- <em>Was verändert sich?</em>
+    - Der Gesamtumsatz des Kunden sinkt deutlich und anhaltend.
+- <em>Welche Parameter zeigen das?</em>
+    - Der monatliche Umsatz sinkt um mehr als 30 % über mindestens drei Monate.
+- <em>Warum ist das für den Vertrieb relevant?</em>
+    - Der Umsatzrückgang hat direkten Ertragseinfluss. Der Vertrieb muss verstehen, ob es sich um einen vorübergehenden Effekt, beispielsweise Saisonalität, oder um eine echte Verlagerung handelt.
+- <em>Beispiel:</em>
+    - Ein Kunde kauft im ersten Halbjahr durchschnittlich 8.000 € pro Monat, im zweiten Halbjahr nur noch 3.000 € pro Monat.</p>
+<p><strong>Typ 2 - Frequenzrückgang:</strong>
+- <em>Was verändert sich?</em>
+    - Der Kunde bestellt seltener, auch wenn der Umsatz pro Bestellung möglicherweise stabil bleibt.
+- <em>Welche Parameter zeigen das?</em>
+    - Die Anzahl der Bestellungen pro Monat sinkt um mehr als 50 %.
+- <em>Warum ist das für den Vertrieb relevant?</em>
+    - Selteneres Bestellen deutet darauf hin, dass der Kunde einen Teil seines Bedarfs woanders deckt, aber noch nicht vollständig abgewandert ist. Es handelt sich um eine frühe Warnstufe.
+- <em>Beispiel:</em>
+    - Ein Kunde bestellte früher viermal pro Monat, jetzt nur noch ein- bis zweimal.</p>
+<p><strong>Typ 3 - Sortimentsverengung:</strong>
+- <em>Was verändert sich?</em>
+    - Der Kunde kauft deutlich weniger verschiedene Produktkategorien als früher.
+- <em>Welche Parameter zeigen das?</em>
+    - Die Anzahl aktiver Warengruppen sinkt um mehr als 50 % im Vergleich zum Referenzzeitraum.
+- <em>Warum ist das für den Vertrieb relevant?</em>
+    - Der Kunde kauft möglicherweise bestimmte Kategorien bei einem Wettbewerber, auch wenn er insgesamt noch Kunde bleibt.
+- <em>Beispiel:</em>
+    - Ein Kunde kaufte früher aus sechs Warengruppen, jetzt nur noch aus zwei.</p>
+<p><strong>Typ 4 - Warengruppenwechsel:</strong>
+- <em>Was verändert sich?</em>
+    - Die Zusammensetzung des Einkaufs verschiebt sich stark. Andere Kategorien werden dominant.
+- <em>Welche Parameter zeigen das?</em>
+    - Die führende Warengruppe, gemessen am Umsatzanteil, wechselt oder der Umsatzanteil einer Kategorie verändert sich um mehr als 40 Prozentpunkte.
+- <em>Warum ist das für den Vertrieb relevant?</em>
+    - Ein Warengruppenwechsel kann auf eine Veränderung im Geschäftsmodell des Kunden hindeuten oder darauf, dass er in bestimmten Bereichen andere Lieferanten nutzt.
+- <em>Beispiel:</em>
+    - Früher stammten 60 % des Umsatzes aus Chemie, jetzt 70 % aus Verpackung.</p>
+<p><strong>Typ 5 - Steigende Rabattabhängigkeit:</strong>
+- <em>Was verändert sich?</em>
+    - Der Kunde fordert oder erhält deutlich mehr Rabatt als zuvor.
+- <em>Welche Parameter zeigen das?</em>
+    - Die Rabattquote steigt dauerhaft um mehr als 5–8 Prozentpunkte.
+- <em>Warum ist das für den Vertrieb relevant?</em>
+    - Steigende Rabattabhängigkeit ist oft ein Zeichen, dass der Kunde Preisdruck von Wettbewerbern signalisiert. Es ist ein frühes Signal, das dem Vertrieb Handlungsspielraum gibt, bevor der Kunde abwandert.
+- <em>Beispiel:</em>
+    - Früher lag der Kunde bei durchschnittlich 4 % Rabatt, jetzt bei durchschnittlich 13 % Rabatt.</p>
+<p><strong>Typ 6 - Margenverschlechterung:</strong>
+- <em>Was verändert sich?</em>
+    - Der Umsatz bleibt stabil, aber der Deckungsbeitrag sinkt, weil der Kunde verstärkt Niedrigmargen-Produkte kauft oder mehr Rabatt fordert.
+- <em>Welche Parameter zeigen das?</em>
+    - Der Deckungsbeitrag sinkt um mehr als 25 % bei gleichbleibendem oder leicht sinkendem Umsatz.
+- <em>Warum ist das für den Vertrieb relevant?</em>
+    - Ein Kunde kann aus Umsatzsicht unauffällig wirken, aber wirtschaftlich immer weniger wertvoll werden. Das ist für das Vertriebscontrolling besonders interessant.
+- <em>Beispiel:</em>
+    - Der Umsatz sinkt von 10.000 € auf 9.000 €, also um 10 %. Der Deckungsbeitrag sinkt jedoch von 2.500 € auf 1.000 €, also um 60 %.</p>
+<hr />
+<h2 id="11-erkennung-von-verhaltensanderungen">11. Erkennung von Verhaltensänderungen</h2>
+<p>Eine zentrale methodische Entscheidung der Arbeit ist die Festlegung, wann eine Veränderung tatsächlich als Verhaltensänderung gilt. Ohne klare Regeln würde jede kleine monatliche Schwankung als Veränderung gelten.</p>
+<h3 id="111-mogliche-arten-von-betrachtungskriterien">11.1 Mögliche Arten von Betrachtungskriterien</h3>
+<p><strong>Es werden drei Arten von Kriterien betrachtet:</strong>
+- <em>Relative Schwellenwerte:</em>
+    - Eine Kennzahl gilt als auffällig, wenn sie sich um mehr als einen definierten Prozentsatz im Vergleich zum Referenzzeitraum verändert.
+    - Beispiele:
+        - Umsatz sinkt um mehr als 30 %
+        - Bestellfrequenz halbiert sich
+        - Rabattquote steigt um mehr als 5 Prozentpunkte
+    - Vorteil:
+        - Relative Schwellenwerte sind einfach zu verstehen und zu erklären.
+    - Nachteil:
+        - Der konkrete Schwellenwert kann willkürlich wirken, wenn er nicht begründet wird.
+- <em>Anhaltende Veränderung über mehrere Monate:</em>
+    - Eine einzelne auffällige Bestellung ist noch kein Muster. Eine Veränderung gilt erst dann als signifikant, wenn sie über mindestens zwei bis drei Monate anhält.
+    - Beispiel:
+        - Ein einmaliger Umsatzrückgang wegen Betriebsurlaub des Kunden ist kein Signal. Ein Umsatzrückgang über mehrere Monate hinweg deutet dagegen auf eine echte Veränderung hin.
+    - Vorteil:
+        - Zufällige Ausreißer werden herausgefiltert.
+    - Nachteil:
+        - Es wird ausreichend Datenhistorie benötigt.
+- <em>Change Point Detection:</em>
+    - Change Point Detection erkennt automatisch, an welchem Zeitpunkt sich der Verlauf einer Zeitreihe statistisch signifikant verändert hat. Dadurch muss ein Schwellenwert nicht ausschließlich manuell festgelegt werden.
+    - Die Methode erkennt beispielsweise einen Zeitpunkt, ab dem eine Umsatzkurve eine neue Richtung einschlägt.
+    - Vorteil:
+        - Die Methode ist datengetrieben und methodisch sauberer als reine Schwellenwerte.</p>
+<h3 id="112-begrundung-der-schwellenwerte">11.2 Begründung der Schwellenwerte</h3>
+<p><strong>Die Schwellenwerte müssen wissenschaftlich begründet werden. Mögliche Begründungen sind:</strong>
+- Orientierung an bestehender Literatur
+- datengetriebene Ableitung aus der Verteilung monatlicher Schwankungen
+- Robustheitsanalyse mit alternativen Schwellenwerten</p>
+<p>Eine Robustheitsanalyse kann zeigen, ob sich Ergebnisse stark verändern, wenn statt eines bestimmten Schwellenwertes leicht abweichende Werte verwendet werden.</p>
+<hr />
+<h2 id="12-erklarbarkeit-der-ergebnisse">12. Erklärbarkeit der Ergebnisse</h2>
+<p>Die Erklärbarkeit ist ein zentraler Bestandteil der Arbeit. Für jede erkannte Veränderung soll nachvollziehbar beschrieben werden, welche Kennzahlen sich wie stark verändert haben.</p>
+<h3 id="121-differenzprofil">12.1 Differenzprofil</h3>
+<p>Das Differenzprofil zeigt die Veränderung der Kennzahlen vor und nach einem Änderungspunkt oder zwischen zwei Zeitfenstern.</p>
+<p><strong>Beispiel:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Kennzahl</strong></th>
+<th style="text-align: right;"><strong>Vorher</strong></th>
+<th style="text-align: right;"><strong>Nachher</strong></th>
+<th style="text-align: right;"><strong>Veränderung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Umsatz</td>
+<td style="text-align: right;">2.800 €</td>
+<td style="text-align: right;">900 €</td>
+<td style="text-align: right;">−68 %</td>
+</tr>
+<tr>
+<td>Bestellfrequenz</td>
+<td style="text-align: right;">3,2 / Monat</td>
+<td style="text-align: right;">1,1 / Monat</td>
+<td style="text-align: right;">−66 %</td>
+</tr>
+<tr>
+<td>Sortimentsbreite</td>
+<td style="text-align: right;">4 Warengruppen</td>
+<td style="text-align: right;">1 Warengruppe</td>
+<td style="text-align: right;">−75 %</td>
+</tr>
+<tr>
+<td>Rabattquote</td>
+<td style="text-align: right;">5 %</td>
+<td style="text-align: right;">14 %</td>
+<td style="text-align: right;">+9 Prozentpunkte</td>
+</tr>
+</tbody>
+</table>
+<p>Dadurch wird sichtbar, welche Merkmale den größten Beitrag zur erkannten Veränderung leisten.</p>
+<h3 id="122-feature-contribution-analyse">12.2 Feature-Contribution-Analyse</h3>
+<p>Die Feature-Contribution-Analyse beschreibt für jede erkannte Veränderung, welches Feature sich wie stark verändert hat. Dadurch kann eine erkannte Veränderung verständlich erklärt werden.</p>
+<p><strong>Beispielhafte Erklärung:</strong>
+- Ein Kunde hat im ersten Halbjahr regelmäßig und breit eingekauft: dreimal pro Monat, aus vier Kategorien, mit wenig Rabattdruck. Im zweiten Halbjahr kauft er fast nur noch eine Warengruppe, nur noch einmal pro Monat, und fordert deutlich höhere Rabatte. Das beschreibt eine mehrdimensionale Verhaltensveränderung.</p>
+<h3 id="123-optionaler-shap-ansatz">12.3 Optionaler SHAP-Ansatz</h3>
+<p>Optional kann ein Surrogate Classifier, beispielsweise ein Random Forest, auf Cluster-Labels trainiert werden. SHAP-Werte können anschließend als Feature-Importance genutzt werden.</p>
+<p>Dieser Ansatz ist optional. Die manuelle Analyse über Differenzprofile ist bereits ein erklärbarer Ansatz.</p>
+<hr />
+<h2 id="13-evaluation">13. Evaluation</h2>
+<p>Die Evaluation ist eine zentrale Herausforderung, da kein natürlicher Ground Truth vorhanden ist. Es gibt keine gelabelten Daten, die eindeutig angeben, ob eine Veränderung tatsächlich relevant war.</p>
+<p>Daher ist eine mehrschichtige Evaluation vorgesehen.</p>
+<h3 id="131-quantitative-interne-evaluation">13.1 Quantitative interne Evaluation</h3>
+<p>Für die quantitative Evaluation werden synthetisch Veränderungen in reale Zeitreihen injiziert. Anschließend wird gemessen, ob die Detektionsmethode diese Veränderungen erkennt.</p>
+<p><strong>Mögliche Evaluationsmetriken:</strong>
+- Precision
+- Recall
+- precision-recall-artige Analyse</p>
+<p>Dieser Ansatz ist der sauberste Workaround für fehlenden Ground Truth, erfordert aber eine eigene Implementierung und eine klare Begründung.</p>
+<h3 id="132-qualitative-externe-evaluation">13.2 Qualitative externe Evaluation</h3>
+<p>Zusätzlich kann eine qualitative Validierung durchgeführt werden.</p>
+<p><strong>Mögliche Ansätze:</strong>
+- Experten-Review
+- Fallbeispielanalyse bekannter Kundenverläufe
+- Analyse von 5–10 Kunden mit nachvollziehbarer Verhaltensänderung</p>
+<p>Ziel ist zu prüfen, ob die erkannten Typen für den Vertrieb handlungsrelevant sind.</p>
+<h3 id="133-optionale-retrospektive-validierung">13.3 Optionale retrospektive Validierung</h3>
+<p>Optional kann eine rückblickende Validierung an Kunden erfolgen, die nachweislich abgewandert sind.</p>
+<p>Historische Churn-Labels sind dafür hilfreich, aber nicht notwendig. Die Arbeit ist keine Churn Prediction, sondern nutzt solche Informationen lediglich optional zur retrospektiven Validierung.</p>
+<hr />
+<h2 id="14-risiken-und-gegenmanahmen">14. Risiken und Gegenmaßnahmen</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Risiko</strong></th>
+<th><strong>Wahrscheinlichkeit</strong></th>
+<th><strong>Auswirkung</strong></th>
+<th><strong>Gegenmaßnahme</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kein Ground Truth für Evaluation</td>
+<td>Hoch</td>
+<td>Mittel</td>
+<td>Synthetische Injektion von Veränderungen als Testdaten</td>
+</tr>
+<tr>
+<td>Datenverfügbarkeit</td>
+<td>Hoch</td>
+<td>Sehr hoch</td>
+<td>ERP-Datenzugang vor Themenauswahl klären</td>
+</tr>
+<tr>
+<td>Daten zu dünn, beispielsweise zu wenige Kunden mit langer Historie</td>
+<td>Mittel</td>
+<td>Mittel</td>
+<td>Mindestanforderungen definieren; Fallback auf aggregiertere Zeitreihen</td>
+</tr>
+<tr>
+<td>Datenqualität</td>
+<td>Mittel</td>
+<td>Mittel</td>
+<td>Datenbeschaffung und -bereinigung früh beginnen</td>
+</tr>
+<tr>
+<td>Typenbildung wird zu subjektiv oder nicht reproduzierbar</td>
+<td>Mittel</td>
+<td>Mittel</td>
+<td>Regelbasierte Definition der Typen vorab; alternativ Clustervalidierung</td>
+</tr>
+<tr>
+<td>Verwechslung mit Churn Prediction</td>
+<td>Niedrig</td>
+<td>Mittel</td>
+<td>In Einleitung und Related Work explizit abgrenzen</td>
+</tr>
+<tr>
+<td>Scope-Creep durch CPD, Fenstervergleich, Taxonomie, Erklärbarkeit und Evaluation</td>
+<td>Mittel</td>
+<td>Mittel</td>
+<td>Klare Priorisierung: Taxonomie und Typisierung als Kern, Detektion als Werkzeug, Erklärbarkeit als Ergänzung</td>
+</tr>
+<tr>
+<td>ERP-Datenschutz / DSGVO</td>
+<td>Nicht beziffert</td>
+<td>Zeitaufwand und Abstimmungsbedarf</td>
+<td>Kundendaten anonymisieren und Abstimmung früh einplanen</td>
+</tr>
+<tr>
+<td>Fehlende Warengruppen-Zuordnungen oder inkonsistente Artikelnummern</td>
+<td>Nicht beziffert</td>
+<td>Beeinträchtigung der Feature-Berechnung</td>
+<td>Datenqualität prüfen und Bereinigung früh durchführen</td>
+</tr>
+<tr>
+<td>Kein öffentlicher B2B-ERP-Datensatz mit vergleichbarer Tiefe</td>
+<td>Hoch</td>
+<td>Sehr hoch</td>
+<td>Unternehmensanbindung und ERP-Datenzugang früh klären</td>
+</tr>
+</tbody>
+</table>
+<h3 id="141-abhangigkeiten">14.1 Abhängigkeiten</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Abhängigkeit</strong></th>
+<th><strong>Bewertung</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ERP-Datenzugang</td>
+<td>Sehr hoch</td>
+</tr>
+<tr>
+<td>Expertenfeedback für qualitative Validierung</td>
+<td>Optional, erhöht aber die Qualität</td>
+</tr>
+<tr>
+<td>Labels / Ground Truth</td>
+<td>Nicht notwendig, da Workaround über synthetische Injektion möglich</td>
+</tr>
+</tbody>
+</table>
+<h3 id="142-machbarkeit">14.2 Machbarkeit</h3>
+<p>Technisch ist das Thema für eine Bachelorarbeit machbar, wenn die erforderlichen Daten vorhanden sind. Die größten Hürden liegen in der Datenbeschaffung, Datenqualität und Evaluation ohne natürlichen Ground Truth.</p>
+<hr />
+<h2 id="15-erwartete-gliederung-der-bachelorarbeit">15. Erwartete Gliederung der Bachelorarbeit</h2>
+<table>
+<thead>
+<tr>
+<th><strong>Kapitel</strong></th>
+<th><strong>Inhalt</strong></th>
+<th style="text-align: right;"><strong>Umfang</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Einleitung</td>
+<td>Motivation, Problemstellung, Forschungsfragen, Abgrenzung</td>
+<td style="text-align: right;">3–4 Seiten</td>
+</tr>
+<tr>
+<td>2. Grundlagen</td>
+<td>Zeitreihenanalyse, Change Point Detection, Kaufverhaltensmerkmale im B2B-Großhandel</td>
+<td style="text-align: right;">5–6 Seiten</td>
+</tr>
+<tr>
+<td>3. Verwandte Arbeiten</td>
+<td>Dynamische Segmentierung, CPD in Transaktionsdaten, Erklärbarkeit, klare Abgrenzung zur eigenen Arbeit</td>
+<td style="text-align: right;">4–5 Seiten</td>
+</tr>
+<tr>
+<td>4. Datenbasis und Feature Engineering</td>
+<td>ERP-Datenstruktur, Aggregation, Feature-Definitionen, Datenqualität</td>
+<td style="text-align: right;">4–5 Seiten</td>
+</tr>
+<tr>
+<td>5. Taxonomie der Verhaltensveränderungstypen</td>
+<td>Konzeptioneller Beitrag: Definition und Kriterien der Typen</td>
+<td style="text-align: right;">4–5 Seiten</td>
+</tr>
+<tr>
+<td>6. Detektions- und Klassifikationsmethodik</td>
+<td>CPD vs. Fensterprofile, Schwellenwert-Tuning, Typenzuordnung</td>
+<td style="text-align: right;">6–7 Seiten</td>
+</tr>
+<tr>
+<td>7. Erklärbarkeit</td>
+<td>Differenzprofile, Feature-Contribution pro Typ, gegebenenfalls SHAP</td>
+<td style="text-align: right;">3–4 Seiten</td>
+</tr>
+<tr>
+<td>8. Evaluation</td>
+<td>Synthetische Injektion, Fallbeispiele, Qualitätsmetriken</td>
+<td style="text-align: right;">4–5 Seiten</td>
+</tr>
+<tr>
+<td>9. Diskussion</td>
+<td>Interpretation, Limitationen, Praxisrelevanz</td>
+<td style="text-align: right;">3–4 Seiten</td>
+</tr>
+<tr>
+<td>10. Fazit und Ausblick</td>
+<td>Zusammenfassung, offene Fragen</td>
+<td style="text-align: right;">2 Seiten</td>
+</tr>
+<tr>
+<td><strong>Gesamt</strong></td>
+<td></td>
+<td style="text-align: right;"><strong>ca. 38–42 Seiten</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="16-zusammenfassung-des-finalen-themas">16. Zusammenfassung des finalen Themas</h2>
+<p>Die Bachelorarbeit beschäftigt sich mit der Erkennung, Typisierung und erklärbaren Beschreibung von Kaufverhaltensveränderungen bei B2B-Großhandelskunden anhand von ERP-Zeitreihendaten.</p>
+<p>Aus ERP-Auftragsdaten werden kundenbezogene Monats- oder Wochenprofile gebildet. Diese Profile enthalten Kennzahlen wie Umsatz, Bestellfrequenz, durchschnittlichen Warenkorbwert, Sortimentsbreite, Warengruppenmix, Rabattquote, Deckungsbeitrag und DB-Quote. Durch den Vergleich von Referenz- und Beobachtungszeiträumen sowie durch Change Point Detection sollen signifikante Veränderungen im Kaufverhalten erkannt werden.</p>
+<p>Die erkannten Veränderungen werden in eine Taxonomie interpretierbarer Typen eingeordnet. Dazu gehören Umsatzrückgang, Frequenzrückgang, Sortimentsverengung, Warengruppenwechsel, steigende Rabattabhängigkeit und Margenverschlechterung. Für jede erkannte Veränderung wird zusätzlich erklärt, welche Kennzahlen sich besonders stark verändert haben.</p>
+<p>Die Evaluation erfolgt mehrschichtig. Da kein natürlicher Ground Truth vorliegt, werden synthetisch injizierte Veränderungen für eine quantitative Evaluation genutzt. Ergänzend können Fallbeispielanalysen, Experten-Reviews oder retrospektive Validierungen an nachweislich abgewanderten Kunden eingesetzt werden.</p>
+<p>Der wissenschaftliche Beitrag der Arbeit liegt in der Kombination aus Taxonomie, automatischer Erkennung und Erklärbarkeit im Kontext des B2B-Großhandels. Das Thema ist geeignet, wenn ausreichende ERP-Daten vorhanden sind.</p>
+    </main>
+</body>
+</html>

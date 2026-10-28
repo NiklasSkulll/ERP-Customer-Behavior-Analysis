@@ -1,0 +1,2160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>fuuckae_framework</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# Framework for analysing and typing customer purchasing changes
+
+[![Phase 1](https://img.shields.io/badge/Phase%201-Frame%20and%20inspect-%23352898?style=flat&labelColor=%2315934E)](#phase-1---frame-the-analysis-and-inspect-the-data)
+[![Phase 2](https://img.shields.io/badge/Phase%202-Understand-%23352898?style=flat&labelColor=%2315934E)](#phase-2---understand-customer-histories-and-purchasing-patterns)
+[![Phase 3](https://img.shields.io/badge/Phase%203-Unify%20and%20construct-%23352898?style=flat&labelColor=%2315934E)](#phase-3---unify-the-data-and-construct-reliable-customer-time-series)
+[![Phase 4](https://img.shields.io/badge/Phase%204-Compare%20and%20characterise-%23352898?style=flat&labelColor=%2315934E)](#phase-4---compare-purchasing-profiles-and-characterise-candidate-changes)
+[![Phase 5](https://img.shields.io/badge/Phase%205-Knowledge%20synthesis-%23352898?style=flat&labelColor=%2315934E)](#phase-5---knowledge-synthesis-develop-the-purchasing-change-taxonomy)
+[![Phase 6](https://img.shields.io/badge/Phase%206-Apply%20and%20explain-%23352898?style=flat&labelColor=%2315934E)](#phase-6---apply-the-taxonomy-and-explain-assignment-outcomes)
+[![Phase 7](https://img.shields.io/badge/Phase%207-Evaluate%20and%20reflect-%23352898?style=flat&labelColor=%2315934E)](#phase-7---evaluate-the-framework-and-reflect-on-findings)
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview-of-the-fuuckae-framework">Overview of the FUUCKAE framework</a></li>
+<li><a href="#phase-1---frame-the-analysis-and-inspect-the-data">Phase 1 - Frame the analysis and inspect the data</a><ul>
+<li><a href="#11-purpose">1.1 Purpose</a></li>
+<li><a href="#12-inputs-and-objectives">1.2 Inputs and objectives</a></li>
+<li><a href="#13-procedure">1.3 Procedure</a><ul>
+<li><a href="#131-dataset-and-column-documentation">1.3.1 Dataset and column documentation</a></li>
+<li><a href="#132-coverage-and-quality-checks">1.3.2 Coverage and quality checks</a></li>
+</ul>
+</li>
+<li><a href="#14-interpretation-and-boundaries">1.4 Interpretation and boundaries</a></li>
+<li><a href="#15-documentation-and-outputs">1.5 Documentation and outputs</a></li>
+<li><a href="#16-completion-criteria">1.6 Completion criteria</a></li>
+</ul>
+</li>
+<li><a href="#phase-2---understand-customer-histories-and-purchasing-patterns">Phase 2 - Understand customer histories and purchasing patterns</a><ul>
+<li><a href="#21-purpose">2.1 Purpose</a></li>
+<li><a href="#22-inputs-and-objectives">2.2 Inputs and objectives</a></li>
+<li><a href="#23-procedure">2.3 Procedure</a><ul>
+<li><a href="#231-customer-assessment">2.3.1 Customer assessment</a></li>
+<li><a href="#232-monthly-profile-definitions">2.3.2 Monthly profile definitions</a></li>
+</ul>
+</li>
+<li><a href="#24-recommended-tables-and-graphics">2.4 Recommended tables and graphics</a></li>
+<li><a href="#25-interpretation-and-boundaries">2.5 Interpretation and boundaries</a></li>
+<li><a href="#26-documentation-and-outputs">2.6 Documentation and outputs</a></li>
+<li><a href="#27-completion-criteria">2.7 Completion criteria</a></li>
+</ul>
+</li>
+<li><a href="#phase-3---unify-the-data-and-construct-reliable-customer-time-series">Phase 3 - Unify the data and construct reliable customer time series</a><ul>
+<li><a href="#31-purpose">3.1 Purpose</a></li>
+<li><a href="#32-inputs-and-objectives">3.2 Inputs and objectives</a></li>
+<li><a href="#33-procedure">3.3 Procedure</a><ul>
+<li><a href="#331-preparation-decision-table">3.3.1 Preparation decision table</a></li>
+<li><a href="#332-cleaning-and-selection-rules">3.3.2 Cleaning and selection rules</a></li>
+</ul>
+</li>
+<li><a href="#34-feature-and-time-series-construction">3.4 Feature and time-series construction</a></li>
+<li><a href="#35-verification-tables-and-graphics">3.5 Verification tables and graphics</a></li>
+<li><a href="#36-interpretation-and-boundaries">3.6 Interpretation and boundaries</a></li>
+<li><a href="#37-documentation-and-outputs">3.7 Documentation and outputs</a></li>
+<li><a href="#38-completion-criteria">3.8 Completion criteria</a></li>
+</ul>
+</li>
+<li><a href="#phase-4---compare-purchasing-profiles-and-characterise-candidate-changes">Phase 4 - Compare purchasing profiles and characterise candidate changes</a><ul>
+<li><a href="#41-purpose">4.1 Purpose</a></li>
+<li><a href="#42-inputs-and-objectives">4.2 Inputs and objectives</a></li>
+<li><a href="#43-procedure">4.3 Procedure</a><ul>
+<li><a href="#431-analysis-specification">4.3.1 Analysis specification</a></li>
+<li><a href="#432-detection-approaches">4.3.2 Detection approaches</a></li>
+</ul>
+</li>
+<li><a href="#44-event-and-feature-descriptions">4.4 Event and feature descriptions</a></li>
+<li><a href="#45-review-and-sensitivity-checks">4.5 Review and sensitivity checks</a></li>
+<li><a href="#46-recommended-tables-and-graphics">4.6 Recommended tables and graphics</a></li>
+<li><a href="#47-evidence-for-taxonomy-development">4.7 Evidence for taxonomy development</a></li>
+<li><a href="#48-interpretation-and-boundaries">4.8 Interpretation and boundaries</a></li>
+<li><a href="#49-documentation-and-outputs">4.9 Documentation and outputs</a></li>
+<li><a href="#410-completion-criteria">4.10 Completion criteria</a></li>
+</ul>
+</li>
+<li><a href="#phase-5---knowledge-synthesis-develop-the-purchasing-change-taxonomy">Phase 5 - Knowledge synthesis: Develop the purchasing-change taxonomy</a><ul>
+<li><a href="#51-purpose">5.1 Purpose</a></li>
+<li><a href="#52-inputs-and-objectives">5.2 Inputs and objectives</a></li>
+<li><a href="#53-procedure">5.3 Procedure</a><ul>
+<li><a href="#531-taxonomy-purpose-scope-and-organising-perspective">5.3.1 Taxonomy purpose, scope and organising perspective</a></li>
+<li><a href="#532-development-evidence-and-case-selection">5.3.2 Development evidence and case selection</a></li>
+<li><a href="#533-iterative-development-and-revision">5.3.3 Iterative development and revision</a></li>
+</ul>
+</li>
+<li><a href="#54-taxonomy-structure-and-type-definitions">5.4 Taxonomy structure and type definitions</a><ul>
+<li><a href="#541-dimensions-characteristics-and-overlapping-types">5.4.1 Dimensions, characteristics and overlapping types</a></li>
+<li><a href="#542-proposed-assignment-criteria-and-parameter-decisions">5.4.2 Proposed assignment criteria and parameter decisions</a></li>
+<li><a href="#543-ambiguous-cases-and-insufficient-evidence">5.4.3 Ambiguous cases and insufficient evidence</a></li>
+</ul>
+</li>
+<li><a href="#55-development-checks-and-revision-record">5.5 Development checks and revision record</a></li>
+<li><a href="#56-interpretation-and-boundaries">5.6 Interpretation and boundaries</a></li>
+<li><a href="#57-documentation-and-outputs">5.7 Documentation and outputs</a></li>
+<li><a href="#58-completion-criteria">5.8 Completion criteria</a></li>
+</ul>
+</li>
+<li><a href="#phase-6---apply-the-taxonomy-and-explain-assignment-outcomes">Phase 6 - Apply the taxonomy and explain assignment outcomes</a><ul>
+<li><a href="#61-purpose">6.1 Purpose</a></li>
+<li><a href="#62-inputs-and-objectives">6.2 Inputs and objectives</a></li>
+<li><a href="#63-procedure">6.3 Procedure</a><ul>
+<li><a href="#631-operational-specification-and-deferred-calibration">6.3.1 Operational specification and deferred calibration</a></li>
+<li><a href="#632-rule-implementation-and-verification">6.3.2 Rule implementation and verification</a></li>
+<li><a href="#633-systematic-assignment-and-unresolved-outcomes">6.3.3 Systematic assignment and unresolved outcomes</a></li>
+</ul>
+</li>
+<li><a href="#64-explanation-construction">6.4 Explanation construction</a><ul>
+<li><a href="#641-observed-differences-and-assignment-reasons">6.4.1 Observed differences and assignment reasons</a></li>
+<li><a href="#642-structured-evidence-and-text-templates">6.4.2 Structured evidence and text templates</a></li>
+<li><a href="#643-supporting-tables-and-graphics">6.4.3 Supporting tables and graphics</a></li>
+</ul>
+</li>
+<li><a href="#65-verification-and-evaluation-handover">6.5 Verification and evaluation handover</a></li>
+<li><a href="#66-interpretation-and-boundaries">6.6 Interpretation and boundaries</a></li>
+<li><a href="#67-documentation-and-outputs">6.7 Documentation and outputs</a></li>
+<li><a href="#68-completion-criteria">6.8 Completion criteria</a></li>
+</ul>
+</li>
+<li><a href="#phase-7---evaluate-the-framework-and-reflect-on-findings">Phase 7 - Evaluate the framework and reflect on findings</a><ul>
+<li><a href="#71-purpose">7.1 Purpose</a></li>
+<li><a href="#72-inputs-and-prerequisites">7.2 Inputs and prerequisites</a></li>
+<li><a href="#73-procedure">7.3 Procedure</a><ul>
+<li><a href="#731-specify-evaluation-claims-and-evidence-roles">7.3.1 Specify evaluation claims and evidence roles</a></li>
+<li><a href="#732-freeze-the-evaluation-configuration">7.3.2 Freeze the evaluation configuration</a></li>
+<li><a href="#733-evaluate-change-detection">7.3.3 Evaluate change detection</a><ul>
+<li><a href="#7331-controlled-benchmark-design">7.3.3.1 Controlled benchmark design</a></li>
+<li><a href="#7332-reference-matching">7.3.3.2 Reference matching</a></li>
+<li><a href="#7333-performance-reporting">7.3.3.3 Performance reporting</a></li>
+<li><a href="#7334-supplementary-semi-synthetic-and-real-data-evidence">7.3.3.4 Supplementary semi-synthetic and real-data evidence</a></li>
+</ul>
+</li>
+<li><a href="#734-evaluate-taxonomy-applicability">7.3.4 Evaluate taxonomy applicability</a></li>
+<li><a href="#735-evaluate-assignment-consistency">7.3.5 Evaluate assignment consistency</a></li>
+<li><a href="#736-evaluate-explanation-quality">7.3.6 Evaluate explanation quality</a></li>
+<li><a href="#737-assess-sensitivity-and-failure-cases">7.3.7 Assess sensitivity and failure cases</a></li>
+<li><a href="#738-reflect-on-findings-and-research-questions">7.3.8 Reflect on findings and research questions</a></li>
+</ul>
+</li>
+<li><a href="#74-outputs">7.4 Outputs</a></li>
+<li><a href="#75-completion-criteria">7.5 Completion criteria</a></li>
+<li><a href="#76-limitations-and-interpretation">7.6 Limitations and interpretation</a></li>
+</ul>
+</li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+<hr />
+<h2 id="overview-of-the-fuuckae-framework">Overview of the FUUCKAE framework</h2>
+<p>The <strong>FUUCKAE framework</strong> sets out a <em>seven-phase workflow</em> for retrospectively analysing purchasing changes among B2B wholesale customers using ERP data. It connects data understanding and preparation with candidate-change detection, taxonomy development, type assignment and evaluation. Its purpose is to produce traceable descriptions of observable purchasing changes and explain their classification under explicit rules.</p>
+<p><strong>Phases 1–3</strong> establish the analytical context, explore customer histories and construct reproducible customer-period datasets. <strong>Phase 4</strong> identifies candidate change events and describes their timing, affected dimensions, magnitude and observed persistence. <strong>Phase 5</strong> combines conceptual foundations with development cases to define a purchasing-change taxonomy. <strong>Phase 6</strong> applies this taxonomy and explains assignment outcomes using recorded evidence and executed rules. <strong>Phase 7</strong> evaluates detection, taxonomy applicability, assignment consistency, explanation quality and sensitivity, then relates the findings to the research questions.</p>
+<p><strong>The workflow is iterative:</strong> findings may require documented revisions to earlier phases. Each phase specifies its inputs, activities, outputs and completion criteria, while preserving uncertainty and known data limitations. Development evidence is distinguished from evidence reserved for evaluation. Conclusions remain restricted to purchasing observed with the focal wholesaler and to the capabilities supported by the assessment.</p>
+<hr />
+<h2 id="phase-1-frame-the-analysis-and-inspect-the-data">Phase 1 - Frame the analysis and inspect the data</h2>
+<h3 id="11-purpose">1.1 Purpose</h3>
+<p><strong>Phase 1</strong> frames the analysis around the thesis research question and establishes a documented understanding of the ERP datasets, their structure, meaning, relationships, coverage and initial quality. It assesses their potential to support the detection, typing and explainable description of purchasing changes among B2B wholesale customers.</p>
+<p>The resulting dataset inventory, preliminary data dictionary and readiness assessment guide customer-history exploration in Phase 2 and data preparation in Phase 3. Expected tables and fields remain requirements to verify against the received extracts, while inspection findings remain provisional and unresolved limitations require documented follow-up.</p>
+<blockquote>
+<p><strong>Methodological basis:</strong> This phase adapts the dataset-description and data-quality assessment activities of CRISP-DM's data-understanding phase (IBM, n.d., pp. 13–16). The ERP-specific inspection checks, field requirements and readiness criteria are project-specific decisions requiring justification.</p>
+</blockquote>
+<h3 id="12-inputs-and-objectives">1.2 Inputs and objectives</h3>
+<p><strong>Inputs:</strong>
+- The thesis research question and defined scope.
+- Available ERP extracts and their extraction information, once received.
+- Available field descriptions, business definitions and data-source documentation.</p>
+<p>Missing inputs are recorded explicitly. Their absence may restrict execution but does not prevent defining the procedure.</p>
+<p><strong>Objectives:</strong>
+- Identify what each dataset and row represent.
+- Establish which required fields are present and what they mean.
+- Assess whether datasets can be linked without unintended duplication or loss.
+- Describe temporal coverage and the distribution of customer activity.
+- Identify initial quality concerns and questions requiring further investigation.</p>
+<h3 id="13-procedure">1.3 Procedure</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Activity</strong></th>
+<th><strong>Checks and decisions</strong></th>
+<th><strong>Recorded output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Frame the analysis</strong></td>
+<td>Record the research objective, scope, expected purchasing dimensions and intended observation levels: order, order line, customer and customer-period. Distinguish documented information from assumptions.</td>
+<td>Analysis context and assumptions</td>
+</tr>
+<tr>
+<td><strong>2. Inventory and load datasets</strong></td>
+<td>Record source, extraction date, file format and documented extraction filters. Check loading success, parsing settings, row and column counts and sample records. Compare received tables with the expected order header, order line, product and customer tables.</td>
+<td>Dataset inventory and loading issues</td>
+</tr>
+<tr>
+<td><strong>3. Inspect structure and meaning</strong></td>
+<td>Record column names, technical types, example values, units and semantic roles. Verify the meaning of dates, quantities, monetary amounts, discounts and status fields against available documentation.</td>
+<td>Preliminary data dictionary and field-availability assessment</td>
+</tr>
+<tr>
+<td><strong>4. Check keys and relationships</strong></td>
+<td>Check missing and duplicate candidate keys, expected relationship cardinalities and unmatched references between tables. Distinguish exact duplicate rows from legitimate repeated business records.</td>
+<td>Relationship map and integrity flags</td>
+</tr>
+<tr>
+<td><strong>5. Scan coverage and quality</strong></td>
+<td>Apply the checks below to relevant tables and fields. Use descriptive summaries and selected graphics to identify issues requiring investigation.</td>
+<td>Initial quality and coverage profile</td>
+</tr>
+<tr>
+<td><strong>6. Assess readiness</strong></td>
+<td>Summarize available evidence, unresolved meanings, missing requirements and preparation needs. Specify which subsequent analyses can proceed and which are restricted.</td>
+<td>Readiness assessment and issue register</td>
+</tr>
+</tbody>
+</table>
+<h4 id="131-dataset-and-column-documentation">1.3.1 Dataset and column documentation</h4>
+<ul>
+<li><em>Dataset description:</em> 1–2 sentences explaining what each dataset contains and what one row represents.</li>
+<li><em>Column description:</em> 1–2 sentences per column explaining its meaning, including units or business codes where relevant.</li>
+<li><em>Data type:</em> the observed technical type and, where different, the intended type.</li>
+<li><em>Definition status:</em> whether the meaning is documented, assumed or unresolved.</li>
+</ul>
+<h4 id="132-coverage-and-quality-checks">1.3.2 Coverage and quality checks</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Area</strong></th>
+<th><strong>Minimum assessment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Field availability</strong></td>
+<td>Required fields present, absent or available through another table. Meaning confirmed or unresolved.</td>
+</tr>
+<tr>
+<td><strong>Missing values</strong></td>
+<td>Counts and percentages per relevant field, including documented placeholder values.</td>
+</tr>
+<tr>
+<td><strong>Identifiers and duplicates</strong></td>
+<td>Missing identifiers, repeated candidate keys, exact duplicate rows and unmatched join references.</td>
+</tr>
+<tr>
+<td><strong>Time coverage</strong></td>
+<td>Earliest and latest dates, records per period, apparent gaps and first-to-last observed order span per customer.</td>
+</tr>
+<tr>
+<td><strong>Customer activity</strong></td>
+<td>Number of observed customers and distributions of orders and active periods per customer.</td>
+</tr>
+<tr>
+<td><strong>Numerical plausibility</strong></td>
+<td>Selected summary statistics, zero and negative values, non-finite values, extreme values, currencies and quantity units.</td>
+</tr>
+<tr>
+<td><strong>Categories and statuses</strong></td>
+<td>Distinct values and frequencies, inconsistent labels, product-group coverage and observed order-status categories.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Suitable orientation graphics <em>(only when informative)</em>:</strong>
+- Missing-value percentages by field.
+- Number of orders or records per month, with the counting unit stated.
+- Distribution of order counts or observed history spans per customer.</p>
+<p>An observed history span does not establish continuous data coverage. Similarly, a period without recorded orders may reflect inactivity or missing records. Phase 1 flags the ambiguity rather than resolving it automatically.</p>
+<h3 id="14-interpretation-and-boundaries">1.4 Interpretation and boundaries</h3>
+<ul>
+<li>Preserve the original extracts. Document parsing and any temporary transformations required for inspection.</li>
+<li>Treat unusual values as flags, not automatic errors. Do not delete, impute or exclude records solely because they are missing, duplicated, zero, negative or extreme.</li>
+<li>Treat proposed business filters, such as excluding open orders, as decisions requiring justification against the intended measurement.</li>
+<li>Perform relationship checks without creating an unverified merged analysis table. In particular, joining headers to multiple order lines can duplicate order-level amounts.</li>
+<li>Keep conclusions descriptive and provisional. Detailed pattern analysis, final cleaning rules, feature construction, detection and typing are outside this phase.</li>
+</ul>
+<h3 id="15-documentation-and-outputs">1.5 Documentation and outputs</h3>
+<p><strong>Record the inspection in one reproducible notebook or equivalent scripted report containing:</strong>
+1. Analysis context and dataset inventory.
+2. Preliminary data dictionary and relationship map.
+3. Quality and coverage summaries, with selected graphics.
+4. Issue register and readiness assessment.</p>
+<p>For each issue, record the affected table or field, observed evidence, potential analytical consequence and required follow-up. Distinguish <strong>observed</strong>, <strong>documented</strong>, <strong>assumed</strong> and <strong>unresolved</strong> information. Record the input version, inspection code and relevant execution settings.</p>
+<h3 id="16-completion-criteria">1.6 Completion criteria</h3>
+<p>Phase 1 is complete when applicable checks have been performed, their outputs recorded and unresolved issues assigned a follow-up action. The readiness assessment must distinguish analyses that can proceed from those requiring clarification or additional data.</p>
+<p>Complete or error-free data is not a completion requirement. However, if access or loading prevents the core inspection, record the phase as <strong>blocked or partially completed</strong>, rather than claiming that the data has been assessed.</p>
+<hr />
+<h2 id="phase-2-understand-customer-histories-and-purchasing-patterns">Phase 2 - Understand customer histories and purchasing patterns</h2>
+<h3 id="21-purpose">2.1 Purpose</h3>
+<p><strong>Phase 2</strong> builds on the initial inspection to examine customer histories, record usability and purchasing patterns. It uses provisional customer-period profiles, initially monthly, to investigate activity, temporal variation, relationships between purchasing measures and differences between customer groups. Exploration addresses explicit questions while allowing additional questions to emerge from the findings.</p>
+<p>The resulting customer assessments, descriptive findings and preparation recommendations inform eligibility rules, feature definitions and data preparation in Phase 3, as well as the analysis design in Phase 4. Findings remain provisional: apparent changes and associations require further investigation, while formal detection, taxonomy development and independent evaluation belong to subsequent phases.</p>
+<blockquote>
+<p><strong>Methodological basis:</strong> This phase adapts the exploration activities of CRISP-DM's data-understanding phase (IBM, n.d., pp. 13–16), informed by exploratory data-analysis principles (Heckert &amp; Filliben, 2003, Section 1.1.1). Limited preparation and renewed investigation are consistent with CRISP-DM's recognition that exploration may require prior processing and movement between phases (IBM, n.d., p. 15). The customer assessments, proposed observation window, provisional profile definitions, temporal aggregation and selected analyses are project-specific decisions requiring justification.</p>
+</blockquote>
+<h3 id="22-inputs-and-objectives">2.2 Inputs and objectives</h3>
+<p><strong>Inputs:</strong>
+- Original ERP extracts and reproducible loading code.
+- Phase 1 inventory, data dictionary, relationship checks and quality findings.
+- The thesis research question and unresolved-issue register.</p>
+<p><strong>Objectives:</strong>
+- Assess customer histories, purchasing activity and record usability.
+- Construct provisional monthly purchasing profiles with explicit definitions.
+- Explore distributions, temporal patterns, relationships and customer-group differences.
+- Investigate issues that could distort interpretation.
+- Recommend preparation rules, customer eligibility criteria and suitable analytical representations.</p>
+<p>No data availability, sufficiency threshold or cleaning rule is assumed in advance. Analyses dependent on unresolved issues remain restricted or provisional.</p>
+<h3 id="23-procedure">2.3 Procedure</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Activity</strong></th>
+<th><strong>Checks and decisions</strong></th>
+<th><strong>Recorded output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Assess customer histories and suitability</strong></td>
+<td>Examine the proposed two-year window, customer activity and record-level concerns. Distinguish extraction coverage, observed purchasing history and suitability for a particular analysis.</td>
+<td>Customer assessment table and unresolved coverage questions</td>
+</tr>
+<tr>
+<td><strong>2. Prepare exploratory views</strong></td>
+<td>Apply necessary documented conversions, verified joins and justified corrections to working copies. Check row counts, unmatched records and relevant totals before and after transformations.</td>
+<td>Reproducible working views and transformation log</td>
+</tr>
+<tr>
+<td><strong>3. Build provisional monthly profiles</strong></td>
+<td>Define the date, order-counting unit, monetary measure and record treatment before aggregation. Summarize each assessable customer by month. Flag restricted profiles and uncertain periods.</td>
+<td>Customer-month table and profile definitions</td>
+</tr>
+<tr>
+<td><strong>4. Explore patterns and relationships</strong></td>
+<td>Examine distributions, order intervals, temporal variation, product mix and relationships among available measures. Compare existing customer groups and varied individual histories. Extend exploration where new questions arise.</td>
+<td>Tables, graphics and exploratory findings</td>
+</tr>
+<tr>
+<td><strong>5. Investigate quality consequences</strong></td>
+<td>Examine whether missing or questionable records concentrate in particular periods or groups. Where useful, compare plausible treatments without silently adopting a final rule.</td>
+<td>Issue-specific evidence and proposed treatments</td>
+</tr>
+<tr>
+<td><strong>6. Recommend preparation and analysis choices</strong></td>
+<td>Consolidate evidence for eligibility, record treatment, measures and temporal aggregation. Record alternatives, limitations and questions requiring follow-up.</td>
+<td>Decision register and preparation recommendations</td>
+</tr>
+</tbody>
+</table>
+<p>Activities may be revisited. If a problem prevents trustworthy interpretation, address it or restrict the affected analysis before proceeding.</p>
+<h4 id="231-customer-assessment">2.3.1 Customer assessment</h4>
+<p><strong>Create one row per customer containing, where measurable:</strong>
+- Customer identifier and existing business group, if available.
+- First and last observed order dates in the extract and activity within the assessment window.
+- Distinct order count, active-month count and distribution of intervals between orders.
+- Periods without recorded orders, with coverage uncertainty distinguished from inactivity.
+- Counts and proportions of records affected by relevant quality issues.
+- Provisional suitability for the intended analysis, reasons and required follow-up.</p>
+<p>Specify the assessment window's start and end dates, preferably using complete calendar months. <strong>Twenty-four months is a proposed window, not proof of sufficient information.</strong> A first-to-last order span does not establish continuous coverage.</p>
+<blockquote>
+<p><strong>Require neither a purchase every month nor recent activity merely to qualify:</strong> such rules could remove declining or inactive customers of research interest. Distinguish customers first observed recently from customers confirmed to be newly acquired.</p>
+</blockquote>
+<h4 id="232-monthly-profile-definitions">2.3.2 Monthly profile definitions</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Measure</strong></th>
+<th><strong>Definition to establish before interpretation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Order count</strong></td>
+<td>Count distinct orders using the verified key and selected order date. Do not count order lines as separate orders.</td>
+</tr>
+<tr>
+<td><strong>Purchasing value</strong></td>
+<td>Specify the monetary field, currency, aggregation level and treatment of cancellations, returns and credits. Avoid duplicating header amounts across lines.</td>
+</tr>
+<tr>
+<td><strong>Product mix</strong></td>
+<td>Specify product groups and whether composition is measured by value, order incidence or another interpretable basis. State the denominator.</td>
+</tr>
+<tr>
+<td><strong>Quantity, when meaningful</strong></td>
+<td>Aggregate only compatible units or documented conversions. Do not sum heterogeneous quantities without justification.</td>
+</tr>
+</tbody>
+</table>
+<p>For each measure, distinguish an observed zero from an unknown or unobserved value. Zero-fill only when coverage, customer observation and record definitions support that interpretation. Flag partial months. Monthly aggregation is an initial exploratory representation. Compare alternatives if sparse or irregular activity makes it uninformative.</p>
+<h3 id="24-recommended-tables-and-graphics">2.4 Recommended tables and graphics</h3>
+<p>Select displays to answer questions. This is a recommendation set, not a requirement to produce every chart for every field or customer.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Question</strong></th>
+<th><strong>Recommended table or graphic</strong></th>
+<th><strong>Interpretation focus</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Which customer histories are assessable?</strong></td>
+<td>Customer assessment table. Summary counts by provisional suitability and reason.</td>
+<td>Coverage, activity and quality are separate dimensions.</td>
+</tr>
+<tr>
+<td><strong>How much activity and history do customers have?</strong></td>
+<td>Histograms of order counts, active months and observed history spans.</td>
+<td>Heterogeneity and sparsity. Show the population and window.</td>
+</tr>
+<tr>
+<td><strong>Where are inactive or uncertain periods?</strong></td>
+<td>Customer-by-month activity heatmap for a documented sample, sorted by activity or group.</td>
+<td>Distinguish zero activity from unknown coverage visually.</td>
+</tr>
+<tr>
+<td><strong>What do individual monthly histories look like?</strong></td>
+<td>Small-multiple line charts or monthly bars for order count and purchasing value.</td>
+<td>Use separate panels. Retain gaps for unknown values and comparable scales where comparison is intended.</td>
+</tr>
+<tr>
+<td><strong>Are patterns shared across time?</strong></td>
+<td>Monthly total and active-customer-count plots. Calendar-month comparisons if sufficient history exists.</td>
+<td>Changing customer composition and incomplete months may affect totals. Two years provides limited evidence of recurring seasonality.</td>
+</tr>
+<tr>
+<td><strong>How do purchasing measures vary and relate?</strong></td>
+<td>Distribution plots. Selected scatterplots, such as order count versus purchasing value.</td>
+<td>State whether points represent customers, orders or customer-months. Association does not establish cause.</td>
+</tr>
+<tr>
+<td><strong>Do existing customer groups differ?</strong></td>
+<td>Group summary table with sample sizes, medians and quartiles. Boxplots.</td>
+<td>Compare activity, purchasing value and history while acknowledging unequal coverage.</td>
+</tr>
+<tr>
+<td><strong>How does product mix differ or change?</strong></td>
+<td>Ranked product-group bars. Selected composition charts across periods.</td>
+<td>Show the share denominator. Handle negative values before interpreting percentage composition.</td>
+</tr>
+<tr>
+<td><strong>Where do data issues concentrate, and do treatments matter?</strong></td>
+<td>Missingness or issue-rate tables by period/group. Side-by-side summaries under plausible rules.</td>
+<td>Show counts, denominators and consequences for records, customers and profiles.</td>
+</tr>
+</tbody>
+</table>
+<p>Document how example customers are selected. Include varied activity levels, values and history lengths, rather than only striking patterns. Do not produce an unreadable chart containing all customer histories.</p>
+<h3 id="25-interpretation-and-boundaries">2.5 Interpretation and boundaries</h3>
+<ul>
+<li><em>Preparation:</em><ul>
+<li>Preserve original extracts.</li>
+<li>Record every exploratory transformation and its effects.</li>
+<li>Do not automatically delete, impute or exclude records because of missing, negative, duplicated or extreme values.</li>
+</ul>
+</li>
+<li><em>Decisions:</em><ul>
+<li>Necessary corrections may occur during exploration.</li>
+<li>Substantive eligibility and cleaning rules require evidence and justification.</li>
+<li>Systematic application belongs to the subsequent preparation phase.</li>
+</ul>
+</li>
+<li><em>Grouping:</em><ul>
+<li>Explore existing business groups first.</li>
+<li>Optional descriptive categories must have explicit definitions.</li>
+<li>Algorithmic clustering requires a stated purpose, justified inputs and a separate assessment of its usefulness. It is not a mandatory Phase 2 output.</li>
+</ul>
+</li>
+<li><em>Claims:</em><ul>
+<li>Treat apparent changes and associations as exploratory observations.</li>
+<li>Recorded spending differences do not alone identify behavioural causes.</li>
+<li>Formal change detection, final taxonomy construction and validation remain outside this phase.</li>
+</ul>
+</li>
+<li><em>Evaluation:</em><ul>
+<li>Record cases and periods used to develop decisions.</li>
+<li>Reusing them later does not constitute independent validation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="26-documentation-and-outputs">2.6 Documentation and outputs</h3>
+<p><strong>Record the exploration in a reproducible notebook or equivalent scripted report containing:</strong>
+1. Customer assessment table and provisional suitability summary.
+2. Monthly profiles, definitions and transformation log.
+3. Selected tables and graphics, with findings and limitations.
+4. Decision register, preparation recommendations and unresolved issues.</p>
+<p>For each exploration, record <strong>question → analysis → observation → implication → limitation</strong>. For each proposed rule, record its rationale, supporting evidence, affected records or customers, alternatives and status: proposed, adopted for exploration or unresolved. Record input versions, execution settings and any sampling procedure or random seed used.</p>
+<h3 id="27-completion-criteria">2.7 Completion criteria</h3>
+<p>Phase 2 is complete when customer suitability and the principal exploration questions have been assessed, applicable monthly profiles have been produced and preparation recommendations are supported by recorded evidence. Additional questions must be answered, deferred with a reason or marked unresolved.</p>
+<p>Completion does not require exhaustive exploration, error-free data or fixed thresholds. Blocked core activities must be identified explicitly, with consequences and follow-up actions. They must not be reported as completed assessments.</p>
+<hr />
+<h2 id="phase-3-unify-the-data-and-construct-reliable-customer-time-series">Phase 3 - Unify the data and construct reliable customer time series</h2>
+<h3 id="31-purpose">3.1 Purpose</h3>
+<p><strong>Phase 3</strong> translates the findings from Phases 1 and 2 into justified preparation rules and reproducible datasets for subsequent purchasing-change analysis. It systematically applies and verifies cleaning, table integration, feature construction and customer eligibility decisions, preserving original extracts and documenting transformations.</p>
+<p>The resulting cleaned source tables, customer-period profiles and eligibility records provide the data basis for candidate-change analysis in Phase 4 and subsequent taxonomy development and application. Explicit feature definitions, coverage indicators and preparation records make these outputs interpretable and traceable. Data readiness is assessed against the intended analysis, with unresolved limitations documented rather than assuming that prepared data is complete or error-free.</p>
+<blockquote>
+<p><strong>Methodological basis:</strong> This phase adapts the data-selection, cleaning, integration, construction and formatting activities of CRISP-DM's data-preparation phase (IBM, n.d., pp. 19–22), informed by tidy-data principles for organising observations and variables (Wickham, 2014). Data-leakage research informs the separation of evidence used to develop preparation rules or estimate transformations from evidence reserved for independent evaluation, according to the intended research claim (Kapoor &amp; Narayanan, 2023). The ERP-specific treatments, customer eligibility rules, feature definitions and temporal aggregation are project-specific decisions requiring justification.</p>
+</blockquote>
+<h3 id="32-inputs-and-objectives">3.2 Inputs and objectives</h3>
+<p><strong>Inputs:</strong>
+- Original ERP extracts and their extraction information.
+- Phase 1 data dictionary, relationship checks and quality assessment.
+- Phase 2 exploratory findings, provisional profiles and preparation recommendations.
+- Research scope and the intended use of data in development and evaluation.</p>
+<p><strong>Objectives:</strong>
+- Apply explicit, justified cleaning and selection rules.
+- Integrate tables without unintended duplication or loss.
+- Define and calculate interpretable purchasing measures.
+- Construct consistent customer-period histories and document analytical eligibility.
+- Export reproducible datasets with sufficient information to interpret and reload them correctly.</p>
+<p>Rules requiring empirical evidence remain conditional until execution. Missing information must not be replaced by unsupported assumptions.</p>
+<h3 id="33-procedure">3.3 Procedure</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Activity</strong></th>
+<th><strong>Checks and decisions</strong></th>
+<th><strong>Recorded output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Specify preparation rules</strong></td>
+<td>Define the observation window, relevant records, status treatment, quality rules and proposed eligibility criteria using Phase 2 evidence. Record unresolved choices and their consequences.</td>
+<td>Preparation decision table.</td>
+</tr>
+<tr>
+<td><strong>2. Clean and standardise source tables</strong></td>
+<td>Correct verified errors. Harmonise identifiers, dates, codes and units. Retain, flag or exclude questionable records according to justified rules. Preserve source-record references.</td>
+<td>Cleaned source tables and cleaning log.</td>
+</tr>
+<tr>
+<td><strong>3. Integrate relevant tables</strong></td>
+<td>Apply verified joins and check unmatched keys, row counts and relevant totals. Aggregate order-line information before combining it with order-level amounts where necessary.</td>
+<td>Validated transaction views and join reconciliation.</td>
+</tr>
+<tr>
+<td><strong>4. Construct customer-period profiles</strong></td>
+<td>Calculate features using explicit formulas and calendar rules. Distinguish inactivity, missing observations and undefined measures. Retain quality and coverage indicators.</td>
+<td>Customer-period table and feature specification.</td>
+</tr>
+<tr>
+<td><strong>5. Confirm analytical eligibility</strong></td>
+<td>Reassess usable history and activity after preparation. Record eligibility for each intended analysis and exclusion reasons. Compare included and excluded customers descriptively.</td>
+<td>Eligibility table and selection summary.</td>
+</tr>
+<tr>
+<td><strong>6. Prepare method-specific variants, if needed</strong></td>
+<td>Apply only transformations justified by later methods. Preserve untransformed measures and document fitted parameters and the data used to estimate them.</td>
+<td>Optional analytical variants and transformation settings.</td>
+</tr>
+<tr>
+<td><strong>7. Verify and export outputs</strong></td>
+<td>Check keys, formulas, totals, missingness and transformation effects. Save versioned CSVs, schemas, code and execution settings. Verify correct reloading.</td>
+<td>Prepared datasets and verification report.</td>
+</tr>
+</tbody>
+</table>
+<p>Revisit earlier activities when checks reveal problems. Customer selection may require iteration because cleaning can change the usable history. Model-specific transformations can be deferred until their requirements are established.</p>
+<h4 id="331-preparation-decision-table">3.3.1 Preparation decision table</h4>
+<p><strong>For each rule, record:</strong>
+- Affected table, field or record group.
+- Evidence from inspection, exploration or source documentation.
+- Action and rationale, including relevant alternatives.
+- Number of affected records and customers, with denominators where appropriate.
+- Consequences for later analysis and remaining limitations.</p>
+<p>Separate technical corrections from business-scope exclusions. A cancelled order, credit note or large project order may be a valid business record even when excluded from a particular analytical view.</p>
+<h4 id="332-cleaning-and-selection-rules">3.3.2 Cleaning and selection rules</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Issue</strong></th>
+<th><strong>Required treatment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identifiers and duplicates</strong></td>
+<td>Preserve identifier semantics, including leading zeros. Remove only confirmed duplicate representations. Repeated business events are not automatically duplicates.</td>
+</tr>
+<tr>
+<td><strong>Dates and statuses</strong></td>
+<td>Specify the relevant event date and included statuses. Do not automatically exclude open orders if the object of analysis is order placement.</td>
+</tr>
+<tr>
+<td><strong>Missing or questionable values</strong></td>
+<td>Correct only with supporting evidence. Otherwise retain with a flag, restrict the affected measure, or exclude with justification. Imputation requires an explicit rationale.</td>
+</tr>
+<tr>
+<td><strong>Returns, credits and negative values</strong></td>
+<td>Establish their business meaning and whether to retain, separate or exclude them for each measure.</td>
+</tr>
+<tr>
+<td><strong>Extreme values and project business</strong></td>
+<td>Investigate before treatment. Do not automatically smooth, cap or remove values that may represent meaningful changes.</td>
+</tr>
+<tr>
+<td><strong>Currencies, units and categories</strong></td>
+<td>Combine only compatible values or use documented conversions. Record limitations of historical category mappings.</td>
+</tr>
+<tr>
+<td><strong>Customer eligibility</strong></td>
+<td>Justify rules against the intended analysis. Treat 24 months as a proposed window, not a universal sufficiency threshold. Do not require recent purchasing merely to qualify.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-feature-and-time-series-construction">3.4 Feature and time-series construction</h3>
+<p>Maintain a <strong>feature specification table</strong> containing each measure's intended meaning, formula, source fields, unit, aggregation rule, missing-value treatment and interpretation limits.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Measure</strong></th>
+<th><strong>Preparation requirement</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purchasing value</strong></td>
+<td>Specify the monetary basis, currency and treatment of adjustments. Avoid repeating header amounts across order lines.</td>
+</tr>
+<tr>
+<td><strong>Order frequency</strong></td>
+<td>Count distinct orders using the verified key and selected date.</td>
+</tr>
+<tr>
+<td><strong>Average order value</strong></td>
+<td>Divide the relevant purchasing value by the corresponding order count. With no orders, the average is undefined rather than zero.</td>
+</tr>
+<tr>
+<td><strong>Assortment breadth and product mix</strong></td>
+<td>Define categories, category coverage and the mix denominator. Document unknown classifications.</td>
+</tr>
+<tr>
+<td><strong>Discount and margin measures, if usable</strong></td>
+<td>Verify definitions and weighting. Define treatment of zero or otherwise unsuitable denominators. Recorded discounts do not establish discount dependence.</td>
+</tr>
+<tr>
+<td><strong>Quantity measures, if usable</strong></td>
+<td>Aggregate within compatible units or documented conversions.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Time-series rules:</strong>
+- Use one row per customer and period in the principal profile table, initially monthly unless evidence justifies another resolution.
+- Define window boundaries, partial-period treatment and the customer observation period.
+- Record zero activity only when coverage and observation support that interpretation. Preserve unknown periods as unknown.
+- Retain interpretable values in their original units alongside any transformed variants.
+- Document dependencies between measures, such as purchasing value, frequency and average order value, to inform later feature selection.</p>
+<h3 id="35-verification-tables-and-graphics">3.5 Verification tables and graphics</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Recommended output</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Record and customer selection table</strong></td>
+<td>Show counts retained or excluded at each step, with reasons.</td>
+</tr>
+<tr>
+<td><strong>Join reconciliation table</strong></td>
+<td>Check key cardinalities, unmatched records and monetary totals before and after integration.</td>
+</tr>
+<tr>
+<td><strong>Feature validation table</strong></td>
+<td>Report uniqueness of customer-period keys, formula checks, missingness, undefined values and plausible ranges.</td>
+</tr>
+<tr>
+<td><strong>Selected before-and-after profile plots</strong></td>
+<td>Check whether preparation alters the apparent purchasing pattern. Explain observed differences.</td>
+</tr>
+<tr>
+<td><strong>Alternative-rule comparison, where consequential</strong></td>
+<td>Assess whether a disputed treatment materially changes histories, features or eligibility.</td>
+</tr>
+</tbody>
+</table>
+<p>Checks should reconcile aggregates to the corresponding included source records. Differences caused by intentional exclusions or conversions must be explainable. Use graphics only where they reveal effects more clearly than tables.</p>
+<h3 id="36-interpretation-and-boundaries">3.6 Interpretation and boundaries</h3>
+<ul>
+<li>Preserve original data and trace prepared records back to their source.</li>
+<li>Do not choose preparation rules to create anticipated change types or improve apparent detection performance.</li>
+<li>If cases or periods are reserved for independent evaluation, do not use them to fit or tune transformations intended to be evaluated on that evidence. Record data already used in exploration as development evidence.</li>
+<li><em>Match information availability to the claim:</em> retrospective analysis may use a full historical sequence, whereas a claim of detection at a particular time must respect what was available then.</li>
+<li>Formal change detection, final type definitions and taxonomy evaluation remain outside this phase.</li>
+</ul>
+<h3 id="37-documentation-and-outputs">3.7 Documentation and outputs</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Output</strong></th>
+<th><strong>Contents</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cleaned source CSVs</strong></td>
+<td>Separate prepared order-header, order-line, customer and product tables, where available and relevant.</td>
+</tr>
+<tr>
+<td><strong>Customer-period CSV</strong></td>
+<td>Calculated purchasing measures, period identifiers and relevant coverage or quality flags.</td>
+</tr>
+<tr>
+<td><strong>Eligibility CSV</strong></td>
+<td>Customer-level eligibility for intended analyses, reasons and restrictions.</td>
+</tr>
+<tr>
+<td><strong>Cleaning and exclusion logs</strong></td>
+<td>Applied rules, affected source-record identifiers, actions and reasons. Preserve excluded records in the original extracts.</td>
+</tr>
+<tr>
+<td><strong>Preparation documentation</strong></td>
+<td>Feature specifications, schemas, validation results, code, input/output versions and execution settings.</td>
+</tr>
+</tbody>
+</table>
+<p>CSV files do not preserve data types. Document encoding, delimiter, decimal notation, date format, missing-value representation and intended column types. Verify that exported files reload with identifiers, dates and missing values interpreted correctly.</p>
+<h3 id="38-completion-criteria">3.8 Completion criteria</h3>
+<p>Phase 3 is complete when the prepared datasets can be regenerated, cleaning and eligibility rules are justified, feature definitions are explicit, required checks pass and remaining restrictions are documented. Unresolved issues that prevent a core analysis must be recorded as blockages rather than hidden through arbitrary corrections.</p>
+<hr />
+<h2 id="phase-4-compare-purchasing-profiles-and-characterise-candidate-changes">Phase 4 - Compare purchasing profiles and characterise candidate changes</h2>
+<h3 id="41-purpose">4.1 Purpose</h3>
+<p><strong>Phase 4</strong> uses the customer-period profiles prepared in Phase 3 to retrospectively identify candidate purchasing changes and describe their timing, affected dimensions, direction, magnitude and observed persistence. The unit of analysis is a <strong>candidate change event within a customer's history</strong>, and one customer may contribute several events.</p>
+<p>The resulting event register, linked feature descriptions and documented development cases provide the empirical basis for taxonomy development in Phase 5. Candidates remain method-dependent findings requiring interpretation. Detection alone does not establish statistical significance, commercial relevance or membership in a change type. Before-and-after feature differences describe what changed without automatically explaining the detector's decision or the causes of customer behaviour.</p>
+<blockquote>
+<p><strong>Methodological basis:</strong> This phase draws on retrospective change-point detection methodology, including window-based approaches and the explicit specification of the properties investigated and detection procedure (Truong et al., 2020). PELT provides an optional segmentation approach that optimises a specified penalised cost, requiring an appropriate cost function and justified penalty and segment-length settings (Killick et al., 2012). Data-leakage research informs the separation of evidence used to develop detection settings and analytical rules from evidence reserved for independent evaluation (Kapoor &amp; Narayanan, 2023). The comparison windows, candidate-selection criteria, event-consolidation rules, descriptive measures of magnitude and persistence, and selection of taxonomy-development cases are project-specific decisions requiring justification.</p>
+</blockquote>
+<h3 id="42-inputs-and-objectives">4.2 Inputs and objectives</h3>
+<p><strong>Inputs:</strong>
+- Prepared customer-period profiles from Phase 3, including interpretable measures and any documented analytical variants.
+- Feature definitions, eligibility rules, quality indicators and coverage information.
+- Exploratory findings and unresolved limitations from Phase 2.
+- Documented separation between development data and evidence reserved for later evaluation, where applicable.</p>
+<p><strong>Objectives:</strong>
+- Specify a reproducible procedure for identifying candidate changes.
+- Describe each event using consistent before-and-after comparisons.
+- Assess sensitivity to plausible analytical settings and identify ambiguous cases.
+- Assemble varied development cases for constructing the taxonomy.</p>
+<p>The analysis is retrospective by default. Window lengths, thresholds, penalties and minimum data requirements must be justified during execution rather than treated as universal constants.</p>
+<h3 id="43-procedure">4.3 Procedure</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Activity</strong></th>
+<th><strong>Checks and decisions</strong></th>
+<th><strong>Recorded output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Specify the analysis design</strong></td>
+<td>Define target purchasing dimensions, changes of interest, temporal resolution, feature selection and minimum support on both sides of a comparison. Identify restrictions arising from missingness, sparsity or seasonality.</td>
+<td>Analysis specification and decision register.</td>
+</tr>
+<tr>
+<td><strong>2. Establish a window-comparison baseline</strong></td>
+<td>Define reference and subsequent windows, summary measures, comparison scores and candidate-selection rules. Document window movement and treatment of incomplete or unsuitable comparisons.</td>
+<td>Reproducible baseline procedure.</td>
+</tr>
+<tr>
+<td><strong>3. Identify candidate changes</strong></td>
+<td>Apply the baseline to eligible histories. Use PELT as a second approach where its assumptions and data requirements are justified. Preserve method-specific results and settings.</td>
+<td>Initial candidate-event register.</td>
+</tr>
+<tr>
+<td><strong>4. Construct change descriptions</strong></td>
+<td>Calculate before-and-after profiles, feature differences, observed persistence and supporting data counts using explicit definitions.</td>
+<td>Event descriptions and feature-level change table.</td>
+</tr>
+<tr>
+<td><strong>5. Review context and sensitivity</strong></td>
+<td>Inspect candidates alongside original-unit profiles and quality flags. Compare selected alternative settings and record method disagreements. Consolidate repeated detections under documented rules.</td>
+<td>Reviewed event register and sensitivity findings.</td>
+</tr>
+<tr>
+<td><strong>6. Assemble taxonomy-development evidence</strong></td>
+<td>Select varied candidates, borderline cases and a documented sample of histories without detections. Record selection criteria and manually identified patterns separately.</td>
+<td>Development case collection for Phase 5.</td>
+</tr>
+</tbody>
+</table>
+<p>Activities may be revisited when findings expose inadequate comparisons or preparation issues. Changes to prepared data belong in a versioned revision of Phase 3, followed by regeneration of affected results.</p>
+<h4 id="431-analysis-specification">4.3.1 Analysis specification</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Decision</strong></th>
+<th><strong>Required specification</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Target changes</strong></td>
+<td>State which properties are investigated, initially purchasing levels and composition. Record whether gradual changes, variability changes or isolated events are within the chosen method's scope.</td>
+</tr>
+<tr>
+<td><strong>Feature selection</strong></td>
+<td>Distinguish features used to identify candidates from those used only to describe them. Document scaling, weighting and dependencies between measures.</td>
+</tr>
+<tr>
+<td><strong>Comparison windows</strong></td>
+<td>Define reference and subsequent periods, their lengths, movement and minimum usable observations. Prefer adjacent, non-overlapping windows within each baseline comparison. Document alternatives.</td>
+</tr>
+<tr>
+<td><strong>Candidate-selection criteria</strong></td>
+<td>Specify comparison scores and thresholds, including data-support requirements and any magnitude or persistence filters. Record the rationale and development data used.</td>
+</tr>
+<tr>
+<td><strong>Seasonality and context</strong></td>
+<td>State how recurring patterns, project business, incomplete periods and changing data coverage are considered. Record unresolved ambiguities rather than assuming every difference is behavioural.</td>
+</tr>
+<tr>
+<td><strong>Repeated detections</strong></td>
+<td>Define when nearby or overlapping detections represent the same candidate event. Preserve original detections and links to consolidated events.</td>
+</tr>
+<tr>
+<td><strong>Evaluation separation</strong></td>
+<td>Keep tuning decisions within development evidence. Document which cases and periods have already informed the design.</td>
+</tr>
+</tbody>
+</table>
+<p>With short monthly histories, limit model complexity and avoid requiring more segments or seasonal information than the observations support. A history without sufficient comparison support is marked <strong>not assessable</strong>, rather than <strong>no change</strong>.</p>
+<h4 id="432-detection-approaches">4.3.2 Detection approaches</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Approach</strong></th>
+<th><strong>Intended role</strong></th>
+<th><strong>Decisions to document</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Window-based profile comparison</strong></td>
+<td>Interpretable baseline comparing earlier and later purchasing profiles.</td>
+<td>Window lengths, summary statistics, feature-specific differences or combined score, scaling, thresholds and candidate consolidation.</td>
+</tr>
+<tr>
+<td><strong>PELT, where justified</strong></td>
+<td>Alternative retrospective segmentation approach for changes represented by the selected cost function.</td>
+<td>Input features, cost function, penalty, minimum segment length, transformations and treatment of unavailable values.</td>
+</tr>
+</tbody>
+</table>
+<p>Selecting PELT alone does not specify a complete detection method. Its cost function determines which differences influence segmentation. An approach aimed at abrupt level shifts must not be assumed to identify gradual changes or all product-mix changes adequately.</p>
+<p>Do not force a second method onto unsuitable histories. Record its applicability limits and use a common eligible subset when directly comparing methods. Report coverage differences separately.</p>
+<h3 id="44-event-and-feature-descriptions">4.4 Event and feature descriptions</h3>
+<p>Create an event register with one row per candidate event and a linked feature table with one row per event and feature.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Component</strong></th>
+<th><strong>Required information</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity and provenance</strong></td>
+<td>Event ID, customer ID, input version, analysis-run identifier, method and settings.</td>
+</tr>
+<tr>
+<td><strong>Timing</strong></td>
+<td>Estimated boundary or transition interval and the dates of the reference and subsequent comparison periods. State the boundary convention.</td>
+</tr>
+<tr>
+<td><strong>Data support</strong></td>
+<td>Number of usable periods and orders on each side, missingness and relevant coverage or quality flags.</td>
+</tr>
+<tr>
+<td><strong>Before-and-after profile</strong></td>
+<td>Feature summaries in original units, with the aggregation basis and denominators stated.</td>
+</tr>
+<tr>
+<td><strong>Direction and magnitude</strong></td>
+<td>Absolute differences, relative differences where meaningful, and percentage-point differences for rates or shares.</td>
+</tr>
+<tr>
+<td><strong>Observed persistence</strong></td>
+<td>The period over which the changed pattern satisfies a stated criterion, including gaps or insufficient follow-up.</td>
+</tr>
+<tr>
+<td><strong>Review status</strong></td>
+<td>Retained candidate, ambiguous, insufficient evidence or suspected data artefact, with reasons. These are review statuses, not taxonomy types.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Comparison rules:</strong>
+- Use comparable summaries. For unequal window lengths, compare rates or period averages rather than unadjusted totals where appropriate.
+- When a reference value is zero or too small for a meaningful percentage comparison, report the absolute difference and flag the relative difference as undefined or unstable. Specify any minimum-denominator rule.
+- For rates and shares, distinguish percentage-point changes from relative percentage changes.
+- Preserve unknown observations. Do not silently replace them with zero to enable detection or comparison.
+- Record detector scores separately from descriptive feature differences. Neither is automatically a probability or a statistical-significance measure.
+- Record the descriptive windows separately from the detector's segments when they differ. Avoid comparisons spanning other known candidate boundaries without explanation.</p>
+<p><strong>Persistence and timing:</strong>
+- The length of a post-change segment does not by itself establish sustained change.
+- Define how persistence is assessed and report only the follow-up supported by the observations.
+- If the pattern continues to the extract's end, report it as ongoing at the observation boundary rather than assigning a completed duration.
+- A monthly boundary does not establish an exact transaction-level change date.</p>
+<h3 id="45-review-and-sensitivity-checks">4.5 Review and sensitivity checks</h3>
+<ul>
+<li>Inspect candidate events against the full available customer history, not only selected before-and-after summaries.</li>
+<li>Check for isolated large orders, recurring seasonal patterns, missing periods and relevant preparation decisions.</li>
+<li>Compare a small, justified set of alternative window lengths, thresholds or penalties. Record changes in event selection, timing and magnitude.</li>
+<li>Preserve disagreements between methods. Agreement indicates consistency between approaches, not verified correctness.</li>
+<li>Retain original method outputs when consolidating repeated detections. Specify the temporal matching tolerance used for cross-method comparisons.</li>
+<li>Do not remove an event solely because it does not fit anticipated taxonomy categories.</li>
+</ul>
+<p>These checks assess plausibility and stability during development. They do not replace the independent performance evaluation planned for Phase 7.</p>
+<h3 id="46-recommended-tables-and-graphics">4.6 Recommended tables and graphics</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Recommended output</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Customer-history plots with marked boundaries and shaded windows</strong></td>
+<td>Inspect candidate timing, surrounding patterns, missing periods and comparison support.</td>
+</tr>
+<tr>
+<td><strong>Before-and-after feature table</strong></td>
+<td>Show the measured differences in interpretable units, alongside data counts and limitations.</td>
+</tr>
+<tr>
+<td><strong>Feature-difference plots</strong></td>
+<td>Display direction and magnitude in separate panels for incompatible units. Label any standardisation explicitly.</td>
+</tr>
+<tr>
+<td><strong>Product-mix comparison charts, where applicable</strong></td>
+<td>Show shifts in category composition with consistent categories and stated denominators.</td>
+</tr>
+<tr>
+<td><strong>Candidate summary by method and setting</strong></td>
+<td>Show assessed histories, unassessable histories, event counts and sensitivity to analytical choices.</td>
+</tr>
+<tr>
+<td><strong>Method-agreement and disagreement table</strong></td>
+<td>Identify matched and unmatched candidates using the documented timing tolerance.</td>
+</tr>
+</tbody>
+</table>
+<p>Select displays according to the question. Avoid plotting every customer in a single chart or presenting only the most striking examples.</p>
+<h3 id="47-evidence-for-taxonomy-development">4.7 Evidence for taxonomy development</h3>
+<p><strong>Construct a documented development case collection containing:</strong>
+- Candidates spanning different purchasing dimensions, directions, magnitudes and observed persistence.
+- Customers with varied activity levels, histories and available business-group characteristics.
+- Borderline or ambiguous cases and disagreements between methods.
+- A documented sample of histories without automatic detections, to inspect possible blind spots.</p>
+<p>Record the selection procedure and any sampling seed. Manually noticed patterns must retain their provenance rather than being presented as automatic detections. Histories without detections are not verified no-change cases. This case collection supports development and must not be presented as independent validation or a representative estimate of population frequencies.</p>
+<h3 id="48-interpretation-and-boundaries">4.8 Interpretation and boundaries</h3>
+<ul>
+<li>Describe observed purchasing changes without assigning final taxonomy types. This follows in Phases 5 and 6.</li>
+<li>Distinguish descriptive magnitude, persistence, statistical evidence and business relevance. Do not label candidates statistically significant unless a suitable inferential procedure supports that claim.</li>
+<li>Feature differences describe what changed. They do not automatically explain the detector's decision or the customer's motivation.</li>
+<li>Restrict claims to purchasing observed with the focal wholesaler. Competitor switching or other causal explanations cannot be inferred directly.</li>
+<li>Retrospective boundaries do not establish when a change could have been detected operationally. Claims about early detection require a separate time-respecting evaluation.</li>
+<li>Keep the number of candidate events separate from the eventual number of taxonomy types. Neither count should be forced to meet an anticipated result.</li>
+</ul>
+<h3 id="49-documentation-and-outputs">4.9 Documentation and outputs</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Output</strong></th>
+<th><strong>Contents</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Candidate-event dataset</strong></td>
+<td>Event identifiers, timing, methods, scores, provenance and review statuses, saved separately as CSV or Parquet.</td>
+</tr>
+<tr>
+<td><strong>Feature-change dataset</strong></td>
+<td>Before-and-after values, differences, units, support counts and limitations linked by event ID.</td>
+</tr>
+<tr>
+<td><strong>Analysis-run and coverage log</strong></td>
+<td>Input versions, code and settings. Customers or periods assessed, unassessable, or assessed without detections. Reasons for restrictions.</td>
+</tr>
+<tr>
+<td><strong>Sensitivity and review report</strong></td>
+<td>Selected tables and graphics, alternative settings, consolidation rules and documented interpretation.</td>
+</tr>
+<tr>
+<td><strong>Taxonomy-development case index</strong></td>
+<td>Selected event or history references, selection rationale and automatic or manual provenance.</td>
+</tr>
+</tbody>
+</table>
+<p>Preserve initial detections alongside consolidated or reviewed results. Link outputs to the prepared data version and document schemas and reload settings for exported files.</p>
+<h3 id="410-completion-criteria">4.10 Completion criteria</h3>
+<p>Phase 4 is complete when the specified procedures have been applied to eligible development histories, assessability and candidate results are recorded, event descriptions are reproducible, sensitivity checks are documented and the development case collection is available for Phase 5.</p>
+<p>Completion does not require a predetermined number of changes, agreement between methods or confirmation of anticipated types. If too few assessable events are available to support taxonomy development, record the limitation and the required revision to scope, data or analysis design.</p>
+<hr />
+<h2 id="phase-5-knowledge-synthesis-develop-the-purchasing-change-taxonomy">Phase 5 - Knowledge synthesis: Develop the purchasing-change taxonomy</h2>
+<h3 id="51-purpose">5.1 Purpose</h3>
+<p><strong>Phase 5</strong> develops a documented taxonomy of observable purchasing changes by combining the thesis's conceptual foundations with the development evidence assembled in Phase 4. It defines purchasing dimensions, change types, their relationships and proposed assignment criteria. The classified object remains a <strong>candidate change event within a customer's history</strong>, which may receive several compatible type labels when different purchasing dimensions change together.</p>
+<p>The resulting taxonomy matrix and versioned type codebook provide the specification for systematic implementation, assignment and explanation in Phase 6. Provisional application to development cases supports refinement of the definitions, assessment of their coherence and documentation of unresolved cases. These development checks support a reasoned stopping decision. Independent assessment of taxonomy applicability, assignment consistency and usefulness belongs to Phase 7.</p>
+<blockquote>
+<p><strong>Methodological basis:</strong> This phase adapts the iterative conceptual-to-empirical and empirical-to-conceptual taxonomy-development approach of Nickerson et al. (2013). The methodological guidance of Kundisch et al. (2022) informs the specification of the taxonomy's purpose and intended users, as well as the distinction between development checks and subsequent evaluation of usefulness. The purchasing dimensions, type definitions, compatible label combinations, assignment criteria and development-case selection are project-specific decisions requiring justification.</p>
+</blockquote>
+<h3 id="52-inputs-and-objectives">5.2 Inputs and objectives</h3>
+<p><strong>Inputs:</strong>
+- Phase 4 candidate-event dataset and linked feature-change dataset.
+- Before-and-after profiles, comparison periods, observed persistence and supporting data counts.
+- Feature definitions, analytical eligibility, coverage information and quality flags from Phase 3.
+- Phase 4 review statuses, sensitivity findings, consolidation links and taxonomy-development case index.
+- Research objectives, conceptual starting points from the project plan and relevant scientific literature.
+- Records identifying evidence already used for exploration, method development or parameter tuning and evidence reserved for later evaluation.</p>
+<p>Available business definitions and domain feedback may support terminology and interpretation. They are desirable inputs rather than mandatory prerequisites.</p>
+<p><strong>Objectives:</strong>
+- Establish the taxonomy's purpose, scope and organising perspective.
+- Identify meaningful distinctions supported by the available measurements.
+- Develop explicit definitions that accommodate multidimensional changes.
+- Specify proposed assignment criteria and the treatment of insufficient or ambiguous evidence.
+- Document development cases, revisions, limitations and the handover to Phase 6.</p>
+<p>The procedure can be specified before empirical execution. A completed empirical taxonomy requires suitable Phase 4 evidence. Anticipated types and illustrative thresholds are not established findings.</p>
+<h3 id="53-procedure">5.3 Procedure</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Activity</strong></th>
+<th><strong>Checks and decisions</strong></th>
+<th><strong>Recorded output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Specify purpose and scope</strong></td>
+<td>Define the classified object, intended users, included purchasing changes and excluded interpretations. Establish the organising perspective against which proposed dimensions and types are assessed.</td>
+<td>Scope and terminology specification.</td>
+</tr>
+<tr>
+<td><strong>2. Review development evidence</strong></td>
+<td>Examine the Phase 4 case collection for variation, missing perspectives and repeated evidence from the same histories. Record prior development use and evaluation restrictions.</td>
+<td>Updated case index and coverage assessment.</td>
+</tr>
+<tr>
+<td><strong>3. Establish a provisional structure</strong></td>
+<td>Use documented purchasing constructs and conceptual starting points to propose dimensions, characteristics and type labels. Separate substantive changes from evidence statuses.</td>
+<td>Initial taxonomy matrix.</td>
+</tr>
+<tr>
+<td><strong>4. Develop and revise definitions</strong></td>
+<td>Examine development cases, apply provisional definitions and investigate counterexamples. Retain, rename, combine, divide or remove categories with recorded reasons.</td>
+<td>Versioned definitions and iteration log.</td>
+</tr>
+<tr>
+<td><strong>5. Specify assignment criteria</strong></td>
+<td>Define required evidence, rule conditions, parameter rationale, compatible labels and exclusions. Identify unresolved calibration requirements.</td>
+<td>Type codebook and parameter-decision table.</td>
+</tr>
+<tr>
+<td><strong>6. Check coherence and prepare the handover</strong></td>
+<td>Review logical consistency, case coverage, interpretability and unresolved cases. Record the stopping decision and the version to implement in Phase 6.</td>
+<td>Development-check report and versioned handover.</td>
+</tr>
+</tbody>
+</table>
+<p>Activities are iterative. If development reveals inadequate feature definitions or event descriptions, revise the relevant earlier phase and regenerate affected outputs. Do not silently alter measurements or comparison windows to make an event fit a proposed type.</p>
+<h4 id="531-taxonomy-purpose-scope-and-organising-perspective">5.3.1 Taxonomy purpose, scope and organising perspective</h4>
+<p><strong>Use the following <em>meta-characteristic</em> or organising perspective, to guide inclusion:</strong></p>
+<blockquote>
+<p>Observable within-customer purchasing changes at the focal wholesaler, represented through differences in purchasing dimensions between documented reference and subsequent periods.</p>
+</blockquote>
+<p><strong>Specify:</strong>
+- <em>The intended use:</em> consistent description and interpretation of candidate events.
+- _The intended users, initially the researcher and readers interpreting the findings.
+- Included purchasing dimensions and the temporal patterns supported by the analysis.
+- Applicable customer histories, observation conditions and measurement restrictions.
+- Excluded interpretations, particularly customer motivation, competitor switching and causal mechanisms.</p>
+<p>Include increases and decreases where meaningful. Do not restrict the taxonomy to deterioration merely because the project plan's examples emphasise declining activity. Begin with the purchasing constructs defined in Phase 3. <strong>A feature does not automatically require a separate type:</strong> retain a distinction only when its meaning, measurement and usefulness for describing events can be explained.</p>
+<p>Keep magnitude and observed persistence primarily as supporting descriptors. Introduce categorical severity or duration distinctions only when they serve a stated purpose and their boundaries can be justified.</p>
+<h4 id="532-development-evidence-and-case-selection">5.3.2 Development evidence and case selection</h4>
+<p>Use and extend the <strong>Phase 4 taxonomy-development case index</strong>, preserving links to the event register, original histories and feature descriptions.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Coverage aspect</strong></th>
+<th><strong>Assessment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purchasing patterns</strong></td>
+<td>Representation of different dimensions, directions, magnitudes and observed persistence.</td>
+</tr>
+<tr>
+<td><strong>Combined changes</strong></td>
+<td>Cases involving one dimension and several simultaneous dimensions.</td>
+</tr>
+<tr>
+<td><strong>Customer histories</strong></td>
+<td>Variation in activity, history length and available business-group characteristics.</td>
+</tr>
+<tr>
+<td><strong>Uncertainty</strong></td>
+<td>Borderline cases, weak support, quality concerns and detector disagreements.</td>
+</tr>
+<tr>
+<td><strong>Possible omissions</strong></td>
+<td>Documented histories without automatic detections and separately identified manual patterns.</td>
+</tr>
+<tr>
+<td><strong>Evidence dependence</strong></td>
+<td>Repeated events, overlapping comparisons and concentration of cases within particular customers.</td>
+</tr>
+</tbody>
+</table>
+<p>Record selection reasons, event counts and distinct customer counts. Avoid allowing numerous similar events from one history to dominate development.</p>
+<p>The project plan's proposed 20–30 profiles provide an initial workload estimate, not a sufficiency criterion. Distinguish selected customer histories from the event cases examined within them. Expand or restrict the collection according to observed coverage gaps and available resources, documenting the consequences.</p>
+<p>Histories without detections are not verified no-change cases. Manually identified patterns must retain their provenance and receive a documented event description before being used as event-level examples.</p>
+<p>Before further refinement, record which customers, periods and cases have already influenced methodological choices. Evidence reserved for independent evaluation must not be used to revise definitions or tune criteria. Where separation is limited, document the dependence and restrict subsequent evaluation claims.</p>
+<h4 id="533-iterative-development-and-revision">5.3.3 Iterative development and revision</h4>
+<p><strong>Combine <em>conceptual-to-empirical</em> and <em>empirical-to-conceptual</em> development:</strong>
+1. Propose distinctions from the taxonomy's purpose, documented purchasing constructs and relevant literature.
+2. Examine a documented batch of development cases using their original histories and Phase 4 descriptions.
+3. Apply the current definitions provisionally and record supporting evidence, non-matches and uncertainties.
+4. Identify distinctions that are unclear, redundant, unsupported or missing.
+5. Revise the structure or definitions with an explicit rationale.
+6. Re-examine previously reviewed cases affected by the revision.</p>
+<p>Do not retain a category solely because it appeared in the project plan or create a category solely to accommodate an isolated numerical difference. Conversely, do not discard an event merely because the current taxonomy cannot describe it.</p>
+<p><strong>For each iteration, record:</strong>
+- Taxonomy version and cases examined.
+- Conceptual or empirical starting point.
+- Proposed change and supporting evidence.
+- Alternatives considered and reason for the decision.
+- Affected definitions, criteria and previously reviewed cases.
+- Remaining questions and required follow-up.</p>
+<p>Structured manual comparison is the principal development procedure. Clustering is optional and requires a specific unresolved question, justified inputs and an explanation of its additional value. Cluster membership alone does not establish a meaningful change type.</p>
+<h3 id="54-taxonomy-structure-and-type-definitions">5.4 Taxonomy structure and type definitions</h3>
+<h4 id="541-dimensions-characteristics-and-overlapping-types">5.4.1 Dimensions, characteristics and overlapping types</h4>
+<p><strong>Maintain a taxonomy matrix distinguishing the following elements:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Element</strong></th>
+<th><strong>Function</strong></th>
+<th><strong>Illustrative example - not an adopted type definition</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Purchasing dimension</strong></td>
+<td>Identifies the aspect of purchasing being characterised.</td>
+<td>Order frequency.</td>
+</tr>
+<tr>
+<td><strong>Characteristic or state</strong></td>
+<td>Describes the dimension under specified comparison rules.</td>
+<td>Increase, decrease or no qualifying directional difference.</td>
+</tr>
+<tr>
+<td><strong>Type label</strong></td>
+<td>Names a defined observable change pattern.</td>
+<td>Frequency decrease.</td>
+</tr>
+<tr>
+<td><strong>Supporting descriptor</strong></td>
+<td>Records magnitude, timing, observed persistence or contextual information.</td>
+<td>Absolute difference and available follow-up.</td>
+</tr>
+<tr>
+<td><strong>Assessability status</strong></td>
+<td>Indicates whether the required evidence permits application of the definition.</td>
+<td>Insufficient comparison support.</td>
+</tr>
+</tbody>
+</table>
+<p>For each assessable dimension, define states that are non-overlapping and cover the outcomes allowed by its representation. This applies <strong>within a dimension</strong>. It does not require one exclusive type label for the entire event. A frequency decrease and assortment narrowing may coexist. Record compatibility and logical exclusions explicitly. Opposing changes in different product categories are not inherently contradictory.</p>
+<p>Product composition requires a suitable representation of distributional change rather than a generic increase/decrease classification. Define the category basis, denominator and evidence needed to describe the shift.</p>
+<p><strong>Structural rules:</strong>
+- Do not interpret "no qualifying difference" as proof of stability.
+- Keep missing or inadequate evidence separate from substantive characteristics.
+- Do not generate a separate named type for every possible label combination.
+- Introduce a composite type only when it adds a distinct interpretation and has explicit criteria.
+- Record relationships among mathematically or empirically dependent measures.</p>
+<p>Report the numbers of dimensions, type labels and observed label combinations separately. The project plan's five-to-seven-type proposal is a scope intention, not a required empirical outcome. Record how the retained structure relates to that intention and justify any departure.</p>
+<h4 id="542-proposed-assignment-criteria-and-parameter-decisions">5.4.2 Proposed assignment criteria and parameter decisions</h4>
+<p>Create a <strong>type codebook</strong> containing one definition record per retained type.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Field</strong></th>
+<th><strong>Required content</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Identity</strong></td>
+<td>Stable type identifier, neutral label and taxonomy version.</td>
+</tr>
+<tr>
+<td><strong>Conceptual definition</strong></td>
+<td>Observable pattern represented and distinction from related types.</td>
+</tr>
+<tr>
+<td><strong>Required evidence</strong></td>
+<td>Features, units, comparison periods, denominators and data-support requirements.</td>
+</tr>
+<tr>
+<td><strong>Assignment conditions</strong></td>
+<td>Explicit logical conditions, comparison operators and treatment of boundary values.</td>
+</tr>
+<tr>
+<td><strong>Parameters</strong></td>
+<td>Values adopted for development, their rationale and any unresolved calibration procedure.</td>
+</tr>
+<tr>
+<td><strong>Relationships</strong></td>
+<td>Compatible labels, logical exclusions and justified composite relationships.</td>
+</tr>
+<tr>
+<td><strong>Evidence limitations</strong></td>
+<td>Conditions under which the rule is inapplicable or its outcome remains indeterminate.</td>
+</tr>
+<tr>
+<td><strong>Examples and counterexamples</strong></td>
+<td>Linked development cases illustrating inclusion, exclusion and relevant boundaries.</td>
+</tr>
+<tr>
+<td><strong>Provenance</strong></td>
+<td>Conceptual sources, empirical support and revision references.</td>
+</tr>
+</tbody>
+</table>
+<p>Apply a label only when the required evidence is assessable and its specified conditions are satisfied. A Phase 4 candidate does not automatically satisfy a taxonomy definition.</p>
+<p><strong>Comparison and parameter rules:</strong>
+- Reuse Phase 4's documented descriptive comparisons unless a revision is justified.
+- Specify absolute, relative or percentage-point differences according to the measure.
+- Define treatment of zero or unsuitable reference values. Do not force an unstable relative comparison.
+- State support requirements and any persistence condition explicitly.
+- Distinguish detection thresholds from typing thresholds, even when they use the same value.
+- Document whether a criterion reflects descriptive materiality, business judgement or statistical evidence. These are not interchangeable.</p>
+<p>Numerical choices must use development evidence and a recorded rationale. Do not adopt the project plan's illustrative percentages or durations as validated thresholds.</p>
+<p>Phase 5 establishes rule meaning and proposed operational criteria. If calibration is deferred to Phase 6, specify the parameter, permitted development evidence, selection procedure and condition for finalisation. A change affecting the type's meaning requires a versioned taxonomy revision.</p>
+<h4 id="543-ambiguous-cases-and-insufficient-evidence">5.4.3 Ambiguous cases and insufficient evidence</h4>
+<p><strong>Record provisional outcomes separately for each relevant event–type combination:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Outcome</strong></th>
+<th><strong>Meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Criteria met</strong></td>
+<td>Required evidence is assessable and satisfies the proposed definition.</td>
+</tr>
+<tr>
+<td><strong>Criteria not met</strong></td>
+<td>Required evidence is assessable but does not satisfy the definition.</td>
+</tr>
+<tr>
+<td><strong>Indeterminate</strong></td>
+<td>Missing support, ambiguous evidence or an unresolved definition prevents a defensible decision.</td>
+</tr>
+<tr>
+<td><strong>Not applicable</strong></td>
+<td>The case falls outside the type's documented applicability conditions.</td>
+</tr>
+</tbody>
+</table>
+<p>These are developmental application outcomes, not additional purchasing-change types. Preserve the Phase 4 event review status separately. Matching a rule does not resolve a suspected data artefact.</p>
+<p><strong>For unresolved cases, identify whether the issue concerns:</strong>
+- A measurement or data-support limitation.
+- An ambiguous definition or rule.
+- A documented scope exclusion.
+- A potential gap in the taxonomy.</p>
+<p>An event may meet several definitions, remain partly assessable or receive no substantive label. Retain such cases and their reasons. Do not force assignment through an undefined "other" type.</p>
+<h3 id="55-development-checks-and-revision-record">5.5 Development checks and revision record</h3>
+<p>Check the current taxonomy against its purpose and documented development evidence.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Check</strong></th>
+<th><strong>Required assessment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Conceptual consistency</strong></td>
+<td>Dimensions and types fit the organising perspective and describe observable purchasing changes.</td>
+</tr>
+<tr>
+<td><strong>Distinctiveness and simplicity</strong></td>
+<td>Definitions add meaningful distinctions without unnecessary duplication or proliferation of composite types.</td>
+</tr>
+<tr>
+<td><strong>Rule consistency</strong></td>
+<td>Conditions, boundaries, compatibility and exclusions do not create unintended contradictions.</td>
+</tr>
+<tr>
+<td><strong>Measurement feasibility</strong></td>
+<td>Required features and comparison support are available within the stated scope.</td>
+</tr>
+<tr>
+<td><strong>Development-case coverage</strong></td>
+<td>Cases can be described or their non-coverage is explicitly explained.</td>
+</tr>
+<tr>
+<td><strong>Interpretability</strong></td>
+<td>Labels and definitions correspond to recorded feature differences without unsupported causal claims.</td>
+</tr>
+<tr>
+<td><strong>Extensibility</strong></td>
+<td>Definitions and identifiers permit documented additions or revisions without silently changing existing meanings.</td>
+</tr>
+<tr>
+<td><strong>Traceability</strong></td>
+<td>Definitions, provisional outcomes and revisions can be linked to their sources and evidence.</td>
+</tr>
+</tbody>
+</table>
+<p>Inspect examples, counterexamples and cases near proposed decision boundaries where available. Record missing examples as limitations rather than inventing empirical support. A limited supervisor or domain review may clarify terminology and practical interpretation. If feedback changes the taxonomy, record it as development input.</p>
+<p>After revisions, conduct a final development pass over the affected cases and the retained structure. If substantive changes remain necessary, continue the iteration or report the unresolved limitation. These checks support a reasoned stopping decision. They do not demonstrate independent assignment reliability, population-wide coverage or practical usefulness.</p>
+<h3 id="56-interpretation-and-boundaries">5.6 Interpretation and boundaries</h3>
+<ul>
+<li>Type labels describe purchasing observed with the focal wholesaler. They do not establish customer motivation, competitor switching or causal mechanisms.</li>
+<li>Recorded discount increases do not establish discount dependence. Absolute margin changes and margin-rate changes require distinct definitions.</li>
+<li>Assortment breadth may change with ordering activity or observation length. Record these dependencies when interpreting narrowing or expansion.</li>
+<li>Multiple related labels do not constitute independent corroboration of a behavioural change.</li>
+<li>The taxonomy's empirical coverage depends partly on the detection procedures and development-case selection. It must not be presented as exhaustive.</li>
+<li>Separate empirically illustrated definitions from conceptual extensions without observed examples.</li>
+<li>Provisional application in this phase supports development. Systematic assignment and explanation generation belong to Phase 6.</li>
+<li>Feature differences, explanations of assignment rules and explanations of a detector's internal decision are distinct outputs.</li>
+<li>Independent evaluation belongs to Phase 7. Revisions prompted by evaluation constitute further development and require a new version.</li>
+</ul>
+<h3 id="57-documentation-and-outputs">5.7 Documentation and outputs</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Output</strong></th>
+<th><strong>Contents</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Scope and terminology specification</strong></td>
+<td>Purpose, organising perspective, intended users, analytical scope and exclusions.</td>
+</tr>
+<tr>
+<td><strong>Taxonomy matrix</strong></td>
+<td>Dimensions, characteristics, type labels, relationships and supporting descriptors.</td>
+</tr>
+<tr>
+<td><strong>Type codebook</strong></td>
+<td>Definitions, required evidence, assignment conditions, examples, limitations and provenance.</td>
+</tr>
+<tr>
+<td><strong>Parameter-decision table</strong></td>
+<td>Adopted settings, rationale, supporting development evidence and deferred calibration requirements.</td>
+</tr>
+<tr>
+<td><strong>Updated development case index</strong></td>
+<td>Event or history references, selection reasons, evidence roles and iterations in which cases were examined.</td>
+</tr>
+<tr>
+<td><strong>Provisional application table</strong></td>
+<td>Event ID, type ID, taxonomy version, outcome, supporting feature references and reasons.</td>
+</tr>
+<tr>
+<td><strong>Revision and development-check report</strong></td>
+<td>Changes, affected cases, consistency checks, unresolved issues and stopping rationale.</td>
+</tr>
+<tr>
+<td><strong>Phase 6 handover</strong></td>
+<td>Version to implement, applicable data versions, rule specification and outstanding implementation or calibration tasks.</td>
+</tr>
+</tbody>
+</table>
+<p>Use stable identifiers to link definitions, events, features and revisions. Where several iterations are retained, distinguish provisional applications by iteration as well as taxonomy version. Record input versions, scripts or notebooks used for case preparation, sampling procedures and random seeds where applicable. Save tabular outputs as CSV or Parquet with schemas and reload settings. Qualitative decisions must remain traceable even where they cannot be reproduced automatically.</p>
+<p>Freeze the handover version before systematic application. Later changes must preserve the earlier version and identify which assignments or evaluations require reconsideration.</p>
+<h3 id="58-completion-criteria">5.8 Completion criteria</h3>
+<p><strong>Phase 5 is complete when:</strong>
+- Purpose, scope and terminology are explicit.
+- Development evidence and its limitations are documented.
+- Retained dimensions and types have traceable definitions and proposed assignment criteria.
+- Compatible labels, exclusions and insufficient evidence have explicit treatment.
+- Development checks reveal no unresolved logical contradictions in the retained structure.
+- A final development pass requires no substantive revision.
+- Unrepresented patterns and conceptual extensions are identified.
+- The Phase 6 handover is versioned, including any bounded calibration tasks.</p>
+<p>Completion does not require a predetermined number of types, a label for every candidate or proof of universal coverage. Numerical calibration may remain pending only where rule meaning and the development-only calibration procedure are explicit.</p>
+<p>If essential measurements, sufficiently varied cases or defensible definitions are unavailable, record the taxonomy as <strong>provisional, restricted or partially completed</strong>, with the affected scope and required follow-up. Unresolved conceptual contradictions prevent completion of the affected definitions.</p>
+<hr />
+<h2 id="phase-6-apply-the-taxonomy-and-explain-assignment-outcomes">Phase 6 - Apply the taxonomy and explain assignment outcomes</h2>
+<h3 id="61-purpose">6.1 Purpose</h3>
+<p><strong>Phase 6</strong> translates the taxonomy developed in Phase 5 into explicit, executable rules and applies them reproducibly to candidate change events. It generates explanations linking observed feature differences to the conditions that produced or prevented each assignment, including relevant evidence limitations. The unit of classification remains a <strong>candidate change event within a customer's history</strong>, which may receive several compatible labels, remain partly assessable or receive no substantive label.</p>
+<p>The resulting assignment records, rule traces and explanations provide reproducible outputs for evaluation in Phase 7. Verification establishes conformity between the codebook, implementation and generated outputs, while assessment of methodological performance, reader understanding and practical usefulness belongs to the subsequent evaluation phase. Explanations describe observed differences and assignment reasoning without automatically explaining the detector's decision or the causes of customer behaviour.</p>
+<blockquote>
+<p><strong>Methodological basis:</strong> This phase draws on the distinction between interpretable decision procedures and post-hoc explanations discussed by Rudin (2019), applying it to the direct implementation of the taxonomy's assignment rules. Explanation construction adapts data-to-text generation principles for selecting, organising and expressing structured evidence (Gatt &amp; Krahmer, 2018). Data-leakage research informs the separation of calibration and implementation-driven revisions from evidence reserved for independent evaluation (Kapoor &amp; Narayanan, 2023). The assignment implementation, evidence-status handling, rule traces and explanation templates are project-specific decisions requiring justification.</p>
+</blockquote>
+<h3 id="62-inputs-and-objectives">6.2 Inputs and objectives</h3>
+<p><strong>Inputs:</strong>
+- Phase 5 taxonomy matrix, type codebook, compatibility rules and versioned handover.
+- Parameter-decision table, including any explicitly deferred calibration procedure.
+- Phase 4 candidate-event and feature-change datasets, with comparison periods, support counts, review statuses and provenance.
+- Phase 3 feature definitions, coverage information and quality indicators.
+- Phase 5 provisional applications, examples, counterexamples and unresolved issues.
+- Records distinguishing development evidence from evidence reserved for later evaluation.</p>
+<p><strong>Objectives:</strong>
+- Translate type definitions into explicit, executable assignment rules.
+- Resolve authorised calibration tasks using development evidence.
+- Apply all relevant type definitions consistently while preserving uncertainty.
+- Generate descriptions from recorded feature differences and actual rule outcomes.
+- Verify agreement between the specification, implementation, assignments and explanations.
+- Export reproducible results and a versioned handover for Phase 7.</p>
+<p>Empirical execution requires an operational codebook and suitable event evidence. The existence of a documented taxonomy-development procedure does not establish that these inputs have already been produced.</p>
+<h3 id="63-procedure">6.3 Procedure</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Activity</strong></th>
+<th><strong>Checks and decisions</strong></th>
+<th><strong>Recorded output</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Confirm the operational specification</strong></td>
+<td>Check type definitions, required evidence, logical conditions, applicability and compatibility. Identify unresolved implementation or calibration tasks.</td>
+<td>Operational specification and issue register.</td>
+</tr>
+<tr>
+<td><strong>2. Complete deferred calibration</strong></td>
+<td>Apply only the development-only procedures authorised in Phase 5. Record selected settings, rationale and affected definitions.</td>
+<td>Versioned parameter configuration.</td>
+</tr>
+<tr>
+<td><strong>3. Implement assignment rules</strong></td>
+<td>Translate each retained definition into executable conditions. Preserve missing evidence and record the conditions underlying each outcome.</td>
+<td>Assignment implementation and rule-trace structure.</td>
+</tr>
+<tr>
+<td><strong>4. Verify the implementation</strong></td>
+<td>Check independently worked examples, decision boundaries, unavailable evidence, compatible labels and contradictions. Resolve discrepancies before systematic application.</td>
+<td>Verification results and correction log.</td>
+</tr>
+<tr>
+<td><strong>5. Apply the taxonomy</strong></td>
+<td>Process the declared event set, preserve provenance and review statuses, and account for events without substantive assignments.</td>
+<td>Assignment dataset and processing summary.</td>
+</tr>
+<tr>
+<td><strong>6. Construct explanations</strong></td>
+<td>Generate structured descriptions and text from feature evidence and executed rule conditions. Include consequential limitations.</td>
+<td>Explanation records and supporting displays.</td>
+</tr>
+<tr>
+<td><strong>7. Verify and export results</strong></td>
+<td>Reconcile explanations with assignments and evidence. Check reproducibility, output schemas and remaining restrictions.</td>
+<td>Verified outputs and Phase 7 handover.</td>
+</tr>
+</tbody>
+</table>
+<p>If execution exposes an inadequate type definition, return the issue to Phase 5. Changes to measurements or event descriptions require a versioned revision of the relevant earlier phase and regeneration of affected outputs.</p>
+<h4 id="631-operational-specification-and-deferred-calibration">6.3.1 Operational specification and deferred calibration</h4>
+<p><strong>Before implementation, confirm that every retained type specifies:</strong>
+- Its identifier, definition and applicability conditions.
+- Required features, units, comparison periods and denominators.
+- Data-support and quality requirements.
+- Logical conditions, operators and treatment of boundary values.
+- Any magnitude or persistence criteria.
+- Compatible labels and logical exclusions.
+- Treatment of insufficient evidence.</p>
+<p>Separate <strong>conceptual meaning</strong>, <strong>parameter configuration</strong> and <strong>software implementation</strong>. Record a version or identifier for each.</p>
+<p>The Phase 5 handover fixes the conceptual specification while permitting explicitly bounded calibration tasks. For each deferred task, record the parameter, permitted development evidence, selection procedure, chosen setting and rationale. Freeze the resulting configuration before systematic application intended for independent evaluation.</p>
+<p>Do not choose thresholds merely to maximise the number of assigned events or agreement with labels generated by the same criteria. Settings may express descriptive materiality or documented business judgement without constituting statistical-significance thresholds. Keep calibration and implementation-driven revisions separate from reserved evaluation evidence. This applies the framework's existing leakage safeguards to rule development, informed by Kapoor and Narayanan (2023).</p>
+<p>A change affecting a type's meaning requires a taxonomy revision. An unresolved conceptual condition must not be silently completed through an implementation assumption.</p>
+<h4 id="632-rule-implementation-and-verification">6.3.2 Rule implementation and verification</h4>
+<p>Implement the codebook directly using explicit functions or an equivalent transparent procedure. For a small taxonomy, a documented parameter table and named rule functions are sufficient. A general-purpose rule engine is not required.</p>
+<p><strong>For each event–type combination:</strong>
+1. Establish whether the type is applicable.
+2. Assess the evidence required by the definition.
+3. Evaluate the specified conditions.
+4. Record the outcome, supporting evidence and reasons.</p>
+<p>Maintain a <strong>rule trace</strong> containing the condition identifier, feature reference, compared value, operator, threshold or comparison value and condition result. Distinguish an unevaluated condition from a condition evaluated as false. For compound rules, preserve the specified conjunctions and alternatives. Define the evidence needed for each valid branch. Missing values must not acquire methodological meaning through software defaults.</p>
+<p><strong>Implementation rules:</strong>
+- Evaluate every applicable type. Do not stop after the first matching label.
+- Apply decisions to the recorded numerical precision, with rounding reserved for presentation.
+- Preserve units and distinguish relative changes from percentage-point differences.
+- Reuse the documented comparison periods and persistence measures.
+- Do not silently impute unavailable values to enable classification.
+- Detect incompatible label combinations and investigate their origin.
+- Record execution failures separately from scientific uncertainty.</p>
+<p>Use independently worked examples to verify expected outcomes. Include clear matches, non-matches, boundary values, insufficient support and supported combinations of labels. Verification against the codebook establishes implementation conformity, not independent classification validity.</p>
+<h4 id="633-systematic-assignment-and-unresolved-outcomes">6.3.3 Systematic assignment and unresolved outcomes</h4>
+<p>Apply the verified rules to a declared input event set. Record its selection criteria and evidence role. Preserve links to original detections, consolidated events and manually identified patterns.</p>
+<p><strong>Maintain the outcomes established in Phase 5:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Outcome</strong></th>
+<th><strong>Operational meaning</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Criteria met</strong></td>
+<td>The required evidence is assessable and satisfies the type definition.</td>
+</tr>
+<tr>
+<td><strong>Criteria not met</strong></td>
+<td>The required evidence is assessable but does not satisfy the definition.</td>
+</tr>
+<tr>
+<td><strong>Indeterminate</strong></td>
+<td>Insufficient or unreliable evidence prevents a defensible decision.</td>
+</tr>
+<tr>
+<td><strong>Not applicable</strong></td>
+<td>The event falls outside the definition's applicability conditions.</td>
+</tr>
+</tbody>
+</table>
+<p>An unresolved definition also prevents a defensible assignment, but must be recorded as a specification problem requiring revision rather than an ordinary data limitation. Assign each type whose criteria are met, subject to the documented evidence requirements and compatibility rules. Preserve the <strong>Phase 4 review status separately</strong> from the type outcome.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Event situation</strong></th>
+<th><strong>Required treatment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Retained candidate with sufficient evidence</strong></td>
+<td>Report applicable rule outcomes and assigned labels.</td>
+</tr>
+<tr>
+<td><strong>Ambiguous candidate with assessable measurements</strong></td>
+<td>Report matching labels alongside the unresolved event status. Rule satisfaction does not resolve the ambiguity.</td>
+</tr>
+<tr>
+<td><strong>Insufficient evidence for a type</strong></td>
+<td>Record an indeterminate outcome and the missing requirement. Other types may remain assessable.</td>
+</tr>
+<tr>
+<td><strong>Suspected artefact affecting required evidence</strong></td>
+<td>Withhold the affected assignment where the evidence fails its quality requirements. Preserve the artefact flag and reason.</td>
+</tr>
+<tr>
+<td><strong>No substantive label assigned</strong></td>
+<td>Retain the event and distinguish assessable non-matches from indeterminate or inapplicable outcomes.</td>
+</tr>
+</tbody>
+</table>
+<p>A quality concern affecting one feature does not automatically invalidate every other feature. Its consequences depend on the evidence requirements of each type. If incompatible labels match, retain the diagnostic rule results but flag the affected assignment as unresolved pending correction. Do not select a dominant label through an undocumented priority rule.</p>
+<p>Account for every input event in the processing register, including restricted cases and execution failures. Report event counts and distinct customer counts separately. Counts of assigned labels may exceed event counts because membership is not exclusive.</p>
+<h3 id="64-explanation-construction">6.4 Explanation construction</h3>
+<h4 id="641-observed-differences-and-assignment-reasons">6.4.1 Observed differences and assignment reasons</h4>
+<p><strong>Construct explanations from two distinct components:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Component</strong></th>
+<th><strong>Question answered</strong></th>
+<th><strong>Required evidence</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Observed-change description</strong></td>
+<td>What differs between the reference and subsequent periods?</td>
+<td>Before-and-after values, units, differences, support counts and observed persistence.</td>
+</tr>
+<tr>
+<td><strong>Assignment explanation</strong></td>
+<td>Why was a type assigned or withheld?</td>
+<td>The executed conditions, their outcomes and relevant evidence restrictions.</td>
+</tr>
+</tbody>
+</table>
+<p>A type label alone is not a sufficient explanation. Conversely, a feature difference does not explain an assignment unless its relationship to the rule is identified. For each assigned label, show the conditions sufficient under the implemented definition. If the definition requires both magnitude and persistence, explain both. Where alternative branches can support assignment, identify the branch or branches that were satisfied.</p>
+<p>Distinguish features used in assignment from additional descriptive context. A feature recorded only for description must not be presented as determining the label. For unassigned types, retain the reason in the structured output. Include it in the event narrative when it materially affects interpretation, particularly where insufficient evidence prevents assessment.</p>
+<h4 id="642-structured-evidence-and-text-templates">6.4.2 Structured evidence and text templates</h4>
+<p><strong>Create a structured explanation record before generating text. It should contain:</strong>
+- Event ID, customer reference and comparison periods.
+- Assigned labels and relevant unresolved outcomes.
+- Before-and-after values and differences for the relevant features.
+- Rule conditions supporting each assignment.
+- Observed persistence, where assessed.
+- Support counts and consequential coverage or quality limitations.
+- Event review status and automatic or manual provenance.
+- References to the evidence, taxonomy, parameters and implementation.</p>
+<p>Use short, controlled templates to render these records. Selecting relevant content, organising it and expressing it consistently adapts established data-to-text generation tasks (Gatt &amp; Krahmer, 2018).</p>
+<p><strong>Recommended narrative order:</strong>
+1. Identify the comparison periods and assigned change labels.
+2. Describe the corresponding feature differences.
+3. State why the assignment criteria are satisfied.
+4. Report relevant unresolved outcomes and limitations.</p>
+<p>Use a fixed, documented dimension order initially. Do not rank heterogeneous feature differences as if they formed a common importance scale.</p>
+<p><strong>Text-generation rules:</strong>
+- Generate factual statements from recorded evidence rather than separately entered narrative values.
+- Include the necessary conditions for every reported assignment.
+- State units, comparison bases and denominators where needed for interpretation.
+- Use documented rounding without changing the underlying decision.
+- Distinguish percentage changes from percentage-point changes.
+- Do not describe unavailable values as zero.
+- Do not interpret "criteria not met" as proof that no purchasing change occurred.
+- Do not describe a pattern as sustained unless the specified persistence criterion is supported.
+- If follow-up ends while the pattern continues, report the observation boundary rather than a completed duration.
+- Preserve consequential ambiguity or data-quality flags.</p>
+<p>Templates require checks for missing fields, inappropriate wording and misleading omissions. Their deterministic construction does not by itself guarantee correct or useful explanations.</p>
+<h4 id="643-supporting-tables-and-graphics">6.4.3 Supporting tables and graphics</h4>
+<table>
+<thead>
+<tr>
+<th><strong>Recommended output</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Event explanation table</strong></td>
+<td>Present labels, relevant feature differences, rule outcomes and limitations together.</td>
+</tr>
+<tr>
+<td><strong>Before-and-after evidence table</strong></td>
+<td>Show values, units, denominators and support counts underlying the description.</td>
+</tr>
+<tr>
+<td><strong>Rule-trace view</strong></td>
+<td>Allow inspection of the conditions that produced or prevented each assignment.</td>
+</tr>
+<tr>
+<td><strong>Selected customer-history plots</strong></td>
+<td>Place assignments in the context of the full available history and comparison windows.</td>
+</tr>
+<tr>
+<td><strong>Product-mix comparisons, where relevant</strong></td>
+<td>Show category-level shifts using consistent categories and stated denominators.</td>
+</tr>
+</tbody>
+</table>
+<p>Reuse suitable Phase 4 displays. Additional graphics should answer a specific interpretive question. Keep incompatible units in separate panels or clearly labelled columns. Standardised displays require documented transformations and must not be presented as causal importance or contribution to a detector's score.</p>
+<h3 id="65-verification-and-evaluation-handover">6.5 Verification and evaluation handover</h3>
+<p>Verify correspondence between the operational specification, computed outcomes and explanations.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Check</strong></th>
+<th><strong>Required assessment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Specification conformity</strong></td>
+<td>Implemented conditions, operators, parameters and applicability match the versioned codebook.</td>
+</tr>
+<tr>
+<td><strong>Boundary and missing-evidence behaviour</strong></td>
+<td>Values below, at and above thresholds, unsuitable denominators and incomplete support produce the intended outcomes.</td>
+</tr>
+<tr>
+<td><strong>Multiple-label consistency</strong></td>
+<td>Compatible labels coexist. Prohibited combinations are detected.</td>
+</tr>
+<tr>
+<td><strong>Evidence integrity</strong></td>
+<td>Assignments and explanations link to the correct events, features, periods and input versions.</td>
+</tr>
+<tr>
+<td><strong>Explanation accuracy</strong></td>
+<td>Numbers, units, direction, conditions and limitations match the structured evidence and rule trace.</td>
+</tr>
+<tr>
+<td><strong>Processing completeness</strong></td>
+<td>All input events are accounted for, including restrictions and execution failures.</td>
+</tr>
+<tr>
+<td><strong>Reproducibility and export</strong></td>
+<td>Fixed inputs and versions reproduce the results. Exported data reload correctly.</td>
+</tr>
+</tbody>
+</table>
+<p>Expected test outcomes must be derived independently from the specification, not generated by the same rule code being checked. Synthetic examples used for boundary verification are software test cases, not evidence of detection performance.</p>
+<p>Compare selected outputs with Phase 5 provisional applications. Investigate differences as possible coding errors, calibration effects, definition ambiguities or earlier application errors. Do not automatically treat provisional classifications as ground truth. Review explanation wording using development cases. Record revisions to templates and content-selection rules.</p>
+<p>Before applying the system to evidence reserved for independent evaluation, freeze the relevant taxonomy, parameters, code and templates. Record any subsequent correction and identify affected results. Cases used to revise the method must no longer be represented as untouched evaluation evidence. This separation between application and assessment of usefulness is consistent with the taxonomy-design guidance of Kundisch et al. (2022).</p>
+<p>Phase 7 evaluates the methodological claims. Successful execution and verification do not establish them.</p>
+<h3 id="66-interpretation-and-boundaries">6.6 Interpretation and boundaries</h3>
+<ul>
+<li>Assignments indicate membership under the specified taxonomy and rules. They are not automatically probabilities, statistically significant findings or validated business diagnoses.</li>
+<li>Preserve event-level uncertainty even when numerical type criteria are met.</li>
+<li>Multiple labels may reflect dependent measures and must not be presented as independent corroboration.</li>
+<li>Explanations describe observed differences and the actual assignment procedure. Detector attribution and causal explanations require separate justification.</li>
+<li>Restrict behavioural descriptions to purchasing observed with the focal wholesaler.</li>
+<li>Retrospective assignments do not establish when a change could have been detected operationally.</li>
+<li>A learned classifier or surrogate model is not required to implement an explicit codebook. Introducing one would require a distinct purpose and additional evaluation.</li>
+<li>Manual corrections or overrides must be recorded separately with their rationale. They must not silently replace automatic results.</li>
+<li>Assignment frequencies describe the processed event set. They do not automatically estimate the prevalence of change types among all customers.</li>
+<li>Technical transparency and factual consistency do not establish reader understanding or practical usefulness. Such claims depend on the evaluation evidence available in Phase 7.</li>
+</ul>
+<h3 id="67-documentation-and-outputs">6.7 Documentation and outputs</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Output</strong></th>
+<th><strong>Contents</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Operational specification</strong></td>
+<td>Type definitions, executable conditions, applicability, evidence requirements and compatibility rules.</td>
+</tr>
+<tr>
+<td><strong>Parameter configuration</strong></td>
+<td>Adopted settings, calibration procedure, rationale and supporting development evidence.</td>
+</tr>
+<tr>
+<td><strong>Assignment dataset</strong></td>
+<td>Run ID, event ID, type ID, outcome, reasons and relevant version references.</td>
+</tr>
+<tr>
+<td><strong>Rule-trace dataset</strong></td>
+<td>Condition identifiers, evidence references, compared values, operators and condition outcomes.</td>
+</tr>
+<tr>
+<td><strong>Explanation dataset or report</strong></td>
+<td>Structured explanation records, generated text, template version and supporting displays.</td>
+</tr>
+<tr>
+<td><strong>Processing and coverage summary</strong></td>
+<td>Input and processed events, distinct customers, restricted cases, unresolved outcomes and execution failures.</td>
+</tr>
+<tr>
+<td><strong>Verification and revision record</strong></td>
+<td>Checks, expected and observed results, discrepancies, corrections and affected outputs.</td>
+</tr>
+<tr>
+<td><strong>Phase 7 handover</strong></td>
+<td>Frozen versions, reproducible execution instructions, evidence roles and unresolved evaluation questions.</td>
+</tr>
+</tbody>
+</table>
+<p>Link assignment records by run ID, event ID and type ID. Link rule traces through these identifiers and the condition ID. Preserve the original Phase 4 event register and Phase 5 development records.</p>
+<p>Record input versions, code versions, execution settings and relevant software dependencies. Save tabular outputs as CSV or Parquet with schemas, missing-value conventions and reload settings. Document the templates and content-selection rules sufficiently to regenerate explanations.</p>
+<p>Do not overwrite earlier results without preserving their version and the reason for replacement.</p>
+<h3 id="68-completion-criteria">6.8 Completion criteria</h3>
+<p><strong>Phase 6 is complete when:</strong>
+- The operational specification is explicit and authorised calibration tasks are resolved.
+- Retained type definitions are implemented with traceable rule outcomes.
+- Meaningful implementation and explanation checks pass.
+- Every event in the declared input set is accounted for.
+- Multiple labels, non-matches, insufficient evidence and applicability restrictions are handled consistently.
+- Explanations correspond to the recorded evidence and executed rules.
+- Outputs can be regenerated and reloaded correctly.
+- The Phase 7 handover identifies frozen versions, evidence roles and remaining limitations.</p>
+<p>Completion does not require assigning every event, eliminating all ambiguity or demonstrating practical usefulness. A correctly recorded indeterminate outcome is compatible with completion.</p>
+<p>If essential definitions remain unresolved, required evidence is unavailable or implementation discrepancies prevent trustworthy application, record the phase as <strong>restricted, partially completed or blocked</strong>. State the affected types or cases and the required follow-up rather than concealing the limitation through forced assignments.</p>
+<hr />
+<h2 id="phase-7-evaluate-the-framework-and-reflect-on-findings">Phase 7 - Evaluate the framework and reflect on findings</h2>
+<h3 id="71-purpose">7.1 Purpose</h3>
+<p><strong>Phase 7</strong> evaluates the framework's detection performance, taxonomy applicability, assignment consistency and explanation quality, including sensitivity to consequential analytical choices. It combines a controlled detection benchmark, a shared collection of additional real cases and a limited sensitivity analysis. Each component is assessed against explicit claims and suitable evidence, with independent review and semi-synthetic experiments providing supplementary evidence where feasible.</p>
+<p>The resulting evaluation findings, failure analyses and documented limitations support qualified answers to the research questions and a critical assessment of the thesis's contributions. Evidence supporting one component does not automatically establish the validity or usefulness of the others. Conclusions remain restricted to the assessed conditions and available evidence, with unsupported claims, unresolved questions and priorities for further work identified explicitly.</p>
+<blockquote>
+<p><strong>Methodological basis:</strong> Detection assessment draws on change-point evaluation methods discussed by Truong et al. (2020), while the controlled benchmark follows simulation-study guidance from Morris et al. (2019). Taxonomy assessment draws on the purpose-oriented evaluation guidance of Kundisch et al. (2022). Annotation-agreement research informs the assessment and interpretation of agreement where independent annotations are available (Artstein &amp; Poesio, 2008). Explanation assessment follows the distinction between intrinsic text quality and extrinsic effectiveness in use described by Gatt and Krahmer (2018). Data-leakage research informs the separation of development and evaluation evidence and the treatment of revisions prompted by evaluation findings (Kapoor &amp; Narayanan, 2023). The evaluation scenarios, sampling procedures, matching tolerances, review criteria and sensitivity settings are project-specific decisions requiring justification.</p>
+</blockquote>
+<h3 id="72-inputs-and-prerequisites">7.2 Inputs and prerequisites</h3>
+<p><strong>Use the following versioned inputs:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Input</strong></th>
+<th><strong>Required information</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Prepared customer-period profiles from Phase 3</strong></td>
+<td>Feature definitions, units, observation coverage, eligibility rules, missing-value treatments and transformation settings.</td>
+</tr>
+<tr>
+<td><strong>Candidate-event evidence from Phase 4</strong></td>
+<td>Detection settings, event timing, before-and-after profiles, persistence evidence, consolidation links, event statuses and processing logs.</td>
+</tr>
+<tr>
+<td><strong>Taxonomy and codebook from Phase 5</strong></td>
+<td>Dimensions, type definitions, applicability conditions, assignment criteria, permitted combinations, examples, counterexamples and development history.</td>
+</tr>
+<tr>
+<td><strong>Assignments and explanations from Phase 6</strong></td>
+<td>Per-type outcomes, assigned label sets, rule traces, explanation templates, generated descriptions, uncertainty indicators and any manual overrides.</td>
+</tr>
+<tr>
+<td><strong>Development and verification records</strong></td>
+<td>Cases previously inspected, settings considered, rules revised, implementation checks and known unresolved limitations.</td>
+</tr>
+<tr>
+<td><strong>Research questions and scope</strong></td>
+<td>The intended retrospective claims, target population, purchasing dimensions and excluded claims.</td>
+</tr>
+</tbody>
+</table>
+<p>Before evaluating results, specify the evidence available for each claim and identify any missing prerequisites. Distinguish completed implementation verification from empirical evaluation: passing the Phase 6 checks establishes readiness for evaluation, rather than independent evidence of validity.</p>
+<p>An independent reviewer is desirable but is not a prerequisite for every evaluation component. Where unavailable, record the resulting restriction on the assessment. Where essential reference evidence is unavailable, identify the corresponding claim as unevaluated rather than substituting an unsuitable performance measure.</p>
+<h3 id="73-procedure">7.3 Procedure</h3>
+<h4 id="731-specify-evaluation-claims-and-evidence-roles">7.3.1 Specify evaluation claims and evidence roles</h4>
+<p>Create an evaluation protocol linking each assessment to its claim, evidence, procedure and interpretation.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Evaluation object</strong></th>
+<th><strong>Evaluation question</strong></th>
+<th><strong>Primary evidence</strong></th>
+<th><strong>Interpretation boundary</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Change detection</strong></td>
+<td>Which specified changes are detected, missed or incorrectly flagged and how accurately are detected changes located?</td>
+<td>Controlled histories with known reference changes and no-change controls.</td>
+<td>Performance applies to the tested conditions. It does not establish accuracy across all real ERP histories.</td>
+</tr>
+<tr>
+<td><strong>Taxonomy</strong></td>
+<td>Can additional observed patterns be represented clearly within the declared scope?</td>
+<td>Additional real cases assessed against the fixed taxonomy.</td>
+<td>Applicability and coverage do not alone establish usefulness for intended users.</td>
+</tr>
+<tr>
+<td><strong>Type assignment</strong></td>
+<td>Does the implementation apply the codebook consistently?</td>
+<td>Expected outcomes derived separately from the automated results, supported by rule traces.</td>
+<td>Agreement with the codebook does not establish that the codebook captures an objectively correct behavioural classification.</td>
+</tr>
+<tr>
+<td><strong>Explanation</strong></td>
+<td>Do descriptions accurately communicate observed differences and assignment reasoning?</td>
+<td>Structured comparison with source evidence and rules. Optional independent reader assessment.</td>
+<td>Factual quality and comprehension do not establish improved business decisions.</td>
+</tr>
+<tr>
+<td><strong>Robustness</strong></td>
+<td>How do findings change under justified alternative settings?</td>
+<td>Planned sensitivity comparisons.</td>
+<td>Stability does not itself establish correctness.</td>
+</tr>
+</tbody>
+</table>
+<p>Maintain an evidence-role record identifying whether each case or dataset was used for exploration, preparation design, detection tuning, taxonomy development, rule verification or evaluation. Record overlaps explicitly.</p>
+<p>Choose separation according to the intended generalisation claim. For an assessment involving additional customers, prefer customer-level separation so that events from the same customer do not appear on both sides of the split. A claim about later periods of existing customers requires an appropriate temporal design. Retrospective evaluation may use the complete historical sequence available for that evaluation. Evaluation of decisions at a particular time must respect the information available then.</p>
+<p>If the available histories have already influenced development, describe their subsequent assessment as internal and exploratory. Retrospectively assigning them to an evaluation subset does not remove prior exposure. These safeguards adapt the leakage concerns discussed by Kapoor and Narayanan (2023) to the present workflow.</p>
+<h4 id="732-freeze-the-evaluation-configuration">7.3.2 Freeze the evaluation configuration</h4>
+<p><strong>Before inspecting evaluation outcomes, record and freeze:</strong>
+- preparation rules, feature definitions and relevant fitted transformations.
+- detection methods, parameters, event-consolidation rules and eligibility conditions.
+- taxonomy version, assignment criteria and uncertainty handling.
+- explanation templates and content-selection rules.
+- simulation scenarios, reference definitions and final random-seed schedule.
+- case-selection procedures, review instructions and reviewer roles.
+- temporal matching tolerance, performance measures, aggregation rules and treatment of undefined measures.
+- planned sensitivity settings and any justified acceptance criteria.</p>
+<p>Use development data or separate pilot runs to resolve implementation issues and select settings. Keep final simulation realisations separate from those used for tuning. Fresh random seeds provide additional realisations under the specified generating mechanisms. They do not establish generalisation to different purchasing processes.</p>
+<p>Do not introduce universal accuracy thresholds, agreement cut-offs or sample-size requirements without justification. Where evaluation is descriptive, state this explicitly and report the observed performance and limitations without inventing a pass/fail boundary.</p>
+<h4 id="733-evaluate-change-detection">7.3.3 Evaluate change detection</h4>
+<h5 id="7331-controlled-benchmark-design">7.3.3.1 Controlled benchmark design</h5>
+<p>Structure the simulation protocol around its aims, data-generating mechanisms, targets, methods and performance measures, following the ADEMP guidance of Morris et al. (2019).</p>
+<p>Use controlled synthetic customer histories as the primary quantitative benchmark. Define the reference changes through the generating process independently of the detector's output. Include no-change controls containing realistic stochastic variation rather than only constant signals.</p>
+<p><strong>Select a compact set of scenarios relevant to the actual detection claim:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Scenario</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>No target change</strong></td>
+<td>Assess detections caused by ordinary variation under the specified background process.</td>
+</tr>
+<tr>
+<td><strong>Sustained increases and decreases</strong></td>
+<td>Assess sensitivity and localisation for level changes.</td>
+</tr>
+<tr>
+<td><strong>Different change magnitudes</strong></td>
+<td>Examine performance for weaker and stronger changes.</td>
+</tr>
+<tr>
+<td><strong>Sparse or intermittent purchasing</strong></td>
+<td>Examine the influence of limited activity and observation support.</td>
+</tr>
+<tr>
+<td><strong>Simultaneous changes in relevant dimensions</strong></td>
+<td>Assess the configured multivariate procedure.</td>
+</tr>
+<tr>
+<td><strong>Relevant non-target patterns</strong></td>
+<td>Examine responses to isolated large orders, seasonality or other patterns that the protocol defines as outside the target phenomenon.</td>
+</tr>
+</tbody>
+</table>
+<p>Include product-group redistribution, gradual transitions or temporary reversals only where they belong to the declared scope. Define whether a temporary change contains two reference boundaries and how gradual changes are represented before scoring results.</p>
+<p>Justify scenario ranges using development data and substantive reasoning. Preserve the relationships between generated features: for example, derive basket value consistently from revenue and order count and enforce valid category shares. A complete ERP transaction simulator is not required if a coherent profile-level generator is sufficient for the stated claim. Identify any feature dimensions or mechanisms the benchmark does not cover.</p>
+<p>Apply the frozen preprocessing and detection procedure at a clearly stated entry point. If simulations begin with prepared profiles, the experiment evaluates downstream detection rather than the correctness of ERP extraction and cleaning. Evaluate at most the detection approaches retained in Phase 4, using the same simulated histories for each. Document method-specific eligibility and failures. Report results on a common assessable set where appropriate, together with coverage of the complete benchmark. Do not silently remove difficult cases.</p>
+<p>Choose the number of repetitions with reference to computational feasibility and the precision required for the main performance estimates. Report Monte Carlo uncertainty where estimated performance is summarised across repetitions, using a calculation appropriate to the measure and simulation unit.</p>
+<h5 id="7332-reference-matching">7.3.3.2 Reference matching</h5>
+<p>Define a temporal tolerance in the customer-period profile's time unit. Use one-to-one matching between reference changes and detected events: first maximise the number of permissible matches, then minimise total absolute timing error among those matchings. Resolve any remaining ties deterministically.</p>
+<p>Specify the event timestamp used for matching, especially where Phase 4 represents an event as an interval. Apply the frozen consolidation rules before scoring. Exclude algorithmic terminal endpoints that do not represent detected changes. Count matched pairs as true positives, unmatched detections as false positives and unmatched reference changes as false negatives. Multiple detections near the same reference change must not all receive credit. Define edge restrictions and required observation support before evaluation, and report excluded reference changes and histories with their reasons.</p>
+<p>Tolerance-based precision and recall and localisation measures are supported by the change-point evaluation discussion in Truong et al. (2020). The matching rule, tolerance and event representation used here are project-specific specifications.</p>
+<h5 id="7333-performance-reporting">7.3.3.3 Performance reporting</h5>
+<p><strong>Report the following measures with their counts and denominators:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Measure</strong></th>
+<th><strong>Definition or reporting rule</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Precision</strong></td>
+<td>TP / (TP + FP), where the denominator is positive.</td>
+</tr>
+<tr>
+<td><strong>Recall</strong></td>
+<td>TP / (TP + FN), where the denominator is positive.</td>
+</tr>
+<tr>
+<td><strong>F1</strong></td>
+<td>2TP / (2TP + FP + FN), where the denominator is positive.</td>
+</tr>
+<tr>
+<td><strong>Localisation error</strong></td>
+<td>Absolute distance between matched reference and detected timestamps, summarised in profile periods.</td>
+</tr>
+<tr>
+<td><strong>False detections in no-change controls</strong></td>
+<td>Number of detections per history or observation period, with the exposure denominator stated.</td>
+</tr>
+<tr>
+<td><strong>Histories with false detections</strong></td>
+<td>Proportion of no-change histories receiving at least one detection.</td>
+</tr>
+<tr>
+<td><strong>Coverage and failures</strong></td>
+<td>Numbers of assessable, excluded, unassessable and technically failed histories, with reasons.</td>
+</tr>
+</tbody>
+</table>
+<p>Report measures with zero denominators as undefined. A zero F1 is appropriate where its denominator is positive and no true positive is obtained. No-change controls can have no applicable recall. They remain informative through their false-detection measures.</p>
+<p>Present localisation error alongside recall because timing accuracy among matched events excludes missed changes. Specify whether summaries pool event counts or average history-level results. Report performance by scenario and relevant difficulty level before any overall aggregation. These measurements concern retrospective localisation. They do not measure operational detection delay or demonstrate statistical significance of individual real events.</p>
+<h5 id="7334-supplementary-semi-synthetic-and-real-data-evidence">7.3.3.4 Supplementary semi-synthetic and real-data evidence</h5>
+<p>Where useful, inject known changes into real histories to examine behaviour against a more realistic background. Preserve feature dependencies and record the injection process. Real backgrounds may contain unknown changes, so unmatched detections cannot automatically be labelled false positives. Report recovery of injected changes and describe other detections without assigning unsupported truth labels.</p>
+<p>Complement the benchmark with inspection of real histories, including histories without detected events where feasible. Such inspection can identify plausible misses, artefacts and difficult cases, but an incomplete or subjective reference does not establish definitive detection precision or recall.</p>
+<h4 id="734-evaluate-taxonomy-applicability">7.3.4 Evaluate taxonomy applicability</h4>
+<p>Use a documented collection of additional real cases to assess the fixed taxonomy. Prefer cases not used to define or refine its types. Include straightforward events, overlapping changes, borderline patterns, insufficient evidence and cases receiving no type.</p>
+<p>Record the selection procedure and the numbers of customers, histories and events. Where a purposive challenge sample supplements a broader sample, report the two separately. Frequencies in a purposive sample do not estimate population prevalence.</p>
+<p><strong>Assess each case against the following criteria:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Criterion</strong></th>
+<th><strong>Assessment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Applicability</strong></td>
+<td>Whether the definitions and criteria can be applied using the available evidence.</td>
+</tr>
+<tr>
+<td><strong>Representational coverage</strong></td>
+<td>Whether the observed pattern can be described within the taxonomy's declared scope.</td>
+</tr>
+<tr>
+<td><strong>Distinctiveness</strong></td>
+<td>Whether relevant types can be distinguished through their definitions and criteria.</td>
+</tr>
+<tr>
+<td><strong>Compatibility</strong></td>
+<td>Whether permitted combinations and prohibited combinations are coherent.</td>
+</tr>
+<tr>
+<td><strong>Interpretability</strong></td>
+<td>Whether the resulting description communicates the observed pattern without unsupported causal or commercial assumptions.</td>
+</tr>
+</tbody>
+</table>
+<p>For cases not adequately represented, distinguish insufficient evidence, out-of-scope patterns, criteria not met, conflicting definitions and plausible taxonomy gaps. An event may receive some labels while remaining inadequately represented in another dimension. Record such partial coverage rather than treating any assigned label as complete coverage.</p>
+<p>High assignment coverage alone does not establish taxonomy quality. Similarly, failure to assign a type because required evidence is missing does not automatically indicate a conceptual gap. Preserve both the full sample denominator and any justified assessable subset.</p>
+<p>This assessment provides additional evidence beyond the development ending conditions. Following Kundisch et al. (2022), claims about usefulness must be aligned with the taxonomy's purpose and intended users. Without suitable user-oriented evaluation, restrict conclusions to the applicability and clarity observed in the assessed cases.</p>
+<h4 id="735-evaluate-assignment-consistency">7.3.5 Evaluate assignment consistency</h4>
+<p><strong>Assess whether the implementation applies the fixed codebook as intended. For selected evaluation cases, derive expected outcomes separately from the system's assignments:</strong>
+1. Provide the reviewer with the relevant profile evidence, event status and codebook.
+2. Hide automated assignments and generated explanations during the initial assessment.
+3. Record expected outcomes and their supporting reasoning.
+4. Compare them with the automated results and rule traces.
+5. Investigate disagreements while preserving the initial assessments and any subsequent adjudication separately.</p>
+<p><strong>Retain the Phase 6 per-type outcomes:</strong> <em>criteria met</em>, <em>criteria not met</em>, <em>indeterminate</em> and <em>not applicable</em>. Do not treat indeterminate or inapplicable cases as negative assignments. Technical failures remain separate from scientific uncertainty. Evaluate automated results separately from manual overrides.</p>
+<p>Report per-type outcome comparisons, agreement of assigned label sets and explanations of disagreements. Where label-set agreement is reported, retain the underlying outcome comparisons so that agreement on empty label sets does not conceal different reasons for withholding assignments.</p>
+<p>Where two independent human annotators and adequate category variation are available, an appropriate chance-corrected agreement coefficient may supplement descriptive comparisons. Document its assumptions and category distributions. Artstein and Poesio (2008) discuss the dependence of agreement measures on their assumptions and category prevalence. No universal coefficient threshold is adopted here.</p>
+<p>If only the researcher performs the manual assessment, describe it as a structured conformance check. It does not establish independent inter-rater reliability. Agreement with the codebook supports consistent application, not an objectively correct behavioural classification.</p>
+<h4 id="736-evaluate-explanation-quality">7.3.6 Evaluate explanation quality</h4>
+<p>Assess explanations against the underlying source evidence and the rules actually evaluated. The shared real-case collection may be reused, but complete any blinded assignment review before revealing the system's explanations.</p>
+<p><strong>Use a predefined rubric:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Criterion</strong></th>
+<th><strong>Review question</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Factual accuracy</strong></td>
+<td>Are dates, values, units, directions and before-and-after comparisons correct?</td>
+</tr>
+<tr>
+<td><strong>Rule fidelity</strong></td>
+<td>Does the explanation correctly represent the conditions producing or withholding assignments?</td>
+</tr>
+<tr>
+<td><strong>Relevant completeness</strong></td>
+<td>Are decisive conditions, evidence limitations and necessary qualifications included?</td>
+</tr>
+<tr>
+<td><strong>Uncertainty communication</strong></td>
+<td>Are ambiguous events, missing support and withheld assignments represented accurately?</td>
+</tr>
+<tr>
+<td><strong>Interpretability</strong></td>
+<td>Can a reader distinguish the observed change from the reason for its assigned type?</td>
+</tr>
+<tr>
+<td><strong>Claim discipline</strong></td>
+<td>Does the explanation avoid unsupported causal, detector-attribution or commercial claims?</td>
+</tr>
+</tbody>
+</table>
+<p>Record each issue with the affected explanation, criterion and supporting evidence. Distinguish factual or logical errors from stylistic weaknesses. Report counts and denominators, including the number of explanations reviewed and the number affected by each issue. Do not present uncalibrated reviewer ratings as probabilities or objective correctness scores.</p>
+<p>Where an independent reader is available, supplement the audit with a short comprehension task: ask the reader to identify what changed, why the type was assigned and what limitation qualifies the result. Record the reader's relevant background and distinguish demonstrated understanding from general preference ratings.</p>
+<p>Gatt and Krahmer (2018) distinguish intrinsic evaluation of text quality from extrinsic evaluation of effectiveness in use. The core assessment here concerns factual quality, rule fidelity and interpretability. Without an appropriate user study, it does not establish improved sales decisions. Researcher-only readability assessment remains a heuristic appraisal rather than independent evidence of reader comprehension.</p>
+<h4 id="737-assess-sensitivity-and-failure-cases">7.3.7 Assess sensitivity and failure cases</h4>
+<p>Evaluate a small set of justified alternatives to consequential settings. Depending on the implemented framework, these may include comparison-window length, detection threshold, segmentation penalty, minimum segment length, persistence criteria and assignment thresholds. Include preparation choices where they materially affect the findings.</p>
+<p><strong>Retain the frozen primary configuration as the reference. Change one analytical layer at a time where feasible and distinguish:</strong>
+- changes in which events are detected.
+- changes in event timing or consolidation.
+- changes in type assignments for comparable events.
+- changes in uncertainty, withheld assignments or coverage.
+- resulting changes in explanation content.</p>
+<p>When assessing assignment sensitivity, hold event evidence fixed where possible. Otherwise, explicitly distinguish changed assignments caused by altered event windows from changed assignments caused by the typing rules themselves. Document how events are matched across configurations.</p>
+<p>Summarise relevant failure mechanisms, including sparse activity, isolated large orders, missing observations, category changes, overlapping events, insufficient comparison support and rule conflicts. Report whether each limitation concerns data, detection, representation, assignment or explanation. Allow multiple contributing factors.</p>
+<p>Account for dependence between events from the same customer. Report customer and event counts separately. Where inferential summaries are justified, use methods consistent with the sampling design. For example, resampling customers rather than treating all their events as independent. For small purposive collections, descriptive counts and case analyses may be more defensible than confidence intervals.</p>
+<p>Do not select a better-performing setting after examining evaluation results and report it as if it had been fixed in advance. Such a change constitutes further development.</p>
+<h4 id="738-reflect-on-findings-and-research-questions">7.3.8 Reflect on findings and research questions</h4>
+<p><strong>For each research question, connect the finding to its evidence and limitations:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Research question or claim</strong></th>
+<th><strong>Finding</strong></th>
+<th><strong>Supporting evidence</strong></th>
+<th><strong>Limitation</strong></th>
+<th><strong>Supported conclusion</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Record each question or claim separately.</td>
+<td>State the observed result, including negative or inconclusive findings.</td>
+<td>Identify the relevant experiment, cases and configuration.</td>
+<td>State the conditions and unresolved uncertainties.</td>
+<td>Limit the conclusion to what the evidence establishes.</td>
+</tr>
+</tbody>
+</table>
+<p>Distinguish the thesis's conceptual contribution, implemented procedure and empirical findings. Explain how data quality, customer eligibility, retrospective analysis, sampling, synthetic assumptions and reviewer availability constrain generalisation.</p>
+<p>Address any mismatch between the original research aspirations and the implemented assessment. In particular, retrospective localisation does not demonstrate earlier operational detection. Threshold exceedance does not automatically establish statistical significance. Descriptive feature differences do not establish causes or detector attribution.</p>
+<p>If evaluation reveals a defect requiring correction, preserve the original configuration and results. Record the issue, revision and affected evidence. Results obtained after using the same cases to revise the framework must be identified as development-informed reassessment. Further independent evaluation requires suitable unused evidence.</p>
+<h3 id="74-outputs">7.4 Outputs</h3>
+<p><strong>Produce the following traceable outputs:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>Output</strong></th>
+<th><strong>Contents</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Evaluation protocol and configuration record</strong></td>
+<td>Claims, evidence roles, frozen versions, criteria, sampling, matching, aggregation and planned sensitivity settings.</td>
+</tr>
+<tr>
+<td><strong>Benchmark specification and results</strong></td>
+<td>Generating mechanisms, reference changes, seeds, repetitions, method coverage, performance measures and simulation uncertainty.</td>
+</tr>
+<tr>
+<td><strong>Real-case evaluation inventory</strong></td>
+<td>Selection procedure, customer and event identifiers, previous development exposure, evidence sufficiency and reviewer roles.</td>
+</tr>
+<tr>
+<td><strong>Taxonomy assessment</strong></td>
+<td>Applicability findings, partial coverage, unrepresented patterns and reasons for gaps or non-assignment.</td>
+</tr>
+<tr>
+<td><strong>Assignment assessment</strong></td>
+<td>Initial expected outcomes, automated outcomes, agreement summaries, disagreement analysis and separate adjudications.</td>
+</tr>
+<tr>
+<td><strong>Explanation assessment</strong></td>
+<td>Rubric outcomes, factual and interpretive issues, representative examples and any independent comprehension evidence.</td>
+</tr>
+<tr>
+<td><strong>Sensitivity and failure analysis</strong></td>
+<td>Comparisons with the primary configuration, affected events, assignment changes and limitations.</td>
+</tr>
+<tr>
+<td><strong>Research-question assessment</strong></td>
+<td>Findings, supporting evidence, qualified conclusions, unevaluated claims and implications for further work.</td>
+</tr>
+<tr>
+<td><strong>Revision record</strong></td>
+<td>Post-evaluation corrections, preserved original results and the evidence status of subsequent reassessment.</td>
+</tr>
+</tbody>
+</table>
+<p>Preserve code, configuration and permissible example data sufficient to reproduce the evaluation. Handle original ERP data and identifiable outputs according to the project's data-access and repository restrictions.</p>
+<h3 id="75-completion-criteria">7.5 Completion criteria</h3>
+<p><strong>Phase 7 is complete when:</strong>
+- each evaluation claim is linked to a procedure and evidence source, or explicitly identified as unevaluated.
+- development exposure, evaluation roles and configuration versions are documented.
+- planned core assessments have been completed, or infeasibility and the resulting reduction in claims are explained.
+- detection results include relevant counts, denominators, matching rules, coverage and failures.
+- taxonomy gaps, partial coverage and insufficient evidence are distinguished.
+- assignment outcomes and disagreements retain their uncertainty and applicability distinctions.
+- explanation quality is assessed separately from practical usefulness.
+- sensitivity findings, failure cases and material limitations are reported.
+- post-evaluation revisions are distinguishable from the original assessment.
+- the research questions are answered within the limits of the evidence.</p>
+<p>Completion does not require favourable performance, complete assignment coverage, elimination of all ambiguity or confirmation of every original aspiration. Unevaluated or unsupported claims remain explicit limitations of the thesis.</p>
+<h3 id="76-limitations-and-interpretation">7.6 Limitations and interpretation</h3>
+<p>The evaluation provides evidence conditional on the assessed data, cases, simulated processes and analytical settings. Synthetic benchmarks offer known references but cannot reproduce every feature of ERP purchasing behaviour. Real-case assessments provide contextual evidence but may lack definitive ground truth and representative sampling.</p>
+<p>Evidence about taxonomy applicability is restricted by the variety and independence of the assessed cases. Agreement supports reproducibility of application rather than substantive truth. Factual and comprehensible explanations remain descriptive unless separate evidence establishes causal interpretation, detector attribution or decision usefulness. Reusing a real-case collection across taxonomy, assignment and explanation assessment is efficient, but these results are related assessments of the same cases rather than independent replications. Findings from one wholesaler do not by themselves establish transferability to other organisations.</p>
+<p>The final conclusions must therefore state both what the framework demonstrated and which capabilities remain uncertain or unevaluated.</p>
+<hr />
+<h2 id="bibliography">Bibliography</h2>
+<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+    </main>
+</body>
+</html>

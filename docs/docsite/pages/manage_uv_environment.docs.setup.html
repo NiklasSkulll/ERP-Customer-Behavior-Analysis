@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>manage_uv_environment</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+
+# Manage a Python environment with uv
+
+This guide explains how to create and synchronize the project's Python environment, add development dependencies, and run commands within that environment using uv. Project dependencies are declared in `pyproject.toml`, while `uv.lock` records their resolved versions to support reproducible setup.
+
+> The environment management commands follow the official uv documentation (Astral, n.d.).
+
+</div>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#create-or-synchronize-the-project-environment">Create or synchronize the project environment</a></li>
+<li><a href="#add-development-dependencies">Add development dependencies</a></li>
+<li><a href="#activation-and-deactivation">Activation and deactivation</a></li>
+<li><a href="#bibliography">Bibliography</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Run all commands from the repository root with uv installed.</p>
+<p><strong>The project uses the following files and directory:</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>File or directory</strong></th>
+<th><strong>Purpose</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pyproject.toml</code></td>
+<td>Declares project configuration and dependencies.</td>
+</tr>
+<tr>
+<td><code>uv.lock</code></td>
+<td>Records resolved dependency versions.</td>
+</tr>
+<tr>
+<td><code>.venv</code></td>
+<td>Contains the local Python environment managed by uv.</td>
+</tr>
+</tbody>
+</table>
+<p>Commit <code>pyproject.toml</code> and <code>uv.lock</code> to version control. Do not commit <code>.venv</code>.</p>
+<hr />
+<h2 id="create-or-synchronize-the-project-environment">Create or synchronize the project environment</h2>
+<p><strong>Create <code>.venv</code> or synchronize an existing environment with the lockfile:</strong></p>
+<pre><code class="language-bash">uv sync --locked
+</code></pre>
+<p>The <code>--locked</code> option prevents lockfile updates. If <code>uv.lock</code> is missing or inconsistent with the project configuration, the command fails.</p>
+<p><strong>If the dependency configuration was intentionally changed, update the lockfile:</strong></p>
+<pre><code class="language-bash">uv lock
+</code></pre>
+<p>Review the changes, then run <code>uv sync --locked</code> again. Commit any related changes to <code>pyproject.toml</code> and <code>uv.lock</code> together.</p>
+<hr />
+<h2 id="add-development-dependencies">Add development dependencies</h2>
+<p>Use <code>uv add --dev</code> to declare tools needed for development.</p>
+<p><strong>For example, add <code>nbconvert</code> for notebook conversion if it is not already declared:</strong></p>
+<pre><code class="language-bash">uv add --dev nbconvert
+</code></pre>
+<p>This command updates <code>pyproject.toml</code>, updates <code>uv.lock</code> and synchronizes the project environment. Commit the configuration and lockfile changes together.</p>
+<p>If the dependency is already declared, use <code>uv sync --locked</code> to install it from the existing lockfile.</p>
+<hr />
+<h2 id="activation-and-deactivation">Activation and deactivation</h2>
+<p>Manual activation is unnecessary when using <code>uv run</code>.</p>
+<p><strong>For example, start Python in the project environment with:</strong></p>
+<pre><code class="language-bash">uv run --locked python
+</code></pre>
+<p>This ensures the environment is synchronized before starting Python, without allowing lockfile updates. Alternatively, activate the environment to run commands such as <code>python</code> directly in the current shell.</p>
+<p><strong>Activate on macOS or Linux using Bash or Zsh:</strong></p>
+<pre><code class="language-bash">source .venv/bin/activate
+</code></pre>
+<p><strong>Activate on Windows using PowerShell:</strong></p>
+<pre><code class="language-powershell">.venv\Scripts\Activate.ps1
+</code></pre>
+<p><strong>Deactivate an activated environment:</strong></p>
+<pre><code class="language-text">deactivate
+</code></pre>
+<p>Activation changes which environment the shell uses. It does not install or synchronize dependencies. Run <code>uv sync --locked</code> beforehand.</p>
+<hr />
+<h2 id="bibliography">Bibliography</h2>
+<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+    </main>
+</body>
+</html>

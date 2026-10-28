@@ -25,7 +25,7 @@ The notebooks remain authoritative. Generated mirrors support read-only code nav
 
 ## Convert Jupyter notebooks to raw Python files
 
-The examples below use `scripts/notebook_to_raw_python.py`. Adjust this command path if the script is stored in another directory directly beneath the repository root. The script determines the repository root from its own location, then reads notebooks from `src/notebooks` and writes mirrors to `src/raw-notebooks`. Each mirror retains the notebook's base name with an added `_mirror` suffix and a `.py` extension.
+Run the examples below from the repository root using `setup/notebook_to_raw_python.py`. The script determines the repository root from its own location, then reads notebooks from `src/notebooks` and writes mirrors to `src/raw-notebooks`. Each mirror retains the notebook's base name with an added `_mirror` suffix and a `.py` extension.
 
 **Subdirectory structure is preserved:**
 
@@ -38,7 +38,7 @@ Output directories are created automatically when needed.
 
 ### Before converting
 
-> **Before the first conversion:** Follow [docs/setup/manage_uv_environment.md](docs/setup/manage_uv_environment.md) to prepare the project environment and ensure `nbconvert` is installed. Run all conversion commands below from the repository root.
+> **Before the first conversion:** Follow the [environment guide](manage_uv_environment.md) to prepare the project environment and ensure `nbconvert` is installed. Run all conversion commands below from the repository root.
 
 Save the notebooks first. Conversion reads the saved files on disk. It does not save open notebooks, execute cells, or modify source notebooks.
 
@@ -48,12 +48,12 @@ Save the notebooks first. Conversion reads the saved files on disk. It does not 
 
 **Pass a notebook path relative to `src/notebooks`:**
 ```bash
-uv run --locked python scripts/notebook_to_raw_python.py --file 01_Phase.ipynb
+uv run --locked python setup/notebook_to_raw_python.py --file 01_Phase.ipynb
 ```
 
 **For a notebook in a subdirectory:**
 ```bash
-uv run --locked python scripts/notebook_to_raw_python.py --file analysis/02_Model.ipynb
+uv run --locked python setup/notebook_to_raw_python.py --file analysis/02_Model.ipynb
 ```
 
 Do not prefix relative `--file` paths with `src/notebooks/`. The script adds that directory itself.
@@ -63,7 +63,7 @@ Absolute paths are also accepted, provided they point to an existing `.ipynb` fi
 ### Convert all notebooks
 
 ```bash
-uv run --locked python scripts/notebook_to_raw_python.py --all-files
+uv run --locked python setup/notebook_to_raw_python.py --all-files
 ```
 
 This recursively finds and converts notebooks beneath `src/notebooks`, excluding `.ipynb_checkpoints` directories. Explicitly selecting a checkpoint notebook with `--file` is also rejected.
@@ -73,7 +73,7 @@ Each run requires exactly one conversion mode: `--file` or `--all-files`. They c
 ### View command-line help
 
 ```bash
-uv run --locked python scripts/notebook_to_raw_python.py --help
+uv run --locked python setup/notebook_to_raw_python.py --help
 ```
 
 ### Maintain the generated mirrors
@@ -108,4 +108,4 @@ Startup errors stop the script before the conversion summary is printed. If `uv`
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](../literature/bibliography.md).

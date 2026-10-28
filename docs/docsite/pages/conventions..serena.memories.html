@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>conventions</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav aria-label="Site navigation">
+        <a href="../index.html">Documentation overview</a>
+    </nav>
+    <main>
+        <h1 id="project-conventions">Project conventions</h1>
+<ul>
+<li>Source notebooks in src/notebooks/ are authoritative. src/raw-notebooks/ Python mirrors are read-only navigation aids: agents must never edit, overwrite, regenerate, delete or synchronize them. Report mismatches; defer generation to user.</li>
+<li>Data boundary and source map: <code>mem:core</code>. No saved production outputs may enter docs, memories or chat.</li>
+<li>Prepared/example tables: UTF-8; comma-separated CSV; decimal period without grouping; English snake_case derived columns; YYYY-MM-DD dates; one header row and observation per subsequent row. Preserve/document original ERP names separately.</li>
+<li>Existing utilities: argparse CLI, pathlib paths resolved from <strong>file</strong>, main() -&gt; int and SystemExit(main()). Delay third-party imports until argument validation/help handling. Outputs use temporary files before replacement where implemented; preserve these conventions.</li>
+<li>Follow existing Markdown layout (centered title/badges, manual GitHub-anchor TOCs, relative links); preserve actual path casing. Do not copy stale capitalized example links from setup docs.</li>
+<li>Keep notes concise. Record only stable non-obvious rules in memories, with <code>mem:</code> references in backticks; follow <code>mem:memory_maintenance</code>. Mutable status stays in HANDOVER.md/BACKLOG.md.</li>
+</ul>
+    </main>
+</body>
+</html>
