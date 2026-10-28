@@ -1,0 +1,7 @@
+# Verification and closeout
+- Follow AGENTS.md startup: AGENTS.md → complete newest HANDOVER.md entry → BACKLOG.md → relevant memories. Use project interpreter for execution; first ensure code requires no data or only explicitly fully synthetic fixtures.
+- Minimal data-free utility checks: `.venv/bin/python setup/csv_to_parquet.py --help`; `.venv/bin/python setup/notebook_to_raw_python.py --help`; `.venv/bin/python setup/create_documentation_site.py --help`. All passed at onboarding; AST parsing of setup/*.py and imports duckdb/markdown/nbconvert also passed.
+- No declared automated test/lint/type-check suite; no notebooks or full analysis to execute. Help/import/syntax checks do not establish conversion or analysis correctness. Add/run meaningful synthetic checks appropriate to future code changes; avoid production data and mirror generation.
+- For Markdown navigation changes verify TOC targets/duplicate-heading suffixes and relative links. Do not run the docs generator as a substitute for narrow checks without reviewing its recursion/output behavior.
+- Closeout order is mandatory: add new entry at top of HANDOVER.md (preserve earlier entries) → update BACKLOG.md → update relevant memories through Serena memory operations. Keep session history out of memories.
+- After memory changes run `serena memories check` and inspect output (command always exits zero). Onboarding needs no repeat unless initial setup or deliberate refresh is requested.

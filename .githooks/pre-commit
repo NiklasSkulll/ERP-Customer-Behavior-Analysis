@@ -1,0 +1,17 @@
+#!/bin/sh
+set -eu
+
+blocked=$(git ls-files --cached -- \
+    'src/.notebooks' \
+    'data/data-prd' \
+    'outputs/.exports') || {
+    echo "ERROR: Could not inspect Git's index; commit blocked." >&2
+    exit 1
+}
+
+if [ -n "$blocked" ]; then
+    echo "ERROR: Private production files are staged or tracked:" >&2
+    printf '%s\n' "$blocked" >&2
+    echo "Remove these paths from Git's index before committing." >&2
+    exit 1
+fi

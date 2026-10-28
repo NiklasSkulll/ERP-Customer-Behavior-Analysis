@@ -1,0 +1,7 @@
+# Project conventions
+- Source notebooks in src/notebooks/ are authoritative. src/raw-notebooks/ Python mirrors are read-only navigation aids: agents must never edit, overwrite, regenerate, delete or synchronize them. Report mismatches; defer generation to user.
+- Data boundary and source map: `mem:core`. No saved production outputs may enter docs, memories or chat.
+- Prepared/example tables: UTF-8; comma-separated CSV; decimal period without grouping; English snake_case derived columns; YYYY-MM-DD dates; one header row and observation per subsequent row. Preserve/document original ERP names separately.
+- Existing utilities: argparse CLI, pathlib paths resolved from __file__, main() -> int and SystemExit(main()). Delay third-party imports until argument validation/help handling. Outputs use temporary files before replacement where implemented; preserve these conventions.
+- Follow existing Markdown layout (centered title/badges, manual GitHub-anchor TOCs, relative links); preserve actual path casing. Do not copy stale capitalized example links from setup docs.
+- Keep notes concise. Record only stable non-obvious rules in memories, with `mem:` references in backticks; follow `mem:memory_maintenance`. Mutable status stays in HANDOVER.md/BACKLOG.md.

@@ -1,0 +1,9 @@
+# Project commands (run at repository root)
+- Synchronize recorded dependencies: `uv sync --locked`; add dependencies intentionally with `uv add PACKAGE` or `uv add --dev PACKAGE` (updates pyproject.toml, uv.lock and environment).
+- Data-free script discovery: `uv run --locked python setup/csv_to_parquet.py --help`, `uv run --locked python setup/notebook_to_raw_python.py --help`, `uv run --locked python setup/create_documentation_site.py --help`. Use existing `.venv/bin/python` for checks that should not synchronize anything.
+- Jupyter: `uv run --locked jupyter lab`; choose project interpreter, not Serena's tool environment.
+- Serena index: `serena project index` only after validating exclusions; memory reference audit: `serena memories check`.
+- CSV utility: `setup/csv_to_parquet.py` scans immediate `data/data-example/*.csv` and writes sibling ZSTD Parquet; skips existing output unless --update. Schema docs instead name `data/data-example/raw/`: resolve mismatch without reading data. Never use --prd as an agent or infer examples are synthetic from directory names.
+- Notebook utility (USER-managed only): `setup/notebook_to_raw_python.py --all-files` or `--file RELATIVE.ipynb`; output `src/raw-notebooks/<stem>_mirror.py`, preserving subfolders. Agents may inspect help but never regenerate mirrors.
+- Documentation utility: `uv run --locked python setup/create_documentation_site.py` rebuilds docs/docsite via docs/docsiteTEMP; not executed during onboarding. It recursively discovers Markdown and rewrites links as root-relative, unlike GitHub's document-relative links. Review traversal/exclusions before running.
+- No project-specific pytest/formatter/linter/type-check command is currently configured. Do not invent a passing suite.

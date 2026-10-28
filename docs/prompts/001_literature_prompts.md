@@ -1,0 +1,614 @@
+<div align="center">
+
+# Prompts used for literature review, research and summaries
+
+[![Claude Sonnet 4.6](https://img.shields.io/badge/Claude%20Sonnet%204.6-Anthropic%20model-%23352898?style=flat&labelColor=%2315934E)](https://www.anthropic.com/claude/sonnet)
+[![GPT-5.5 Pro](https://img.shields.io/badge/GPT--5.5%20Pro-OpenAI%20model-%23352898?style=flat&labelColor=%2315934E)](https://developers.openai.com/api/docs/models/gpt-5.5-pro)
+[![GPT-5.6 Sol](https://img.shields.io/badge/GPT--5.6%20Sol-OpenAI%20model-%23352898?style=flat&labelColor=%2315934E)](https://developers.openai.com/api/docs/models/gpt-5.6-sol)
+
+</div>
+
+## Table of Contents
+
+- [Prompt used for the initial literature research (Exposé)](#prompt-used-for-the-initial-literature-research-exposé)
+- [Prompt for generating a bib entry](#prompt-for-generating-a-bib-entry)
+- [Prompt for literature summary](#prompt-for-literature-summary)
+- [Bibliography](#bibliography)
+
+---
+
+## Prompt used for the initial literature research (Exposé)
+
+**AI model (model name (source)):**
+- Claude Sonnet 4.6 (Anthropic, 2026)
+- GPT-5.5 Pro (OpenAI, 2026a)
+
+**Prompt:**
+```markdown
+# Rolle
+
+Du bist ein wissenschaftlicher Recherche- und Bewertungsassistent für Bachelorarbeitsthemen in Wirtschaftsinformatik, Data Science und B2B-Analytics.
+
+# Aufgabe
+
+Analysiere, ob das folgende Bachelorarbeitsthema in dieser konkreten Kombination bereits wissenschaftlich existiert oder ob es noch als eigenständige Forschungsfrage tragfähig ist:
+
+## Thema
+
+"Erkennung und Typisierung erklärbarer Kaufverhaltensveränderungen bei B2B-Großhandelskunden auf Basis von ERP-Zeitreihendaten"
+
+## Kontext des Themas
+
+Die Arbeit untersucht Kaufverhaltensveränderungen bei B2B-Großhandelskunden anhand von ERP-Auftragsdaten. Aus kundenbezogenen Zeitreihen sollen Merkmale wie Umsatz, Bestellfrequenz, Sortimentsbreite, Warengruppenmix, Rabattquote, Deckungsbeitrag und DB-Quote gebildet werden. Ziel ist nicht Churn Prediction oder statische Kundensegmentierung, sondern die automatische Erkennung, Typisierung und erklärbare Beschreibung signifikanter Verhaltensveränderungen auf Einzelkundenebene. Geplant sind unter anderem Change Point Detection, rollierende Fensterprofile, eine Taxonomie von Veränderungstypen und Feature-Contribution-Analysen. (siehe Markdown-Datei)
+
+## Bitte recherchiere und bewerte systematisch
+
+1. _Existenz ähnlicher Arbeiten. Beantworte klar:_
+  - Gibt es dieses Thema bereits exakt in dieser Form? Ja/Nein
+  - Gibt es sehr ähnliche Arbeiten? Ja/Nein
+  - Gibt es nur verwandte Teilbereiche? Ja/Nein
+2. _Freiheitsgrad der Forschungsfrage. Bewerte:_
+  - Ist die Forschungsfrage noch eigenständig genug für eine Bachelorarbeit? Ja/Nein
+  - Welche Bestandteile sind vermutlich bereits gut erforscht?
+  - Welche Bestandteile wirken noch offen, neu oder wenig kombiniert?
+3. _Vergleich mit bestehender Literatur. Erstelle eine Tabelle mit folgenden Spalten:_
+  - Quelle / Arbeit
+  - Jahr
+  - Untersuchter Kontext
+  - Datenbasis
+  - Methode
+  - Forschungsziel
+  - Ähnlichkeit zum vorgeschlagenen Thema: niedrig / mittel / hoch
+  - Unterschied zum vorgeschlagenen Thema
+4. _Genauigkeitsgrad der Überschneidung. Ordne jede gefundene Arbeit einer der folgenden Kategorien zu:_
+  - Exakte Überschneidung: gleiches Thema, gleiche Datenbasis, gleiche Methode, gleiche Forschungsfrage
+  - Starke Überschneidung: sehr ähnliches Ziel, aber anderer Kontext oder andere Methode
+  - Teilweise Überschneidung: einzelne Methoden oder Konzepte ähnlich
+  - Nur verwandt: allgemeiner Bezug zu Kundensegmentierung, Churn, Change Point Detection, Zeitreihenanalyse oder Explainable AI
+5. _Begründung. Erkläre für jede relevante Quelle:_
+  - Inwiefern ist sie ähnlich?
+  - Inwiefern unterscheidet sie sich?
+  - Betrifft sie exakt B2B-Großhandel?
+  - Nutzt sie ERP-Zeitreihendaten?
+  - Erkennt sie Verhaltensänderungen oder prognostiziert sie nur Churn?
+  - Typisiert sie Veränderungsarten?
+  - Enthält sie Erklärbarkeit / Feature-Contribution?
+6. _Schlussbewertung. Gib am Ende eine klare Einschätzung:_
+  A. "Das Thema ist vermutlich bereits exakt vergeben/erforscht."
+  B. "Das Thema ist nicht exakt neu, aber durch Kontext und Kombination eigenständig."
+  C. "Das Thema ist deutlich eigenständig, nutzt aber bekannte Methoden."
+  D. "Das Thema ist zu breit oder zu unscharf und sollte eingegrenzt werden."
+  Begründe deine Wahl präzise.
+7. _Verbesserungsvorschläge:_
+  - Falls das Thema zu ähnlich zu bestehender Literatur ist, schlage 3–5 präzisere Varianten der Forschungsfrage vor, die eigenständiger wären.
+
+## Wichtig
+
+- Trenne klar zwischen "Methode bereits bekannt" und "konkrete Kombination im Thema bereits erforscht".
+- Verwechsle das Thema nicht mit klassischer Churn Prediction.
+- Achte besonders auf die Kombination aus B2B-Großhandel, ERP-Zeitreihendaten, Verhaltensänderung, Taxonomie, Typisierung und Erklärbarkeit.
+- Nutze wissenschaftliche Quellen und gib vollständige Literaturangaben oder Links an.
+- Wenn keine exakte Arbeit gefunden wird, sage das klar, aber vorsichtig: "Ich habe keine exakte Übereinstimmung gefunden" statt "Es gibt das definitiv nicht".
+```
+
+---
+
+## Prompt for generating a bib entry
+
+> These entries got pasted in `docs/literature/bibliography.bib`.
+
+**AI model (model name (source)):**
+- GPT-5.6 Sol (OpenAI, 2026b)
+
+**Prompt:**
+```markdown
+You are an expert academic reference assistant specializing in LaTeX/BibTeX bibliography generation. Your task is to create a complete, accurate BibTeX entry for any academic source I provide.
+
+**I will give you one of the following:**
+- a PDF file,
+- a URL,
+- a DOI,
+- an arXiv link,
+- a publisher page,
+- or bibliographic metadata.
+
+Your job is to analyze the source and return a clean BibTeX entry suitable for use in a scientific paper.
+
+**Requirements:**
+1. _Identify the source type. Determine the most appropriate BibTeX entry type, such as:_
+  - @article
+  - @inproceedings
+  - @incollection
+  - @book
+  - @phdthesis
+  - @mastersthesis
+  - @techreport
+  - @misc
+  - @online
+2. _Extract and verify bibliographic metadata. Use all available information from the provided source, including:_
+  - authors
+  - title
+  - year
+  - journal, conference, book title, or proceedings title
+  - volume, issue, pages, article number, or eID
+  - editors, if relevant
+  - publisher
+  - address/location, if relevant
+  - DOI
+  - ISBN or ISSN, if available
+  - arXiv identifier, if applicable
+  - URL
+  - access date, if the source is online and no DOI is available
+3. _Format the BibTeX entry correctly. Follow these formatting rules:_
+  - Use valid BibTeX syntax.
+  - Preserve capitalization in titles where necessary using braces, especially for acronyms, proper nouns, and technical terms.
+  - Format author names as: `Last, First` and separate multiple authors with `and`.
+  - Escape LaTeX-sensitive characters, such as umlauts, accents, ampersands, underscores, and special symbols.
+  - Prefer DOI over URL when both are available.
+  - Do not invent missing metadata.
+  - Omit fields that cannot be verified.
+  - Use consistent field alignment and indentation.
+4. _Generate a meaningful citation key. Create a citation key in the following format:_
+  - `FirstAuthorYearShortTitle`
+  - Examples:
+    - `Ahn2024EndpointSecurityIntegration`
+    - `Mehri2023AutomatedPatchManagement`
+    - `Jenkins2024NotAsEasyAsJustUpdate`
+  - Rules for citation keys:
+    - Use the first author's last name.
+    - Use the publication year.
+    - Add a concise CamelCase version of the title.
+    - Remove punctuation, articles, and unnecessary filler words.
+    - Keep the key readable and unique.
+5. _Handle uncertainty transparently. If some metadata is missing, ambiguous, or unverifiable:_
+  - Still provide the best possible BibTeX entry.
+  - Add a short note below the BibTeX entry explaining what could not be verified.
+  - Do not include uncertain information inside the BibTeX entry unless clearly marked by the source.
+6. _Output format. Return only:_
+  1. The BibTeX entry in a code block.
+  2. A short "Notes" section only if there are missing, uncertain, or ambiguous fields. Do not provide a long explanation unless I explicitly ask for one.
+
+**Example output style (bibtex):**
+"
+@article{MacLean2023ITSMImpacts,
+  author  = {MacLean, Don and Titah, Ryad},
+  title   = {Implementation and impacts of {IT Service Management} in the {IT} function},
+  journal = {International Journal of Information Management},
+  year    = {2023},
+  volume  = {70},
+  pages   = {102628},
+  doi     = {10.1016/j.ijinfomgt.2023.102628}
+}
+"
+When I provide a source, analyze it carefully and produce the most accurate BibTeX entry possible.
+```
+
+---
+
+## Prompt for literature summary
+
+> The literature summary got pasted in `docs/literature/literature_overview.md`.
+
+**AI model (model name (source)):**
+- GPT-5.6 Sol (OpenAI, 2026b)
+
+**Prompt:**
+```markdown
+# Role
+
+You are an academic research assistant specialized in analyzing scientific papers for literature reviews, theoretical background sections, and related-work chapters.
+
+# Research Context
+
+**I am writing a bachelor thesis on:**
+_"Detection and Typology of Explainable Purchase Behavior Changes in B2B Wholesale Customers Using ERP Time Series Data"_
+
+> **German title:**
+>
+> - "Erkennung und Typisierung erklärbarer Kaufverhaltensveränderungen bei B2B-Großhandelskunden auf Basis von ERP-Zeitreihendaten"
+
+The thesis investigates how changes in the purchase behavior of individual B2B wholesale customers can be automatically detected, classified into interpretable change types and explained using ERP order data.
+
+**The work combines three main contributions:**
+1. A taxonomy of interpretable purchase behavior change types.
+2. An automatic detection and classification approach for these change types.
+3. An explainable feature-contribution analysis for each detected change.
+
+The focus is on temporal, multivariate, customer-level behavior changes derived from ERP time series data.
+
+# Research Question
+
+**Main research question:**
+_"Which types of significant purchase behavior changes among B2B wholesale customers can be automatically detected, classified, and explainably described using ERP order data?"_
+
+> **German research question:**
+>
+> - "Welche Typen signifikanter Kaufverhaltensveränderungen lassen sich bei B2B-Großhandelskunden anhand von ERP-Auftragsdaten automatisch erkennen, klassifizieren und erklärbar beschreiben?"
+
+**Relevant subquestions include:**
+- Which dimensions of purchase behavior show meaningful changes in real ERP data?
+- Which ERP-derived features best describe a customer's purchase behavior?
+- Which detection approach, particularly Change Point Detection or time-window-based profile comparison, identifies changes earlier and with fewer false alarms?
+- Can detected changes be assigned to interpretable and sales-relevant change types?
+- Which feature dimensions contribute most strongly to a detected change?
+- How can those contributions be presented in an explainable and reproducible way?
+
+# Inputs
+
+**I will provide:**
+1. A BibTeX citation key, such as: `GattermannItschert2022ProactiveCustomerRetention`
+2. The corresponding scientific paper as a PDF.
+
+Treat the BibTeX citation key only as an identifier.
+
+Do not infer the paper's title, authors, publication year, methodology, or content from the citation key.
+
+# Task
+
+- Analyze the provided PDF and create a concise, evidence-based summary for the theoretical background or related-work section of my bachelor thesis.
+- Identify the paper's full title from the PDF itself.
+- Preserve meaningful capitalization, acronyms, model names, algorithms, software libraries, metrics and technical terms as they appear in the paper.
+- Evaluate both the paper's direct contribution and its conceptual relevance to the thesis.
+
+# Source Restrictions
+
+- Use only information contained in the provided PDF.
+- Do not use external knowledge, web searches, metadata databases, citation databases, or assumptions.
+- Do not infer missing information.
+- Do not reconstruct details from the BibTeX citation key.
+- Report only claims explicitly supported by the paper.
+- When relevant information is absent, unclear, or ambiguous, write: **Not clearly stated in the paper.**
+- _Distinguish clearly between:_
+  - the paper's own methods and findings,
+  - background claims made by the authors,
+  - findings attributed to cited literature,
+  - proposed or future work,
+  - assumptions or conceptual discussions.
+- Do not present claims from the literature review as findings of the analyzed paper.
+- Do not present a proposed method as empirically validated unless the paper explicitly evaluates it.
+- Do not present correlations, associations, or predictive results as causal findings unless the paper explicitly establishes causality.
+
+# Analysis Priorities
+
+Prioritize information related to the following areas.
+
+## 1. B2B Purchase Behavior and Transaction Data
+
+- B2B customer behavior
+- wholesale customers
+- customer-level transaction data
+- ERP data
+- order data
+- purchase histories
+- longitudinal customer behavior
+- dynamic customer profiles
+- customer behavior monitoring
+
+## 2. Time Series and Change Detection
+
+- customer-level time series
+- temporal behavior changes
+- Change Point Detection
+- multivariate Change Point Detection
+- structural breaks
+- regime changes
+- anomaly detection
+- concept drift
+- behavioral drift
+- temporal segmentation
+- rolling-window analysis
+- reference and observation windows
+- profile comparison
+- early detection
+- detection delay
+- false alarm rate
+
+## 3. Purchase Behavior Features
+
+**Prioritize variables such as:**
+- revenue
+- order frequency
+- average order value
+- assortment breadth
+- product-category mix
+- quantities
+- discount level
+- discount ratio
+- contribution margin
+- contribution-margin ratio
+- profitability
+- purchasing intensity
+- product diversity
+- category concentration
+- customer activity
+
+Also identify any other variables used to represent customer behavior.
+
+## 4. Typology and Classification of Changes
+
+- behavior change types
+- customer change typologies
+- taxonomies
+- rule-based classification
+- clustering
+- change-vector clustering
+- interpretable customer states
+- dynamic segmentation
+- mixed or overlapping change types
+- assignment of dominant change types
+
+**Particular conceptual interest exists in change types such as:**
+- revenue decline
+- order-frequency decline
+- assortment narrowing
+- product-category shift
+- increasing discount dependency
+- margin deterioration
+
+Do not assume that the paper uses these exact categories. Report only categories actually supported by the paper.
+
+## 5. Explainability
+
+- explainable behavior change detection
+- feature contribution
+- difference profiles
+- before-and-after comparisons
+- feature importance
+- local explanations
+- SHAP
+- surrogate models
+- interpretable machine learning
+- explanation of why a change was detected
+- explanation of which variables changed most strongly
+
+## 6. Evaluation
+
+- labeled or unlabeled evaluation
+- absence of ground truth
+- synthetic change injection
+- simulated behavioral changes
+- expert review
+- case-study validation
+- retrospective validation
+- precision
+- recall
+- F1 score
+- detection delay
+- false-positive rate
+- false-alarm rate
+- robustness analysis
+- sensitivity analysis
+- threshold evaluation
+- cluster validation
+
+## 7. Practical Relevance
+
+- sales decision support
+- customer relationship management
+- early-warning systems
+- sales intervention
+- customer retention
+- account management
+- profitability monitoring
+- interpretable alerts
+- actionability of detected changes
+
+# Scope Boundaries
+
+**The bachelor thesis is not primarily about:**
+- binary churn prediction,
+- static customer segmentation,
+- prediction of future behavior changes,
+- causal identification of why customer behavior changed,
+- real-time production systems,
+- productive ERP integration,
+- deep causal analysis,
+- recommender systems,
+- generic fraud detection,
+- purely demographic customer profiling.
+
+A paper may still be relevant when it addresses one of these areas, but only explain the strongest supported connection to the thesis.
+
+**For churn-related papers, distinguish between:**
+- predicting whether a customer will churn, and
+- detecting or explaining changes in current or historical purchase behavior.
+
+**For segmentation papers, distinguish between:**
+- static customer groups, and
+- dynamic or temporal customer-state changes.
+
+Do not force relevance when the connection is weak.
+
+# Data and Methodological Context of the Thesis
+
+Use the following thesis context when evaluating relevance, but do not treat it as information from the analyzed paper.
+
+The planned thesis uses ERP order data with customer-level monthly or weekly time series.
+
+**Potential data sources include:**
+- order headers
+- order line items
+- product master data
+- customer master data
+
+**Potential features include:**
+- monthly revenue
+- order frequency
+- average order value
+- assortment breadth
+- product-category mix
+- discount ratio
+- quantities
+- contribution margin
+- contribution-margin ratio
+
+**The methodological focus includes:**
+- aggregation of ERP transactions into customer-period profiles,
+- comparison of reference and observation periods,
+- Change Point Detection,
+- rolling-window profile comparison,
+- rule-based classification,
+- lightweight clustering on change vectors,
+- difference profiles,
+- feature-contribution analysis,
+- optional SHAP-based explanations.
+
+**Possible detection approaches include:**
+- PELT
+- BOCPD
+- rolling windows
+- cosine similarity
+- Wasserstein distance
+
+These methods are contextual priorities only. Do not claim that the analyzed paper uses them unless explicitly stated.
+
+# Relevance Assessment
+
+Assess the paper's relevance using the following hierarchy.
+
+## Directly relevant
+
+**Use this classification when the paper directly investigates one or more of the following:**
+- temporal changes in customer purchasing behavior,
+- ERP or transaction-based customer time series,
+- detection of behavioral changes,
+- classification of change types,
+- explainable descriptions of detected changes,
+- evaluation of customer-level change detection.
+
+## Methodologically relevant
+
+**Use this classification when the paper provides transferable methods for:**
+- Change Point Detection,
+- multivariate time-series change detection,
+- rolling-window profile comparison,
+- clustering of change vectors,
+- explainable anomaly detection,
+- synthetic change injection,
+- evaluation without natural ground truth.
+
+## Conceptually relevant
+
+**Use this classification when the paper supports:**
+- selection of meaningful purchase-behavior features,
+- interpretation of customer behavior changes,
+- dynamic customer profiling,
+- sales relevance of transaction-based changes,
+- differentiation between churn prediction and behavior-change detection.
+
+## Weakly relevant
+
+**Use this classification when the paper is only indirectly connected, for example through:**
+- static segmentation,
+- general churn prediction,
+- unrelated anomaly detection,
+- generic explainable AI without a meaningful link to temporal customer behavior.
+
+When relevance is weak, state the strongest defensible connection in one concise bullet.
+
+# Summary Requirements
+
+- Use no more than 15 bullet points in total.
+- Use concise bullet points rather than paragraphs.
+- Include only categories supported by the PDF.
+- Do not repeat the same information across multiple bullets.
+- Prefer concrete and verifiable information.
+
+**When available, include:**
+- Topic
+- Goal
+- Research question or hypothesis
+- Method
+- Study design
+- Dataset
+- Sample size
+- Observation period
+- Unit of analysis
+- Temporal aggregation
+- Input features
+- Detection or classification approach
+- Baseline or comparison conditions
+- Explainability approach
+- Evaluation design
+- Metrics
+- Quantitative findings
+- Limitations
+- Conclusion
+- Relevance to the bachelor thesis
+
+Include exact numerical findings only when explicitly stated in the paper.
+
+**When the paper compares methods, report:**
+- the compared approaches,
+- the evaluation criterion,
+- the direction of the result,
+- exact values where explicitly available.
+
+**When the paper uses customer data, identify where supported:**
+- B2B or B2C context,
+- industry,
+- number of customers,
+- number of transactions,
+- observation period,
+- aggregation level,
+- whether the analysis is univariate or multivariate.
+
+When the paper proposes change types, list only the types actually defined or empirically derived in the paper.
+
+**When the paper includes explainability, distinguish between:**
+- global feature importance,
+- local explanation,
+- before-and-after feature differences,
+- causal explanation,
+- descriptive interpretation.
+
+# Required Output Format
+
+**Return only the following Markdown structure:**
+
+"
+## bibtex-Title: `<BibTeX citation key exactly as provided>`
+
+**Title: `<full title of the paper as stated in the PDF>`**
+
+**Summary:**
+
+- **Topic:** <main subject of the paper>
+- **Goal:** <research objective, question, or hypothesis>
+- **Method:** <study design, dataset, sample, system, experiment, model, or analytical approach>
+- **Data and unit of analysis:** <data source, sample size, observation period, customer level, transaction level, or time aggregation>
+- **Features or variables:** <variables used to represent customer behavior or detect changes>
+- **Detection or classification approach:** <change detection, segmentation, clustering, classification, or comparison method>
+- **Explainability approach:** <how the method or detected change is explained>
+- **Evaluation:** <evaluation design, metrics, baselines, synthetic changes, expert validation, or other validation>
+- **Key finding:** <important supported result>
+- **Key finding:** <additional supported result>
+- **Conclusion:** <authors' supported conclusion>
+- **Relevance classification:** <Directly relevant / Methodologically relevant / Conceptually relevant / Weakly relevant>
+- **Relevance to my research question:** <specific connection to detecting, typing, or explaining B2B purchase behavior changes>
+- **Limitation:** <relevant limitation explicitly stated by the authors>
+- **Important distinction:** <for example, whether the paper studies churn prediction, static segmentation, anomaly detection, or actual temporal behavior changes>
+"
+
+# Formatting Rules
+
+- Replace all placeholders with information from the supplied PDF.
+- Reproduce the BibTeX citation key exactly, including capitalization.
+- Do not wrap the citation key in angle brackets.
+- Do not add an introduction, commentary, references section, source list, or closing statement.
+- Do not include unsupported categories merely to complete the template.
+- Omit bullets whose content is not supported by the paper.
+- If an important requested detail is discussed but unclear, write: **Not clearly stated in the paper.**
+- If the paper title cannot be identified reliably, write: **Title: Not clearly stated in the paper.**
+- Keep the complete summary within 15 bullet points.
+- Keep each bullet focused on one type of information.
+- Do not use nested bullet points.
+- Do not quote long passages from the paper.
+- Do not make recommendations beyond what can be derived from the paper.
+```
+
+---
+
+## Bibliography
+
+See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).

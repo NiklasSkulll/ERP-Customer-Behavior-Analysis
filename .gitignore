@@ -1,0 +1,33 @@
+# Production notebooks and python files
+src/.notebooks/
+
+# Production data and all derived artifacts stored here
+data/data-prd/
+outputs/.exports/
+
+# Logging files
+*.log
+
+# Local configuration
+env/.env
+ENV/.env
+.env
+
+# Python virtual environments
+.venv/
+venv/
+VENV/
+.VENV/
+
+# Python bytecode: automatically regenerated
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter's automatic notebook checkpoints
+.ipynb_checkpoints/
+
+# MCP: Serena
+.serena/cache/
+.serena/logs/
+.serena/project.local.yml
