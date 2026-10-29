@@ -13,12 +13,15 @@
     <main>
         <h1 id="project-conventions">Project conventions</h1>
 <ul>
-<li>Source notebooks in src/notebooks/ are authoritative. src/raw-notebooks/ Python mirrors are read-only navigation aids: agents must never edit, overwrite, regenerate, delete or synchronize them. Report mismatches; defer generation to user.</li>
-<li>Data boundary and source map: <code>mem:core</code>. No saved production outputs may enter docs, memories or chat.</li>
-<li>Prepared/example tables: UTF-8; comma-separated CSV; decimal period without grouping; English snake_case derived columns; YYYY-MM-DD dates; one header row and observation per subsequent row. Preserve/document original ERP names separately.</li>
-<li>Existing utilities: argparse CLI, pathlib paths resolved from <strong>file</strong>, main() -&gt; int and SystemExit(main()). Delay third-party imports until argument validation/help handling. Outputs use temporary files before replacement where implemented; preserve these conventions.</li>
-<li>Follow existing Markdown layout (centered title/badges, manual GitHub-anchor TOCs, relative links); preserve actual path casing. Do not copy stale capitalized example links from setup docs.</li>
-<li>Keep notes concise. Record only stable non-obvious rules in memories, with <code>mem:</code> references in backticks; follow <code>mem:memory_maintenance</code>. Mutable status stays in HANDOVER.md/BACKLOG.md.</li>
+<li>Source notebooks in src/notebooks/ are authoritative. src/raw-notebooks/ mirrors are read-only navigation aids: agents must not edit, overwrite, regenerate, delete or synchronize them. Report mismatches; user manages export.</li>
+<li>Public notebooks explicitly use from config.example import CONFIG. Only private copies use from config.production import CONFIG; keep production work in a separate kernel. Analysis code reads CONFIG.data_dir and writes intermediates there or artifacts under CONFIG.output_dir.</li>
+<li>Example roots: data/data-example/ and outputs/exports/. Production roots: data/data-prd/ and outputs/.exports/. Config imports are immutable, perform no data reads/directory creation, and do not enforce notebook location or filesystem containment. Create needed output subdirectories explicitly.</li>
+<li>The .githooks/pre-commit guard checks Git's index for private paths, not notebook contents; it cannot detect production results embedded in a public tracked notebook. Production boundaries: <code>mem:core</code>.</li>
+<li>Prepared tables: UTF-8, comma-separated CSV, decimal period without grouping, English snake_case derived columns, YYYY-MM-DD dates, one header row and observation per row. Preserve/document original ERP field names separately.</li>
+<li>Utilities follow argparse + pathlib rooted at <strong>file</strong>, main() -&gt; int and SystemExit(main()). Delay third-party imports until argument/help handling. Preserve temporary-write/replace behavior where implemented.</li>
+<li>Markdown uses centered title/badge wrappers, manual GitHub-anchor TOCs and case-correct relative links. Preserve source Markdown; HTML header rendering is handled by the converter's preprocessor, after fenced-code stashing and before raw-HTML handling. Explicit markdown attributes and code examples stay untouched.</li>
+<li>Documentation styling belongs in setup/create_documentation_site.py's SITE_CSS; docs/docsite/ is generated. Use its compact CSS variables/dark palette, green .highlight, grouped root-first index and .back-link navigation; avoid new UI dependencies for small visual changes.</li>
+<li>Keep memories dense and durable with backticked mem: references; session history and task status belong in HANDOVER.md/BACKLOG.md under the default workflow, subject to explicit user overrides.</li>
 </ul>
     </main>
 </body>

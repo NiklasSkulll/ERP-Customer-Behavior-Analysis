@@ -11,14 +11,18 @@
         <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
-        <h1 id="verification-and-closeout">Verification and closeout</h1>
+        <h1 id="safe-verification-and-closeout">Safe verification and closeout</h1>
 <ul>
-<li>Follow AGENTS.md startup: AGENTS.md → complete newest HANDOVER.md entry → BACKLOG.md → relevant memories. Use project interpreter for execution; first ensure code requires no data or only explicitly fully synthetic fixtures.</li>
-<li>Minimal data-free utility checks: <code>.venv/bin/python setup/csv_to_parquet.py --help</code>; <code>.venv/bin/python setup/notebook_to_raw_python.py --help</code>; <code>.venv/bin/python setup/create_documentation_site.py --help</code>. All passed at onboarding; AST parsing of setup/*.py and imports duckdb/markdown/nbconvert also passed.</li>
-<li>No declared automated test/lint/type-check suite; no notebooks or full analysis to execute. Help/import/syntax checks do not establish conversion or analysis correctness. Add/run meaningful synthetic checks appropriate to future code changes; avoid production data and mirror generation.</li>
-<li>For Markdown navigation changes verify TOC targets/duplicate-heading suffixes and relative links. Do not run the docs generator as a substitute for narrow checks without reviewing its recursion/output behavior.</li>
-<li>Closeout order is mandatory: add new entry at top of HANDOVER.md (preserve earlier entries) → update BACKLOG.md → update relevant memories through Serena memory operations. Keep session history out of memories.</li>
-<li>After memory changes run <code>serena memories check</code> and inspect output (command always exits zero). Onboarding needs no repeat unless initial setup or deliberate refresh is requested.</li>
+<li>Follow AGENTS.md's default workflow unless the user explicitly overrides it. Use project .venv/bin/python for Python execution. Confirm that execution requires no data or only explicitly fully synthetic fixtures; never use production inputs or regenerate mirrors.</li>
+<li>Python syntax checks: ast.parse on setup/<em>.py and src/config/</em>.py using .venv/bin/python -B; avoid compiling notebook mirrors. Bash syntax: bash -n setup/initial_setup.sh.</li>
+<li>Data-free utility checks: .venv/bin/python -B setup/csv_to_parquet.py --help; .venv/bin/python -B setup/notebook_to_raw_python.py --help; .venv/bin/python -B setup/create_documentation_site.py --help. Setup status: bash setup/initial_setup.sh --check. Lock consistency: uv --no-cache lock --check --offline.</li>
+<li>Check config import from an unrelated working directory with repository src explicitly on PYTHONPATH; example selection must remain independent of production environment variables. Importing production config is not a production execution test.</li>
+<li>No committed automated test/lint/type-check suite is configured. Use targeted data-free or isolated synthetic checks appropriate to a change; do not claim a project-wide test suite passed or run notebook/analysis execution by default.</li>
+<li>Bootstrap tests must isolate HOME/Git config and network/package-manager calls in disposable repositories. Do not install tools, pull LFS, chmod tracked hooks or reconfigure the user's checkout just to test bootstrap behavior.</li>
+<li>For converter changes, copy the script into a temporary synthetic repository; test centered headers, badges/link conversion, preserved code examples, index grouping/count and generated CSS/navigation as relevant. Avoid real-checkout builds due to the traversal issue recorded in <code>mem:suggested_commands</code>.</li>
+<li>For documentation changes verify source-relative links, anchors and actual command behavior. Run git diff --check on authored changes; preserve unrelated user edits and staged state.</li>
+<li>Default closeout: HANDOVER.md entry → BACKLOG.md update → relevant Serena memory operations; explicit user instructions override this. Store no session history in memories. Use onboarding only for initial setup or a deliberate refresh.</li>
+<li>After memory writes run serena memories check and inspect its report (the command can exit zero despite reported issues). Also verify the intended repository's memory files changed.</li>
 </ul>
     </main>
 </body>

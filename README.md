@@ -9,6 +9,8 @@
 
 Detection, typology and explainable description of purchasing changes in B2B wholesale customers using ERP time series data.
 
+**Open documentation website:** [https://niklasskulll.github.io/ERP-Customer-Behavior-Analysis/docsite/](https://niklasskulll.github.io/ERP-Customer-Behavior-Analysis/docsite/)
+
 </div>
 
 ## Table of Contents

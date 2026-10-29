@@ -13,13 +13,14 @@
     <main>
         <h1 id="project-source-map-and-invariants">Project source map and invariants</h1>
 <ul>
-<li>Research project: retrospective detection, typing and explanation of B2B wholesale purchasing changes from ERP time series; not a deployed application.</li>
-<li>Methodology: <code>docs/framework/fuuckae_framework.md</code>; research scope/questions: <code>docs/project/complete_project_plan.md</code> (German); schema only: <code>docs/project/data_description.md</code>; literature and prompt evidence: <code>docs/literature/</code>, <code>docs/prompts/</code>.</li>
-<li>Workflow: Frame → Understand → Unify → Compare candidate events → develop taxonomy → Apply/explain → Evaluate. Candidate detection is separate from final type assignment; distinguish development and evaluation evidence, and observed changes from causal claims.</li>
-<li>Executable utilities live in <code>setup/</code>, not <code>scripts/</code>. No analysis notebooks/pipeline exist at onboarding; public notebook/mirror folders contain placeholders.</li>
-<li>Never inspect, search, execute against, or modify <code>data/data-prd/</code>, <code>src/.notebooks/</code>, <code>outputs/.exports/</code>, or production-derived information elsewhere. Use only explicitly fully synthetic inputs or data-free operations; pseudonymized records are not synthetic.</li>
-<li>Session history/tasks belong in HANDOVER.md/BACKLOG.md, not memories. Follow AGENTS.md startup and closeout order.</li>
-<li>Environment and kernel details: <code>mem:tech_stack</code>; utility entrypoints and path traps: <code>mem:suggested_commands</code>; notebook/data/script rules: <code>mem:conventions</code>; verification and session closeout: <code>mem:task_completion</code>.</li>
+<li>Bachelor's thesis: retrospective detection, typing and explanation of B2B wholesale purchasing changes from ERP time series; research repository, not a deployed application.</li>
+<li>Methodology: docs/framework/fuuckae_framework.md; scope/questions: docs/project/complete_project_plan.md (German); data-free schema: docs/project/data_description.md; evidence: docs/literature/ and docs/prompts/.</li>
+<li>Workflow: Frame → Understand → Unify → Compare candidate events → Knowledge synthesis/taxonomy → Apply/explain → Evaluate. Separate candidate detection from final type assignment, development from evaluation evidence, and observed changes from causal claims.</li>
+<li>Executable utilities live in setup/, not scripts/. Public notebook/mirror directories currently contain .gitkeep placeholders; no end-to-end analysis pipeline is present.</li>
+<li>Two-PC workflow: develop public source notebooks on synthetic inputs; user copies to ignored src/.notebooks/ on the production PC and changes only the explicit configuration import. Both src/config profiles are tracked generic paths, not datasets.</li>
+<li>Never inspect, search, execute against or modify data/data-prd/, src/.notebooks/, outputs/.exports/, or production-derived content elsewhere. Directory names do not establish that example data is synthetic; pseudonymized records are not synthetic.</li>
+<li>Markdown sources are authoritative; docs/docsite/ contains generated HTML, including copies of memories/session documents that can be stale.</li>
+<li>Environment, notebook import setup and Serena connection details: <code>mem:tech_stack</code>. Bootstrap, utilities and path/traversal traps: <code>mem:suggested_commands</code>. Config/notebook/data/style rules: <code>mem:conventions</code>. Safe verification and closeout: <code>mem:task_completion</code>. Memory graph and maintenance policy: <code>mem:memory_maintenance</code>.</li>
 </ul>
     </main>
 </body>
