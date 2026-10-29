@@ -2,10 +2,10 @@
 
 # ERP-Customer-Behavior-Analysis
 
-[![Python](https://img.shields.io/badge/Python-3.12-%231D9FD7?style=flat&logo=python&logoColor=%231D9FD7&labelColor=%23082A2E)](pyproject.toml)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-%23F37626?style=flat&logo=jupyter&logoColor=%23F37626&labelColor=%23082A2E)](src/notebooks)
-[![uv](https://img.shields.io/badge/uv-Environment%20Manager-%23DE5FE9?style=flat&logo=uv&logoColor=%23DE5FE9&labelColor=%23082A2E)](uv.lock)
-[![AI Disclosure](https://img.shields.io/badge/AI-Vibe%20Coding-%237F7F7F?style=flat&labelColor=%23082A2E)](AI_TOOL_DISCLOSURE.md)
+[![Python](https://img.shields.io/badge/Python-3.12-%231D9FD7?style=flat&logo=python&logoColor=%231D9FD7&labelColor=%2330363D)](pyproject.toml)
+[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-%23F37626?style=flat&logo=jupyter&logoColor=%23F37626&labelColor=%2330363D)](src/notebooks)
+[![uv](https://img.shields.io/badge/uv-Environment%20Manager-%23DE5FE9?style=flat&logo=uv&logoColor=%23DE5FE9&labelColor=%2330363D)](uv.lock)
+[![AI Disclosure](https://img.shields.io/badge/AI-Vibe%20Coding-%236E7681?style=flat&labelColor=%2330363D)](AI_TOOL_DISCLOSURE.md)
 
 Detection, typology and explainable description of purchasing changes in B2B wholesale customers using ERP time series data.
 

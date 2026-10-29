@@ -7,23 +7,18 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav aria-label="Site navigation">
-        <a href="../index.html">Documentation overview</a>
+    <nav class="page-nav" aria-label="Site navigation">
+        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
-
-# ERP-Customer-Behavior-Analysis
-
-[![Python](https://img.shields.io/badge/Python-3.12-%231D9FD7?style=flat&logo=python&logoColor=%231D9FD7&labelColor=%23082A2E)](pyproject.toml)
-[![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-%23F37626?style=flat&logo=jupyter&logoColor=%23F37626&labelColor=%23082A2E)](src/notebooks)
-[![uv](https://img.shields.io/badge/uv-Environment%20Manager-%23DE5FE9?style=flat&logo=uv&logoColor=%23DE5FE9&labelColor=%23082A2E)](uv.lock)
-[![AI Disclosure](https://img.shields.io/badge/AI-Vibe%20Coding-%237F7F7F?style=flat&labelColor=%23082A2E)](AI_TOOL_DISCLOSURE.md)
-
-Detection, typology and explainable description of purchasing changes in B2B wholesale customers using ERP time series data.
-
+<h1 id="erp-customer-behavior-analysis">ERP-Customer-Behavior-Analysis</h1>
+<p><a href="../../../pyproject.toml"><img alt="Python" src="https://img.shields.io/badge/Python-3.12-%231D9FD7?style=flat&amp;logo=python&amp;logoColor=%231D9FD7&amp;labelColor=%2330363D" /></a>
+<a href="../../../src/notebooks"><img alt="Jupyter" src="https://img.shields.io/badge/Jupyter-Notebook-%23F37626?style=flat&amp;logo=jupyter&amp;logoColor=%23F37626&amp;labelColor=%2330363D" /></a>
+<a href="../../../uv.lock"><img alt="uv" src="https://img.shields.io/badge/uv-Environment%20Manager-%23DE5FE9?style=flat&amp;logo=uv&amp;logoColor=%23DE5FE9&amp;labelColor=%2330363D" /></a>
+<a href="AI_TOOL_DISCLOSURE.html"><img alt="AI Disclosure" src="https://img.shields.io/badge/AI-Vibe%20Coding-%236E7681?style=flat&amp;labelColor=%2330363D" /></a></p>
+<p>Detection, typology and explainable description of purchasing changes in B2B wholesale customers using ERP time series data.</p>
 </div>
-
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#overview">Overview</a></li>
@@ -46,7 +41,7 @@ Detection, typology and explainable description of purchasing changes in B2B who
 <hr />
 <h2 id="project-status">Project status</h2>
 <p><strong>Early research and setup stage.</strong> The repository contains the seven-phase framework, project planning, literature notes, prompt records, and utility scripts. The public notebook directories currently contain placeholders; an end-to-end analysis pipeline and evaluation results are not yet included.</p>
-<p><code>pyproject.toml</code> and <code>uv.lock</code> are currently empty placeholders. A reproducible dependency environment still needs to be configured before the analysis can be run.</p>
+<p>Python dependencies and Jupyter tools are declared in <a href="../../../pyproject.toml">pyproject.toml</a> and resolved in <a href="../../../uv.lock">uv.lock</a>. The <a href="../../../setup/initial_setup.sh">contributor setup script</a> prepares the local environment, Git hooks, and Git LFS. Separate example and production configurations are available in <a href="../../../src/config">src/config</a>.</p>
 <hr />
 <h2 id="methodology">Methodology</h2>
 <p><strong>The <a href="fuuckae_framework.docs.framework.html">FUUCKAE framework</a> organises the work into seven iterative phases:</strong></p>
@@ -90,14 +85,32 @@ Detection, typology and explainable description of purchasing changes in B2B who
 </table>
 <p>Candidate detection, taxonomy development, and type assignment are distinct steps. Development evidence and evidence reserved for evaluation are kept separate according to the research claim.</p>
 <h2 id="getting-started">Getting started</h2>
-<ol>
-<li>Read the <a href="fuuckae_framework.docs.framework.html">framework</a> and <a href="data_description.docs.project.html">data description</a> to understand the workflow and expected input tables. The documentation can be read without installing Python dependencies.</li>
-<li>For code execution, use Python 3.11 and uv as the intended tooling. Follow the <a href="manage_uv_environment.docs.setup.html">environment guide</a> once the dependency configuration is populated; <code>uv sync --locked</code> is not a working bootstrap command with the current empty configuration files.</li>
-<li>Review the utility scripts below. Run commands from the project root. Their help commands use only the Python standard library and do not process data or generate files.</li>
-</ol>
-<pre><code class="language-bash">python3 setup/csv_to_parquet.py --help
-python3 setup/notebook_to_raw_python.py --help
-python3 setup/create_documentation_site.py --help
+<p>Read the <a href="fuuckae_framework.docs.framework.html">framework</a> and <a href="data_description.docs.project.html">data description</a> for the workflow and expected input tables. Documentation can be read without installing Python dependencies.</p>
+<p><strong>After cloning, run the setup script from the repository root:</strong></p>
+<pre><code class="language-bash">bash setup/initial_setup.sh
+</code></pre>
+<p>The script supports Linux, with automatic system-package installation on Ubuntu/Debian, including WSL. Git and an existing clone are required; Python and uv can be installed during setup. Native Windows and macOS setup are not automated by this script.</p>
+<p><strong>Recommended setup:</strong>
+- Detects installed tools and offers to install missing Git LFS, uv, and Python.
+- Makes the existing Git hooks executable and activates them locally with <code>git config --local core.hooksPath .githooks</code>.
+- Configures Git LFS locally and downloads files for the checked-out revision, subject to existing LFS download filters.
+- Creates or synchronizes <code>.venv</code> from the lockfile, including Jupyter and development tools.</p>
+<p>The project selects <strong>Python 3.12</strong> through <a href="../../../.python-version">.python-version</a> and requires <strong>uv 0.13.1 or newer</strong> through <code>pyproject.toml</code>. Setup uses <code>uv sync --locked</code>; it does not update dependency versions. It can be rerun after an interrupted setup.</p>
+<p><strong>Optional setup commands:</strong></p>
+<pre><code class="language-bash">bash setup/initial_setup.sh --check     # Inspect setup without changing it
+bash setup/initial_setup.sh --yes       # Approve recommended setup and missing-tool installations
+bash setup/initial_setup.sh --no-color # Disable colored messages
+</code></pre>
+<p><code>--check</code> returns exit code <code>1</code> if setup is incomplete. <code>--yes</code> stops if conflicting custom Git hooks need approval. See <code>bash setup/initial_setup.sh --help</code> for details.</p>
+<p><strong>Start Jupyter from the repository root:</strong></p>
+<pre><code class="language-bash">PYTHONPATH=&quot;$PWD/src&quot; uv run --locked jupyter lab
+</code></pre>
+<p>This makes <code>src/config</code> importable as <code>config</code> from either notebook directory. Select the project interpreter at <code>.venv/bin/python</code>. For notebooks run through an editor instead, use the same interpreter and ensure the kernel's <code>PYTHONPATH</code> includes the repository's absolute <code>src</code> path.</p>
+<p>After pulling dependency changes, run <code>uv sync --locked</code> again. See the <a href="manage_uv_environment.docs.setup.html">environment guide</a> for dependency management and activation. Example and production notebook usage is described under <a href="#data-handling">Data handling</a>.</p>
+<p><strong>Utility help commands</strong> use only the Python standard library and do not process data or generate files. Run them from the repository root:</p>
+<pre><code class="language-bash">.venv/bin/python setup/csv_to_parquet.py --help
+.venv/bin/python setup/notebook_to_raw_python.py --help
+.venv/bin/python setup/create_documentation_site.py --help
 </code></pre>
 <table>
 <thead>
@@ -160,6 +173,14 @@ python3 setup/create_documentation_site.py --help
 <td>Dependency management and environment activation with uv.</td>
 </tr>
 <tr>
+<td><a href="../../../setup/initial_setup.sh">Contributor setup script</a></td>
+<td>Interactive installation, local Git hooks, LFS retrieval, and environment setup.</td>
+</tr>
+<tr>
+<td><a href="../../../src/config">Notebook configurations</a></td>
+<td>Explicit example and production data and output paths.</td>
+</tr>
+<tr>
 <td><a href="create_raw_python_files.docs.setup.html">Notebook mirror workflow</a></td>
 <td>Exporting notebooks for read-only code navigation.</td>
 </tr>
@@ -186,14 +207,23 @@ python3 setup/create_documentation_site.py --help
 │   ├── project/            # Thesis plan and data description
 │   ├── prompts/            # Research and development prompt records
 │   └── setup/              # Tooling and workflow guides
-├── setup/                  # Conversion and documentation utilities
+├── setup/                  # Contributor setup, conversion, and documentation utilities
+│   └── initial_setup.sh    # Interactive setup after cloning
 ├── src/
+│   ├── config/             # Shared type and explicit example/production configurations
 │   ├── notebooks/          # Authoritative source notebooks
+│   ├── .notebooks/         # Private production notebook copies (ignored)
 │   └── raw-notebooks/      # Generated Python mirrors for read-only navigation
-├── env/
-│   └── .env.example        # Local configuration template
-├── pyproject.toml          # Project configuration placeholder
-├── uv.lock                 # Dependency lockfile placeholder
+├── data/
+│   ├── data-example/       # Synthetic example inputs and intermediate datasets
+│   └── data-prd/           # Private production inputs and intermediate datasets (ignored)
+├── outputs/
+│   ├── exports/            # Example figures, tables, and other artifacts
+│   └── .exports/           # Private production artifacts (ignored)
+├── .githooks/              # Production-file guard and Git LFS hooks
+├── .python-version        # Project Python version selection
+├── pyproject.toml          # Dependencies and minimum uv version
+├── uv.lock                 # Resolved dependency versions
 ├── AI_TOOL_DISCLOSURE.md   # AI tool disclosure
 └── README.md
 </code></pre>
@@ -241,15 +271,52 @@ python3 setup/create_documentation_site.py --help
 </tbody>
 </table>
 <h2 id="data-handling">Data handling</h2>
-<p>Public examples should use synthetic data.</p>
+<p>Public examples must use fully synthetic data. The two configurations in <code>src/config</code> expose the same properties, so notebook analysis code can use a single <code>CONFIG</code> object:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Configuration</strong></th>
+<th><strong>Import</strong></th>
+<th><strong><code>CONFIG.data_dir</code></strong></th>
+<th><strong><code>CONFIG.output_dir</code></strong></th>
+<th><strong><code>CONFIG.is_production</code></strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Example</td>
+<td><code>from config.example import CONFIG</code></td>
+<td><code>data/data-example/</code></td>
+<td><code>outputs/exports/</code></td>
+<td><code>False</code></td>
+</tr>
+<tr>
+<td>Production</td>
+<td><code>from config.production import CONFIG</code></td>
+<td><code>data/data-prd/</code></td>
+<td><code>outputs/.exports/</code></td>
+<td><code>True</code></td>
+</tr>
+</tbody>
+</table>
+<p>Paths resolve from the repository root, independently of the notebook's working directory. Configuration imports do not read data or create directories. Neither configuration selects a profile through environment variables or machine detection.</p>
+<p><strong>Workflow across development and production PCs:</strong>
+1. Develop the source notebook in <code>src/notebooks/</code> with <code>from config.example import CONFIG</code> and fully synthetic inputs.
+2. Pull the source notebook on the production PC and copy it into the ignored <code>src/.notebooks/</code> directory.
+3. Change only the private copy's import to <code>from config.production import CONFIG</code>. Use a separate kernel for production work.
+4. Read datasets through <code>CONFIG.data_dir</code> and save intermediate datasets there or generated artifacts under <code>CONFIG.output_dir</code>. Create any required output subdirectories explicitly.</p>
+<p><strong>For example, the same analysis code can use either configuration:</strong></p>
+<pre><code class="language-python">orders = pd.read_parquet(CONFIG.data_dir / &quot;raw/orders.parquet&quot;)
+tables_dir = CONFIG.output_dir / &quot;tables&quot;
+tables_dir.mkdir(parents=True, exist_ok=True)
+summary.to_parquet(tables_dir / &quot;summary.parquet&quot;, index=False)
+</code></pre>
+<p>This snippet assumes <code>pandas</code> is imported as <code>pd</code> and <code>summary</code> has been computed. Both configurations are version-controlled and contain generic paths; production data and results stay in the ignored directories. The repository does not use an <code>.env</code> file for this switch.</p>
 <p><strong>Private production notebooks, datasets, and derived exports are excluded through <a href="../../../.gitignore">.gitignore</a>:</strong>
 - <code>src/.notebooks/</code>
 - <code>data/data-prd/</code>
 - <code>outputs/.exports/</code></p>
-<p>The <a href="../../../.githooks/pre-commit">pre-commit hook</a> checks Git's index for these paths and blocks a commit if any are tracked.</p>
-<p><strong>After initialising a local Git repository, enable the hook with:</strong></p>
-<pre><code class="language-bash">git config core.hooksPath .githooks
-</code></pre>
+<p>The <a href="../../../.githooks/pre-commit">pre-commit hook</a> checks Git's index for these paths and blocks a commit if any are tracked. The contributor setup script activates this guard and the existing LFS hooks locally. The guard checks paths; it does not detect production results embedded in a public notebook. Keep production imports, saved outputs, and analysis results in private notebook copies.</p>
 <p>Edit source notebooks in <code>src/notebooks/</code>. Python files in <code>src/raw-notebooks/</code> are generated mirrors for read-only inspection; the <a href="create_raw_python_files.docs.setup.html">mirror guide</a> documents their generation.</p>
 <h2 id="ai-assistance">AI assistance</h2>
 <p>AI tools have supported literature research, framework development, and tooling. See the <a href="AI_TOOL_DISCLOSURE.html">AI tool disclosure</a> and <a href="../../prompts">prompt records</a> for the documentation available so far. The disclosure is still being completed.</p>

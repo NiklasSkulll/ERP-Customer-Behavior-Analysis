@@ -7,31 +7,24 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav aria-label="Site navigation">
-        <a href="../index.html">Documentation overview</a>
+    <nav class="page-nav" aria-label="Site navigation">
+        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <!-- MANUAL -->
 <div align="center">
-
-# AGENTS.md
-
-This file provides guidance to AI coding agents when working with code in this repository.
-
-**Instructions for AI agents working on this project:** Keep it brief and follow conventions. See [BACKLOG.md](BACKLOG.md) for open tasks.
-
-## Shift Handoff (ALWAYS read this first)
-
-**Before each new session:** _First_, read this `AGENTS.md`. _Afterward_, read [HANDOVER.md](HANDOVER.md) (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. _After that_, consult the [BACKLOG.md](BACKLOG.md) (Task Status) and MCP Serena-Memory files (in [.serena/](.serena/)).
-
-> **Important notes for development:**
->- For notebook-related changes, _edit only_ the source notebooks in [src/notebooks/](src/notebooks/). Python files in [src/raw-notebooks/](src/raw-notebooks/) are _read-only mirrors_ of notebook code. Use them for navigation and inspection only. Never edit, overwrite, regenerate, delete or synchronize these mirror files. Their generation is handled separately by the user. If a mirror differs from its source notebook, treat the notebook as authoritative and report the mismatch.
->- Never inspect, load, search, execute against or modify production data located [src/.notebooks/](src/.notebooks/), [data/data-prd/](data/data-prd/) and [outputs/.exports/](outputs/.exports/). Do not copy production information into chat responses, code examples, documentation, handovers or Serena memories. If a task requires production access, stop and request a synthetic reproduction or data-free specification.
-
-**At the end of the session:** _First_, add a new entry at the top of [HANDOVER.md](HANDOVER.md). A template is provided at the bottom of this `AGENTS.md`. _Afterward_, update the [BACKLOG.md](BACKLOG.md). _At the end_, update relevant Serena memories using its memory operations. Run onboarding only for initial setup or when a deliberate refresh is needed.
-
+<h1 id="agentsmd">AGENTS.md</h1>
+<p>This file provides guidance to AI coding agents when working with code in this repository.</p>
+<p><strong>Instructions for AI agents working on this project:</strong> Keep it brief and follow conventions. See <a href="BACKLOG.html">BACKLOG.md</a> for open tasks.</p>
+<h2 id="shift-handoff-always-read-this-first">Shift Handoff (ALWAYS read this first)</h2>
+<p><strong>Before each new session:</strong> <em>First</em>, read this <code>AGENTS.md</code>. <em>Afterward</em>, read <a href="HANDOVER.html">HANDOVER.md</a> (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. <em>After that</em>, consult the <a href="BACKLOG.html">BACKLOG.md</a> (Task Status) and MCP Serena-Memory files (in <a href="../../../.serena/">.serena/</a>).</p>
+<blockquote>
+<p><strong>Important notes for development:</strong>
+- For notebook-related changes, <em>edit only</em> the source notebooks in <a href="../../../src/notebooks/">src/notebooks/</a>. Python files in <a href="../../../src/raw-notebooks/">src/raw-notebooks/</a> are <em>read-only mirrors</em> of notebook code. Use them for navigation and inspection only. Never edit, overwrite, regenerate, delete or synchronize these mirror files. Their generation is handled separately by the user. If a mirror differs from its source notebook, treat the notebook as authoritative and report the mismatch.
+- Never inspect, load, search, execute against or modify production data located <a href="../../../src/.notebooks/">src/.notebooks/</a>, <a href="../../../data/data-prd/">data/data-prd/</a> and <a href="../../../outputs/.exports/">outputs/.exports/</a>. Do not copy production information into chat responses, code examples, documentation, handovers or Serena memories. If a task requires production access, stop and request a synthetic reproduction or data-free specification.</p>
+</blockquote>
+<p><strong>At the end of the session:</strong> <em>First</em>, add a new entry at the top of <a href="HANDOVER.html">HANDOVER.md</a>. A template is provided at the bottom of this <code>AGENTS.md</code>. <em>Afterward</em>, update the <a href="BACKLOG.html">BACKLOG.md</a>. <em>At the end</em>, update relevant Serena memories using its memory operations. Run onboarding only for initial setup or when a deliberate refresh is needed.</p>
 </div>
-
 <!-- END MANUAL -->
 
 <hr />

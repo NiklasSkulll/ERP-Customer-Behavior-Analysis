@@ -2,6 +2,7 @@
 
 import os
 import argparse
+import re
 import shutil
 from pathlib import Path
 from html import escape
@@ -9,29 +10,42 @@ from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 # Create a constant string containing the stylesheet
 SITE_CSS = """
+:root {
+    color-scheme: dark;
+    --page-bg: #0d1117;
+    --panel-bg: #161b22;
+    --surface-bg: #21262d;
+    --text: #c9d1d9;
+    --heading: #f0f6fc;
+    --link: #79b8ff;
+    --link-hover: #a5d6ff;
+    --border: #30363d;
+    --highlight: #3fcb7f;
+}
+
 * {
     box-sizing: border-box;
 }
 
 html {
-    background: #f3f5f7;
+    background: var(--page-bg);
 }
 
 body {
     max-width: 960px;
     margin: 2rem auto;
     padding: clamp(1rem, 4vw, 3rem);
-    background: #ffffff;
-    color: #243042;
+    background: var(--panel-bg);
+    color: var(--text);
     font-family: system-ui, sans-serif;
     line-height: 1.7;
     overflow-wrap: anywhere;
     border-radius: 12px;
-    box-shadow: 0 4px 24px #0000000a;
+    box-shadow: 0 8px 32px #00000040;
 }
 
-h1, h2, h3, h4 {
-    color: #152238;
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading);
     line-height: 1.3;
     margin-top: 1.8em;
 }
@@ -42,26 +56,53 @@ h1 {
 
 h2 {
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 1px solid var(--border);
+}
+
+.highlight {
+    color: var(--highlight);
 }
 
 a {
-    color: #175cd3;
+    color: var(--link);
     text-underline-offset: 0.2em;
 }
 
 a:hover {
-    color: #123e8a;
+    color: var(--link-hover);
 }
 
 a:focus-visible {
-    outline: 2px solid #175cd3;
+    outline: 2px solid var(--link);
     outline-offset: 3px;
+}
+
+.page-nav {
+    margin-bottom: 1.5rem;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    color: var(--text);
+    background: var(--surface-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    color: var(--heading);
+    border-color: var(--highlight);
 }
 
 code {
     padding: 0.15em 0.35em;
-    background: #eef2f6;
+    background: var(--surface-bg);
     border-radius: 4px;
     font-family: ui-monospace, monospace;
     font-size: 0.9em;
@@ -70,7 +111,7 @@ code {
 pre {
     padding: 1rem;
     overflow-x: auto;
-    background: #eef2f6;
+    background: var(--surface-bg);
     border-radius: 8px;
 }
 
@@ -82,8 +123,8 @@ pre code {
 blockquote {
     margin-inline: 0;
     padding: 0.5rem 1rem;
-    border-left: 4px solid #94a3b8;
-    background: #f8fafc;
+    border-left: 4px solid var(--highlight);
+    background: var(--surface-bg);
 }
 
 table {
@@ -96,12 +137,12 @@ table {
 
 th, td {
     padding: 0.65rem 1rem;
-    border: 1px solid #dbe2ea;
+    border: 1px solid var(--border);
     text-align: left;
 }
 
 th {
-    background: #eef2f6;
+    background: var(--surface-bg);
 }
 
 img {
@@ -111,7 +152,7 @@ img {
 
 hr {
     border: 0;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid var(--border);
     margin-block: 2rem;
 }
 """
@@ -134,6 +175,7 @@ def main() -> int:
     # Import HTML conversion package.
     try:
         import markdown
+        from markdown.preprocessors import Preprocessor
         from markdown.treeprocessors import Treeprocessor
     except ImportError:
         parser.exit(status=1, message="Missing dependency. Install it with: uv add markdown\n")
@@ -188,6 +230,22 @@ def main() -> int:
 
         page_targets[source.resolve()] = pages_dir / filename
 
+    class CenteredHeaderPreprocessor(Preprocessor):
+        """Enable Markdown in centered wrappers without changing source files."""
+
+        centered_div = re.compile(
+            r'''^([ ]{0,3}<div[ \t]+align[ \t]*=[ \t]*(?:"center"|'center'|center))[ \t]*>[ \t]*$''',
+            re.IGNORECASE,
+        )
+
+        def run(self, lines):
+            # Fenced code is already stashed. Four-space-indented code and
+            # wrappers with an explicit markdown attribute are left untouched.
+            return [
+                self.centered_div.sub(r'\1 markdown="1">', line)
+                for line in lines
+            ]
+
     # Adjust Markdown-generated links before rendering the final HTML
     class RepositoryLinkProcessor(Treeprocessor):
         def run(self, root):
@@ -221,8 +279,8 @@ def main() -> int:
                 link.set("href", urlunsplit(("", "", quote(new_path), url.query, url.fragment)))
 
     # Convert each Markdown source into an HTML page
-    index_entries = []
-    for source in sources:
+    index_entries = {}
+    for source in sorted(sources, key=lambda path: path.relative_to(source_dir).as_posix().casefold()):
         relative_path = source.relative_to(source_dir)
         output_path = page_targets[source.resolve()]
 
@@ -232,6 +290,13 @@ def main() -> int:
 
             converter = markdown.Markdown(
                 extensions=["extra", "toc"],
+            )
+            # Run after fenced_code_block (25), before html_block (20).
+            # "extra" includes the markdown-in-HTML extension.
+            converter.preprocessors.register(
+                CenteredHeaderPreprocessor(converter),
+                "centered_headers",
+                24,
             )
             converter.treeprocessors.register(
                 RepositoryLinkProcessor(converter),
@@ -252,8 +317,8 @@ def main() -> int:
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav aria-label="Site navigation">
-        <a href="../index.html">Documentation overview</a>
+    <nav class="page-nav" aria-label="Site navigation">
+        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         {html_content}
@@ -266,14 +331,21 @@ def main() -> int:
 
             page_url = quote(f"pages/{output_path.name}")
             label = escape(relative_path.as_posix())
-            index_entries.append(f'<li><a href="{page_url}">{label}</a></li>')
+            group = relative_path.parts[0] + "/" if len(relative_path.parts) > 1 else "Root"
+            index_entries.setdefault(group, []).append(f'<li><a href="{page_url}">{label}</a></li>')
         except (OSError, UnicodeError) as exc:
             parser.exit(status=1, message=f"Error: Could not convert '{source}' to '{output_path}': {exc}\n")
 
-    print(f"Converted '{len(index_entries)}' Markdown files to HTML in '{pages_dir}'")
+    page_count = sum(len(entries) for entries in index_entries.values())
+    print(f"Converted '{page_count}' Markdown files to HTML in '{pages_dir}'")
 
     # Build the overview from the successfully generated pages
-    index_items = "\n".join(index_entries)
+    index_items = "\n".join(
+        f'<p><strong>Documents in <span class="highlight">{escape(group)}</span>:</strong></p>\n<ul>\n'
+        + "\n".join(index_entries[group])
+        + "\n</ul>"
+        for group in sorted(index_entries, key=lambda group: (group != "Root", group.casefold()))
+    )
 
     index_html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -287,11 +359,10 @@ def main() -> int:
     <main>
         <h1>Documentation of ERP-Customer-Behavior-Analysis</h1>
         <p>Browse the documentation for this repository.</p>
-        <p>{len(index_entries)} documentation pages available:</p>
-        <nav aria-label="Documentation pages">
-            <ul>
-                {index_items}
-            </ul>
+        <p>{page_count} documentation pages available.</p>
+        <h2 id="table-of-contents">Table of contents</h2>
+        <nav aria-labelledby="table-of-contents">
+            {index_items}
         </nav>
     </main>
 </body>

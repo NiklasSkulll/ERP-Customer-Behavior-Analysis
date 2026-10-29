@@ -7,22 +7,18 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav aria-label="Site navigation">
-        <a href="../index.html">Documentation overview</a>
+    <nav class="page-nav" aria-label="Site navigation">
+        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
-
-# Set up and use Git LFS
-
-This guide explains how to install Git Large File Storage (Git LFS), configure tracking for CSV files, Parquet files and Jupyter notebooks and work with those files in the repository.
-
-Git LFS stores file contents separately from ordinary Git objects and commits small pointer files to the repository. This reduces the growth of ordinary Git history when large files change. A normal clone still downloads the LFS files needed for the checked-out revision.
-
-> The installation, tracking and file-handling commands follow the official Git LFS and GitHub documentation (GitHub, n.d.-a, n.d.-b; Git LFS,n.d.-a, n.d.-b, n.d.-c, n.d.-d).
-
+<h1 id="set-up-and-use-git-lfs">Set up and use Git LFS</h1>
+<p>This guide explains how to install Git Large File Storage (Git LFS), configure tracking for CSV files, Parquet files and Jupyter notebooks and work with those files in the repository.</p>
+<p>Git LFS stores file contents separately from ordinary Git objects and commits small pointer files to the repository. This reduces the growth of ordinary Git history when large files change. A normal clone still downloads the LFS files needed for the checked-out revision.</p>
+<blockquote>
+<p>The installation, tracking and file-handling commands follow the official Git LFS and GitHub documentation (GitHub, n.d.-a, n.d.-b; Git LFS,n.d.-a, n.d.-b, n.d.-c, n.d.-d).</p>
+</blockquote>
 </div>
-
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#overview">Overview</a></li>

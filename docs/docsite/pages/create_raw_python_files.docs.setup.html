@@ -7,22 +7,18 @@
     <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-    <nav aria-label="Site navigation">
-        <a href="../index.html">Documentation overview</a>
+    <nav class="page-nav" aria-label="Site navigation">
+        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
-
-# Create raw Python files from Jupyter notebooks
-
-This guide explains how to generate Python mirror files using the project's `notebook_to_raw_python.py` script within the uv-managed environment. The script uses `nbconvert` internally.
-
-The notebooks remain authoritative. Generated mirrors support read-only code navigation and inspection through MCP Serena.
-
-> The environment setup uses uv, and the conversion script uses nbconvert to export notebooks as Python files (Astral, n.d.; Jupyter Development Team, n.d.a, n.d.b). The script's command-line interface, mirror naming convention, and read-only workflow are project-specific.
-
+<h1 id="create-raw-python-files-from-jupyter-notebooks">Create raw Python files from Jupyter notebooks</h1>
+<p>This guide explains how to generate Python mirror files using the project's <code>notebook_to_raw_python.py</code> script within the uv-managed environment. The script uses <code>nbconvert</code> internally.</p>
+<p>The notebooks remain authoritative. Generated mirrors support read-only code navigation and inspection through MCP Serena.</p>
+<blockquote>
+<p>The environment setup uses uv, and the conversion script uses nbconvert to export notebooks as Python files (Astral, n.d.; Jupyter Development Team, n.d.a, n.d.b). The script's command-line interface, mirror naming convention, and read-only workflow are project-specific.</p>
+</blockquote>
 </div>
-
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#convert-jupyter-notebooks-to-raw-python-files">Convert Jupyter notebooks to raw Python files</a><ul>
