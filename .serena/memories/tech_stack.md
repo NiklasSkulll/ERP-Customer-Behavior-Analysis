@@ -1,8 +1,9 @@
-# Environment
-- WSL/Linux; uv-managed non-package project. Python requirement >=3.12 in pyproject.toml; `.python-version` pins 3.12. Project `.venv/bin/python` verified as CPython 3.12.3 at onboarding. Resolve current versions from pyproject.toml/uv.lock rather than README, which still has stale bootstrap text.
-- Runtime dependencies: duckdb, markdown, pandas, numpy, pyarrow, scipy, scikit-learn (import sklearn), ruptures, matplotlib, seaborn, plotly[express].
-- Dev group: nbconvert, jupyterlab, ipykernel, anywidget. SHAP is optional in the research plan and not declared.
-- Jupyter: select project `.venv/bin/python` in the editor; installation does not prove UI kernel selection. Launch via `uv run --locked jupyter lab`. No notebooks yet.
-- Serena is a separately installed tool (2.0.0 observed); do not add it to project dependencies. Project uses LSP python+markdown and REPL interface; exclusions in .serena/project.yml apply in addition to .gitignore.
-- Python symbol and Markdown nested-heading lookup were both verified through Serena.
-- `.gitattributes` tracks CSV/Parquet with LFS; notebooks currently use ordinary Git. Pre-commit guard exists but requires Git initialization and hook configuration. Git was not initialized at onboarding.
+# Environment and tooling
+- WSL/Linux; uv-managed non-package project (no build-system installation). pyproject.toml requires Python >=3.12 and uv >=0.13.1 via [tool.uv].required-version; .python-version selects 3.12. pyproject.toml and uv.lock are populated; README now documents the working bootstrap.
+- Runtime dependencies: duckdb, markdown, pandas, numpy, pyarrow, scipy, scikit-learn (import sklearn), ruptures, matplotlib, seaborn, plotly[express]. Dev group: nbconvert, jupyterlab, ipykernel, anywidget. SHAP is not declared.
+- src/config is not installed as a package by uv sync. Launch Jupyter from repo root with PYTHONPATH="$PWD/src" uv run --locked jupyter lab; editor kernels need the absolute src path on PYTHONPATH too. Select project .venv/bin/python, not Serena's tool interpreter.
+- Configurations share frozen AnalysisConfig(data_dir, output_dir, is_production); paths derive from src/config/_base.py's location, not the working directory. No automatic machine/environment profile selection and no .env-based configuration.
+- setup/initial_setup.sh is Bash; automatic apt installation targets Ubuntu/Debian/WSL. Existing tools can be reused on other Linux distributions; native Windows/macOS automation is not implemented.
+- .gitattributes puts CSV/Parquet in LFS, not notebooks. Existing .githooks provide the private-path pre-commit guard and four LFS hooks. Bootstrap repairs executable permissions and sets repository-local core.hooksPath.
+- Serena is separately installed, not a project dependency. .serena/project.yml selects Python+Markdown LSP, REPL, Git-ignore handling and explicit production exclusions. Verify the active project on each MCP connection before symbol/memory writes; different connections can target different projects.
+- Python class and nested Markdown heading navigation work through this project's Serena MCP. Installed tools/kernel configuration do not prove editor UI kernel selection.

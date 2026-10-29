@@ -1,33 +1,10 @@
-# Memory Maintenance
-
-## Discovery Model
-
-- Core principle: progressive discovery through references, building a graph of memories.
-- Initially, agents are provided with the list of all memories (names only).
-- Agents should read `mem:core` as the top-level entry point (graph root).
-  This memory should contain references to other memories covering major project domains.
-  The referenced memories shall, in turn, shall contain references to even more specific memories, and so on.
-  The depth of the graph shall depend on the project complexity.
-- Use topics/folders to group related memories in order to make the content structure explicit.
-  Folders can mirror project structure (e.g. modules like frontend/backend) or topics like debugging, architecture, etc.
-- Memory references must use a mem: prefix inside backticks, e.g. `mem:frontend/core`.
-  The surrounding text should clearly indicate when to read the memory/which content to expect.
-  The text should provide more precise guidance than the memory name alone, 
-  i.e. avoid a reference like "frontend debugging: `mem:frontend/debugging` and instead make clear which aspects of frontend debugging are covered.
-- Memories themselves should not contain information about when to read them; this is the responsibility of the referring memory.
-
-## Style
-
-Dense agent notes, not prose docs. Prefer invariants, terse bullets. 
-Avoid obvious context, rationale, and examples unless they prevent likely mistakes. 
-Keep guidance durable and generalizable, not task-local.
-
-## Add/update threshold
-
-Add or update memories only with stable, non-obvious project conventions that avoid complex rediscovery in the future.
-Do not add: quick-read facts; generic language/framework knowledge; one-off task notes; volatile line-level details; behavior likely to change soon.
-
-## Maintenance Actions
-
-- Renaming memories: References are updated automatically if handled via Serena's memory rename tool.
-- Checking for stale memories (e.g. after deletion): Call `serena memories check` for a report.
+# Memory maintenance
+- Progressive discovery: `mem:core` is the entry point and links focused memories. Its domain references should explain what information each target provides.
+- Keep the existing compact graph for this repository: core, tech_stack, suggested_commands, conventions and task_completion. Add topic folders only when a distinct module needs them.
+- References must use a mem: prefix inside backticks, e.g. `mem:tech_stack`. Put discovery guidance in the referring memory, not instructions about when to read a memory inside its own contents.
+- Write dense agent notes containing stable, non-obvious facts and invariants that prevent rediscovery. Avoid generic framework advice, quick-read facts, task-local decisions, transient installed-version snapshots and duplicate explanations.
+- Verify against authoritative source files and tool configuration. Generated docs/docsite/ pages may contain stale copies of memories or session notes; do not treat them as authoritative evidence.
+- Preserve production-data and read-only-mirror boundaries while collecting evidence. Source map and boundaries: `mem:core`.
+- Keep session history in HANDOVER.md and task status in BACKLOG.md under the repository workflow, subject to explicit user overrides; do not duplicate them in memory.
+- Use Serena memory operations for writes/renames. Renaming updates references; deletion requires explicit authorization. Verify the active project on the specific MCP connection before writing.
+- After changes run serena memories check and inspect the report for dangling references; exit status alone is insufficient.

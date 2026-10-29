@@ -1,8 +1,9 @@
 # Project source map and invariants
-- Research project: retrospective detection, typing and explanation of B2B wholesale purchasing changes from ERP time series; not a deployed application.
-- Methodology: `docs/framework/fuuckae_framework.md`; research scope/questions: `docs/project/complete_project_plan.md` (German); schema only: `docs/project/data_description.md`; literature and prompt evidence: `docs/literature/`, `docs/prompts/`.
-- Workflow: Frame → Understand → Unify → Compare candidate events → develop taxonomy → Apply/explain → Evaluate. Candidate detection is separate from final type assignment; distinguish development and evaluation evidence, and observed changes from causal claims.
-- Executable utilities live in `setup/`, not `scripts/`. No analysis notebooks/pipeline exist at onboarding; public notebook/mirror folders contain placeholders.
-- Never inspect, search, execute against, or modify `data/data-prd/`, `src/.notebooks/`, `outputs/.exports/`, or production-derived information elsewhere. Use only explicitly fully synthetic inputs or data-free operations; pseudonymized records are not synthetic.
-- Session history/tasks belong in HANDOVER.md/BACKLOG.md, not memories. Follow AGENTS.md startup and closeout order.
-- Environment and kernel details: `mem:tech_stack`; utility entrypoints and path traps: `mem:suggested_commands`; notebook/data/script rules: `mem:conventions`; verification and session closeout: `mem:task_completion`.
+- Bachelor's thesis: retrospective detection, typing and explanation of B2B wholesale purchasing changes from ERP time series; research repository, not a deployed application.
+- Methodology: docs/framework/fuuckae_framework.md; scope/questions: docs/project/complete_project_plan.md (German); data-free schema: docs/project/data_description.md; evidence: docs/literature/ and docs/prompts/.
+- Workflow: Frame → Understand → Unify → Compare candidate events → Knowledge synthesis/taxonomy → Apply/explain → Evaluate. Separate candidate detection from final type assignment, development from evaluation evidence, and observed changes from causal claims.
+- Executable utilities live in setup/, not scripts/. Public notebook/mirror directories currently contain .gitkeep placeholders; no end-to-end analysis pipeline is present.
+- Two-PC workflow: develop public source notebooks on synthetic inputs; user copies to ignored src/.notebooks/ on the production PC and changes only the explicit configuration import. Both src/config profiles are tracked generic paths, not datasets.
+- Never inspect, search, execute against or modify data/data-prd/, src/.notebooks/, outputs/.exports/, or production-derived content elsewhere. Directory names do not establish that example data is synthetic; pseudonymized records are not synthetic.
+- Markdown sources are authoritative; docs/docsite/ contains generated HTML, including copies of memories/session documents that can be stale.
+- Environment, notebook import setup and Serena connection details: `mem:tech_stack`. Bootstrap, utilities and path/traversal traps: `mem:suggested_commands`. Config/notebook/data/style rules: `mem:conventions`. Safe verification and closeout: `mem:task_completion`. Memory graph and maintenance policy: `mem:memory_maintenance`.
