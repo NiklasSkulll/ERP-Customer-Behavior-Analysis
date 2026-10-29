@@ -5,13 +5,14 @@ src/.notebooks/
 data/data-prd/
 outputs/.exports/
 
+# Literature source files (scientific papers)
+docs/literature/.literature-source-files/
+
+# Bachelor thesis (LaTeX files)
+docs/.bachelor-thesis/
+
 # Logging files
 *.log
-
-# Local configuration
-env/.env
-ENV/.env
-.env
 
 # Python virtual environments
 .venv/

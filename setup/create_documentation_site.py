@@ -188,6 +188,8 @@ def main() -> int:
         project_root / "outputs" / ".exports",
         project_root / "data" / "data-prd",
         project_root / "src" / ".notebooks",
+        project_root / "docs" / ".bachelor-thesis",
+        project_root / "docs" / "literature" / ".literature-source-files",
     }
 
     sources = sorted(

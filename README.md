@@ -140,29 +140,31 @@ The CSV converter currently scans only the selected directory's immediate CSV fi
 ```text
 ERP-Customer-Behavior-Analysis/
 ├── docs/
-│   ├── framework/          # FUUCKAE methodology
-│   ├── literature/         # Papers, summaries, and references
-│   ├── project/            # Thesis plan and data description
-│   ├── prompts/            # Research and development prompt records
-│   └── setup/              # Tooling and workflow guides
-├── setup/                  # Contributor setup, conversion, and documentation utilities
-│   └── initial_setup.sh    # Interactive setup after cloning
+│   ├── .bachelor-thesis/             # Bachelor thesis LaTeX sources (ignored)
+│   ├── framework/                    # FUUCKAE methodology
+│   ├── literature/                   # Literature summaries and references
+│   │   └── .literature-source-files/ # Scientific papers and source files (ignored)
+│   ├── project/                      # Thesis plan and data description
+│   ├── prompts/                      # Research and development prompt records
+│   └── setup/                        # Tooling and workflow guides
+├── setup/                            # Contributor setup, conversion, and documentation utilities
+│   └── initial_setup.sh              # Interactive setup after cloning
 ├── src/
-│   ├── config/             # Shared type and explicit example/production configurations
-│   ├── notebooks/          # Authoritative source notebooks
-│   ├── .notebooks/         # Private production notebook copies (ignored)
-│   └── raw-notebooks/      # Generated Python mirrors for read-only navigation
+│   ├── config/                       # Shared type and explicit example/production configurations
+│   ├── notebooks/                    # Authoritative source notebooks
+│   ├── .notebooks/                   # Private production notebook copies (ignored)
+│   └── raw-notebooks/                # Generated Python mirrors for read-only navigation
 ├── data/
-│   ├── data-example/       # Synthetic example inputs and intermediate datasets
-│   └── data-prd/           # Private production inputs and intermediate datasets (ignored)
+│   ├── data-example/                 # Synthetic example inputs and intermediate datasets
+│   └── data-prd/                     # Private production inputs and intermediate datasets (ignored)
 ├── outputs/
-│   ├── exports/            # Example figures, tables, and other artifacts
-│   └── .exports/           # Private production artifacts (ignored)
-├── .githooks/              # Production-file guard and Git LFS hooks
-├── .python-version        # Project Python version selection
-├── pyproject.toml          # Dependencies and minimum uv version
-├── uv.lock                 # Resolved dependency versions
-├── AI_TOOL_DISCLOSURE.md   # AI tool disclosure
+│   ├── exports/                      # Example figures, tables, and other artifacts
+│   └── .exports/                     # Private production artifacts (ignored)
+├── .githooks/                        # Production-file guard and Git LFS hooks
+├── .python-version                   # Project Python version selection
+├── pyproject.toml                    # Dependencies and minimum uv version
+├── uv.lock                           # Resolved dependency versions
+├── AI_TOOL_DISCLOSURE.md             # AI tool disclosure
 └── README.md
 ```
 
