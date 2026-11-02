@@ -13,27 +13,58 @@
     <main>
         <div align="center">
 <h1 id="data-description">Data description</h1>
-<p><a href="../../../data/data-example/raw/001_order_header_pos_data.csv"><img alt="Order Header Pos Data" src="https://img.shields.io/badge/Order-Header%20and%20Pos-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="../../../data/data-example/raw/002_product_master_data.csv"><img alt="Product Master Data" src="https://img.shields.io/badge/Product-Master-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="../../../data/data-example/raw/003_product_price_data.csv"><img alt="Product Price Data" src="https://img.shields.io/badge/Product-Prices-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="../../../data/data-example/raw/004_customer_master_data.csv"><img alt="Customer Master Data" src="https://img.shields.io/badge/Customer-Master-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="../../../data/data-example/raw/005_customer_industry_mapping_data.csv"><img alt="Customer Industry Mapping Data" src="https://img.shields.io/badge/Customer-Industry%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
+<p><a href="../../../data/data-example/raw/001_order_header_pos_data_eg.csv"><img alt="Order Header Pos Data" src="https://img.shields.io/badge/Order-Header%20and%20Pos-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="../../../data/data-example/raw/002_product_master_data_eg.csv"><img alt="Product Master Data" src="https://img.shields.io/badge/Product-Master-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="../../../data/data-example/raw/003_product_price_data_eg.csv"><img alt="Product Price Data" src="https://img.shields.io/badge/Product-Prices-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="../../../data/data-example/raw/004_customer_master_data_eg.csv"><img alt="Customer Master Data" src="https://img.shields.io/badge/Customer-Master-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
+<p><a href="../../../data/data-example/raw/005_order_sddocumentreason_mapping_eg.csv"><img alt="Order SDDOCUMENTREASON Mapping" src="https://img.shields.io/badge/Order-SDDOCUMENTREASON%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="../../../data/data-example/raw/006_product_productgroup_mapping_eg.csv"><img alt="Product PRODUCTGROUP Mapping" src="https://img.shields.io/badge/Product-PRODUCTGROUP%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="../../../data/data-example/raw/007_product_conditiontype_mapping_eg.csv"><img alt="Product CONDITIONTYPE Mapping" src="https://img.shields.io/badge/Order-CONDITIONTYPE%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="../../../data/data-example/raw/008_customer_industry_mapping_eg.csv"><img alt="Customer INDUSTRY Mapping" src="https://img.shields.io/badge/Customer-INDUSTRY%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
 </div>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#overview">Overview</a></li>
-<li><a href="#order-header-and-position-data">Order: Header and position data</a></li>
-<li><a href="#product-master-data">Product: Master data</a></li>
-<li><a href="#product-price-data">Product: Price data</a></li>
-<li><a href="#customer-master-data">Customer: Master data</a></li>
-<li><a href="#customer-industry-mapping-data">Customer: Industry mapping data</a></li>
+<li><a href="#documentation-background">Documentation background</a></li>
+<li><a href="#1-order-header-and-item-data">1 Order: Header and item data</a><ul>
+<li><a href="#11-main-data-set">1.1 Main data set</a></li>
+<li><a href="#12-lookup-and-mapping-data">1.2 Lookup and mapping data</a></li>
+</ul>
+</li>
+<li><a href="#2-product-master-data">2 Product: Master data</a><ul>
+<li><a href="#21-main-data-set">2.1 Main data set</a></li>
+<li><a href="#22-lookup-and-mapping-data">2.2 Lookup and mapping data</a></li>
+</ul>
+</li>
+<li><a href="#3-product-price-data">3 Product: Price data</a><ul>
+<li><a href="#31-main-data-set">3.1 Main data set</a></li>
+<li><a href="#32-lookup-and-mapping-data">3.2 Lookup and mapping data</a></li>
+</ul>
+</li>
+<li><a href="#4-customer-master-data">4 Customer: Master data</a><ul>
+<li><a href="#41-main-data-set">4.1 Main data set</a></li>
+<li><a href="#42-lookup-and-mapping-data">4.2 Lookup and mapping data</a></li>
+</ul>
+</li>
+<li><a href="#data-relationships">Data relationships</a></li>
 </ul>
 <hr />
 <h2 id="overview">Overview</h2>
-<p>...</p>
+<p>This document provides an overview of the datasets extracted from the ERP system for this data analytics project. It describes the structure, technical fields, and business meaning of the data, including relevant value mappings and data interpretation rules.</p>
+<p><strong>The documentation covers four main datasets:</strong>
+- <strong>Sales order header and item data:</strong> Sales order header and item information, including customers, products, quantities, order values, and processing statuses.
+- <strong>Product master data:</strong> Product identifiers, product groups, units of measure, and product descriptions.
+- <strong>Product price data:</strong> Pricing conditions, prices, customer-specific pricing information, and validity periods.
+- <strong>Customer master data:</strong> Customer identifiers, names, postal codes, industries, and customer price groups.</p>
+<p>Additional <strong>lookup and mapping datasets</strong> provide human-readable descriptions for selected ERP codes, such as order reasons, product groups, pricing condition types, and customer industries.</p>
+<p>Each section documents the available fields, their meanings, and relevant considerations for data processing and analysis. The referenced CSV files contain example data corresponding to the documented structures. Textual values and descriptions are provided in German.</p>
 <hr />
-<h2 id="order-header-and-position-data">Order: Header and position data</h2>
-<p><strong>Data file:</strong> <code>data/data-example/raw/001_order_header_pos_data.csv</code></p>
+<h2 id="documentation-background">Documentation background</h2>
+<p>This documentation was compiled as part of the bachelor's thesis project. The field descriptions, value mappings, and business definitions are based on the ERP system's technical documentation and configuration settings. The relevant information was collected, consolidated, and documented to provide a consistent basis for understanding and analyzing the extracted datasets.</p>
+<hr />
+<h2 id="1-order-header-and-item-data">1 Order: Header and item data</h2>
+<h3 id="11-main-data-set">1.1 Main data set</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/001_order_header_pos_data_eg.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -44,27 +75,27 @@
 <tbody>
 <tr>
 <td><code>SALESORDER</code></td>
-<td>Sales order ID (number)</td>
+<td>Sales order ID</td>
 </tr>
 <tr>
 <td><code>SALESORDERTYPE</code></td>
-<td></td>
+<td>Document Type (OR = Order)</td>
 </tr>
 <tr>
 <td><code>OVERALLSDPROCESSSTATUS</code></td>
-<td></td>
+<td>Overall processing status of the sales order</td>
 </tr>
 <tr>
 <td><code>SDDOCUMENTREASON</code></td>
-<td></td>
+<td>Reason for the order (ID, Key)</td>
 </tr>
 <tr>
 <td><code>OVERALLSDDOCUMENTREJECTIONSTS</code></td>
-<td></td>
+<td>Overall rejection status of the sales order</td>
 </tr>
 <tr>
 <td><code>SALESORDERDATE</code></td>
-<td></td>
+<td>Sales order date</td>
 </tr>
 <tr>
 <td><code>SOLDTOPARTY</code></td>
@@ -72,29 +103,69 @@
 </tr>
 <tr>
 <td><code>TOTALNETAMOUNT</code></td>
-<td></td>
+<td>Total net value of the order</td>
 </tr>
 <tr>
 <td><code>TRANSACTIONCURRENCY</code></td>
-<td></td>
+<td>Currency of the document</td>
 </tr>
 <tr>
 <td><code>SALESORDERITEM</code></td>
-<td>Position number, of the ordered items</td>
+<td>Sales order item number (position)</td>
 </tr>
 <tr>
 <td><code>MATERIAL</code></td>
-<td>Product ID (number)</td>
+<td>Product ID</td>
 </tr>
 <tr>
 <td><code>CONFDDELIVQTYINORDERQTYUNIT</code></td>
-<td></td>
+<td>Confirmed delivery quantity in the sales order quantity unit</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mapping the values for <code>OVERALLSDPROCESSSTATUS</code>:</strong>
+- <code>A</code> : "Offen" (Open)
+- <code>B</code> : "In Bearbeitung" (In progress)
+- <code>C</code> : "Erledigt" (Completed)</p>
+<p><strong>Mapping the values for <code>SDDOCUMENTREASON</code>:</strong>
+- view <code>data/data-example/raw/005_order_sddocumentreason_mapping_eg.csv</code></p>
+<p><strong>Mapping the values for <code>OVERALLSDDOCUMENTREJECTIONSTS</code>:</strong>
+- <code>A</code> : "Nichts abgesagt" (Nothing rejected)
+- <code>B</code> : "Teilweise abgesagt" (Partially rejected)
+- <code>C</code> : "Alles abgesagt" (Fully rejected)</p>
+<p><strong>Mapping the values for <code>TRANSACTIONCURRENCY</code>:</strong>
+- <code>EUR</code> : Euros
+- <code>GBP</code> : British pounds sterling</p>
+<blockquote>
+<p><strong>Important to note!</strong>
+- <strong>Data Granularity and Structure:</strong> This dataset combines sales order header information with item-level information. Header-level attributes, such as the customer, order status, and total net amount, may be repeated across multiple rows belonging to the same sales order.
+- <code>TOTALNETAMOUNT</code> is located at the order level (order header) and may appear multiple times in the line items within this data record.</p>
+</blockquote>
+<p><strong>Important:</strong> When aggregating header-level values, repeated information must be considered to avoid double-counting.</p>
+<h3 id="12-lookup-and-mapping-data">1.2 Lookup and mapping data</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/005_order_sddocumentreason_mapping_eg.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SDDOCUMENTREASON</code></td>
+<td>Reason for the order (ID, Key)</td>
+</tr>
+<tr>
+<td><code>SDDOCUMENTREASONTEXT</code></td>
+<td>Human-readable description of the order reason</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="product-master-data">Product: Master data</h2>
-<p><strong>Data file:</strong> <code>data/data-example/raw/002_product_master_data.csv</code></p>
+<h2 id="2-product-master-data">2 Product: Master data</h2>
+<h3 id="21-main-data-set">2.1 Main data set</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/002_product_master_data_eg.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -105,25 +176,53 @@
 <tbody>
 <tr>
 <td><code>PRODUCT</code></td>
-<td>Product ID (number)</td>
+<td>Product ID</td>
 </tr>
 <tr>
 <td><code>PRODUCTGROUP</code></td>
-<td></td>
+<td>Product category or group (ID, Key)</td>
 </tr>
 <tr>
 <td><code>TO_PLANT_BASEUNIT</code></td>
-<td></td>
+<td>Base unit of measure</td>
 </tr>
 <tr>
 <td><code>TO_PRODUCTBASICTEXT_LONGTEXT</code></td>
-<td></td>
+<td>Long product description</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mapping the values for <code>PRODUCTGROUP</code>:</strong>
+- view <code>data/data-example/raw/006_product_productgroup_mapping_eg.csv</code></p>
+<p><strong>Mapping the values for <code>TO_PLANT_BASEUNIT</code>:</strong>
+- <code>M</code>  : "Meter"
+- <code>PC</code> : "Stück" (Pieces)
+- <code>ROL</code>: "Rolle" (Roll)
+- <code>ZBU</code>: "Bund" (Bundle)</p>
+<h3 id="22-lookup-and-mapping-data">2.2 Lookup and mapping data</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/006_product_productgroup_mapping_eg.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PRODUCTGROUP</code></td>
+<td>Product category or group (ID, Key)</td>
+</tr>
+<tr>
+<td><code>PRODUCTGROUPTEXT</code></td>
+<td>Human-readable description of the product category or group</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="product-price-data">Product: Price data</h2>
-<p><strong>Data file:</strong> <code>data/data-example/raw/003_product_price_data.csv</code></p>
+<h2 id="3-product-price-data">3 Product: Price data</h2>
+<h3 id="31-main-data-set">3.1 Main data set</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/003_product_price_data_eg.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -134,19 +233,19 @@
 <tbody>
 <tr>
 <td><code>MATERIAL</code></td>
-<td>Product ID (number)</td>
+<td>Product ID</td>
 </tr>
 <tr>
 <td><code>CONDITIONVALIDITYSTARTDATE</code></td>
-<td></td>
+<td>Start date for the validity of the catalog price or discount</td>
 </tr>
 <tr>
 <td><code>CONDITIONVALIDITYENDDATE</code></td>
-<td></td>
+<td>End date for the validity of the catalog price or discount</td>
 </tr>
 <tr>
 <td><code>CUSTOMERPRICEGROUP</code></td>
-<td></td>
+<td>Customer price group or category</td>
 </tr>
 <tr>
 <td><code>CUSTOMER</code></td>
@@ -154,21 +253,55 @@
 </tr>
 <tr>
 <td><code>CONDITIONTYPE</code></td>
-<td></td>
+<td>Pricing condition type (ID, Key)</td>
 </tr>
 <tr>
 <td><code>CONDITIONRATEVALUE</code></td>
-<td></td>
+<td>Condition rate value</td>
 </tr>
 <tr>
 <td><code>CONDITIONRATEVALUEUNIT</code></td>
-<td></td>
+<td>Currency or unit of the condition rate</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Mapping the values for <code>CONDITIONTYPE</code>:</strong>
+- view <code>data/data-example/raw/007_product_conditiontype_mapping_eg.csv</code></p>
+<p><strong>Mapping the values for <code>CONDITIONRATEVALUEUNIT</code>:</strong>
+- <code>EUR</code> : Euros</p>
+<blockquote>
+<p><strong>Important to note!</strong>
+- For the <strong>"Price per item before discount"</strong>, <code>CONDITIONTYPE</code> is filtered to "List price" (<code>"Price per item before discount" = "List price"</code>).
+- For the <strong>"Discount (Percentage)"</strong>, the "List price" is subtracted from the "Total price of the product" and divided by the "List price" (<code>"Discount (Percentage)" = ("List price"-"Total price of the product")/"List price"</code>).
+- For the <strong>"Discount (Amount)"</strong>, the "List price" is subtracted from the "Total price of the product" (<code>"Discount (Amount)" = "List price"-"Total price of the product"</code>).
+- If <code>CONDITIONRATEVALUE</code> has the default value of <code>999999</code> or <code>999999,00</code>, this means that the price has not been maintained. This is a placeholder for a missing price.
+- Pay attention to the validity of the values. The validity period is between <code>CONDITIONVALIDITYSTARTDATE</code> and <code>CONDITIONVALIDITYENDDATE</code>.
+- If <strong>"List price" is null or <code>0</code></strong>, the "Discount (Amount)" and "Discount (Percentage)" cannot be calculated.</p>
+</blockquote>
+<h3 id="32-lookup-and-mapping-data">3.2 Lookup and mapping data</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/007_product_conditiontype_mapping_eg.csv</code></p>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CONDITIONTYPE</code></td>
+<td>Pricing condition type (ID, Key)</td>
+</tr>
+<tr>
+<td><code>CONDITIONTYPETEXT</code></td>
+<td>Human-readable description of the pricing condition type</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="customer-master-data">Customer: Master data</h2>
-<p><strong>Data file:</strong> <code>data/data-example/raw/004_customer_master_data.csv</code></p>
+<h2 id="4-customer-master-data">4 Customer: Master data</h2>
+<h3 id="41-main-data-set">4.1 Main data set</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/004_customer_master_data_eg.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -191,17 +324,18 @@
 </tr>
 <tr>
 <td><code>INDUSTRY</code></td>
-<td></td>
+<td>Customer's industry (ID, Key)</td>
 </tr>
 <tr>
 <td><code>CUSTOMERPRICEGROUP</code></td>
-<td></td>
+<td>Customer price group or category</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="customer-industry-mapping-data">Customer: Industry mapping data</h2>
-<p><strong>Data file:</strong> <code>data/data-example/raw/005_customer_industry_mapping_data.csv</code></p>
+<p><strong>Mapping the values for <code>INDUSTRY</code>:</strong>
+- view <code>data/data-example/raw/008_customer_industry_mapping_eg.csv</code></p>
+<h3 id="42-lookup-and-mapping-data">4.2 Lookup and mapping data</h3>
+<p><strong>Data file:</strong> <code>data/data-example/raw/008_customer_industry_mapping_eg.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -212,11 +346,65 @@
 <tbody>
 <tr>
 <td><code>INDUSTRY</code></td>
-<td></td>
+<td>Customer's industry (ID, Key)</td>
 </tr>
 <tr>
-<td><code>INDUSTRYNAME</code></td>
-<td></td>
+<td><code>INDUSTRYTEXT</code></td>
+<td>Human-readable description of the customer's industry</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="data-relationships">Data relationships</h2>
+<p>The following table summarizes the identified field relationships between the datasets. The uniqueness of the join keys and the corresponding relationship cardinalities will be examined during the subsequent data analysis.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Initial dataset</strong></th>
+<th><strong>Target dataset</strong></th>
+<th><strong>Feature mapping</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sales order header and item</td>
+<td>Product master</td>
+<td><code>MATERIAL</code> to <code>PRODUCT</code></td>
+</tr>
+<tr>
+<td>Sales order header and item</td>
+<td>Customer Master</td>
+<td><code>SOLDTOPARTY</code> to <code>CUSTOMER</code></td>
+</tr>
+<tr>
+<td>Product price</td>
+<td>Product master</td>
+<td><code>MATERIAL</code> to <code>PRODUCT</code></td>
+</tr>
+<tr>
+<td>Product price</td>
+<td>Customer master</td>
+<td><code>CUSTOMER</code> to <code>CUSTOMER</code></td>
+</tr>
+<tr>
+<td>Sales order header and item</td>
+<td>Order reason mapping</td>
+<td><code>SDDOCUMENTREASON</code> to <code>SDDOCUMENTREASON</code></td>
+</tr>
+<tr>
+<td>Product master</td>
+<td>Product group mapping</td>
+<td><code>PRODUCTGROUP</code> to <code>PRODUCTGROUP</code></td>
+</tr>
+<tr>
+<td>Product price</td>
+<td>Condition type mapping</td>
+<td><code>CONDITIONTYPE</code> to <code>CONDITIONTYPE</code></td>
+</tr>
+<tr>
+<td>Customer master</td>
+<td>Industry mapping</td>
+<td><code>INDUSTRY</code> to <code>INDUSTRY</code></td>
 </tr>
 </tbody>
 </table>

@@ -172,14 +172,11 @@ ERP-Customer-Behavior-Analysis/
 
 Use these conventions for prepared tables and public examples. Original ERP field names are documented in the [data description](docs/project/data_description.md).
 
-| **Property**          | **Convention**                               | **Example**                              |
-| --------------------- | -------------------------------------------- | ---------------------------------------- |
-| **Column separator**  | Comma                                        | `,`                                      |
-| **Decimal separator** | Period, without thousands separators         | `1234.56`                                |
-| **Encoding**          | UTF-8                                        | Supports accented characters and umlauts |
-| **Column names**      | English, `snake_case`                        | `monthly_revenue`                        |
-| **Date format**       | `YYYY-MM-DD`                                 | `2026-10-21`                             |
-| **Table structure**   | One header row, then one observation per row | No extra title or total rows             |
+| **Property**              | **Convention**                               | **Example**                              |
+| ------------------------- | -------------------------------------------- | ---------------------------------------- |
+| **CSV column separator**  | Comma                                        | `,`                                      |
+| **Encoding**              | UTF-8                                        | Supports accented characters and umlauts |
+| **Column names**          | English, All caps                            | `MONTHLYREVENUE`                         |
 
 ## Data handling
 
