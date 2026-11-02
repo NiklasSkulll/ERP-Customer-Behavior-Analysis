@@ -137,9 +137,11 @@
 - <code>EUR</code> : Euros
 - <code>GBP</code> : British pounds sterling</p>
 <blockquote>
-<p><strong>Important to note!</strong>
-- <strong>Data Granularity and Structure:</strong> This dataset combines sales order header information with item-level information. Header-level attributes, such as the customer, order status, and total net amount, may be repeated across multiple rows belonging to the same sales order.
-- <code>TOTALNETAMOUNT</code> is located at the order level (order header) and may appear multiple times in the line items within this data record.</p>
+<p><strong>Important to note!</strong></p>
+<ul>
+<li><strong>Data Granularity and Structure:</strong> This dataset combines sales order header information with item-level information. Header-level attributes, such as the customer, order status, and total net amount, may be repeated across multiple rows belonging to the same sales order.</li>
+<li><code>TOTALNETAMOUNT</code> is located at the order level (order header) and may appear multiple times in the line items within this data record.</li>
+</ul>
 </blockquote>
 <p><strong>Important:</strong> When aggregating header-level values, repeated information must be considered to avoid double-counting.</p>
 <h3 id="12-lookup-and-mapping-data">1.2 Lookup and mapping data</h3>
@@ -270,13 +272,15 @@
 <p><strong>Mapping the values for <code>CONDITIONRATEVALUEUNIT</code>:</strong>
 - <code>EUR</code> : Euros</p>
 <blockquote>
-<p><strong>Important to note!</strong>
-- For the <strong>"Price per item before discount"</strong>, <code>CONDITIONTYPE</code> is filtered to "List price" (<code>"Price per item before discount" = "List price"</code>).
-- For the <strong>"Discount (Percentage)"</strong>, the "List price" is subtracted from the "Total price of the product" and divided by the "List price" (<code>"Discount (Percentage)" = ("List price"-"Total price of the product")/"List price"</code>).
-- For the <strong>"Discount (Amount)"</strong>, the "List price" is subtracted from the "Total price of the product" (<code>"Discount (Amount)" = "List price"-"Total price of the product"</code>).
-- If <code>CONDITIONRATEVALUE</code> has the default value of <code>999999</code> or <code>999999,00</code>, this means that the price has not been maintained. This is a placeholder for a missing price.
-- Pay attention to the validity of the values. The validity period is between <code>CONDITIONVALIDITYSTARTDATE</code> and <code>CONDITIONVALIDITYENDDATE</code>.
-- If <strong>"List price" is null or <code>0</code></strong>, the "Discount (Amount)" and "Discount (Percentage)" cannot be calculated.</p>
+<p><strong>Important to note!</strong></p>
+<ul>
+<li>For the <strong>"Price per item before discount"</strong>, <code>CONDITIONTYPE</code> is filtered to "List price" (<code>"Price per item before discount" = "List price"</code>).</li>
+<li>For the <strong>"Discount (Percentage)"</strong>, the "List price" is subtracted from the "Total price of the product" and divided by the "List price" (<code>"Discount (Percentage)" = ("List price"-"Total price of the product")/"List price"</code>).</li>
+<li>For the <strong>"Discount (Amount)"</strong>, the "List price" is subtracted from the "Total price of the product" (<code>"Discount (Amount)" = "List price"-"Total price of the product"</code>).</li>
+<li>If <code>CONDITIONRATEVALUE</code> has the default value of <code>999999</code> or <code>999999,00</code>, this means that the price has not been maintained. This is a placeholder for a missing price.</li>
+<li>Pay attention to the validity of the values. The validity period is between <code>CONDITIONVALIDITYSTARTDATE</code> and <code>CONDITIONVALIDITYENDDATE</code>.</li>
+<li>If <strong>"List price" is null or <code>0</code></strong>, the "Discount (Amount)" and "Discount (Percentage)" cannot be calculated.</li>
+</ul>
 </blockquote>
 <h3 id="32-lookup-and-mapping-data">3.2 Lookup and mapping data</h3>
 <p><strong>Data file:</strong> <code>data/data-example/raw/007_product_conditiontype_mapping_eg.csv</code></p>

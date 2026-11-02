@@ -91,7 +91,7 @@ a:focus-visible {
 
 code {
     padding: 0.15em 0.35em;
-    background: var(--surface-bg);
+    background: var(--page-bg);
     border-radius: 4px;
     font-family: ui-monospace, monospace;
     font-size: 0.9em;
@@ -100,7 +100,7 @@ code {
 pre {
     padding: 1rem;
     overflow-x: auto;
-    background: var(--surface-bg);
+    background: var(--page-bg);
     border-radius: 8px;
 }
 

@@ -102,7 +102,7 @@ a:focus-visible {
 
 code {
     padding: 0.15em 0.35em;
-    background: var(--surface-bg);
+    background: var(--page-bg);
     border-radius: 4px;
     font-family: ui-monospace, monospace;
     font-size: 0.9em;
@@ -111,7 +111,7 @@ code {
 pre {
     padding: 1rem;
     overflow-x: auto;
-    background: var(--surface-bg);
+    background: var(--page-bg);
     border-radius: 8px;
 }
 
@@ -232,21 +232,27 @@ def main() -> int:
 
         page_targets[source.resolve()] = pages_dir / filename
 
-    class CenteredHeaderPreprocessor(Preprocessor):
-        """Enable Markdown in centered wrappers without changing source files."""
+    class DocumentationPreprocessor(Preprocessor):
+        """Normalize centered wrappers and quoted lists without changing sources."""
 
         centered_div = re.compile(
             r'''^([ ]{0,3}<div[ \t]+align[ \t]*=[ \t]*(?:"center"|'center'|center))[ \t]*>[ \t]*$''',
             re.IGNORECASE,
         )
+        quoted_bullet = re.compile(r"^ {0,3}>[ \t]*[-+*][ \t]+\S")
 
         def run(self, lines):
             # Fenced code is already stashed. Four-space-indented code and
             # wrappers with an explicit markdown attribute are left untouched.
-            return [
-                self.centered_div.sub(r'\1 markdown="1">', line)
-                for line in lines
-            ]
+            result = []
+            for line in lines:
+                # Python-Markdown needs a blank line before a quoted list.
+                if (self.quoted_bullet.match(line) and result
+                        and re.match(r"^ {0,3}>[ \t]*\S", result[-1])
+                        and not self.quoted_bullet.match(result[-1])):
+                    result.append(">")
+                result.append(self.centered_div.sub(r'\1 markdown="1">', line))
+            return result
 
     # Adjust Markdown-generated links before rendering the final HTML
     class RepositoryLinkProcessor(Treeprocessor):
@@ -296,8 +302,8 @@ def main() -> int:
             # Run after fenced_code_block (25), before html_block (20).
             # "extra" includes the markdown-in-HTML extension.
             converter.preprocessors.register(
-                CenteredHeaderPreprocessor(converter),
-                "centered_headers",
+                DocumentationPreprocessor(converter),
+                "documentation",
                 24,
             )
             converter.treeprocessors.register(
