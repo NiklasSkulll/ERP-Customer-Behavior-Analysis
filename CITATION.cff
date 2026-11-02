@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this repository in research or academic work, please cite it using the metadata provided here."
+
+type: software
+title: "ERP-Customer-Behavior-Analysis"
+
+authors:
+  - family-names: "Schneider"
+    given-names: "Niklas"
+
+repository-code: "https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis"
+
+abstract: >-
+  Bachelor's thesis project for detecting, classifying, and explaining
+  changes in B2B wholesale customers' purchasing behavior using ERP time
+  series.
+
+keywords:
+  - data analytics
+  - ERP
+  - business data
+  - customer behavior analysis
+  - time series analysis
+  - research software
+  - bachelor's thesis
+
+# Add after the final GitHub release:
+# version: 1.0.0
+# date-released: "YYYY-MM-DD"
+# doi: "10.xxxx/xxxxx"

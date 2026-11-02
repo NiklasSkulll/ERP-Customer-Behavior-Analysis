@@ -15,6 +15,7 @@
     - [Prompt to analyse the Git LFS setup and setup the uv environment](#prompt-to-analyse-the-git-lfs-setup-and-setup-the-uv-environment)
     - [Prompt to setup MCP Serena for this project](#prompt-to-setup-mcp-serena-for-this-project)
 - [Prompt to clean up the repo](#prompt-to-clean-up-the-repo)
+- [Prompt to create the pull request template](#prompt-to-create-the-pull-request-template)
 - [Bibliography](#bibliography)
 
 ---
@@ -125,7 +126,7 @@ No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp s
 
 ---
 
-### Prompt to clean up the repo
+## Prompt to clean up the repo
 
 > The same chat as the initial setup file got created in [004_setup_files_creation_prompts.md](docs/prompts/004_setup_files_creation_prompts.md#prompt-to-create-a-initial-start-script), was used for this clean up.
 
@@ -143,6 +144,27 @@ No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp s
     - env/.env.example is empty, so creating a local .env currently provides no benefit.
     - No minimum uv version is declared. **->** is this important? If so, lets choose my current version, or? Can we declare this?
     - The README incorrectly says dependency files are empty and recommends Python 3.11. **->** we do this later, like the serena correction
+```
+
+---
+
+## Prompt to create the pull request template
+
+> The template `.github/pull_request_template.md` got created all in one chat.
+
+**AI model (model name (source)):**
+- GPT-6.1 Sol (Codex)
+
+**Prompt:**
+```markdown
+**I have a new improvement to make:**
+- Analyse my repo, if you haven't got the context yet (you can use Serena MCP for it).
+- Analyse the current best practices for writing pull request in GitHub.
+
+**What I want:**
+- Look at my `.github/pull_request_template.md` now.
+- This is currently empty.
+- Create a best practice and for my project the best/fitting pull request template.
 ```
 
 ---
