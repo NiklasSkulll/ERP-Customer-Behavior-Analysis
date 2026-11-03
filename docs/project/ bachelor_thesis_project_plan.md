@@ -2,7 +2,7 @@
 
 # Project plan for the Bachelor's Thesis
 
-...(short overview)
+This project plan defines the objectives, scope and methodological approach for detecting, classifying and explainably describing changes in B2B customers’ purchasing behaviour using ERP sales order data. It outlines the data basis, candidate analytical measures, taxonomy development and evaluation strategy, distinguishing the core investigation from optional extensions.
 
 </div>
 
