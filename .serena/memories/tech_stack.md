@@ -1,5 +1,5 @@
 # Environment and tooling
-- WSL/Linux; uv-managed non-package project (no build-system installation). pyproject.toml requires Python >=3.12 and uv >=0.13.1 via [tool.uv].required-version; .python-version selects 3.12. pyproject.toml and uv.lock are populated; README now documents the working bootstrap.
+- WSL/Linux; uv-managed non-package project (no build-system installation). pyproject.toml requires Python >=3.12 and uv >=0.13.1 via [tool.uv].required-version; .python-version selects 3.12. Dependencies are declared in pyproject.toml and resolved in uv.lock; bootstrap and environment instructions live in README and docs/setup/.
 - Runtime dependencies: duckdb, markdown, pandas, numpy, pyarrow, scipy, scikit-learn (import sklearn), ruptures, matplotlib, seaborn, plotly[express]. Dev group: nbconvert, jupyterlab, ipykernel, anywidget. SHAP is not declared.
 - src/config is not installed as a package by uv sync. Launch Jupyter from repo root with PYTHONPATH="$PWD/src" uv run --locked jupyter lab; editor kernels need the absolute src path on PYTHONPATH too. Select project .venv/bin/python, not Serena's tool interpreter.
 - Configurations share frozen AnalysisConfig(data_dir, output_dir, is_production); paths derive from src/config/_base.py's location, not the working directory. No automatic machine/environment profile selection and no .env-based configuration.
@@ -7,3 +7,5 @@
 - .gitattributes puts CSV/Parquet in LFS, not notebooks. Existing .githooks provide the private-path pre-commit guard and four LFS hooks. Bootstrap repairs executable permissions and sets repository-local core.hooksPath.
 - Serena is separately installed, not a project dependency. .serena/project.yml selects Python+Markdown LSP, REPL, Git-ignore handling and explicit production exclusions. Verify the active project on each MCP connection before symbol/memory writes; different connections can target different projects.
 - Python class and nested Markdown heading navigation work through this project's Serena MCP. Installed tools/kernel configuration do not prove editor UI kernel selection.
+
+- Phase 1 is a self-contained .ipynb, not an installed Python module. Its functions use pandas/NumPy, explicit-schema Arrow/DuckDB conversion and matplotlib; synthetic checks use standard-library unittest/tempfile. Library cells carry the `library` tag for isolated function verification without executing extract-loading/exploration cells. Config import still requires src on sys.path.

@@ -18,10 +18,12 @@ Agents implement and verify with fully synthetic fixtures and public source note
 
 ## Phase 1 - Familiarise yourself with the data and assess its suitability
 
+**Status (2026-11-04):** Implemented the Phase 1 workflow in `src/notebooks/001_f_phase_1.ipynb`, including empty-input handling, structural audits, fixed evidence roles, provisional profiles, focused exploration, decisions and verified exports. All 16 embedded synthetic checks and four isolated empty/populated/export/conflict workflows passed. P1.01 and P1.02 are complete; P1.03–P1.17 have implementation support but remain unchecked where empirical outputs or actual-input reproduction require populated extracts and review. P1.18 remains pending. The eight example CSV/Parquet pairs still contain no records.
+
 ### Inspect the datasets and verify their meaning
 
-- [ ] **P1.01** Review the plan, framework and existing data description; confirm the research questions, core measures, 24-month scope and information still needed from the extraction process.
-- [ ] **P1.02** Create a reproducible source notebook in `src/notebooks/` with the explicit example configuration and synthetic fixtures; establish Parquet loading and configured artifact paths without changing original extracts.
+- [x] **P1.01** Review the plan, framework and existing data description; confirm the research questions, core measures, 24-month scope and information still needed from the extraction process.
+- [x] **P1.02** Create a reproducible source notebook in `src/notebooks/` with the explicit example configuration and synthetic fixtures; establish Parquet loading and configured artifact paths without changing original extracts.
 - [ ] **P1.03** Record the available tables, extraction dates, filters, coverage, row/column counts and the entity represented by each row; distinguish documented facts, observed properties, assumptions and unresolved questions.
 - [ ] **P1.04** Verify required fields, data types, identifiers, leading-zero semantics, duplicate candidate keys and missing-value placeholders against the data description.
 - [ ] **P1.05** Verify table relationships and the distinction between order-level and item-level fields, including how `TOTALNETAMOUNT` can be counted once per order after joins.

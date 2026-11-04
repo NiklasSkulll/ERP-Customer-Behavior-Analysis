@@ -19,6 +19,99 @@
 <p><strong>Important:</strong> Do not delete old entries, because they represent the history, like a git log, but in narrative form. If the file becomes too long, move the oldest entries to <a href="HANDOVER_ARCHIVE.html" target="_blank" rel="noopener noreferrer">HANDOVER_ARCHIVE.md</a> (once there are more than 50 entries).</p>
 </div>
 <hr />
+<h2 id="2026-11-04-gpt-6-implement-phase-1-assessment-notebook">2026-11-04 - GPT-6: Implement Phase 1 assessment notebook</h2>
+<h3 id="session-summary">Session Summary</h3>
+<ul>
+<li>Implemented <code>src/notebooks/001_f_phase_1.ipynb</code> as a self-contained 25-cell Phase 1 workflow with explicit example configuration, instructions, five required output sections and backlog mapping.</li>
+<li>Implemented all currently feasible code; empirical Phase 1 findings, domain confirmations and P1.18 remain pending populated inputs and researcher review.</li>
+<li>All 16 embedded synthetic checks passed. Isolated code-cell workflows passed for empty sources, populated synthetic sources with exports, populated sources without general exports, and conflicting headers that must block analysis.</li>
+</ul>
+<h3 id="changes-findings">Changes &amp; Findings</h3>
+<ul>
+<li>Added field/type/null/key/relationship audits, order-header consistency checks, structural date/code/value reports and an optional price-feasibility screen.</li>
+<li>Added customer-level evidence assignment/exposure tracking, durable pre-exploration role freeze, explicit 24-month/eligibility gates, coverage-aware monthly/quarterly profiles, history/population assessments, focused plots and partial-rejection sensitivity.</li>
+<li>Added decision/open-issue registers, completion review, reproducibility metadata and verified CSV-to-Parquet exports preserving identifiers and missing values.</li>
+<li>Added implementation plan at <code>docs/superpowers/plans/2026-11-04-phase-1-notebook.md</code>; no dependency/configuration changes.</li>
+<li>Independent read-only review identified false inactivity after quarantining uncertain orders and role persistence after exploration; both were corrected with regressions.</li>
+</ul>
+<h3 id="end-session-status">End-Session Status</h3>
+<ul>
+<li>Branch: <code>feat/phase-1-data-understanding</code>; HEAD: <code>87d2b5d</code>. No commit or push performed.</li>
+<li>Source notebook remains untracked and has no saved outputs/execution counts. Pre-existing <code>.gitkeep</code> deletion and eight untracked Parquet inputs were preserved.</li>
+<li>Notebook schema/code syntax checks and <code>git diff --check</code> passed. No project-wide test suite exists. No real extract notebook execution, bootstrap, production access or mirror regeneration occurred.</li>
+<li>Verification used the existing project interpreter and invented fixtures under <code>/tmp/erp-phase1-work/</code>; fixture raw-file hashes remained unchanged.</li>
+</ul>
+<h3 id="next-step">Next Step</h3>
+<ul>
+<li>User reviews notebook settings, supplies populated extracts in their own environment, confirms extraction metadata/coverage, parsing/identifier semantics, eligible reason codes/currency and evidence-use plan, then restarts the kernel and runs the notebook.</li>
+<li>Review generated evidence, enter evidence-linked preparation recommendations and assess all Phase 1 completion criteria before marking P1.18 complete.</li>
+</ul>
+<h3 id="important-decisions-with-justification">Important Decisions with Justification</h3>
+<ul>
+<li>Unknown coverage leaves primary measures undefined; recorded counts/values remain separate. Excluding uncertain headers must not imply zero purchasing, so unresolved development order attribution/eligibility blocks analysis.</li>
+<li>Confirmed analysis persists CSV/Parquet evidence roles before behavioural calculations even when general exports are disabled: later splits cannot silently reserve previously explored customers.</li>
+<li>Scoped export reads CSV fields as strings through DuckDB, restores the explicit Arrow schema and verifies the round trip. The general converter's inferred types could lose leading zeros or reinterpret null-like strings. Seconds-resolution dates are stored losslessly as nanoseconds because Parquet lacks timestamp[s].</li>
+<li>Only P1.01 and P1.02 are checked complete; implementation/synthetic verification of remaining tasks is distinguished from empirical results and private-environment reproduction.</li>
+</ul>
+<h3 id="gotchas-and-pitfalls">Gotchas and Pitfalls</h3>
+<ul>
+<li>Default settings intentionally block behavioural analysis until dates, currency, reason eligibility, identifier semantics and evidence/exposure confirmations are supplied. General exports default off; a confirmed analysis still writes the mandatory evidence manifest under the configured interim directory.</li>
+<li>Filenames in <code>SOURCES</code> and explicit parsing formats must match the user's extracts; changing the config import changes roots, not filenames or ERP semantics.</li>
+<li>Product keys must be unique/non-null before joins. Missing amounts/items/classifications leave affected measures undefined; no annual order-count minimum or automatic currency/unit conversion is imposed.</li>
+<li>Notebook Python mirrors remain user-managed and were not inspected or modified.</li>
+</ul>
+<h3 id="modified-and-new-memories">Modified and new Memories</h3>
+<ul>
+<li>Updated <code>core</code> with the Phase 1 source location and current implementation boundary.</li>
+<li>Updated <code>conventions</code> with pre-exploration evidence persistence, unresolved-order gating and schema-preserving export guidance.</li>
+</ul>
+<h3 id="open-or-unresolved">Open or Unresolved</h3>
+<ul>
+<li>Data-dependent P1.03–P1.18 outputs, actual extraction coverage, final temporal/suitability rules and Phase 2 recommendations remain pending.</li>
+<li>Discount assignment/overlap/unit feasibility and optional subgroup/quantity exploration remain deferred unless justified by an explicit analytical question.</li>
+</ul>
+<h2 id="2026-11-04-gpt-6-phase-1-feasibility-review">2026-11-04 - GPT-6: Phase 1 feasibility review</h2>
+<h3 id="session-summary_1">Session Summary</h3>
+<ul>
+<li>Reviewed AGENTS.md, the plan, FUUCCE framework, Phase 1 backlog, data documentation, configuration and relevant Serena memories.</li>
+<li>Confirmed that all eight example CSV/Parquet pairs contain zero records and documented columns; the requested notebook is a zero-byte file.</li>
+<li>Implementation is feasible from the schema, but empirical Phase 1 completion requires populated data and user review. User requested assessment first and a pause before implementation.</li>
+</ul>
+<h3 id="changes-findings_1">Changes &amp; Findings</h3>
+<ul>
+<li>No notebook, data, configuration or mirror changes. Added this handover and a Phase 1 backlog status note.</li>
+<li>Empty Parquet fields are strings: future parsing must validate dates/numbers explicitly and preserve identifier semantics.</li>
+<li>Exact observation dates, extraction coverage/filters, prior evidence exposure and unresolved eligibility treatments require explicit inputs or pending decisions.</li>
+</ul>
+<h3 id="end-session-status_1">End-Session Status</h3>
+<ul>
+<li>Branch: <code>feat/phase-1-data-understanding</code>; HEAD: <code>87d2b5d</code>. No commit or push performed.</li>
+<li>Pre-existing work: deleted notebook <code>.gitkeep</code>, untracked empty target notebook and eight untracked Parquet files; preserved.</li>
+<li>Read-only schema/row-count inspection used the project interpreter. No notebook execution or build performed.</li>
+</ul>
+<h3 id="next-step_1">Next Step</h3>
+<ul>
+<li>Await the user's response before implementing <code>src/notebooks/001_f_phase_1.ipynb</code> against P1.01–P1.18.</li>
+</ul>
+<h3 id="important-decisions-with-justification_1">Important Decisions with Justification</h3>
+<ul>
+<li>Distinguish complete notebook implementation from empirical phase completion: header-only files cannot establish behavioural findings or preparation recommendations.</li>
+<li>Use <code>from config.example import CONFIG</code> with an explanatory comment and configured paths; private production execution remains user-managed.</li>
+<li>Preserve evaluation boundaries before behavioural exploration; do not invent extraction coverage or eligibility semantics.</li>
+</ul>
+<h3 id="gotchas-and-pitfalls_1">Gotchas and Pitfalls</h3>
+<ul>
+<li>Missing coverage must not become zero activity; repeated header amounts must be counted once per consistent order, and currencies kept compatible.</li>
+<li>Monthly aggregation and two-to-four annual orders are exploratory orientations, not fixed inclusion requirements.</li>
+</ul>
+<h3 id="modified-and-new-memories_1">Modified and new Memories</h3>
+<ul>
+<li>Updated <code>core</code> to remove the stale claim that public notebook directories contain only <code>.gitkeep</code> placeholders.</li>
+</ul>
+<h3 id="open-or-unresolved_1">Open or Unresolved</h3>
+<ul>
+<li>No Phase 1 checklist task marked complete. Empirical assessment, metadata clarification and final Phase 2 recommendations remain pending.</li>
+</ul>
     </main>
 </body>
 </html>

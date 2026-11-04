@@ -22,6 +22,15 @@
 <li>Markdown uses centered title/badge wrappers, manual GitHub-anchor TOCs and case-correct links. DocumentationPreprocessor runs after fenced-code stashing and before raw-HTML handling: enables Markdown in centred wrappers and inserts separators before quoted bullet lists and bullets following bold-only labels. Preserve explicit markdown attributes, fenced examples and source content; normalisation belongs in the converter.</li>
 <li>Documentation styling belongs in setup/create_documentation_site.py's SITE_CSS; docs/docsite/ is generated. Dark palette: --page-bg #0d1117 (outer page plus inline/fenced code), --panel-bg #161b22 (content), --surface-bg #21262d (blockquotes), green .highlight. Preserve grouped root-first index and .back-link navigation; avoid new UI dependencies for small visual changes.</li>
 <li>Keep memories dense and durable with backticked mem: references; session history and task status belong in HANDOVER.md/BACKLOG.md under the default workflow, subject to explicit user overrides.</li>
+<li>Phase 1 analysis requires explicit 24-month bounds, eligibility/currency/identifier and evidence/exposure confirmations. Confirmed evidence roles are validated and persisted under CONFIG.data_dir/interim before behavioural exploration, independently of general export settings. Changed roles/specifications require an explicit versioned revision.</li>
+<li>Unresolved development order identity/header/eligibility blocks Phase 1 analysis rather than allowing quarantined orders to create false zero activity. Missing amounts or item classifications instead leave affected measures undefined; unknown extraction coverage keeps primary measures undefined with separate recorded-evidence columns.</li>
+<li>
+<p>Phase 1 exports use scoped CSV-to-DuckDB/Arrow conversion with explicit schemas and verified null masks/values; general converter inference can lose leading-zero IDs. All-null Arrow fields need explicit null arrays; Parquet stores seconds timestamps losslessly as ns. Original extracts are preserved.</p>
+</li>
+<li>
+<p>Phase 1 time bounds and verified coverage intervals are start-inclusive/end-exclusive; the observation end must equal start plus 24 calendar months. Monthly/quarterly views are provisional; no separate annual order minimum is imposed. Customers with no selected eligible orders remain in the development population audit instead of being silently declared suitable or unchanged.</p>
+</li>
+<li>Phase 1 data/parsing contracts are explicit: SOURCES maps the eight documented Parquet tables, DATE_FORMAT/DECIMAL_MARK/MISSING_TOKENS define interpretation, and field audits preserve failures and numeric-identifier risks. Never infer zero padding, locale, cancellation semantics, FX rates or extraction coverage from convenient defaults.</li>
 </ul>
     </main>
 </body>
