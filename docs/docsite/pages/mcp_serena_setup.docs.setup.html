@@ -71,7 +71,7 @@ serena --version
 <ul>
 <li>Source notebooks: <code>src/notebooks/</code></li>
 <li>Read-only Python mirrors: <code>src/raw-notebooks/</code></li>
-<li>Refresh mirrors using the repository's existing export workflow in <a href="../../setup/Create_raw_Python_files.md">docs/setup/Create_raw_Python_files.md</a> before initial indexing and after notebook changes.</li>
+<li>Refresh mirrors using the repository's existing export workflow in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/setup/Create_raw_Python_files.md">docs/setup/Create_raw_Python_files.md</a> before initial indexing and after notebook changes.</li>
 <li>Keep <code>src/raw-notebooks/</code> accessible to Serena.</li>
 <li>Agents must not regenerate or edit mirrors.</li>
 </ul>
@@ -190,7 +190,7 @@ args = [
 </code></pre>
 <p>Use either the extension UI or the JSON configuration. If <code>.mcp.json</code> already contains other servers, add <code>serena</code> to the existing <code>mcpServers</code> object without replacing those entries. Start a new conversation and approve the project MCP server if prompted. Enter <code>/mcp</code> to check the connection or reconnect Serena. If Serena was already registered through Claude Code CLI for this repository, use that existing registration instead of adding a duplicate. No separate CLI installation is required for the extension setup (Anthropic, n.d.a, n.d.b).</p>
 <h3 id="onboarding">Onboarding</h3>
-<p>Onboarding is performed by the connected AI agent using Serena, resulting in <a href="../../../.serena/memories/">.serena/memories/</a> files (Oraios AI &amp; Oraios Software, n.d.b).</p>
+<p>Onboarding is performed by the connected AI agent using Serena, resulting in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena/memories">.serena/memories/</a> files (Oraios AI &amp; Oraios Software, n.d.b).</p>
 <p><strong>Once connected, ask the agent to:</strong></p>
 <blockquote>
 <p>Onboard this repository using Serena. First follow the startup sequence in <code>AGENTS.md</code>. Inspect the project structure, dependency files, Python modules, notebooks and Markdown documentation. Do not execute notebooks or regenerate data.</p>
@@ -283,14 +283,16 @@ initial_prompt: |
   - These rules do not authorize reading saved notebook outputs or
     embedded content derived from production data.
 </code></pre>
-<p><strong>Explanation of this configuration (Oraios AI &amp; Oraios Software, n.d.a):</strong>
-- <code>agent_interface: REPL</code>: Lets the agent combine Serena operations in one call. It does not connect Serena to the Jupyter kernel.
-- <code>read_only: false</code>: Allows normal editing and memory updates.
-- <code>ignore_all_files_in_gitignore: true</code>: Ignores all files, which are defined in the <code>.gitignore</code>. Important ignores are defined under <code>ignored_paths</code> as well.
-- Ignore rules filter Serena's project operations. They are not filesystem access controls. Likewise, the read-only mirror policy is an agent instruction, not a per-directory permission enforced by <code>read_only: false</code>.</p>
+<p><strong>Explanation of this configuration (Oraios AI &amp; Oraios Software, n.d.a):</strong></p>
+<ul>
+<li><code>agent_interface: REPL</code>: Lets the agent combine Serena operations in one call. It does not connect Serena to the Jupyter kernel.</li>
+<li><code>read_only: false</code>: Allows normal editing and memory updates.</li>
+<li><code>ignore_all_files_in_gitignore: true</code>: Ignores all files, which are defined in the <code>.gitignore</code>. Important ignores are defined under <code>ignored_paths</code> as well.</li>
+<li>Ignore rules filter Serena's project operations. They are not filesystem access controls. Likewise, the read-only mirror policy is an agent instruction, not a per-directory permission enforced by <code>read_only: false</code>.</li>
+</ul>
 <hr />
 <h2 id="bibliography">Bibliography</h2>
-<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+<p>See <a href="bibliography.docs.literature.html">docs/literature/bibliography.md</a>.</p>
     </main>
 </body>
 </html>

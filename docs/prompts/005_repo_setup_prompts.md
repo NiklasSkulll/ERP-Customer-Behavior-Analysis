@@ -15,6 +15,9 @@
     - [Prompt to analyse the Git LFS setup and setup the uv environment](#prompt-to-analyse-the-git-lfs-setup-and-setup-the-uv-environment)
     - [Prompt to setup MCP Serena for this project](#prompt-to-setup-mcp-serena-for-this-project)
 - [Prompt to clean up the repo](#prompt-to-clean-up-the-repo)
+- [Prompt to create the pull request template](#prompt-to-create-the-pull-request-template)
+- [Prompt to improve the project plan](#prompt-to-improve-the-project-plan)
+- [Prompt to create the backlog tasks](#prompt-to-create-the-backlog-tasks)
 - [Bibliography](#bibliography)
 
 ---
@@ -125,7 +128,7 @@ No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp s
 
 ---
 
-### Prompt to clean up the repo
+## Prompt to clean up the repo
 
 > The same chat as the initial setup file got created in [004_setup_files_creation_prompts.md](docs/prompts/004_setup_files_creation_prompts.md#prompt-to-create-a-initial-start-script), was used for this clean up.
 
@@ -147,6 +150,75 @@ No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp s
 
 ---
 
+## Prompt to create the pull request template
+
+> The template `.github/pull_request_template.md` got created all in one chat.
+
+**AI model (model name (source)):**
+- GPT-6.1 Sol (Codex)
+
+**Prompt:**
+```markdown
+**I have a new improvement to make:**
+- Analyse my repo, if you haven't got the context yet (you can use Serena MCP for it).
+- Analyse the current best practices for writing pull request in GitHub.
+
+**What I want:**
+- Look at my `.github/pull_request_template.md` now.
+- This is currently empty.
+- Create a best practice and for my project the best/fitting pull request template.
+```
+
+---
+
+## Prompt to improve the project plan
+
+> This improvement got done in one chat. The file `docs/project/bachelor_thesis_project_plan.md` got created here.
+
+**AI model (model name (source)):**
+- GPT-6 Astra (OpenAI, 2026c)
+
+> Below is an example prompt that got used to improve and finalise the project plan step-by-step after it got reviewed each time.
+
+**Prompt:**
+```markdown
+**Role - You are an expert in:**
+- Academic writing, academic reviewer, professor of computer science, and the scope of bachelor's theses
+- Expert in data analysis using Python and notebooks
+
+**Topic:** Bachelor's thesis in computer science, GitHub/programming, project planning, data analysis
+
+**Task:** I would like to adjust and refine/improve my project plan for my bachelor's thesis. Since I now have the ERP data I want to analyze—and have also removed some items due to the scope of the project—I need to adjust the plan accordingly. I have created a public repository for the methodological section of my thesis ([https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis](https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis)).
+
+**For context and information:**
+- Open and analyze the GitHub project (README.md, project-related documentation, sample data feature structure (currently only column names), dataset documentation)
+- Open and analyze the `docs/project/complete_project_plan1.md` file.
+
+First, read and analyze everything; further instructions will follow. The goal is to have a finished plan. However, we'll take it step by step here and begin once you've analyzed and read everything.
+```
+
+---
+
+## Prompt to create the backlog tasks
+
+**AI model (model name (source)):**
+- GPT-6.1 Sol (Codex)
+
+> Below is an example prompt that got used to improve and finalise the `BACKLOG.md` step-by-step after it got reviewed each time.
+
+**Prompt:**
+```markdown
+Look at my source of truth project plan in `docs/project/bachelor_thesis_project_plan.md` and the workflow `docs/framework/fuucce_framework.md`.
+
+I want to create the final complete `BACKLOG.md` now. **Means:**
+- a short overview (what is this file about) directly after `# Backlog` replacing the `...`.
+- then all task we need, to finish the workflow in `docs/framework/fuucce_framework.md`.
+- Each `## ...` should be named by the phase. Like `## Backlog Entry: Phase 1` or `## Backlog task: Phase 1` or so.
+- After the heading there should be all tasks chronological listed which need to be completed to complete the phase.
+```
+
+---
+
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

@@ -389,4 +389,4 @@ Can we do this nice and clean with good messages and colors and so? Analyse all 
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

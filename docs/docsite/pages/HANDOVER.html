@@ -19,57 +19,6 @@
 <p><strong>Important:</strong> Do not delete old entries, because they represent the history, like a git log, but in narrative form. If the file becomes too long, move the oldest entries to <a href="HANDOVER_ARCHIVE.html">HANDOVER_ARCHIVE.md</a> (once there are more than 50 entries).</p>
 </div>
 <hr />
-<h2 id="2026-10-28-gpt-6-initial-serena-onboarding">2026-10-28 - GPT-6: Initial Serena onboarding</h2>
-<h3 id="session-summary">Session Summary</h3>
-<ul>
-<li>Activated the requested ERP-Customer-Behavior-Analysis project in Serena and performed initial onboarding.</li>
-<li>Reviewed agent instructions, setup documentation, dependency configuration, utility scripts, and methodology/schema documentation. Production directories were not inspected; no notebooks or datasets were executed or generated.</li>
-<li>Verified Python symbol lookup and Markdown heading navigation through Serena; prepared concise project memories.</li>
-</ul>
-<h3 id="changes-findings">Changes &amp; Findings</h3>
-<ul>
-<li>Python 3.12.3 is installed in <code>.venv</code>; <code>.python-version</code> pins 3.12 and <code>pyproject.toml</code> requires &gt;=3.12. Analysis and notebook dependencies are populated.</li>
-<li>All three <code>setup/*.py</code> files passed AST parsing and <code>--help</code> execution with the project interpreter; DuckDB, Markdown, and nbconvert imported successfully.</li>
-<li>Serena located <code>main</code> in <code>setup/csv_to_parquet.py</code> and <code>MCP Serena setup/Setup/Onboarding</code> in the setup guide.</li>
-<li>README still describes empty dependency files and Python 3.11 in its getting-started text; record correction in BACKLOG.md.</li>
-<li>Converter scans immediate CSV files in <code>data/data-example/</code>, whereas schema documentation uses <code>data/data-example/raw/</code>; no data was inspected to resolve this mismatch.</li>
-</ul>
-<h3 id="end-session-status">End-Session Status</h3>
-<ul>
-<li>Git is not initialized locally: no branch, HEAD, push, or Git working-tree status is available.</li>
-<li>Public notebook and mirror directories contain only <code>.gitkeep</code>; no analysis entry point or results exist yet.</li>
-<li>Data-free checks passed; no analysis/build or dataset conversion was attempted. No test/lint/type-check configuration is declared in pyproject.toml.</li>
-<li>HANDOVER.md and BACKLOG.md updated; Serena memories describe the confirmed setup and boundaries.</li>
-</ul>
-<h3 id="next-step">Next Step</h3>
-<ul>
-<li>Address the documentation/path-alignment tasks in BACKLOG.md before starting synthetic notebook development.</li>
-</ul>
-<h3 id="important-decisions-with-justification">Important Decisions with Justification</h3>
-<ul>
-<li>Treat installed configuration as authoritative over stale README text to avoid repeating environment setup.</li>
-<li>Keep onboarding limited to navigation, metadata, syntax, and CLI-help checks because no analysis notebooks exist and production access is prohibited.</li>
-</ul>
-<h3 id="gotchas-and-pitfalls">Gotchas and Pitfalls</h3>
-<ul>
-<li>Serena reports the requested mixed-case project path; this WSL workspace is exposed with a lowercase path. Avoid assuming a second checkout exists based on spelling alone.</li>
-<li>Notebook mirror generation is exclusively user-managed. Never run the exporter beyond <code>--help</code> as an agent.</li>
-<li>The documentation generator rebuilds its output directory and discovers Markdown recursively; its build was not run during onboarding.</li>
-</ul>
-<h3 id="modified-and-new-memories">Modified and new Memories</h3>
-<ul>
-<li><code>core</code>: source map, research workflow, and project boundaries.</li>
-<li><code>tech_stack</code>: environment, dependencies, and Jupyter interpreter selection.</li>
-<li><code>suggested_commands</code>: actual utility commands and execution restrictions.</li>
-<li><code>conventions</code>: notebook authority, data formatting, and script conventions.</li>
-<li><code>task_completion</code>: data-free validation and required session closeout order.</li>
-</ul>
-<h3 id="open-or-unresolved">Open or Unresolved</h3>
-<ul>
-<li>Correct stale README setup instructions and align CSV input paths.</li>
-<li>Jupyter kernel selection in the user's editor has not been observed; select the project <code>.venv/bin/python</code>.</li>
-<li>End-to-end analysis, evaluation results, and a project license remain absent. No Git initialization or push was requested.</li>
-</ul>
     </main>
 </body>
 </html>

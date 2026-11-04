@@ -611,4 +611,4 @@ When the paper proposes change types, list only the types actually defined or em
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

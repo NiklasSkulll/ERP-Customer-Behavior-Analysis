@@ -99,4 +99,4 @@ Activation changes which environment the shell uses. It does not install or sync
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

@@ -27,6 +27,7 @@
 - Anthropic. (2026). _Claude Sonnet 4.6_ [Large language model]. https://www.anthropic.com/claude/sonnet
 - Artstein, R., & Poesio, M. (2008). Inter-coder agreement for computational linguistics. _Computational Linguistics, 34_(4), 555–596. https://doi.org/10.1162/coli.07-034-R2
 - Astral. (n.d.). _Working on projects_. uv documentation. Retrieved October 17, 2026, from https://docs.astral.sh/uv/guides/projects/
+- Chavelli, F., Ermshaus, A., Yang, F., Schäfer, P., Paparrizos, J., & Boniol, P. (2026). TSB-SEG: A systematic time-series segmentation benchmark [Preprint]. arXiv. https://arxiv.org/abs/2611.03039
 - Gatt, A., & Krahmer, E. (2018). Survey of the state of the art in natural language generation: Core tasks, applications and evaluation. _Journal of Artificial Intelligence Research, 61_, 65–170. https://doi.org/10.1613/jair.5477
 - GitHub. (n.d.-a). _Configuring Git Large File Storage_. GitHub Docs. Retrieved October 28, 2026, from https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage
 - GitHub. (n.d.-b). _Git Large File Storage billing_. GitHub Docs. Retrieved October 28, 2026, from https://docs.github.com/en/billing/concepts/product-billing/git-lfs
@@ -49,11 +50,14 @@
 - OpenAI. (2026a). _GPT-5.5 Pro_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-5.5-pro
 - OpenAI. (2026b). _GPT-5.6 Sol_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-5.6-sol
 - OpenAI. (2026c). _GPT-6 Astra_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-6-astra
+- Opitz, J. (2024). A closer look at classification evaluation metrics and a critical reflection of common evaluation practice. Transactions of the Association for Computational Linguistics, 12, 820–836. https://doi.org/10.1162/tacl_a_00675
 - Oraios AI. (2026). _Serena_ (Version 2.0.0) [Computer software]. GitHub. https://github.com/oraios/serena/releases/tag/v2.0.0
 - Oraios AI, & Oraios Software. (n.d.a). _Configuration_. Serena Documentation. Retrieved October 16, 2026, from https://oraios.github.io/serena/02-usage/050_configuration.html
 - Oraios AI, & Oraios Software. (n.d.b). _Serena documentation_. Retrieved October 16, 2026, from https://oraios.github.io/serena/
 - Rudin, C. (2019). Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead. _Nature Machine Intelligence, 1_(5), 206–215. https://doi.org/10.1038/s42256-019-0048-x
+- Song, H., Su, H., Shalyminov, I., Cai, J., & Mansour, S. (2024). FineSurE: Fine-grained summarization evaluation using LLMs. In L.-W. Ku, A. Martins, & V. Srikumar (Eds.), Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) (pp. 906–922). Association for Computational Linguistics. https://doi.org/10.18653/v1/2024.acl-long.51
 - Szopinski, D., Schoormann, T., & Kundisch, D. (2020). Criteria as a prelude for guiding taxonomy evaluation. In _Proceedings of the 53rd Hawaii International Conference on System Sciences_. https://aisel.aisnet.org/hicss-53/os/design_science_research/6/
 - Truong, C., Oudre, L., & Vayatis, N. (2020). Selective review of offline change point detection methods. _Signal Processing, 167_, Article 107299. https://doi.org/10.1016/j.sigpro.2019.107299
 - van Heesch, U., Avgeriou, P., & Hilliard, R. (2012). A documentation framework for architecture decisions. _Journal of Systems and Software, 85_(4), 795–820. https://doi.org/10.1016/j.jss.2011.10.017
 - Wickham, H. (2014). Tidy data. _Journal of Statistical Software, 59_(10), 1–23. https://doi.org/10.18637/jss.v059.i10
+- Zhang, M.-L., & Zhou, Z.-H. (2014). A review on multi-label learning algorithms. IEEE Transactions on Knowledge and Data Engineering, 26(8), 1819–1837. https://doi.org/10.1109/TKDE.2013.39

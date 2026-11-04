@@ -1,6 +1,5 @@
 """Convert project documentation Markdown files to HTML and combine to a documentation site."""
 
-import os
 import argparse
 import re
 import shutil
@@ -233,7 +232,7 @@ def main() -> int:
         page_targets[source.resolve()] = pages_dir / filename
 
     class DocumentationPreprocessor(Preprocessor):
-        """Normalize centered wrappers and quoted lists without changing sources."""
+        """Normalize centered wrappers and list starts without changing sources."""
 
         centered_div = re.compile(
             r'''^([ ]{0,3}<div[ \t]+align[ \t]*=[ \t]*(?:"center"|'center'|center))[ \t]*>[ \t]*$''',
@@ -246,6 +245,10 @@ def main() -> int:
             # wrappers with an explicit markdown attribute are left untouched.
             result = []
             for line in lines:
+                # Separate bold section labels from the bullet lists they introduce.
+                if (re.match(r"^ {0,3}[-+*][ \t]+\S", line) and result
+                        and re.fullmatch(r" {0,3}\*\*.+\*\*[ \t]*", result[-1])):
+                    result.append("")
                 # Python-Markdown needs a blank line before a quoted list.
                 if (self.quoted_bullet.match(line) and result
                         and re.match(r"^ {0,3}>[ \t]*\S", result[-1])
@@ -277,11 +280,14 @@ def main() -> int:
                     # All generated document pages share the same folder
                     new_path = html_target.name
                 else:
-                    # Link to the original repository file or directory
-                    new_path = Path(os.path.relpath(linked_source, pages_dir)).as_posix()
-
-                    if url.path.endswith("/"):
-                        new_path += "/"
+                    # Files outside the generated site are available on GitHub.
+                    if not linked_source.is_relative_to(project_root):
+                        continue
+                    repo_path = linked_source.relative_to(project_root).as_posix()
+                    view = "tree" if url.path.endswith("/") else "blob"
+                    github_path = f"/NiklasSkulll/ERP-Customer-Behavior-Analysis/{view}/main/{repo_path}"
+                    link.set("href", urlunsplit(("https", "github.com", quote(github_path), url.query, url.fragment)))
+                    continue
 
                 # Preserve any query string and section fragment.
                 link.set("href", urlunsplit(("", "", quote(new_path), url.query, url.fragment)))

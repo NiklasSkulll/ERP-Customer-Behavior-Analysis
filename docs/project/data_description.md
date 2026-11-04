@@ -169,8 +169,8 @@ This documentation was compiled as part of the bachelor's thesis project. The fi
 
 > **Important to note!**
 >- For the **"Price per item before discount"**, `CONDITIONTYPE` is filtered to "List price" (`"Price per item before discount" = "List price"`).
->- For the **"Discount (Percentage)"**, the "List price" is subtracted from the "Total price of the product" and divided by the "List price" (`"Discount (Percentage)" = ("List price"-"Total price of the product")/"List price"`).
->- For the **"Discount (Amount)"**, the "List price" is subtracted from the "Total price of the product" (`"Discount (Amount)" = "List price"-"Total price of the product"`).
+>- For the **"Discount (Percentage)"**, the "Price per item after discount" is subtracted from the "List price" and divided by the "List price" (`"Discount (Percentage)" = ("List price" - "Price per item after discount") / "List price" * 100`).
+>- For the **"Discount (Amount)"**, the "Price per item after discount" is subtracted from the "List price" (`"Discount (Amount)" = "List price" - "Price per item after discount"`).
 >- If `CONDITIONRATEVALUE` has the default value of `999999` or `999999,00`, this means that the price has not been maintained. This is a placeholder for a missing price.
 >- Pay attention to the validity of the values. The validity period is between `CONDITIONVALIDITYSTARTDATE` and `CONDITIONVALIDITYENDDATE`.
 >- If **"List price" is null or `0`**, the "Discount (Amount)" and "Discount (Percentage)" cannot be calculated.

@@ -12,13 +12,14 @@
 - [Prompt used for phase 1-4 development](#prompt-used-for-phase-1-4-development)
 - [Prompt used for phase 5-7 development](#prompt-used-for-phase-5-7-development)
 - [Prompt used to clean up each "Purpose" section](#prompt-used-for-clean-up-each-purpose-section)
+- [Prompt used to improve the former FUUCKAE framework to the new FUUCCE framework](#prompt-used-to-improve-the-former-fuuckae-framework-to-the-new-fuucce-framework)
 - [Bibliography](#bibliography)
 
 ---
 
 ## Prompt used for first framework brainstorming and improvements
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -165,7 +166,7 @@ Do **not** begin constructing the framework until I explicitly tell you to conti
 
 ## Prompt used for phase 1-4 development
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -183,7 +184,7 @@ Now we can continue with phase 3.
 
 ## Prompt used for phase 5-7 development
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -747,7 +748,7 @@ After your assessment, wait until I explicitly ask you to begin Phase 5.
 
 ## Prompt used to clean up each "Purpose" section
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -788,9 +789,9 @@ Phases 1-4 form a project-specific workflow for understanding, exploring and pre
 
 Within this workflow, **Phase 1** establishes an initial understanding of dataset structure, field meanings, relationships, coverage and quality. **Phase 2** investigates customer histories and purchasing patterns to inform preparation and analytical choices. **Phase 3** translates these findings into justified rules, cleaned source tables and reproducible customer-period profiles. **Phase 4** uses these profiles to identify candidate events and document their timing, affected dimensions, magnitude and observed persistence. This division adapts established activities to the thesis rather than reproducing an existing process model directly.
 
-The workflow is iterative. Inspection or exploration may require limited preparation, while preparation and change analysis may reveal issues requiring renewed investigation. This is consistent with CRISP-DM’s recognition that meaningful exploration can depend on prior processing and that analysts may move between phases (IBM, n.d., p. 15). Documented transformations, preserved original extracts and versioned analytical settings make these revisions traceable.
+The workflow is iterative. Inspection or exploration may require limited preparation, while preparation and change analysis may reveal issues requiring renewed investigation. This is consistent with CRISP-DM's recognition that meaningful exploration can depend on prior processing and that analysts may move between phases (IBM, n.d., p. 15). Documented transformations, preserved original extracts and versioned analytical settings make these revisions traceable.
 
-Phase 4 distinguishes the identification of a candidate change from its descriptive interpretation. Following Truong et al. (2020), detection requires an explicit specification of the properties being investigated and the procedure used to locate changes. PELT optimises a specified penalised segmentation objective; its output does not, by itself, establish statistical significance or commercial relevance (Killick et al., 2012). Before-and-after profiles therefore provide separate descriptive evidence. Feature differences indicate what changed but do not automatically explain the detector’s decision or the causes of customer behaviour. Final type definitions and assignments remain tasks for subsequent phases.
+Phase 4 distinguishes the identification of a candidate change from its descriptive interpretation. Following Truong et al. (2020), detection requires an explicit specification of the properties being investigated and the procedure used to locate changes. PELT optimises a specified penalised segmentation objective; its output does not, by itself, establish statistical significance or commercial relevance (Killick et al., 2012). Before-and-after profiles therefore provide separate descriptive evidence. Feature differences indicate what changed but do not automatically explain the detector's decision or the causes of customer behaviour. Final type definitions and assignments remain tasks for subsequent phases.
 
 Where independent evaluation is intended, the data used to develop rules or estimate transformations and detection settings must be distinguished from the evidence used to evaluate them. The appropriate separation depends on the research claim: retrospective analysis may use a complete historical sequence, whereas evaluation of detection at a particular time must respect the information available at that time. The workflow applies leakage safeguards according to this distinction, informed by Kapoor and Narayanan (2023).
 
@@ -801,6 +802,31 @@ Together, these phases provide prepared data and traceable candidate-change evid
 
 ---
 
+## Prompt used to improve the former FUUCKAE framework to the new FUUCCE framework
+
+> The final framework is documented in `docs/framework/fuucce_framework.md`. The same chat got used to finalise the project plan (view [docs/prompts/005_repo_setup_prompts.md](docs/prompts/005_repo_setup_prompts.md#prompt-to-improve-the-project-plan))
+
+**AI model (model name (source)):**
+- GPT-6 Astra (OpenAI, 2026c)
+
+> Below is an example prompt that got used to improve and finalise the framework step-by-step after it got reviewed each time.
+
+**Prompt:**
+```markdown
+So now that the project plan (`bachelor_thesis_project_plan.md`, which I've renamed) is finished, we'll adapt/improve the framework (`fuuckae_framework.md`).
+
+We'll definitely have to shorten, restructure, or remove some phases—depending on the situation. Because the new plan—which follows the “big to small/general to detailed” approach—is now finalized.
+
+Let's get started. **Here's what to do:**
+- Analyze the framework thoroughly and carefully, and review the plan.
+- _Then create a brief overview for me:_
+    - What phases must the improved framework include?
+    - Which phases should be removed, added, or modified?
+    - What would be the best workflow for my bachelor's thesis?
+```
+
+---
+
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

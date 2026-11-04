@@ -26,6 +26,9 @@
 </ul>
 </li>
 <li><a href="#prompt-to-clean-up-the-repo">Prompt to clean up the repo</a></li>
+<li><a href="#prompt-to-create-the-pull-request-template">Prompt to create the pull request template</a></li>
+<li><a href="#prompt-to-improve-the-project-plan">Prompt to improve the project plan</a></li>
+<li><a href="#prompt-to-create-the-backlog-tasks">Prompt to create the backlog tasks</a></li>
 <li><a href="#bibliography">Bibliography</a></li>
 </ul>
 <hr />
@@ -33,8 +36,10 @@
 <blockquote>
 <p>The pre-commit <code>.githooks/pre-commit</code> hook got created all in one chat.</p>
 </blockquote>
-<p><strong>AI model (model name (source)):</strong>
-- GPT-6 Astra (OpenAI, 2026c)</p>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6 Astra (OpenAI, 2026c)</li>
+</ul>
 <blockquote>
 <p>An existing chat with a question about the <code>.gitignore</code> file was used to create this hook (see initial prompt below).</p>
 </blockquote>
@@ -87,38 +92,48 @@ Is there a way to make sure this never happens? Like, e.g. with a pre-commit hoo
 <p>This clean up got done in one chat.</p>
 </blockquote>
 <h3 id="prompt-to-clean-up-the-headings-and-links-from-the-tables-of-content">Prompt to clean up the headings and links from the tables of content</h3>
-<p><strong>AI model (model name (source)):</strong>
-- GPT-6.1 Sol (Codex)</p>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6.1 Sol (Codex)</li>
+</ul>
 <p><strong>Prompt:</strong></p>
 <pre><code class="language-markdown">Look at my whole project and analyse it so you got the context. This isnt a GitHub repo yet. We need to make some clean-up for the initial push.
 1. Analyse the repo so that you know everything. Ignore the AGENTS.md instructions for now.
 2. Then look at all my table of contents links/missing links and their wording. Correct the wording if its wrong and create the missing GitHub-Style links for the headings. DONT change ANYTHING ELSE.
 </code></pre>
 <h3 id="prompt-to-update-and-write-the-readmemd">Prompt to update and write the README.md</h3>
-<p><strong>AI model (model name (source)):</strong>
-- GPT-6.1 Sol (Codex)</p>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6.1 Sol (Codex)</li>
+</ul>
 <p><strong>Prompt:</strong></p>
 <pre><code class="language-markdown">Now, Look at my README.md Its quiet empty. Improve it with the current best pratices. Use links to setup, docs if nessessary
 </code></pre>
 <h3 id="prompt-to-analyse-the-git-lfs-setup-and-setup-the-uv-environment">Prompt to analyse the Git LFS setup and setup the uv environment</h3>
-<p><strong>AI model (model name (source)):</strong>
-- GPT-6.1 Sol (Codex)</p>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6.1 Sol (Codex)</li>
+</ul>
 <p><strong>Prompt:</strong></p>
 <pre><code class="language-markdown">Like this .gitattributes? If so. Help me set up my uv. Look at my doc (uv and python is installed), and tell me in chat what commands do I need and what packages do I ned to add for my repo? Look at my project (like pandas, or plotly for diagrams) what would I need and what do I need for my scripts to work. ALl this can I now set up
 </code></pre>
 <h3 id="prompt-to-setup-mcp-serena-for-this-project">Prompt to setup MCP Serena for this project</h3>
-<p><strong>AI model (model name (source)):</strong>
-- GPT-6.1 Sol (Codex)</p>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6.1 Sol (Codex)</li>
+</ul>
 <p><strong>Prompt:</strong></p>
 <pre><code class="language-markdown">No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp setup docu. I ned to setup my repo with it now and run the index/onboarding. Tell me in chat aswell: What commands do I need to do?
 </code></pre>
 <hr />
-<h3 id="prompt-to-clean-up-the-repo">Prompt to clean up the repo</h3>
+<h2 id="prompt-to-clean-up-the-repo">Prompt to clean up the repo</h2>
 <blockquote>
 <p>The same chat as the initial setup file got created in <a href="004_setup_files_creation_prompts.docs.prompts.html#prompt-to-create-a-initial-start-script">004_setup_files_creation_prompts.md</a>, was used for this clean up.</p>
 </blockquote>
-<p><strong>AI model (model name (source)):</strong>
-- GPT-6.1 Sol (Codex)</p>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6.1 Sol (Codex)</li>
+</ul>
 <blockquote>
 <p>The config files in <code>src/config</code> (<code>src/config/__init__.py</code>, <code>src/config/_base.py</code>, <code>src/config/example.py</code> and <code>src/config/production.py</code>) got created with this prompt and follow up iteration.</p>
 </blockquote>
@@ -132,8 +147,72 @@ Is there a way to make sure this never happens? Like, e.g. with a pre-commit hoo
     - The README incorrectly says dependency files are empty and recommends Python 3.11. **-&gt;** we do this later, like the serena correction
 </code></pre>
 <hr />
+<h2 id="prompt-to-create-the-pull-request-template">Prompt to create the pull request template</h2>
+<blockquote>
+<p>The template <code>.github/pull_request_template.md</code> got created all in one chat.</p>
+</blockquote>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6.1 Sol (Codex)</li>
+</ul>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">**I have a new improvement to make:**
+- Analyse my repo, if you haven't got the context yet (you can use Serena MCP for it).
+- Analyse the current best practices for writing pull request in GitHub.
+
+**What I want:**
+- Look at my `.github/pull_request_template.md` now.
+- This is currently empty.
+- Create a best practice and for my project the best/fitting pull request template.
+</code></pre>
+<hr />
+<h2 id="prompt-to-improve-the-project-plan">Prompt to improve the project plan</h2>
+<blockquote>
+<p>This improvement got done in one chat. The file <code>docs/project/bachelor_thesis_project_plan.md</code> got created here.</p>
+</blockquote>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6 Astra (OpenAI, 2026c)</li>
+</ul>
+<blockquote>
+<p>Below is an example prompt that got used to improve and finalise the project plan step-by-step after it got reviewed each time.</p>
+</blockquote>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">**Role - You are an expert in:**
+- Academic writing, academic reviewer, professor of computer science, and the scope of bachelor's theses
+- Expert in data analysis using Python and notebooks
+
+**Topic:** Bachelor's thesis in computer science, GitHub/programming, project planning, data analysis
+
+**Task:** I would like to adjust and refine/improve my project plan for my bachelor's thesis. Since I now have the ERP data I want to analyze—and have also removed some items due to the scope of the project—I need to adjust the plan accordingly. I have created a public repository for the methodological section of my thesis ([https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis](https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis)).
+
+**For context and information:**
+- Open and analyze the GitHub project (README.md, project-related documentation, sample data feature structure (currently only column names), dataset documentation)
+- Open and analyze the `docs/project/complete_project_plan1.md` file.
+
+First, read and analyze everything; further instructions will follow. The goal is to have a finished plan. However, we'll take it step by step here and begin once you've analyzed and read everything.
+</code></pre>
+<hr />
+<h2 id="prompt-to-create-the-backlog-tasks">Prompt to create the backlog tasks</h2>
+<p><strong>AI model (model name (source)):</strong></p>
+<ul>
+<li>GPT-6.1 Sol (Codex)</li>
+</ul>
+<blockquote>
+<p>Below is an example prompt that got used to improve and finalise the <code>BACKLOG.md</code> step-by-step after it got reviewed each time.</p>
+</blockquote>
+<p><strong>Prompt:</strong></p>
+<pre><code class="language-markdown">Look at my source of truth project plan in `docs/project/bachelor_thesis_project_plan.md` and the workflow `docs/framework/fuucce_framework.md`.
+
+I want to create the final complete `BACKLOG.md` now. **Means:**
+- a short overview (what is this file about) directly after `# Backlog` replacing the `...`.
+- then all task we need, to finish the workflow in `docs/framework/fuucce_framework.md`.
+- Each `## ...` should be named by the phase. Like `## Backlog Entry: Phase 1` or `## Backlog task: Phase 1` or so.
+- After the heading there should be all tasks chronological listed which need to be completed to complete the phase.
+</code></pre>
+<hr />
 <h2 id="bibliography">Bibliography</h2>
-<p>See <a href="../../literature/Bibliography.md">docs/literature/Bibliography.md</a>.</p>
+<p>See <a href="bibliography.docs.literature.html">docs/literature/bibliography.md</a>.</p>
     </main>
 </body>
 </html>
