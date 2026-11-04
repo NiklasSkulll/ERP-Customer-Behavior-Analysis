@@ -9,7 +9,7 @@ This file provides guidance to AI coding agents when working with code in this r
 
 ## Shift Handoff (ALWAYS read this first)
 
-**Before each new session:** _First_, read this `AGENTS.md`. _Afterward_, read [HANDOVER.md](HANDOVER.md) (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. _After that_, consult the [BACKLOG.md](BACKLOG.md) (Task Status) and MCP Serena-Memory files (in [.serena/](.serena/)).
+**Before each new session:** _First_, read this `AGENTS.md`. _Afterward_, read [HANDOVER.md](HANDOVER.md) (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. _After that_, consult the phase-based task checklists in [BACKLOG.md](BACKLOG.md) and MCP Serena-Memory files (in [.serena/](.serena/)).
 
 > **Important notes for development:**
 >- For notebook-related changes, _edit only_ the source notebooks in [src/notebooks/](src/notebooks/). Python files in [src/raw-notebooks/](src/raw-notebooks/) are _read-only mirrors_ of notebook code. Use them for navigation and inspection only. Never edit, overwrite, regenerate, delete or synchronize these mirror files. Their generation is handled separately by the user. If a mirror differs from its source notebook, treat the notebook as authoritative and report the mismatch.

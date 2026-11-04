@@ -294,7 +294,7 @@
 <ul>
 <li>For the <strong>"Price per item before discount"</strong>, <code>CONDITIONTYPE</code> is filtered to "List price" (<code>"Price per item before discount" = "List price"</code>).</li>
 <li>For the <strong>"Discount (Percentage)"</strong>, the "Price per item after discount" is subtracted from the "List price" and divided by the "List price" (<code>"Discount (Percentage)" = ("List price" - "Price per item after discount") / "List price" * 100</code>).</li>
-<li>For the <strong>"Discount (Amount)"</strong>, the "List price" is subtracted from the "Price per item after discount" (<code>"Discount (Amount)" = "List price" - "Price per item after discount"</code>).</li>
+<li>For the <strong>"Discount (Amount)"</strong>, the "Price per item after discount" is subtracted from the "List price" (<code>"Discount (Amount)" = "List price" - "Price per item after discount"</code>).</li>
 <li>If <code>CONDITIONRATEVALUE</code> has the default value of <code>999999</code> or <code>999999,00</code>, this means that the price has not been maintained. This is a placeholder for a missing price.</li>
 <li>Pay attention to the validity of the values. The validity period is between <code>CONDITIONVALIDITYSTARTDATE</code> and <code>CONDITIONVALIDITYENDDATE</code>.</li>
 <li>If <strong>"List price" is null or <code>0</code></strong>, the "Discount (Amount)" and "Discount (Percentage)" cannot be calculated.</li>
