@@ -17,6 +17,7 @@
 - [Prompt to clean up the repo](#prompt-to-clean-up-the-repo)
 - [Prompt to create the pull request template](#prompt-to-create-the-pull-request-template)
 - [Prompt to improve the project plan](#prompt-to-improve-the-project-plan)
+- [Prompt to create the backlog tasks](#prompt-to-create-the-backlog-tasks)
 - [Bibliography](#bibliography)
 
 ---
@@ -194,6 +195,26 @@ No I dont have notebooks yet. But the setup is nice. Now look at my serena mcp s
 - Open and analyze the `docs/project/complete_project_plan1.md` file.
 
 First, read and analyze everything; further instructions will follow. The goal is to have a finished plan. However, we'll take it step by step here and begin once you've analyzed and read everything.
+```
+
+---
+
+## Prompt to create the backlog tasks
+
+**AI model (model name (source)):**
+- GPT-6.1 Sol (Codex)
+
+> Below is an example prompt that got used to improve and finalise the `BACKLOG.md` step-by-step after it got reviewed each time.
+
+**Prompt:**
+```markdown
+Look at my source of truth project plan in `docs/project/bachelor_thesis_project_plan.md` and the workflow `docs/framework/fuucce_framework.md`.
+
+I want to create the final complete `BACKLOG.md` now. **Means:**
+- a short overview (what is this file about) directly after `# Backlog` replacing the `...`.
+- then all task we need, to finish the workflow in `docs/framework/fuucce_framework.md`.
+- Each `## ...` should be named by the phase. Like `## Backlog Entry: Phase 1` or `## Backlog task: Phase 1` or so.
+- After the heading there should be all tasks chronological listed which need to be completed to complete the phase.
 ```
 
 ---

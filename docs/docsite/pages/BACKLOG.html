@@ -19,6 +19,7 @@
 <p>Use the <a href="bachelor_thesis_project_plan.docs.project.html">project plan</a> as the source of truth, the <a href="fuucce_framework.docs.framework.html">FUUCCE framework</a> as the detailed workflow, and the <a href="data_description.docs.project.html">data description</a> for source fields and relationships.</p>
 <p>Work through the core tasks in order. Task IDs support progress references; check an item only when its output and verification are available. Development may return to earlier phases, but affected decisions and outputs must then be revised and regenerated. Optional refinements are not phase-completion requirements and must not delay the complete core workflow and its evaluation.</p>
 <p>Agents implement and verify with fully synthetic fixtures and public source notebooks. Production-dependent inspection, execution and real-case review are user-managed work in the private environment. Do not record production data, derived findings or private case identifiers in this public backlog. Use <code>CONFIG.data_dir</code> and <code>CONFIG.output_dir</code>, preserve original extracts, and follow the framework's CSV-to-Parquet workflow for reusable tables.</p>
+<hr />
 <h2 id="phase-1-familiarise-yourself-with-the-data-and-assess-its-suitability">Phase 1 - Familiarise yourself with the data and assess its suitability</h2>
 <h3 id="inspect-the-datasets-and-verify-their-meaning">Inspect the datasets and verify their meaning</h3>
 <ul>
@@ -55,6 +56,7 @@
 <li>[ ] <strong>P1.O1 — Optional:</strong> Assess discount feasibility, including price-condition assignment, validity, quantity compatibility and coverage, without making full discount integration a core requirement.</li>
 <li>[ ] <strong>P1.O2 — Optional:</strong> Explore product-group incidence, compatible quantity measures or customer subgroups only where they answer a specific unresolved analytical question.</li>
 </ul>
+<hr />
 <h2 id="phase-2-use-erp-data-to-prepare-customer-profiles">Phase 2 - Use ERP data to prepare customer profiles</h2>
 <h3 id="finalise-and-apply-preparation-rules">Finalise and apply preparation rules</h3>
 <ul>
@@ -92,6 +94,7 @@
 <li>[ ] <strong>P2.O1 — Optional:</strong> Add product-group order shares, days since last order or compatible-unit quantities where justified; retain appropriate denominators and distinguish unknown preceding history from inactivity.</li>
 <li>[ ] <strong>P2.O2 — Optional:</strong> Integrate discounts only after verifying customer/price-group assignment, validity, price bases and quantity compatibility; retain unmaintained prices as missing and report calculable-item coverage. Preserve a runnable core dataset.</li>
 </ul>
+<hr />
 <h2 id="phase-3-uncover-and-characterise-changes">Phase 3 - Uncover and characterise changes</h2>
 <h3 id="specify-the-comparison-design">Specify the comparison design</h3>
 <ul>
@@ -128,6 +131,7 @@
 <ul>
 <li>[ ] <strong>P3.O1 — Optional:</strong> Add a behavioural dimension, alternative window design or second detector only for a specific justified limitation and with time for evaluation; preserve disagreements and applicability differences between methods.</li>
 </ul>
+<hr />
 <h2 id="phase-4-construct-the-change-taxonomy">Phase 4 - Construct the change taxonomy</h2>
 <h3 id="establish-the-perspective-and-review-development-evidence">Establish the perspective and review development evidence</h3>
 <ul>
@@ -162,6 +166,7 @@
 <ul>
 <li>[ ] <strong>P4.O1 — Optional:</strong> Obtain targeted domain feedback, inspect additional development cases or use exploratory clustering for a specific unresolved question; interpret any groups against the taxonomy purpose before adopting them as types.</li>
 </ul>
+<hr />
 <h2 id="phase-5-classify-and-explain-changes">Phase 5 - Classify and explain changes</h2>
 <h3 id="confirm-the-operational-specification">Confirm the operational specification</h3>
 <ul>
@@ -197,6 +202,7 @@
 <ul>
 <li>[ ] <strong>P5.O1 — Optional:</strong> Add templates, focused domain feedback or improved graphics for identified limitations. Introduce a learned classifier or extra explanation technique only for a distinct purpose with its own evaluation.</li>
 </ul>
+<hr />
 <h2 id="phase-6-evaluate-and-discuss-findings">Phase 6 - Evaluate and discuss findings</h2>
 <h3 id="finalise-the-evaluation-protocol-before-inspecting-results">Finalise the evaluation protocol before inspecting results</h3>
 <ul>
