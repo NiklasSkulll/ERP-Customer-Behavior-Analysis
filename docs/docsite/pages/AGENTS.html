@@ -8,24 +8,24 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <!-- MANUAL -->
 <div align="center">
 <h1 id="agentsmd">AGENTS.md</h1>
 <p>This file provides guidance to AI coding agents when working with code in this repository.</p>
-<p><strong>Instructions for AI agents working on this project:</strong> Keep it brief and follow conventions. See <a href="BACKLOG.html">BACKLOG.md</a> for open tasks.</p>
+<p><strong>Instructions for AI agents working on this project:</strong> Keep it brief and follow conventions. See <a href="BACKLOG.html" target="_blank" rel="noopener noreferrer">BACKLOG.md</a> for open tasks.</p>
 <h2 id="shift-handoff-always-read-this-first">Shift Handoff (ALWAYS read this first)</h2>
-<p><strong>Before each new session:</strong> <em>First</em>, read this <code>AGENTS.md</code>. <em>Afterward</em>, read <a href="HANDOVER.html">HANDOVER.md</a> (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. <em>After that</em>, consult the phase-based task checklists in <a href="BACKLOG.html">BACKLOG.md</a> and MCP Serena-Memory files (in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena">.serena/</a>).</p>
+<p><strong>Before each new session:</strong> <em>First</em>, read this <code>AGENTS.md</code>. <em>Afterward</em>, read <a href="HANDOVER.html" target="_blank" rel="noopener noreferrer">HANDOVER.md</a> (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. <em>After that</em>, consult the phase-based task checklists in <a href="BACKLOG.html" target="_blank" rel="noopener noreferrer">BACKLOG.md</a> and MCP Serena-Memory files (in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena" target="_blank" rel="noopener noreferrer">.serena/</a>).</p>
 <blockquote>
 <p><strong>Important notes for development:</strong></p>
 <ul>
-<li>For notebook-related changes, <em>edit only</em> the source notebooks in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/notebooks">src/notebooks/</a>. Python files in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/raw-notebooks">src/raw-notebooks/</a> are <em>read-only mirrors</em> of notebook code. Use them for navigation and inspection only. Never edit, overwrite, regenerate, delete or synchronize these mirror files. Their generation is handled separately by the user. If a mirror differs from its source notebook, treat the notebook as authoritative and report the mismatch.</li>
-<li>Never inspect, load, search, execute against or modify production data located <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/.notebooks">src/.notebooks/</a>, <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/data/data-prd">data/data-prd/</a> and <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/outputs/.exports">outputs/.exports/</a>. Do not copy production information into chat responses, code examples, documentation, handovers or Serena memories. If a task requires production access, stop and request a synthetic reproduction or data-free specification.</li>
+<li>For notebook-related changes, <em>edit only</em> the source notebooks in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/notebooks" target="_blank" rel="noopener noreferrer">src/notebooks/</a>. Python files in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/raw-notebooks" target="_blank" rel="noopener noreferrer">src/raw-notebooks/</a> are <em>read-only mirrors</em> of notebook code. Use them for navigation and inspection only. Never edit, overwrite, regenerate, delete or synchronize these mirror files. Their generation is handled separately by the user. If a mirror differs from its source notebook, treat the notebook as authoritative and report the mismatch.</li>
+<li>Never inspect, load, search, execute against or modify production data located <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/.notebooks" target="_blank" rel="noopener noreferrer">src/.notebooks/</a>, <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/data/data-prd" target="_blank" rel="noopener noreferrer">data/data-prd/</a> and <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/outputs/.exports" target="_blank" rel="noopener noreferrer">outputs/.exports/</a>. Do not copy production information into chat responses, code examples, documentation, handovers or Serena memories. If a task requires production access, stop and request a synthetic reproduction or data-free specification.</li>
 </ul>
 </blockquote>
-<p><strong>At the end of the session:</strong> <em>First</em>, add a new entry at the top of <a href="HANDOVER.html">HANDOVER.md</a>. A template is provided at the bottom of this <code>AGENTS.md</code>. <em>Afterward</em>, update the <a href="BACKLOG.html">BACKLOG.md</a>. <em>At the end</em>, update relevant Serena memories using its memory operations. Run onboarding only for initial setup or when a deliberate refresh is needed.</p>
+<p><strong>At the end of the session:</strong> <em>First</em>, add a new entry at the top of <a href="HANDOVER.html" target="_blank" rel="noopener noreferrer">HANDOVER.md</a>. A template is provided at the bottom of this <code>AGENTS.md</code>. <em>Afterward</em>, update the <a href="BACKLOG.html" target="_blank" rel="noopener noreferrer">BACKLOG.md</a>. <em>At the end</em>, update relevant Serena memories using its memory operations. Run onboarding only for initial setup or when a deliberate refresh is needed.</p>
 </div>
 <!-- END MANUAL -->
 
@@ -34,7 +34,7 @@
 <h2 id="overview">Overview</h2>
 <ul>
 <li>This repository supports a bachelor's thesis on detecting, typing and explainably describing changes in B2B wholesale customers' purchasing behaviour using ERP order data. It is a research project; an end-to-end analysis pipeline and evaluation results are not yet implemented.</li>
-<li>The <a href="bachelor_thesis_project_plan.docs.project.html">project plan</a> is the source of truth for objectives, scope, candidate measures and evaluation commitments. The <a href="fuucce_framework.docs.framework.html">FUUCCE framework</a> operationalises it; the completed <a href="data_description.docs.project.html">data description</a> defines the available tables, fields and mappings.</li>
+<li>The <a href="bachelor_thesis_project_plan.docs.project.html" target="_blank" rel="noopener noreferrer">project plan</a> is the source of truth for objectives, scope, candidate measures and evaluation commitments. The <a href="fuucce_framework.docs.framework.html" target="_blank" rel="noopener noreferrer">FUUCCE framework</a> operationalises it; the completed <a href="data_description.docs.project.html" target="_blank" rel="noopener noreferrer">data description</a> defines the available tables, fields and mappings.</li>
 <li>FUUCCE has six phases: Familiarise and assess → Use data and prepare profiles → Uncover and characterise changes → Construct the taxonomy → Classify and explain → Evaluate and discuss.</li>
 <li>The plan covers a 24-month window, with time-window profile comparison as the main detection direction. Ordering activity, net order value and assortment form the core; discounts are optional. Profitability analysis, churn prediction and causal explanations are outside scope.</li>
 </ul>
@@ -43,7 +43,7 @@
 <hr />
 <!-- AUTO-MANAGED: build-commands -->
 <h2 id="build-development-commands">Build &amp; Development Commands</h2>
-<p>Run commands from the repository root. Python is selected by <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.python-version">.python-version</a> (3.12); <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/pyproject.toml">pyproject.toml</a> requires Python &gt;=3.12 and uv &gt;=0.13.1. Use the existing <code>.venv/bin/python</code> for checks to avoid incidental dependency installation.</p>
+<p>Run commands from the repository root. Python is selected by <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.python-version" target="_blank" rel="noopener noreferrer">.python-version</a> (3.12); <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/pyproject.toml" target="_blank" rel="noopener noreferrer">pyproject.toml</a> requires Python &gt;=3.12 and uv &gt;=0.13.1. Use the existing <code>.venv/bin/python</code> for checks to avoid incidental dependency installation.</p>
 <table>
 <thead>
 <tr>
@@ -102,13 +102,13 @@
 <!-- AUTO-MANAGED: architecture -->
 <h2 id="architecture">Architecture</h2>
 <ul>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/project">docs/project/</a> contains the authoritative plan and data schema; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/framework">docs/framework/</a> contains the methodological workflow. <a href="README.html">README.md</a> is the project entry point.</li>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/literature">docs/literature/</a> contains research notes and bibliography; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/prompts">docs/prompts/</a> records historical AI prompts. Preserve original prompt text when updating navigation or annotations.</li>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/setup">setup/</a> contains the Bash bootstrap and standalone Python utilities for CSV conversion, notebook export and documentation generation. There is no installed application package or deployment service.</li>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/config">src/config/</a> contains the frozen <code>AnalysisConfig</code> type and explicit example/production profiles. Paths derive from the repository location; imports perform no data reads or directory creation.</li>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/notebooks">src/notebooks/</a> contains authoritative public notebooks. <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/raw-notebooks">src/raw-notebooks/</a> contains user-generated mirrors for read-only navigation. Both currently contain placeholders.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/project" target="_blank" rel="noopener noreferrer">docs/project/</a> contains the authoritative plan and data schema; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/framework" target="_blank" rel="noopener noreferrer">docs/framework/</a> contains the methodological workflow. <a href="README.html" target="_blank" rel="noopener noreferrer">README.md</a> is the project entry point.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/literature" target="_blank" rel="noopener noreferrer">docs/literature/</a> contains research notes and bibliography; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/prompts" target="_blank" rel="noopener noreferrer">docs/prompts/</a> records historical AI prompts. Preserve original prompt text when updating navigation or annotations.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/setup" target="_blank" rel="noopener noreferrer">setup/</a> contains the Bash bootstrap and standalone Python utilities for CSV conversion, notebook export and documentation generation. There is no installed application package or deployment service.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/config" target="_blank" rel="noopener noreferrer">src/config/</a> contains the frozen <code>AnalysisConfig</code> type and explicit example/production profiles. Paths derive from the repository location; imports perform no data reads or directory creation.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/notebooks" target="_blank" rel="noopener noreferrer">src/notebooks/</a> contains authoritative public notebooks. <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/raw-notebooks" target="_blank" rel="noopener noreferrer">src/raw-notebooks/</a> contains user-generated mirrors for read-only navigation. Both currently contain placeholders.</li>
 <li>Example inputs and intermediate datasets belong under <code>data/data-example/</code> (<code>raw/</code>, <code>interim/</code>, <code>processed/</code>); public synthetic artifacts belong under <code>outputs/exports/</code>. Production roots remain subject to the restrictions above.</li>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/docsite">docs/docsite/</a> is generated output. Its generator and shared CSS live in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/create_documentation_site.py">setup/create_documentation_site.py</a>. Local thesis sources in <code>docs/.bachelor-thesis/</code> and literature originals in <code>docs/literature/.literature-source-files/</code> are ignored and excluded from conversion.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/docsite" target="_blank" rel="noopener noreferrer">docs/docsite/</a> is generated output. Its generator and shared CSS live in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/create_documentation_site.py" target="_blank" rel="noopener noreferrer">setup/create_documentation_site.py</a>. Local thesis sources in <code>docs/.bachelor-thesis/</code> and literature originals in <code>docs/literature/.literature-source-files/</code> are ignored and excluded from conversion.</li>
 </ul>
 <!-- END AUTO-MANAGED -->
 
@@ -141,9 +141,9 @@
 <!-- AUTO-MANAGED: git-insights -->
 <h2 id="git-insights">Git Insights</h2>
 <ul>
-<li>Existing commits use Conventional Commit titles, for example <code>fix(docsite): ...</code> and <code>chore(docs): ...</code>. Keep changes focused and use the <a href="pull_request_template..github.html">pull request template</a> to explain motivation, results and validation.</li>
-<li>CSV and Parquet files use Git LFS through <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.gitattributes">.gitattributes</a>. Do not replace LFS pointers or download datasets merely to inspect repository structure.</li>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.githooks/pre-commit">.githooks/pre-commit</a> rejects tracked/staged paths under the three production roots. It checks paths, not notebook contents; saved outputs can still expose production information in public files.</li>
+<li>Existing commits use Conventional Commit titles, for example <code>fix(docsite): ...</code> and <code>chore(docs): ...</code>. Keep changes focused and use the <a href="pull_request_template..github.html" target="_blank" rel="noopener noreferrer">pull request template</a> to explain motivation, results and validation.</li>
+<li>CSV and Parquet files use Git LFS through <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.gitattributes" target="_blank" rel="noopener noreferrer">.gitattributes</a>. Do not replace LFS pointers or download datasets merely to inspect repository structure.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.githooks/pre-commit" target="_blank" rel="noopener noreferrer">.githooks/pre-commit</a> rejects tracked/staged paths under the three production roots. It checks paths, not notebook contents; saved outputs can still expose production information in public files.</li>
 <li>The bootstrap activates repository-local hooks and existing LFS hooks. Do not reconfigure the user's Git setup as an incidental check.</li>
 <li>Inspect working-tree and staged changes before editing; preserve unrelated work and staged state. Keep <code>pyproject.toml</code> and <code>uv.lock</code> together when intentionally changing dependencies. Do not commit or push unless requested.</li>
 </ul>
@@ -165,7 +165,7 @@
 
 <!-- MANUAL -->
 <h2 id="template-for-a-handovermd-entry">Template for a HANDOVER.md-Entry</h2>
-<p>Copy and paste this template below for the next entry in <a href="HANDOVER.html">HANDOVER.md</a>.</p>
+<p>Copy and paste this template below for the next entry in <a href="HANDOVER.html" target="_blank" rel="noopener noreferrer">HANDOVER.md</a>.</p>
 <pre><code class="language-markdown">## YYYY-MM-DD - &lt;AI model name&gt;: &lt;Short Overview-Title&gt;
 
 ### Session Summary

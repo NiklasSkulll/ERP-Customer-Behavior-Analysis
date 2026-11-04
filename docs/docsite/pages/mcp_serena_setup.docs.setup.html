@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
@@ -18,24 +18,24 @@
 </div>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><a href="#workflow">Workflow</a></li>
-<li><a href="#installation">Installation</a></li>
-<li><a href="#setup">Setup</a><ul>
-<li><a href="#initialize-mcp-serena">Initialize MCP Serena</a></li>
-<li><a href="#prepare-notebook-mirrors">Prepare notebook mirrors</a></li>
-<li><a href="#index-the-project-for-mcp-serena">Index the project for MCP Serena</a></li>
-<li><a href="#connect-an-ai-client">Connect an AI client</a><ul>
-<li><a href="#connect-codex-cli">Connect Codex CLI</a></li>
-<li><a href="#connect-claude-code">Connect Claude Code</a></li>
-<li><a href="#connect-codex-via-vscode">Connect Codex via VSCode</a></li>
-<li><a href="#connect-claude-code-via-vscode">Connect Claude Code via VSCode</a></li>
+<li><a href="#workflow" target="_self">Workflow</a></li>
+<li><a href="#installation" target="_self">Installation</a></li>
+<li><a href="#setup" target="_self">Setup</a><ul>
+<li><a href="#initialize-mcp-serena" target="_self">Initialize MCP Serena</a></li>
+<li><a href="#prepare-notebook-mirrors" target="_self">Prepare notebook mirrors</a></li>
+<li><a href="#index-the-project-for-mcp-serena" target="_self">Index the project for MCP Serena</a></li>
+<li><a href="#connect-an-ai-client" target="_self">Connect an AI client</a><ul>
+<li><a href="#connect-codex-cli" target="_self">Connect Codex CLI</a></li>
+<li><a href="#connect-claude-code" target="_self">Connect Claude Code</a></li>
+<li><a href="#connect-codex-via-vscode" target="_self">Connect Codex via VSCode</a></li>
+<li><a href="#connect-claude-code-via-vscode" target="_self">Connect Claude Code via VSCode</a></li>
 </ul>
 </li>
-<li><a href="#onboarding">Onboarding</a></li>
+<li><a href="#onboarding" target="_self">Onboarding</a></li>
 </ul>
 </li>
-<li><a href="#configuration">Configuration</a></li>
-<li><a href="#bibliography">Bibliography</a></li>
+<li><a href="#configuration" target="_self">Configuration</a></li>
+<li><a href="#bibliography" target="_self">Bibliography</a></li>
 </ul>
 <hr />
 <h2 id="workflow">Workflow</h2>
@@ -63,7 +63,7 @@ serena --version
 <hr />
 <h2 id="setup">Setup</h2>
 <h3 id="initialize-mcp-serena">Initialize MCP Serena</h3>
-<p>Before indexing or connecting an AI client, apply the settings in <a href="#configuration">Configuration</a>, including all production-data exclusions. If the configuration file for MCP Serena <code>.serena/project.yml</code> already exists, edit that file instead of initializing the project again. Merge the settings without duplicating YAML keys (Oraios AI &amp; Oraios Software, n.d.b).</p>
+<p>Before indexing or connecting an AI client, apply the settings in <a href="#configuration" target="_self">Configuration</a>, including all production-data exclusions. If the configuration file for MCP Serena <code>.serena/project.yml</code> already exists, edit that file instead of initializing the project again. Merge the settings without duplicating YAML keys (Oraios AI &amp; Oraios Software, n.d.b).</p>
 <p><strong>Initialize MCP Serena in the project root (Oraios AI &amp; Oraios Software, n.d.b):</strong></p>
 <pre><code class="language-bash">serena project create --name ERP-Customer-Behavior-Analysis --language python --language markdown
 </code></pre>
@@ -71,7 +71,7 @@ serena --version
 <ul>
 <li>Source notebooks: <code>src/notebooks/</code></li>
 <li>Read-only Python mirrors: <code>src/raw-notebooks/</code></li>
-<li>Refresh mirrors using the repository's existing export workflow in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/setup/Create_raw_Python_files.md">docs/setup/Create_raw_Python_files.md</a> before initial indexing and after notebook changes.</li>
+<li>Refresh mirrors using the repository's existing export workflow in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/setup/Create_raw_Python_files.md" target="_blank" rel="noopener noreferrer">docs/setup/Create_raw_Python_files.md</a> before initial indexing and after notebook changes.</li>
 <li>Keep <code>src/raw-notebooks/</code> accessible to Serena.</li>
 <li>Agents must not regenerate or edit mirrors.</li>
 </ul>
@@ -190,7 +190,7 @@ args = [
 </code></pre>
 <p>Use either the extension UI or the JSON configuration. If <code>.mcp.json</code> already contains other servers, add <code>serena</code> to the existing <code>mcpServers</code> object without replacing those entries. Start a new conversation and approve the project MCP server if prompted. Enter <code>/mcp</code> to check the connection or reconnect Serena. If Serena was already registered through Claude Code CLI for this repository, use that existing registration instead of adding a duplicate. No separate CLI installation is required for the extension setup (Anthropic, n.d.a, n.d.b).</p>
 <h3 id="onboarding">Onboarding</h3>
-<p>Onboarding is performed by the connected AI agent using Serena, resulting in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena/memories">.serena/memories/</a> files (Oraios AI &amp; Oraios Software, n.d.b).</p>
+<p>Onboarding is performed by the connected AI agent using Serena, resulting in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena/memories" target="_blank" rel="noopener noreferrer">.serena/memories/</a> files (Oraios AI &amp; Oraios Software, n.d.b).</p>
 <p><strong>Once connected, ask the agent to:</strong></p>
 <blockquote>
 <p>Onboard this repository using Serena. First follow the startup sequence in <code>AGENTS.md</code>. Inspect the project structure, dependency files, Python modules, notebooks and Markdown documentation. Do not execute notebooks or regenerate data.</p>
@@ -292,7 +292,7 @@ initial_prompt: |
 </ul>
 <hr />
 <h2 id="bibliography">Bibliography</h2>
-<p>See <a href="bibliography.docs.literature.html">docs/literature/bibliography.md</a>.</p>
+<p>See <a href="bibliography.docs.literature.html" target="_blank" rel="noopener noreferrer">docs/literature/bibliography.md</a>.</p>
     </main>
 </body>
 </html>

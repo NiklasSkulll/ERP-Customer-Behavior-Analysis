@@ -5,7 +5,8 @@ import re
 import shutil
 from pathlib import Path
 from html import escape
-from urllib.parse import quote, unquote, urlsplit, urlunsplit
+from html.parser import HTMLParser
+from urllib.parse import quote, unquote, urljoin, urlsplit, urlunsplit
 
 # Create a constant string containing the stylesheet
 SITE_CSS = """
@@ -155,6 +156,48 @@ hr {
     margin-block: 2rem;
 }
 """
+
+def set_link_targets(html_text: str, page_path: str) -> str:
+    """Open links in new tabs, except heading links within the current page."""
+    line_offsets = [0]
+    for line in html_text.splitlines(keepends=True):
+        line_offsets.append(line_offsets[-1] + len(line))
+    replacements = []
+
+    class LinkParser(HTMLParser):
+        def handle_starttag(self, tag, attrs):
+            if tag != "a":
+                return
+            attributes = dict(attrs)
+            if "href" not in attributes:
+                return
+
+            url = urlsplit(urljoin(page_path, attributes["href"] or ""))
+            same_page_heading = (
+                url.fragment and not url.scheme and not url.netloc
+                and unquote(url.path) == page_path and not url.query
+            )
+            attributes["target"] = "_self" if same_page_heading else "_blank"
+            if not same_page_heading:
+                rel = (attributes.get("rel") or "").split()
+                attributes["rel"] = " ".join(dict.fromkeys([*rel, "noopener", "noreferrer"]))
+
+            original = self.get_starttag_text()
+            rendered = "<a" + "".join(
+                f' {name}="{escape(value, quote=True)}"' if value is not None else f" {name}"
+                for name, value in attributes.items()
+            ) + ("/>" if original.endswith("/>") else ">")
+            line, column = self.getpos()
+            start = line_offsets[line - 1] + column
+            replacements.append((start, start + len(original), rendered))
+
+    parser = LinkParser(convert_charrefs=False)
+    parser.feed(html_text)
+    parser.close()
+    for start, end, rendered in reversed(replacements):
+        html_text = html_text[:start] + rendered + html_text[end:]
+    return html_text
+
 
 def main() -> int:
     # Create argument parser and the argument '--help'
@@ -341,7 +384,10 @@ def main() -> int:
 </html>
 """
 
-            output_path.write_text(html_page, encoding="utf-8")
+            output_path.write_text(
+                set_link_targets(html_page, output_path.relative_to(build_dir).as_posix()),
+                encoding="utf-8",
+            )
 
             page_url = quote(f"pages/{output_path.name}")
             label = escape(relative_path.as_posix())
@@ -386,7 +432,7 @@ def main() -> int:
     index_path = build_dir / "index.html"
 
     try:
-        index_path.write_text(index_html, encoding="utf-8")
+        index_path.write_text(set_link_targets(index_html, "index.html"), encoding="utf-8")
     except OSError as exc:
         parser.exit(status=1, message=f"Error: Could not write index '{index_path}': {exc}\n")
 

@@ -8,125 +8,125 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
 <h1 id="framework-for-analysing-and-typing-customer-purchasing-changes">Framework for analysing and typing customer purchasing changes</h1>
-<p><a href="#phase-1---familiarise-yourself-with-the-data-and-assess-its-suitability"><img alt="Phase 1" src="https://img.shields.io/badge/Phase%201-Familiarise%20and%20assess-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="#phase-2---use-erp-data-to-prepare-customer-profiles"><img alt="Phase 2" src="https://img.shields.io/badge/Phase%202-Use%20data%20and%20prepare%20profiles-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="#phase-3---uncover-and-characterise-changes"><img alt="Phase 3" src="https://img.shields.io/badge/Phase%203-Uncover%20and%20characterise-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="#phase-4---construct-the-change-taxonomy"><img alt="Phase 4" src="https://img.shields.io/badge/Phase%204-Construct%20the%20taxonomy-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="#phase-5---classify-and-explain-changes"><img alt="Phase 5" src="https://img.shields.io/badge/Phase%205-Classify%20and%20explain-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="#phase-6---evaluate-and-discuss-findings"><img alt="Phase 6" src="https://img.shields.io/badge/Phase%206-Evaluate%20and%20discuss-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
+<p><a href="#phase-1---familiarise-yourself-with-the-data-and-assess-its-suitability" target="_self"><img alt="Phase 1" src="https://img.shields.io/badge/Phase%201-Familiarise%20and%20assess-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="#phase-2---use-erp-data-to-prepare-customer-profiles" target="_self"><img alt="Phase 2" src="https://img.shields.io/badge/Phase%202-Use%20data%20and%20prepare%20profiles-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="#phase-3---uncover-and-characterise-changes" target="_self"><img alt="Phase 3" src="https://img.shields.io/badge/Phase%203-Uncover%20and%20characterise-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="#phase-4---construct-the-change-taxonomy" target="_self"><img alt="Phase 4" src="https://img.shields.io/badge/Phase%204-Construct%20the%20taxonomy-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="#phase-5---classify-and-explain-changes" target="_self"><img alt="Phase 5" src="https://img.shields.io/badge/Phase%205-Classify%20and%20explain-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="#phase-6---evaluate-and-discuss-findings" target="_self"><img alt="Phase 6" src="https://img.shields.io/badge/Phase%206-Evaluate%20and%20discuss-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
 </div>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
-<li><a href="#overview-of-the-fuucce-framework">Overview of the FUUCCE framework</a></li>
-<li><a href="#data-formats-and-file-workflow">Data formats and file workflow</a></li>
-<li><a href="#phase-1---familiarise-yourself-with-the-data-and-assess-its-suitability">Phase 1 - Familiarise yourself with the data and assess its suitability</a><ul>
-<li><a href="#11-purpose">1.1 Purpose</a></li>
-<li><a href="#12-inputs">1.2 Inputs</a></li>
-<li><a href="#13-core-procedure">1.3 Core procedure</a><ul>
-<li><a href="#131-inspect-the-datasets-and-verify-their-meaning">1.3.1 Inspect the datasets and verify their meaning</a></li>
-<li><a href="#132-establish-development-and-evaluation-boundaries">1.3.2 Establish development and evaluation boundaries</a></li>
-<li><a href="#133-assess-customer-histories-and-ordering-activity">1.3.3 Assess customer histories and ordering activity</a></li>
-<li><a href="#134-explore-a-small-set-of-candidate-measures">1.3.4 Explore a small set of candidate measures</a></li>
-<li><a href="#135-consolidate-preparation-and-analysis-decisions">1.3.5 Consolidate preparation and analysis decisions</a></li>
+<li><a href="#overview-of-the-fuucce-framework" target="_self">Overview of the FUUCCE framework</a></li>
+<li><a href="#data-formats-and-file-workflow" target="_self">Data formats and file workflow</a></li>
+<li><a href="#phase-1---familiarise-yourself-with-the-data-and-assess-its-suitability" target="_self">Phase 1 - Familiarise yourself with the data and assess its suitability</a><ul>
+<li><a href="#11-purpose" target="_self">1.1 Purpose</a></li>
+<li><a href="#12-inputs" target="_self">1.2 Inputs</a></li>
+<li><a href="#13-core-procedure" target="_self">1.3 Core procedure</a><ul>
+<li><a href="#131-inspect-the-datasets-and-verify-their-meaning" target="_self">1.3.1 Inspect the datasets and verify their meaning</a></li>
+<li><a href="#132-establish-development-and-evaluation-boundaries" target="_self">1.3.2 Establish development and evaluation boundaries</a></li>
+<li><a href="#133-assess-customer-histories-and-ordering-activity" target="_self">1.3.3 Assess customer histories and ordering activity</a></li>
+<li><a href="#134-explore-a-small-set-of-candidate-measures" target="_self">1.3.4 Explore a small set of candidate measures</a></li>
+<li><a href="#135-consolidate-preparation-and-analysis-decisions" target="_self">1.3.5 Consolidate preparation and analysis decisions</a></li>
 </ul>
 </li>
-<li><a href="#14-required-outputs">1.4 Required outputs</a></li>
-<li><a href="#15-completion-criteria">1.5 Completion criteria</a></li>
-<li><a href="#16-optional-refinements">1.6 Optional refinements</a></li>
+<li><a href="#14-required-outputs" target="_self">1.4 Required outputs</a></li>
+<li><a href="#15-completion-criteria" target="_self">1.5 Completion criteria</a></li>
+<li><a href="#16-optional-refinements" target="_self">1.6 Optional refinements</a></li>
 </ul>
 </li>
-<li><a href="#phase-2---use-erp-data-to-prepare-customer-profiles">Phase 2 - Use ERP data to prepare customer profiles</a><ul>
-<li><a href="#21-purpose">2.1 Purpose</a></li>
-<li><a href="#22-inputs">2.2 Inputs</a></li>
-<li><a href="#23-core-procedure">2.3 Core procedure</a><ul>
-<li><a href="#231-finalise-and-apply-preparation-rules">2.3.1 Finalise and apply preparation rules</a></li>
-<li><a href="#232-integrate-the-relevant-tables">2.3.2 Integrate the relevant tables</a></li>
-<li><a href="#233-calculate-the-selected-core-measures">2.3.3 Calculate the selected core measures</a></li>
-<li><a href="#234-construct-customer-period-histories">2.3.4 Construct customer-period histories</a></li>
-<li><a href="#235-confirm-suitability-and-verify-the-dataset">2.3.5 Confirm suitability and verify the dataset</a></li>
+<li><a href="#phase-2---use-erp-data-to-prepare-customer-profiles" target="_self">Phase 2 - Use ERP data to prepare customer profiles</a><ul>
+<li><a href="#21-purpose" target="_self">2.1 Purpose</a></li>
+<li><a href="#22-inputs" target="_self">2.2 Inputs</a></li>
+<li><a href="#23-core-procedure" target="_self">2.3 Core procedure</a><ul>
+<li><a href="#231-finalise-and-apply-preparation-rules" target="_self">2.3.1 Finalise and apply preparation rules</a></li>
+<li><a href="#232-integrate-the-relevant-tables" target="_self">2.3.2 Integrate the relevant tables</a></li>
+<li><a href="#233-calculate-the-selected-core-measures" target="_self">2.3.3 Calculate the selected core measures</a></li>
+<li><a href="#234-construct-customer-period-histories" target="_self">2.3.4 Construct customer-period histories</a></li>
+<li><a href="#235-confirm-suitability-and-verify-the-dataset" target="_self">2.3.5 Confirm suitability and verify the dataset</a></li>
 </ul>
 </li>
-<li><a href="#24-required-outputs">2.4 Required outputs</a></li>
-<li><a href="#25-completion-criteria">2.5 Completion criteria</a></li>
-<li><a href="#26-optional-refinements">2.6 Optional refinements</a></li>
+<li><a href="#24-required-outputs" target="_self">2.4 Required outputs</a></li>
+<li><a href="#25-completion-criteria" target="_self">2.5 Completion criteria</a></li>
+<li><a href="#26-optional-refinements" target="_self">2.6 Optional refinements</a></li>
 </ul>
 </li>
-<li><a href="#phase-3---uncover-and-characterise-changes">Phase 3 - Uncover and characterise changes</a><ul>
-<li><a href="#31-purpose">3.1 Purpose</a></li>
-<li><a href="#32-inputs">3.2 Inputs</a></li>
-<li><a href="#33-core-procedure">3.3 Core procedure</a><ul>
-<li><a href="#331-specify-the-comparison-design">3.3.1 Specify the comparison design</a></li>
-<li><a href="#332-implement-and-calibrate-the-comparison-rules">3.3.2 Implement and calibrate the comparison rules</a></li>
-<li><a href="#333-identify-and-consolidate-candidate-events">3.3.3 Identify and consolidate candidate events</a></li>
-<li><a href="#334-characterise-each-candidate">3.3.4 Characterise each candidate</a></li>
-<li><a href="#335-review-development-cases-and-prepare-taxonomy-evidence">3.3.5 Review development cases and prepare taxonomy evidence</a></li>
+<li><a href="#phase-3---uncover-and-characterise-changes" target="_self">Phase 3 - Uncover and characterise changes</a><ul>
+<li><a href="#31-purpose" target="_self">3.1 Purpose</a></li>
+<li><a href="#32-inputs" target="_self">3.2 Inputs</a></li>
+<li><a href="#33-core-procedure" target="_self">3.3 Core procedure</a><ul>
+<li><a href="#331-specify-the-comparison-design" target="_self">3.3.1 Specify the comparison design</a></li>
+<li><a href="#332-implement-and-calibrate-the-comparison-rules" target="_self">3.3.2 Implement and calibrate the comparison rules</a></li>
+<li><a href="#333-identify-and-consolidate-candidate-events" target="_self">3.3.3 Identify and consolidate candidate events</a></li>
+<li><a href="#334-characterise-each-candidate" target="_self">3.3.4 Characterise each candidate</a></li>
+<li><a href="#335-review-development-cases-and-prepare-taxonomy-evidence" target="_self">3.3.5 Review development cases and prepare taxonomy evidence</a></li>
 </ul>
 </li>
-<li><a href="#34-required-outputs">3.4 Required outputs</a></li>
-<li><a href="#35-completion-criteria">3.5 Completion criteria</a></li>
-<li><a href="#36-optional-refinements">3.6 Optional refinements</a></li>
+<li><a href="#34-required-outputs" target="_self">3.4 Required outputs</a></li>
+<li><a href="#35-completion-criteria" target="_self">3.5 Completion criteria</a></li>
+<li><a href="#36-optional-refinements" target="_self">3.6 Optional refinements</a></li>
 </ul>
 </li>
-<li><a href="#phase-4---construct-the-change-taxonomy">Phase 4 - Construct the change taxonomy</a><ul>
-<li><a href="#41-purpose">4.1 Purpose</a></li>
-<li><a href="#42-inputs">4.2 Inputs</a></li>
-<li><a href="#43-core-procedure">4.3 Core procedure</a><ul>
-<li><a href="#431-establish-the-organising-perspective">4.3.1 Establish the organising perspective</a></li>
-<li><a href="#432-review-and-select-development-evidence">4.3.2 Review and select development evidence</a></li>
-<li><a href="#433-develop-and-revise-the-type-structure">4.3.3 Develop and revise the type structure</a></li>
-<li><a href="#434-specify-definitions-and-assignment-criteria">4.3.4 Specify definitions and assignment criteria</a></li>
-<li><a href="#435-check-coherence-and-prepare-the-handover">4.3.5 Check coherence and prepare the handover</a></li>
+<li><a href="#phase-4---construct-the-change-taxonomy" target="_self">Phase 4 - Construct the change taxonomy</a><ul>
+<li><a href="#41-purpose" target="_self">4.1 Purpose</a></li>
+<li><a href="#42-inputs" target="_self">4.2 Inputs</a></li>
+<li><a href="#43-core-procedure" target="_self">4.3 Core procedure</a><ul>
+<li><a href="#431-establish-the-organising-perspective" target="_self">4.3.1 Establish the organising perspective</a></li>
+<li><a href="#432-review-and-select-development-evidence" target="_self">4.3.2 Review and select development evidence</a></li>
+<li><a href="#433-develop-and-revise-the-type-structure" target="_self">4.3.3 Develop and revise the type structure</a></li>
+<li><a href="#434-specify-definitions-and-assignment-criteria" target="_self">4.3.4 Specify definitions and assignment criteria</a></li>
+<li><a href="#435-check-coherence-and-prepare-the-handover" target="_self">4.3.5 Check coherence and prepare the handover</a></li>
 </ul>
 </li>
-<li><a href="#44-required-outputs">4.4 Required outputs</a></li>
-<li><a href="#45-completion-criteria">4.5 Completion criteria</a></li>
-<li><a href="#46-optional-refinements">4.6 Optional refinements</a></li>
+<li><a href="#44-required-outputs" target="_self">4.4 Required outputs</a></li>
+<li><a href="#45-completion-criteria" target="_self">4.5 Completion criteria</a></li>
+<li><a href="#46-optional-refinements" target="_self">4.6 Optional refinements</a></li>
 </ul>
 </li>
-<li><a href="#phase-5---classify-and-explain-changes">Phase 5 - Classify and explain changes</a><ul>
-<li><a href="#51-purpose">5.1 Purpose</a></li>
-<li><a href="#52-inputs">5.2 Inputs</a></li>
-<li><a href="#53-core-procedure">5.3 Core procedure</a><ul>
-<li><a href="#531-confirm-the-operational-specification">5.3.1 Confirm the operational specification</a></li>
-<li><a href="#532-implement-the-assignment-rules">5.3.2 Implement the assignment rules</a></li>
-<li><a href="#533-apply-the-rules-and-retain-assignment-evidence">5.3.3 Apply the rules and retain assignment evidence</a></li>
-<li><a href="#534-generate-evidence-based-descriptions">5.3.4 Generate evidence-based descriptions</a></li>
-<li><a href="#535-verify-the-implementation-and-prepare-evaluation">5.3.5 Verify the implementation and prepare evaluation</a></li>
+<li><a href="#phase-5---classify-and-explain-changes" target="_self">Phase 5 - Classify and explain changes</a><ul>
+<li><a href="#51-purpose" target="_self">5.1 Purpose</a></li>
+<li><a href="#52-inputs" target="_self">5.2 Inputs</a></li>
+<li><a href="#53-core-procedure" target="_self">5.3 Core procedure</a><ul>
+<li><a href="#531-confirm-the-operational-specification" target="_self">5.3.1 Confirm the operational specification</a></li>
+<li><a href="#532-implement-the-assignment-rules" target="_self">5.3.2 Implement the assignment rules</a></li>
+<li><a href="#533-apply-the-rules-and-retain-assignment-evidence" target="_self">5.3.3 Apply the rules and retain assignment evidence</a></li>
+<li><a href="#534-generate-evidence-based-descriptions" target="_self">5.3.4 Generate evidence-based descriptions</a></li>
+<li><a href="#535-verify-the-implementation-and-prepare-evaluation" target="_self">5.3.5 Verify the implementation and prepare evaluation</a></li>
 </ul>
 </li>
-<li><a href="#54-required-outputs">5.4 Required outputs</a></li>
-<li><a href="#55-completion-criteria">5.5 Completion criteria</a></li>
-<li><a href="#56-optional-refinements">5.6 Optional refinements</a></li>
+<li><a href="#54-required-outputs" target="_self">5.4 Required outputs</a></li>
+<li><a href="#55-completion-criteria" target="_self">5.5 Completion criteria</a></li>
+<li><a href="#56-optional-refinements" target="_self">5.6 Optional refinements</a></li>
 </ul>
 </li>
-<li><a href="#phase-6---evaluate-and-discuss-findings">Phase 6 - Evaluate and discuss findings</a><ul>
-<li><a href="#61-purpose">6.1 Purpose</a></li>
-<li><a href="#62-inputs">6.2 Inputs</a></li>
-<li><a href="#63-core-procedure">6.3 Core procedure</a><ul>
-<li><a href="#631-finalise-the-evaluation-protocol">6.3.1 Finalise the evaluation protocol</a></li>
-<li><a href="#632-evaluate-change-detection">6.3.2 Evaluate change detection</a></li>
-<li><a href="#633-assess-taxonomy-applicability">6.3.3 Assess taxonomy applicability</a></li>
-<li><a href="#634-evaluate-automatic-type-assignment">6.3.4 Evaluate automatic type assignment</a></li>
-<li><a href="#635-evaluate-generated-descriptions">6.3.5 Evaluate generated descriptions</a></li>
-<li><a href="#636-examine-the-complete-workflow-and-sensitivity">6.3.6 Examine the complete workflow and sensitivity</a></li>
-<li><a href="#637-answer-the-research-questions">6.3.7 Answer the research questions</a></li>
+<li><a href="#phase-6---evaluate-and-discuss-findings" target="_self">Phase 6 - Evaluate and discuss findings</a><ul>
+<li><a href="#61-purpose" target="_self">6.1 Purpose</a></li>
+<li><a href="#62-inputs" target="_self">6.2 Inputs</a></li>
+<li><a href="#63-core-procedure" target="_self">6.3 Core procedure</a><ul>
+<li><a href="#631-finalise-the-evaluation-protocol" target="_self">6.3.1 Finalise the evaluation protocol</a></li>
+<li><a href="#632-evaluate-change-detection" target="_self">6.3.2 Evaluate change detection</a></li>
+<li><a href="#633-assess-taxonomy-applicability" target="_self">6.3.3 Assess taxonomy applicability</a></li>
+<li><a href="#634-evaluate-automatic-type-assignment" target="_self">6.3.4 Evaluate automatic type assignment</a></li>
+<li><a href="#635-evaluate-generated-descriptions" target="_self">6.3.5 Evaluate generated descriptions</a></li>
+<li><a href="#636-examine-the-complete-workflow-and-sensitivity" target="_self">6.3.6 Examine the complete workflow and sensitivity</a></li>
+<li><a href="#637-answer-the-research-questions" target="_self">6.3.7 Answer the research questions</a></li>
 </ul>
 </li>
-<li><a href="#64-required-outputs">6.4 Required outputs</a></li>
-<li><a href="#65-completion-criteria">6.5 Completion criteria</a></li>
-<li><a href="#66-optional-refinements">6.6 Optional refinements</a></li>
+<li><a href="#64-required-outputs" target="_self">6.4 Required outputs</a></li>
+<li><a href="#65-completion-criteria" target="_self">6.5 Completion criteria</a></li>
+<li><a href="#66-optional-refinements" target="_self">6.6 Optional refinements</a></li>
 </ul>
 </li>
-<li><a href="#bibliography">Bibliography</a></li>
+<li><a href="#bibliography" target="_self">Bibliography</a></li>
 </ul>
 <hr />
 <h2 id="overview-of-the-fuucce-framework">Overview of the FUUCCE framework</h2>
-<p>The <strong>FUUCCE framework</strong> operationalises the <a href="bachelor_thesis_project_plan.docs.project.html">thesis project plan</a>, the source of truth for research objectives, scope and evaluation strategy, through six phases: familiarising with and assessing the data, preparing customer profiles, uncovering and characterising changes, constructing a change taxonomy, classifying and explaining events, and evaluating the findings.</p>
+<p>The <strong>FUUCCE framework</strong> operationalises the <a href="bachelor_thesis_project_plan.docs.project.html" target="_blank" rel="noopener noreferrer">thesis project plan</a>, the source of truth for research objectives, scope and evaluation strategy, through six phases: familiarising with and assessing the data, preparing customer profiles, uncovering and characterising changes, constructing a change taxonomy, classifying and explaining events, and evaluating the findings.</p>
 <p>It defines the core activities, expected outputs and completion criteria for a reproducible workflow, prioritising a complete core analysis before optional extensions. Development proceeds iteratively, while the final evaluation uses separate evidence to assess the individual components and the complete workflow.</p>
 <hr />
 <h2 id="data-formats-and-file-workflow">Data formats and file workflow</h2>
@@ -135,7 +135,7 @@
 1. <strong>Load:</strong> Read the required datasets from their Parquet files.
 2. <strong>Analyse:</strong> Perform preparation, calculations and analyses in the relevant notebook or script.
 3. <strong>Export:</strong> Save newly created or updated datasets as CSV.
-4. <strong>Convert:</strong> Convert the exported CSV files to Parquet using <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/csv_to_parquet.py">setup/csv_to_parquet.py</a>, retaining both formats.
+4. <strong>Convert:</strong> Convert the exported CSV files to Parquet using <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/csv_to_parquet.py" target="_blank" rel="noopener noreferrer">setup/csv_to_parquet.py</a>, retaining both formats.
 5. <strong>Reuse:</strong> Load the resulting Parquet files in subsequent processing steps or phases.</p>
 <p>After conversion, verify that both files represent the same dataset and that the Parquet version preserves the intended schema and missing values. Regenerate the corresponding Parquet file whenever an exported CSV dataset changes.</p>
 <p>Select the conversion stage explicitly with <code>--folder raw</code>, <code>--folder interim</code> or <code>--folder processed</code>, for example <code>uv run --locked python setup/csv_to_parquet.py --folder raw</code>. The converter reads only immediate CSV files in the selected folder under <code>data/data-example/</code>; it does not scan nested folders. Add <code>--update</code> to refresh existing Parquet files. For user-run production conversion, <code>--prd</code> selects the corresponding folder under <code>data/data-prd/</code>.</p>
@@ -240,7 +240,7 @@
 3. <strong>Focused exploratory findings:</strong> Selected summaries and graphics linked to the questions they answer.
 4. <strong>Preparation decisions and open issues:</strong> Recommended treatments, candidate measures, temporal representation and outstanding dependencies.
 5. <strong>Evidence-use record:</strong> Development cases, reserved evaluation evidence and any prior exposure.</p>
-<p>These outputs may be sections or tables within the same notebook. Separate files are only necessary where they support reuse in later phases. Export figures and tables to the directory specified by the project configuration in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/src/config">src/config</a>. The default export directory is <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/exports">outputs/exports</a>. Outputs derived from production data must use <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/.exports">outputs/.exports</a>. Use the configured path consistently throughout the notebook.</p>
+<p>These outputs may be sections or tables within the same notebook. Separate files are only necessary where they support reuse in later phases. Export figures and tables to the directory specified by the project configuration in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/src/config" target="_blank" rel="noopener noreferrer">src/config</a>. The default export directory is <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/exports" target="_blank" rel="noopener noreferrer">outputs/exports</a>. Outputs derived from production data must use <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/.exports" target="_blank" rel="noopener noreferrer">outputs/.exports</a>. Use the configured path consistently throughout the notebook.</p>
 <h3 id="15-completion-criteria">1.5 Completion criteria</h3>
 <p><strong>Phase 1 is complete when:</strong></p>
 <ul>
@@ -365,7 +365,7 @@
 3. <strong>Preparation and feature specification:</strong> Applied rules, formulas and consequential decisions.
 4. <strong>Verification results:</strong> Reconciliation checks, identified discrepancies and their resolution.
 5. <strong>Reproducible preparation code:</strong> Input references, configuration and output schemas.</p>
-<p><strong>Export the prepared analytical datasets according to the <a href="#data-formats-and-file-workflow">shared data-format workflow</a>:</strong> save them as CSV, convert them to Parquet and use the Parquet versions in subsequent phases. Document the CSV encoding, delimiter, decimal notation and missing-value representation. Retain additional intermediate datasets where they support verification or reuse, and preserve the original extracts.</p>
+<p><strong>Export the prepared analytical datasets according to the <a href="#data-formats-and-file-workflow" target="_self">shared data-format workflow</a>:</strong> save them as CSV, convert them to Parquet and use the Parquet versions in subsequent phases. Document the CSV encoding, delimiter, decimal notation and missing-value representation. Retain additional intermediate datasets where they support verification or reuse, and preserve the original extracts.</p>
 <h3 id="25-completion-criteria">2.5 Completion criteria</h3>
 <p><strong>Phase 2 is complete when:</strong></p>
 <ul>
@@ -659,7 +659,7 @@
 3. <strong>Development-case record:</strong> Cases examined, provisional outcomes and supporting evidence.
 4. <strong>Decision and revision record:</strong> Reasons for additions, combinations, removals and parameter choices.
 5. <strong>Phase 5 handover:</strong> The codebook version, applicable data versions and any bounded calibration tasks.</p>
-<p>These outputs may be maintained in one specification document and linked tables. Use stable identifiers to connect types, events and revisions. Export reusable tabular datasets according to the <a href="#data-formats-and-file-workflow">shared CSV-to-Parquet workflow</a>. Qualitative reasoning remains documented in the notebook or accompanying specification.</p>
+<p>These outputs may be maintained in one specification document and linked tables. Use stable identifiers to connect types, events and revisions. Export reusable tabular datasets according to the <a href="#data-formats-and-file-workflow" target="_self">shared CSV-to-Parquet workflow</a>. Qualitative reasoning remains documented in the notebook or accompanying specification.</p>
 <h3 id="45-completion-criteria">4.5 Completion criteria</h3>
 <p><strong>Phase 4 is complete when:</strong></p>
 <ul>
@@ -693,7 +693,7 @@
 <li>Development examples, counterexamples and provisional assignments.</li>
 <li>Records identifying development evidence and reserved evaluation cases.</li>
 </ul>
-<p>Load tabular inputs from their Parquet versions according to the <a href="#data-formats-and-file-workflow">shared file workflow</a>. Keep the final evaluation cases reserved for Phase 6.</p>
+<p>Load tabular inputs from their Parquet versions according to the <a href="#data-formats-and-file-workflow" target="_self">shared file workflow</a>. Keep the final evaluation cases reserved for Phase 6.</p>
 <h3 id="53-core-procedure">5.3 Core procedure</h3>
 <h4 id="531-confirm-the-operational-specification">5.3.1 Confirm the operational specification</h4>
 <p><strong>Check that every retained type has:</strong></p>
@@ -1007,7 +1007,7 @@
 3. <strong>Real-case assessment:</strong> Taxonomy findings, assignment comparisons and description checks.
 4. <strong>Complete-workflow and sensitivity findings:</strong> Error propagation, alternative-setting results and failure cases.
 5. <strong>Research-question assessment:</strong> Supported conclusions, limitations and unresolved questions.</p>
-<p>Keep results traceable to their input data and configuration. Export reusable tabular datasets according to the <a href="#data-formats-and-file-workflow">shared CSV-to-Parquet workflow</a> and save figures and tables in the configured directories.</p>
+<p>Keep results traceable to their input data and configuration. Export reusable tabular datasets according to the <a href="#data-formats-and-file-workflow" target="_self">shared CSV-to-Parquet workflow</a> and save figures and tables in the configured directories.</p>
 <h3 id="65-completion-criteria">6.5 Completion criteria</h3>
 <p><strong>Phase 6 is complete when:</strong></p>
 <ul>
@@ -1026,7 +1026,7 @@
 <p>Any additional claims must remain proportionate to the evidence collected.</p>
 <hr />
 <h2 id="bibliography">Bibliography</h2>
-<p>See <a href="bibliography.docs.literature.html">docs/literature/bibliography.md</a>.</p>
+<p>See <a href="bibliography.docs.literature.html" target="_blank" rel="noopener noreferrer">docs/literature/bibliography.md</a>.</p>
     </main>
 </body>
 </html>
