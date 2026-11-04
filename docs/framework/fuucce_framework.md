@@ -95,7 +95,7 @@
 
 ## Overview of the FUUCCE framework
 
-The **FUUCCE framework** operationalises the thesis project plan through six phases: familiarising with and assessing the data, preparing customer profiles, uncovering and characterising changes, constructing a change taxonomy, classifying and explaining events, and evaluating the findings.
+The **FUUCCE framework** operationalises the [thesis project plan](docs/project/bachelor_thesis_project_plan.md), the source of truth for research objectives, scope and evaluation strategy, through six phases: familiarising with and assessing the data, preparing customer profiles, uncovering and characterising changes, constructing a change taxonomy, classifying and explaining events, and evaluating the findings.
 
 It defines the core activities, expected outputs and completion criteria for a reproducible workflow, prioritising a complete core analysis before optional extensions. Development proceeds iteratively, while the final evaluation uses separate evidence to assess the individual components and the complete workflow.
 
@@ -994,4 +994,4 @@ Any additional claims must remain proportionate to the evidence collected.
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

@@ -200,4 +200,4 @@ First, read and analyze everything; further instructions will follow. The goal i
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

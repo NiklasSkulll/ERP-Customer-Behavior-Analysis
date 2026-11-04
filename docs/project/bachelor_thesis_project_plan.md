@@ -243,7 +243,7 @@ The separation between development and final evaluation cases will be planned ea
 
 ### 5.5 Relationship to the methodological framework
 
-The accompanying methodological framework specifies the detailed workflow, including phase-specific tasks, decision criteria and expected outputs. It operationalises the approach outlined here within the agreed research objectives, scope and evaluation strategy.
+The accompanying [FUUCCE framework](docs/framework/fuucce_framework.md) specifies the detailed workflow, including phase-specific tasks, decision criteria and expected outputs. It operationalises the approach outlined here within the agreed research objectives, scope and evaluation strategy. This project plan is the source of truth for those objectives, scope and evaluation commitments.
 
 ---
 
@@ -432,4 +432,4 @@ Final feature selection, calculation decisions and any distinction between detec
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

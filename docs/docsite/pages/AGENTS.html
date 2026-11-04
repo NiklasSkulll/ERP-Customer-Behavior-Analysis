@@ -17,12 +17,12 @@
 <p>This file provides guidance to AI coding agents when working with code in this repository.</p>
 <p><strong>Instructions for AI agents working on this project:</strong> Keep it brief and follow conventions. See <a href="BACKLOG.html">BACKLOG.md</a> for open tasks.</p>
 <h2 id="shift-handoff-always-read-this-first">Shift Handoff (ALWAYS read this first)</h2>
-<p><strong>Before each new session:</strong> <em>First</em>, read this <code>AGENTS.md</code>. <em>Afterward</em>, read <a href="HANDOVER.html">HANDOVER.md</a> (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. <em>After that</em>, consult the <a href="BACKLOG.html">BACKLOG.md</a> (Task Status) and MCP Serena-Memory files (in <a href="../../../.serena/">.serena/</a>).</p>
+<p><strong>Before each new session:</strong> <em>First</em>, read this <code>AGENTS.md</code>. <em>Afterward</em>, read <a href="HANDOVER.html">HANDOVER.md</a> (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. <em>After that</em>, consult the <a href="BACKLOG.html">BACKLOG.md</a> (Task Status) and MCP Serena-Memory files (in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena">.serena/</a>).</p>
 <blockquote>
 <p><strong>Important notes for development:</strong></p>
 <ul>
-<li>For notebook-related changes, <em>edit only</em> the source notebooks in <a href="../../../src/notebooks/">src/notebooks/</a>. Python files in <a href="../../../src/raw-notebooks/">src/raw-notebooks/</a> are <em>read-only mirrors</em> of notebook code. Use them for navigation and inspection only. Never edit, overwrite, regenerate, delete or synchronize these mirror files. Their generation is handled separately by the user. If a mirror differs from its source notebook, treat the notebook as authoritative and report the mismatch.</li>
-<li>Never inspect, load, search, execute against or modify production data located <a href="../../../src/.notebooks/">src/.notebooks/</a>, <a href="../../../data/data-prd/">data/data-prd/</a> and <a href="../../../outputs/.exports/">outputs/.exports/</a>. Do not copy production information into chat responses, code examples, documentation, handovers or Serena memories. If a task requires production access, stop and request a synthetic reproduction or data-free specification.</li>
+<li>For notebook-related changes, <em>edit only</em> the source notebooks in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/notebooks">src/notebooks/</a>. Python files in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/raw-notebooks">src/raw-notebooks/</a> are <em>read-only mirrors</em> of notebook code. Use them for navigation and inspection only. Never edit, overwrite, regenerate, delete or synchronize these mirror files. Their generation is handled separately by the user. If a mirror differs from its source notebook, treat the notebook as authoritative and report the mismatch.</li>
+<li>Never inspect, load, search, execute against or modify production data located <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/.notebooks">src/.notebooks/</a>, <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/data/data-prd">data/data-prd/</a> and <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/outputs/.exports">outputs/.exports/</a>. Do not copy production information into chat responses, code examples, documentation, handovers or Serena memories. If a task requires production access, stop and request a synthetic reproduction or data-free specification.</li>
 </ul>
 </blockquote>
 <p><strong>At the end of the session:</strong> <em>First</em>, add a new entry at the top of <a href="HANDOVER.html">HANDOVER.md</a>. A template is provided at the bottom of this <code>AGENTS.md</code>. <em>Afterward</em>, update the <a href="BACKLOG.html">BACKLOG.md</a>. <em>At the end</em>, update relevant Serena memories using its memory operations. Run onboarding only for initial setup or when a deliberate refresh is needed.</p>
@@ -32,36 +32,134 @@
 <hr />
 <!-- AUTO-MANAGED: project-description -->
 <h2 id="overview">Overview</h2>
+<ul>
+<li>This repository supports a bachelor's thesis on detecting, typing and explainably describing changes in B2B wholesale customers' purchasing behaviour using ERP order data. It is a research project; an end-to-end analysis pipeline and evaluation results are not yet implemented.</li>
+<li>The <a href="bachelor_thesis_project_plan.docs.project.html">project plan</a> is the source of truth for objectives, scope, candidate measures and evaluation commitments. The <a href="fuucce_framework.docs.framework.html">FUUCCE framework</a> operationalises it; the completed <a href="data_description.docs.project.html">data description</a> defines the available tables, fields and mappings.</li>
+<li>FUUCCE has six phases: Familiarise and assess → Use data and prepare profiles → Uncover and characterise changes → Construct the taxonomy → Classify and explain → Evaluate and discuss.</li>
+<li>The plan covers a 24-month window, with time-window profile comparison as the main detection direction. Ordering activity, net order value and assortment form the core; discounts are optional. Profitability analysis, churn prediction and causal explanations are outside scope.</li>
+</ul>
 <!-- END AUTO-MANAGED -->
 
 <hr />
 <!-- AUTO-MANAGED: build-commands -->
 <h2 id="build-development-commands">Build &amp; Development Commands</h2>
+<p>Run commands from the repository root. Python is selected by <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.python-version">.python-version</a> (3.12); <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/pyproject.toml">pyproject.toml</a> requires Python &gt;=3.12 and uv &gt;=0.13.1. Use the existing <code>.venv/bin/python</code> for checks to avoid incidental dependency installation.</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bash setup/initial_setup.sh</code></td>
+<td>Contributor bootstrap: prepares tools, Git hooks, Git LFS and the environment; changes local configuration and may install/download dependencies.</td>
+</tr>
+<tr>
+<td><code>bash setup/initial_setup.sh --check</code></td>
+<td>Inspect setup status; exit code <code>1</code> means setup is incomplete.</td>
+</tr>
+<tr>
+<td><code>uv sync --locked</code></td>
+<td>Synchronize the environment with the committed lockfile.</td>
+</tr>
+<tr>
+<td><code>PYTHONPATH="$PWD/src" uv run --locked jupyter lab</code></td>
+<td>Launch Jupyter with <code>src/config</code> importable as <code>config</code>; use the project interpreter.</td>
+</tr>
+<tr>
+<td><code>.venv/bin/python -B setup/csv_to_parquet.py --help</code></td>
+<td>Inspect CSV converter usage without processing data.</td>
+</tr>
+<tr>
+<td><code>.venv/bin/python -B setup/notebook_to_raw_python.py --help</code></td>
+<td>Inspect exporter usage; mirror generation remains exclusively user-managed.</td>
+</tr>
+<tr>
+<td><code>.venv/bin/python -B setup/create_documentation_site.py --help</code></td>
+<td>Inspect documentation generator usage without building.</td>
+</tr>
+<tr>
+<td><code>bash -n setup/initial_setup.sh</code></td>
+<td>Check Bash syntax without running setup.</td>
+</tr>
+<tr>
+<td><code>uv --no-cache lock --check --offline</code></td>
+<td>Check lockfile consistency without resolving dependencies online.</td>
+</tr>
+<tr>
+<td><code>git diff --check</code></td>
+<td>Check changes for whitespace errors.</td>
+</tr>
+</tbody>
+</table>
+<p>The user-facing documentation build command is <code>uv run --locked python setup/create_documentation_site.py</code>. It replaces <code>docs/docsite/</code>. <strong>Agents must build in an isolated copy of allowed public Markdown sources or synthetic fixtures:</strong> the current generator traverses the repository before filtering exclusions, so running it in the real checkout would traverse protected directories.</p>
+<p>There is no configured automated test, lint or type-check suite. Use checks appropriate to the change; do not claim that a project-wide suite passed. Do not execute notebooks, convert datasets or run bootstrap as a routine verification step.</p>
 <!-- END AUTO-MANAGED -->
 
 <hr />
 <!-- AUTO-MANAGED: architecture -->
 <h2 id="architecture">Architecture</h2>
+<ul>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/project">docs/project/</a> contains the authoritative plan and data schema; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/framework">docs/framework/</a> contains the methodological workflow. <a href="README.html">README.md</a> is the project entry point.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/literature">docs/literature/</a> contains research notes and bibliography; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/prompts">docs/prompts/</a> records historical AI prompts. Preserve original prompt text when updating navigation or annotations.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/setup">setup/</a> contains the Bash bootstrap and standalone Python utilities for CSV conversion, notebook export and documentation generation. There is no installed application package or deployment service.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/config">src/config/</a> contains the frozen <code>AnalysisConfig</code> type and explicit example/production profiles. Paths derive from the repository location; imports perform no data reads or directory creation.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/notebooks">src/notebooks/</a> contains authoritative public notebooks. <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/raw-notebooks">src/raw-notebooks/</a> contains user-generated mirrors for read-only navigation. Both currently contain placeholders.</li>
+<li>Example inputs and intermediate datasets belong under <code>data/data-example/</code> (<code>raw/</code>, <code>interim/</code>, <code>processed/</code>); public synthetic artifacts belong under <code>outputs/exports/</code>. Production roots remain subject to the restrictions above.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/docsite">docs/docsite/</a> is generated output. Its generator and shared CSS live in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/create_documentation_site.py">setup/create_documentation_site.py</a>. Local thesis sources in <code>docs/.bachelor-thesis/</code> and literature originals in <code>docs/literature/.literature-source-files/</code> are ignored and excluded from conversion.</li>
+</ul>
 <!-- END AUTO-MANAGED -->
 
 <hr />
 <!-- AUTO-MANAGED: conventions -->
 <h2 id="code-conventions">Code Conventions</h2>
+<ul>
+<li>Follow existing utility structure: <code>argparse</code>, <code>pathlib</code>, paths rooted at <code>__file__</code>, <code>main() -&gt; int</code>, and <code>raise SystemExit(main())</code>. Load third-party dependencies after argument parsing so <code>--help</code> remains data-free.</li>
+<li>Preserve temporary-file/build-directory writes and replacement behaviour; do not replace them with partial in-place output writes.</li>
+<li>Public notebooks explicitly import <code>from config.example import CONFIG</code>. Only user-managed private copies select production. Use <code>CONFIG.data_dir</code> and <code>CONFIG.output_dir</code>; avoid machine detection, environment-based profile switching and hard-coded absolute paths.</li>
+<li>Prepared CSV tables use UTF-8, comma separators and English uppercase columns. Preserve ERP field meanings and use the plan's measure names, such as <code>ORDERCOUNT</code> and <code>TOTALORDERVALUE</code>, and identifiers <code>CUSTOMERID</code> and <code>PERIODSTART</code>.</li>
+<li>Load tabular inputs from Parquet; export new or updated datasets to CSV, convert to Parquet, retain both and verify schema/missing-value preservation. Preserve original extracts.</li>
+<li>Keep Markdown source authoritative, preserve established title wrappers and tables of contents, and check link case and anchors. Update generator styling rather than editing generated HTML/CSS manually.</li>
+</ul>
 <!-- END AUTO-MANAGED -->
 
 <hr />
 <!-- AUTO-MANAGED: patterns -->
 <h2 id="detected-patterns">Detected Patterns</h2>
+<ul>
+<li>Explicit configuration keeps the same analysis code usable on development and production PCs. Switching profiles is a deliberate import change in a private notebook copy, not an automatic fallback.</li>
+<li>Order headers repeat across item rows: count distinct eligible orders and include each order-level net amount once. Distinguish missing coverage from inactivity and leave zero-denominator averages/shares undefined.</li>
+<li>Candidate detection, taxonomy development, automatic assignment and explanation are separate steps. Preserve supporting observations and represent combined changes, ambiguity and insufficient evidence explicitly.</li>
+<li>Development is iterative; final evaluation uses reserved evidence. Fix measures, thresholds, taxonomy criteria and description rules before final evaluation, and report sensitivity analyses separately.</li>
+<li>The documentation preprocessor handles centred Markdown wrappers and list separators. Link rewriting maps converted Markdown to HTML, preserves queries/fragments, and sends other local targets to GitHub <code>main</code>; folder links ending in <code>/</code> use the folder view.</li>
+</ul>
 <!-- END AUTO-MANAGED -->
 
 <hr />
 <!-- AUTO-MANAGED: git-insights -->
 <h2 id="git-insights">Git Insights</h2>
+<ul>
+<li>Existing commits use Conventional Commit titles, for example <code>fix(docsite): ...</code> and <code>chore(docs): ...</code>. Keep changes focused and use the <a href="pull_request_template..github.html">pull request template</a> to explain motivation, results and validation.</li>
+<li>CSV and Parquet files use Git LFS through <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.gitattributes">.gitattributes</a>. Do not replace LFS pointers or download datasets merely to inspect repository structure.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.githooks/pre-commit">.githooks/pre-commit</a> rejects tracked/staged paths under the three production roots. It checks paths, not notebook contents; saved outputs can still expose production information in public files.</li>
+<li>The bootstrap activates repository-local hooks and existing LFS hooks. Do not reconfigure the user's Git setup as an incidental check.</li>
+<li>Inspect working-tree and staged changes before editing; preserve unrelated work and staged state. Keep <code>pyproject.toml</code> and <code>uv.lock</code> together when intentionally changing dependencies. Do not commit or push unless requested.</li>
+</ul>
 <!-- END AUTO-MANAGED -->
 
 <hr />
 <!-- AUTO-MANAGED: best-practices -->
 <h2 id="best-practices">Best Practices</h2>
+<ul>
+<li>Use focused source inspection and Serena navigation; confirm the active project before memory or symbol writes. Never use broad searches, indexing or traversal that enters protected production paths.</li>
+<li>Verify that any execution requires no data or uses explicitly fully synthetic fixtures. A directory named <code>data-example</code> alone does not establish synthetic provenance; pseudonymized real records are not synthetic.</li>
+<li>For utility changes, use isolated temporary fixtures. For documentation changes, check links, anchors and generated output as relevant. Report checks actually run and their limitations.</li>
+<li>Known tooling limits: the CSV converter scans immediate <code>data/data-example/*.csv</code>, whereas documented extracts are under <code>raw/</code>; the docsite converter assumes repository-root-relative links and its generated heading IDs differ from some GitHub-style anchors. Do not silently assume these cases work.</li>
+<li>Describe recorded net order values accurately; do not equate them with realised revenue. Descriptions explain observed changes and assignment evidence, not customer motives. Without a user study, factual correctness and traceability do not demonstrate user comprehensibility or usefulness.</li>
+<li>Keep durable technical guidance in Serena memories, session history in HANDOVER.md and task status in BACKLOG.md, subject to explicit user overrides. Do not copy historical claims into current guidance without verifying them against the plan and source files.</li>
+</ul>
 <!-- END AUTO-MANAGED -->
 
 <!-- MANUAL -->

@@ -108,4 +108,4 @@ Startup errors stop the script before the conversion summary is printed. If `uv`
 
 ## Bibliography
 
-See [docs/literature/bibliography.md](../literature/bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

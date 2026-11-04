@@ -32,17 +32,17 @@ Detection, typology and explainable description of purchasing changes in B2B who
 
 This bachelor's thesis project investigates how changes in customer purchasing behaviour can be detected, classified into interpretable types, and explained using enterprise resource planning (ERP) order data from a B2B wholesaler.
 
-Customer-level time series will describe purchasing dimensions such as revenue, order frequency, basket value, assortment breadth, product-group mix, discounts, and contribution margin. The intended result is a traceable description of **what changed, when it changed, and which purchasing dimensions support the assigned change type**.
+The investigation covers a 24-month observation window. Core candidate measures describe ordering activity, total and average net order value, and product and product-group breadth. Their final selection depends on data quality and the evidence available for customer-level comparisons. Discount levels and more detailed assortment analyses are optional extensions. Recorded net order values are not automatically interpreted as realised revenue.
 
-The focus is retrospective analysis of purchases observed with the wholesaler. Predicting churn, inferring customers' motives, and deploying a real-time monitoring system are outside the current scope.
+The intended result is a traceable description of **what changed, when it changed, and which observations support the assigned change type**. The focus is retrospective analysis of purchases observed with the wholesaler. Churn prediction, causal explanations, profitability analysis, production integration, and real-time monitoring are outside the core investigation.
 
-Start with the [FUUCKAE framework](docs/framework/fuuckae_framework.md) for the methodology or the [project plan](docs/project/complete_project_plan.md) for the research questions, scope, and proposed thesis structure. The framework is written in English and the project plan is in German.
+Start with the [bachelor's thesis project plan](docs/project/bachelor_thesis_project_plan.md), the source of truth for research objectives, scope, candidate measures, and evaluation strategy. The [FUUCCE framework](docs/framework/fuucce_framework.md) operationalises that plan, and the [data description](docs/project/data_description.md) documents the ERP tables, fields, mappings, and interpretation rules. All three documents are written in English, with German thesis-title and research-question translations in the plan.
 
 ---
 
 ## Project status
 
-**Early research and setup stage.** The repository contains the seven-phase framework, project planning, literature notes, prompt records, and utility scripts. The public notebook directories currently contain placeholders; an end-to-end analysis pipeline and evaluation results are not yet included.
+**Research planning and data documentation are established; analytical implementation is still pending.** The repository contains the current project plan, the six-phase FUUCCE framework, the completed data description, literature notes, prompt records, and utility scripts. The public notebook directories currently contain placeholders; an end-to-end analysis pipeline and evaluation results are not yet included. Documented methods and candidate measures describe planned work, not validated findings.
 
 Python dependencies and Jupyter tools are declared in [pyproject.toml](pyproject.toml) and resolved in [uv.lock](uv.lock). The [contributor setup script](setup/initial_setup.sh) prepares the local environment, Git hooks, and Git LFS. Separate example and production configurations are available in [src/config](src/config).
 
@@ -50,23 +50,22 @@ Python dependencies and Jupyter tools are declared in [pyproject.toml](pyproject
 
 ## Methodology
 
-**The [FUUCKAE framework](docs/framework/fuuckae_framework.md) organises the work into seven iterative phases:**
+**The [FUUCCE framework](docs/framework/fuucce_framework.md) implements the project plan through six phases:**
 
-| **Phase**                  | **Purpose**                                                                                |
-| -------------------------- | ------------------------------------------------------------------------------------------ |
-| **1. Frame**               | Define the analysis context and inspect the ERP datasets.                                  |
-| **2. Understand**          | Explore customer histories, purchasing patterns, and data usability.                       |
-| **3. Unify**               | Prepare the data and construct reliable customer time series.                              |
-| **4. Compare**             | Identify candidate changes and describe their timing, magnitude, and persistence.          |
-| **5. Knowledge synthesis** | Develop the purchasing-change taxonomy and proposed assignment criteria.                   |
-| **6. Apply**               | Assign change types and explain outcomes using recorded evidence and rules.                |
-| **7. Evaluate**            | Assess detection, taxonomy applicability, assignment consistency, and explanation quality. |
+| **Phase** | **Purpose** |
+| --------- | ----------- |
+| **1. Familiarise and assess** | Examine the ERP data, customer histories, and suitability of candidate measures; establish development and evaluation boundaries. |
+| **2. Use data and prepare profiles** | Apply eligibility and preparation rules and construct reproducible customer-period profiles. |
+| **3. Uncover and characterise changes** | Compare reference and subsequent periods and retain change candidates with their supporting evidence. |
+| **4. Construct the taxonomy** | Develop distinguishable change types and document their assignment criteria using development cases. |
+| **5. Classify and explain** | Apply the criteria automatically and generate evidence-based descriptions, including ambiguity and insufficient evidence. |
+| **6. Evaluate and discuss** | Assess detection, taxonomy applicability, assignment quality, and description correctness and completeness. |
 
-Candidate detection, taxonomy development, and type assignment are distinct steps. Development evidence and evidence reserved for evaluation are kept separate according to the research claim.
+Time-window-based comparison of customer profiles is the planned main detection approach. Taxonomy development is researcher-led and data-informed; documented rules support reproducible automatic assignment of change events. Development is iterative, while final evaluation uses controlled cases and held-out real customer histories, with selected sensitivity analyses reported separately. The core investigation prioritises a complete workflow and its evaluation before optional extensions.
 
 ## Getting started
 
-Read the [framework](docs/framework/fuuckae_framework.md) and [data description](docs/project/data_description.md) for the workflow and expected input tables. Documentation can be read without installing Python dependencies.
+Read the [project plan](docs/project/bachelor_thesis_project_plan.md) first, followed by the [framework](docs/framework/fuucce_framework.md) and [data description](docs/project/data_description.md) for the workflow and documented input tables. Documentation can be read without installing Python dependencies.
 
 **After cloning, run the setup script from the repository root:**
 ```bash
@@ -121,9 +120,9 @@ The CSV converter currently scans only the selected directory's immediate CSV fi
 
 | **Resource**                                                                                 | **Contents**                                                                            |
 | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| [FUUCKAE framework](docs/framework/fuuckae_framework.md)                                     | Phase procedures, inputs, outputs, completion criteria, and methodological foundations. |
-| [Project plan](docs/project/complete_project_plan.md)                                        | Thesis topic, research questions, metrics, scope, and evaluation proposals.             |
-| [Data description](docs/project/data_description.md)                                         | Expected order, product, price, customer, and industry-mapping tables.                  |
+| [Project plan](docs/project/bachelor_thesis_project_plan.md) | Source of truth for objectives, research questions, scope, candidate measures, and evaluation strategy. |
+| [FUUCCE framework](docs/framework/fuucce_framework.md) | Six-phase workflow with procedures, inputs, outputs, and completion criteria. |
+| [Data description](docs/project/data_description.md) | Completed documentation of four main ERP datasets, four lookup/mapping datasets, and their relationships. |
 | [Literature overview](docs/literature/literature_overview.md)                                | Paper summaries and their relevance to the research question.                           |
 | [Bibliography](docs/literature/bibliography.md) · [BibTeX](docs/literature/bibliography.bib) | References used throughout the project.                                                 |
 | [Environment setup](docs/setup/manage_uv_environment.md)                                     | Dependency management and environment activation with uv.                               |
@@ -141,10 +140,14 @@ The CSV converter currently scans only the selected directory's immediate CSV fi
 ERP-Customer-Behavior-Analysis/
 ├── docs/
 │   ├── .bachelor-thesis/             # Bachelor thesis LaTeX sources (ignored)
-│   ├── framework/                    # FUUCKAE methodology
+│   ├── docsite/                      # Generated HTML documentation
+│   ├── framework/                    # Six-phase FUUCCE methodology
+│   │   └── fuucce_framework.md
 │   ├── literature/                   # Literature summaries and references
 │   │   └── .literature-source-files/ # Scientific papers and source files (ignored)
 │   ├── project/                      # Thesis plan and data description
+│   │   ├── bachelor_thesis_project_plan.md # Source of truth for the investigation
+│   │   └── data_description.md        # ERP schema, mappings, and interpretation rules
 │   ├── prompts/                      # Research and development prompt records
 │   └── setup/                        # Tooling and workflow guides
 ├── setup/                            # Contributor setup, conversion, and documentation utilities
@@ -156,11 +159,15 @@ ERP-Customer-Behavior-Analysis/
 │   └── raw-notebooks/                # Generated Python mirrors for read-only navigation
 ├── data/
 │   ├── data-example/                 # Synthetic example inputs and intermediate datasets
+│   │   ├── raw/                      # Example extracts matching the data description
+│   │   ├── interim/                  # Intermediate preparation datasets
+│   │   └── processed/                # Prepared analytical datasets
 │   └── data-prd/                     # Private production inputs and intermediate datasets (ignored)
 ├── outputs/
 │   ├── exports/                      # Example figures, tables, and other artifacts
 │   └── .exports/                     # Private production artifacts (ignored)
 ├── .githooks/                        # Production-file guard and Git LFS hooks
+├── .github/                          # Pull request template
 ├── .python-version                   # Project Python version selection
 ├── pyproject.toml                    # Dependencies and minimum uv version
 ├── uv.lock                           # Resolved dependency versions
@@ -171,6 +178,8 @@ ERP-Customer-Behavior-Analysis/
 ## Data conventions
 
 Use these conventions for prepared tables and public examples. Original ERP field names are documented in the [data description](docs/project/data_description.md).
+
+The [framework's file workflow](docs/framework/fuucce_framework.md#data-formats-and-file-workflow) uses Parquet as the standard tabular input format. Export newly created or updated datasets as CSV, convert them to Parquet, and retain both formats. Verify schema and missing-value preservation, and refresh the Parquet version whenever its CSV changes. The CSV converter's directory limitation is described under [Getting started](#getting-started).
 
 | **Property**              | **Convention**                               | **Example**                              |
 | ------------------------- | -------------------------------------------- | ---------------------------------------- |

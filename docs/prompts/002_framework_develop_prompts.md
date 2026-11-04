@@ -19,7 +19,7 @@
 
 ## Prompt used for first framework brainstorming and improvements
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -166,7 +166,7 @@ Do **not** begin constructing the framework until I explicitly tell you to conti
 
 ## Prompt used for phase 1-4 development
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -184,7 +184,7 @@ Now we can continue with phase 3.
 
 ## Prompt used for phase 5-7 development
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -748,7 +748,7 @@ After your assessment, wait until I explicitly ask you to begin Phase 5.
 
 ## Prompt used to clean up each "Purpose" section
 
-> The final framework is documented in `docs/framework/fuuckae_framework.md`.
+> This prompt contributed to the former FUUCKAE framework. The current framework is documented in [docs/framework/fuucce_framework.md](docs/framework/fuucce_framework.md).
 
 **AI model (model name (source)):**
 - GPT-6 Astra (OpenAI, 2026c)
@@ -829,4 +829,4 @@ Let's get started. **Here's what to do:**
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).

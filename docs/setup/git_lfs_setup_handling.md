@@ -194,4 +194,4 @@ Downloads count toward the repository owner's LFS bandwidth usage, including dow
 
 ## Bibliography
 
-See [docs/literature/Bibliography.md](docs/literature/Bibliography.md).
+See [docs/literature/bibliography.md](docs/literature/bibliography.md).
