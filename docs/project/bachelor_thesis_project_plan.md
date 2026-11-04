@@ -2,7 +2,7 @@
 
 # Project plan for the Bachelor's Thesis
 
-This project plan defines the objectives, scope and methodological approach for detecting, classifying and explainably describing changes in B2B customers’ purchasing behaviour using ERP sales order data. It outlines the data basis, candidate analytical measures, taxonomy development and evaluation strategy, distinguishing the core investigation from optional extensions.
+This project plan defines the objectives, scope and methodological approach for detecting, classifying and explainably describing changes in B2B customers' purchasing behaviour using ERP sales order data. It outlines the data basis, candidate analytical measures, taxonomy development and evaluation strategy, distinguishing the core investigation from optional extensions.
 
 </div>
 
@@ -338,7 +338,7 @@ A limited sensitivity analysis will examine selected thresholds or comparison pe
 
 No universal numerical success threshold is assumed. Any acceptance criteria will require justification before the final evaluation. Conclusions will distinguish demonstrated performance in the evaluated cases from claims that the available evidence cannot support.
 
-Detailed sampling procedures, matching rules and review checklists will be specified in the [methodological framework](docs/framework/fuuckae_framework.md).
+Detailed sampling procedures, matching rules and review checklists will be specified in the [methodological framework](docs/framework/fuucce_framework.md).
 
 ---
 

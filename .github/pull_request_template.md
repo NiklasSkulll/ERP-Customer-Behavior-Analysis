@@ -32,7 +32,7 @@ Use only fully synthetic inputs or data-free checks; do not attach production ou
 
 ## Research impact (if applicable)
 
-<!-- Identify the affected FUUCKAE phase and explain changes to assumptions, features,
+<!-- Identify the affected FUUCCE phase and explain changes to assumptions, features,
 detection rules, taxonomy, evaluation, or interpretation. Cite supporting sources
 and state limitations. Distinguish methodological proposals from evaluated findings. -->
 
