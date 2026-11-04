@@ -114,6 +114,8 @@ Parquet is the standard input format for loading, processing and analysing tabul
 
 After conversion, verify that both files represent the same dataset and that the Parquet version preserves the intended schema and missing values. Regenerate the corresponding Parquet file whenever an exported CSV dataset changes.
 
+Select the conversion stage explicitly with `--folder raw`, `--folder interim` or `--folder processed`, for example `uv run --locked python setup/csv_to_parquet.py --folder raw`. The converter reads only immediate CSV files in the selected folder under `data/data-example/`; it does not scan nested folders. Add `--update` to refresh existing Parquet files. For user-run production conversion, `--prd` selects the corresponding folder under `data/data-prd/`.
+
 Use the configured data and output directories consistently and preserve the original extracts.
 
 ---

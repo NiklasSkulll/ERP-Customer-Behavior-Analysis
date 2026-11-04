@@ -122,7 +122,7 @@ bash setup/initial_setup.sh --no-color # Disable colored messages
 <tbody>
 <tr>
 <td><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/csv_to_parquet.py">CSV to Parquet</a></td>
-<td>Convert CSV files directly inside <code>data/data-example/</code> to compressed Parquet files.</td>
+<td>Convert immediate CSV files in a selected <code>raw</code>, <code>interim</code>, or <code>processed</code> folder to compressed Parquet files.</td>
 <td><code>duckdb</code></td>
 </tr>
 <tr>
@@ -137,7 +137,11 @@ bash setup/initial_setup.sh --no-color # Disable colored messages
 </tr>
 </tbody>
 </table>
-<p>The CSV converter currently scans only the selected directory's immediate CSV files. The <a href="data_description.docs.project.html">data description</a> uses paths under <code>data/data-example/raw/</code>. Those paths need to be aligned before using the converter with that layout.</p>
+<p>The CSV converter requires <code>--folder raw</code>, <code>--folder interim</code>, or <code>--folder processed</code>. It reads that folder under <code>data/data-example/</code> by default; <code>--prd</code> selects the same folder under <code>data/data-prd/</code>. It scans only immediate CSV files and writes ZSTD-compressed Parquet files beside them, retaining the CSV originals. Existing Parquet files are skipped unless <code>--update</code> is supplied. A missing or empty folder produces an error.</p>
+<pre><code class="language-bash">uv run --locked python setup/csv_to_parquet.py --folder raw
+uv run --locked python setup/csv_to_parquet.py --folder interim --update
+</code></pre>
+<p>For user-run production conversion, add <code>--prd</code> to the corresponding command. Folder selection is required for both environments; commands without <code>--folder</code> no longer convert files directly in the data root.</p>
 <h2 id="documentation">Documentation</h2>
 <table>
 <thead>
@@ -238,7 +242,7 @@ bash setup/initial_setup.sh --no-color # Disable colored messages
 </code></pre>
 <h2 id="data-conventions">Data conventions</h2>
 <p>Use these conventions for prepared tables and public examples. Original ERP field names are documented in the <a href="data_description.docs.project.html">data description</a>.</p>
-<p>The <a href="fuucce_framework.docs.framework.html#data-formats-and-file-workflow">framework's file workflow</a> uses Parquet as the standard tabular input format. Export newly created or updated datasets as CSV, convert them to Parquet, and retain both formats. Verify schema and missing-value preservation, and refresh the Parquet version whenever its CSV changes. The CSV converter's directory limitation is described under <a href="#getting-started">Getting started</a>.</p>
+<p>The <a href="fuucce_framework.docs.framework.html#data-formats-and-file-workflow">framework's file workflow</a> uses Parquet as the standard tabular input format. Export newly created or updated datasets as CSV, convert them to Parquet, and retain both formats. Verify schema and missing-value preservation, and refresh the Parquet version whenever its CSV changes. The CSV converter's folder selection is described under <a href="#getting-started">Getting started</a>.</p>
 <table>
 <thead>
 <tr>

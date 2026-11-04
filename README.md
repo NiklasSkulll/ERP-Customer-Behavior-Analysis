@@ -110,11 +110,18 @@ After pulling dependency changes, run `uv sync --locked` again. See the [environ
 
 | **Utility**                                              | **Purpose**                                                                                                                                 | **Execution dependency** |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| [CSV to Parquet](setup/csv_to_parquet.py)                | Convert CSV files directly inside `data/data-example/` to compressed Parquet files.                                                         | `duckdb`                 |
+| [CSV to Parquet](setup/csv_to_parquet.py) | Convert immediate CSV files in a selected `raw`, `interim`, or `processed` folder to compressed Parquet files. | `duckdb` |
 | [Notebook export](setup/notebook_to_raw_python.py)       | Export saved source notebooks as Python mirrors without executing cells. See the [conversion guide](docs/setup/create_raw_python_files.md). | `nbconvert`              |
 | [Documentation site](setup/create_documentation_site.py) | Generate a local HTML documentation site at `docs/docsite/index.html`.                                                                      | `markdown`               |
 
-The CSV converter currently scans only the selected directory's immediate CSV files. The [data description](docs/project/data_description.md) uses paths under `data/data-example/raw/`. Those paths need to be aligned before using the converter with that layout.
+The CSV converter requires `--folder raw`, `--folder interim`, or `--folder processed`. It reads that folder under `data/data-example/` by default; `--prd` selects the same folder under `data/data-prd/`. It scans only immediate CSV files and writes ZSTD-compressed Parquet files beside them, retaining the CSV originals. Existing Parquet files are skipped unless `--update` is supplied. A missing or empty folder produces an error.
+
+```bash
+uv run --locked python setup/csv_to_parquet.py --folder raw
+uv run --locked python setup/csv_to_parquet.py --folder interim --update
+```
+
+For user-run production conversion, add `--prd` to the corresponding command. Folder selection is required for both environments; commands without `--folder` no longer convert files directly in the data root.
 
 ## Documentation
 
@@ -179,7 +186,7 @@ ERP-Customer-Behavior-Analysis/
 
 Use these conventions for prepared tables and public examples. Original ERP field names are documented in the [data description](docs/project/data_description.md).
 
-The [framework's file workflow](docs/framework/fuucce_framework.md#data-formats-and-file-workflow) uses Parquet as the standard tabular input format. Export newly created or updated datasets as CSV, convert them to Parquet, and retain both formats. Verify schema and missing-value preservation, and refresh the Parquet version whenever its CSV changes. The CSV converter's directory limitation is described under [Getting started](#getting-started).
+The [framework's file workflow](docs/framework/fuucce_framework.md#data-formats-and-file-workflow) uses Parquet as the standard tabular input format. Export newly created or updated datasets as CSV, convert them to Parquet, and retain both formats. Verify schema and missing-value preservation, and refresh the Parquet version whenever its CSV changes. The CSV converter's folder selection is described under [Getting started](#getting-started).
 
 | **Property**              | **Convention**                               | **Example**                              |
 | ------------------------- | -------------------------------------------- | ---------------------------------------- |

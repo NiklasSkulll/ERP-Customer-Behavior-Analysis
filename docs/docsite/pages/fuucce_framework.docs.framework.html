@@ -138,6 +138,7 @@
 4. <strong>Convert:</strong> Convert the exported CSV files to Parquet using <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/csv_to_parquet.py">setup/csv_to_parquet.py</a>, retaining both formats.
 5. <strong>Reuse:</strong> Load the resulting Parquet files in subsequent processing steps or phases.</p>
 <p>After conversion, verify that both files represent the same dataset and that the Parquet version preserves the intended schema and missing values. Regenerate the corresponding Parquet file whenever an exported CSV dataset changes.</p>
+<p>Select the conversion stage explicitly with <code>--folder raw</code>, <code>--folder interim</code> or <code>--folder processed</code>, for example <code>uv run --locked python setup/csv_to_parquet.py --folder raw</code>. The converter reads only immediate CSV files in the selected folder under <code>data/data-example/</code>; it does not scan nested folders. Add <code>--update</code> to refresh existing Parquet files. For user-run production conversion, <code>--prd</code> selects the corresponding folder under <code>data/data-prd/</code>.</p>
 <p>Use the configured data and output directories consistently and preserve the original extracts.</p>
 <hr />
 <h2 id="phase-1-familiarise-yourself-with-the-data-and-assess-its-suitability">Phase 1 - Familiarise yourself with the data and assess its suitability</h2>

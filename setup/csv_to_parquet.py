@@ -5,8 +5,12 @@ from pathlib import Path
 import sys
 
 def main() -> int:
-    # Create argument parser and arguments like '--help', '--prd' and '--update'
+    # Select the data environment, processing folder and overwrite behaviour.
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--folder", required=True, choices=("raw", "interim", "processed"),
+        help="Convert immediate CSV files in this subfolder; nested folders are not scanned.",
+    )
     parser.add_argument(
         "--prd", action="store_true",
         help="Read data/data-prd instead of data/data-example.",
@@ -23,7 +27,7 @@ def main() -> int:
     # Resolve project data paths as 'source_dir'
     source_dir = project_root / "data" / (
         "data-prd" if args.prd else "data-example"
-    )
+    ) / args.folder
     if not source_dir.is_dir():
         parser.exit(status=1, message=f"Error: Directory does not exist: {source_dir}\n")
 
