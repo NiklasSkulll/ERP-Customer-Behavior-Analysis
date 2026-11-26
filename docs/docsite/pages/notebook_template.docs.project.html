@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>notebook_template</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="page-nav" aria-label="Site navigation">
+        <a class="back-link" href="../index.html" target="_self"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+<h1 id="notebook-template">Notebook template</h1>
+<p>A shared structure for the six <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE phase</a> notebooks, supporting consistent documentation, reproducible execution and traceable analytical decisions.</p>
+</div>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview" target="_self">Overview</a></li>
+<li><a href="#notebook-structure" target="_self">Notebook structure</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>This document defines the common structure for the project's Jupyter notebooks, with one notebook dedicated to each <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE phase</a>. Each notebook records its purpose, inputs, configuration, analytical steps, validation results and findings, followed by exports and the handoff to subsequent work.</p>
+<p>The template provides a consistent organisational structure without prescribing identical analyses. Phase-specific tasks, required outputs and completion criteria remain defined by the <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE framework</a>. Methodological explanations and interpretations belong in Markdown cells, while executable analysis and checks belong in code cells.</p>
+<hr />
+<h2 id="notebook-structure">Notebook structure</h2>
+<p>Use the following headings as the starting point for each phase notebook. Replace the placeholders with the phase number and name, and expand the sections with appropriate Markdown and code cells. The bullet points describe the expected content and should be replaced with concrete explanations, procedures and findings.</p>
+<p>Keep the main section order consistent and add subsections where needed. If an item does not apply, briefly explain why. Present validation checks and relevant findings alongside the analytical steps where useful. The dedicated sections consolidate their outcomes.</p>
+<p><strong>Notebook structure:</strong></p>
+<pre><code class="language-markdown"># Phase &lt;No.&gt; - &lt;Phase Name&gt;
+
+## 1 Purpose and context
+
+- Purpose of the phase.
+- Relevant research questions.
+- Expected results.
+- Reference to the framework.
+
+## 2 Inputs and prerequisites
+
+- Required data.
+- Results from previous phases.
+- Data version, observation period and preparation status.
+- Role as evidence for development or evaluation.
+
+## 3 Configuration
+
+- Data profile.
+- Paths.
+- Relevant parameters.
+- If applicable, random seed.
+
+## 4 Execution
+
+- Phase-specific analysis steps with brief methodological justifications.
+
+## 5 Validation of results
+
+- Data and plausibility checks.
+- Computational and methodological consistency.
+- Failed checks.
+
+## 6 Findings and decisions
+
+- Key results.
+- Interpretation.
+- Decisions made.
+- Limitations.
+
+## 7 Exports and report
+
+- Saved artifacts.
+- Report.
+- Information about the execution run.
+
+## 8 Completion and handoff
+
+- Completion criteria met.
+- Open issues.
+- Specific inputs required for the next phase.
+</code></pre>
+<p>Place the following code in the configuration section before loading data or writing outputs. It locates the project's source directory and makes the configuration package importable when the kernel's working directory is the repository root or one of its subdirectories.</p>
+<p>Use the example configuration in public source notebooks. In a user-managed private production copy, change the configuration import to <code>from config.production import CONFIG</code> and the config check to <code>folder / "src" / "config" / "production.py"</code>. Use <code>CONFIG.data_dir</code> and <code>CONFIG.output_dir</code> consistently for subsequent file operations.</p>
+<p><strong>Import of the configuration:</strong></p>
+<pre><code class="language-python"># CONFIG roots derive from the repository location, not the kernel's working directory.
+from pathlib import Path
+import sys
+
+# Find src starting from the working directory and its ancestor directories.
+cwd = Path.cwd()
+
+# In a user-managed private copy, select &quot;production.py&quot; instead of &quot;example.py&quot;.
+for folder in (cwd, *cwd.parents):
+    if (folder / &quot;src&quot; / &quot;config&quot; / &quot;example.py&quot;).is_file():
+        src_path = folder / &quot;src&quot;
+        break
+else:
+    raise FileNotFoundError(
+        f&quot;src/config/example.py was not found relative to {cwd}.&quot;
+    )
+
+if str(src_path) not in sys.path:
+    sys.path.insert(0, str(src_path))
+
+# Load configuration. In a user-managed private copy, select config.production instead of config.example.
+from config.example import CONFIG
+</code></pre>
+    </main>
+</body>
+</html>

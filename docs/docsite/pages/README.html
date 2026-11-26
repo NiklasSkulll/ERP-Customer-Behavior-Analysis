@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_self"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
@@ -16,7 +16,7 @@
 <p><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/pyproject.toml" target="_blank" rel="noopener noreferrer"><img alt="Python" src="https://img.shields.io/badge/Python-3.12-%231D9FD7?style=flat&amp;logo=python&amp;logoColor=%231D9FD7&amp;labelColor=%2330363D" /></a>
 <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/src/notebooks" target="_blank" rel="noopener noreferrer"><img alt="Jupyter" src="https://img.shields.io/badge/Jupyter-Notebook-%23F37626?style=flat&amp;logo=jupyter&amp;logoColor=%23F37626&amp;labelColor=%2330363D" /></a>
 <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/uv.lock" target="_blank" rel="noopener noreferrer"><img alt="uv" src="https://img.shields.io/badge/uv-Environment%20Manager-%23DE5FE9?style=flat&amp;logo=uv&amp;logoColor=%23DE5FE9&amp;labelColor=%2330363D" /></a>
-<a href="AI_TOOL_DISCLOSURE.html" target="_blank" rel="noopener noreferrer"><img alt="AI Disclosure" src="https://img.shields.io/badge/AI-Vibe%20Coding-%236E7681?style=flat&amp;labelColor=%2330363D" /></a></p>
+<a href="AI_TOOL_DISCLOSURE.html" target="_self"><img alt="AI Disclosure" src="https://img.shields.io/badge/AI-Vibe%20Coding-%236E7681?style=flat&amp;labelColor=%2330363D" /></a></p>
 <p>Detection, typology and explainable description of purchasing changes in B2B wholesale customers using ERP time series data.</p>
 <p><strong>Open documentation website:</strong> <a href="https://niklasskulll.github.io/ERP-Customer-Behavior-Analysis/docsite/" target="_blank" rel="noopener noreferrer">https://niklasskulll.github.io/ERP-Customer-Behavior-Analysis/docsite/</a></p>
 </div>
@@ -36,16 +36,17 @@
 <hr />
 <h2 id="overview">Overview</h2>
 <p>This bachelor's thesis project investigates how changes in customer purchasing behaviour can be detected, classified into interpretable types, and explained using enterprise resource planning (ERP) order data from a B2B wholesaler.</p>
-<p>The investigation covers a 24-month observation window. Core candidate measures describe ordering activity, total and average net order value, and product and product-group breadth. Their final selection depends on data quality and the evidence available for customer-level comparisons. Discount levels and more detailed assortment analyses are optional extensions. Recorded net order values are not automatically interpreted as realised revenue.</p>
+<p>The investigation covers a 24-month observation window and uses sales order header information. The three core measures are order count (<code>ORDERCOUNT</code>), total net order value (<code>TOTALORDERNETVALUE</code>), and average net order value (<code>AVGORDERNETVALUE</code>). Customer industry provides context for grouped summaries. Product, assortment, quantity, price-condition, and discount analyses are outside the selected scope. Recorded net order values are not automatically interpreted as realised revenue.</p>
+<p>The analytical basis comprises an enriched table with one row per order and monthly profiles keyed by <code>CUSTOMER_ID</code>, <code>PERIODSTART</code>, and <code>TRANSACTIONCURRENCY</code>. Monetary comparisons keep EUR and GBP separate. Monthly profiles can support comparison windows spanning several months; the three stored measures are mathematically related and do not provide independent confirmation of a change.</p>
 <p>The intended result is a traceable description of <strong>what changed, when it changed, and which observations support the assigned change type</strong>. The focus is retrospective analysis of purchases observed with the wholesaler. Churn prediction, causal explanations, profitability analysis, production integration, and real-time monitoring are outside the core investigation.</p>
-<p>Start with the <a href="bachelor_thesis_project_plan.docs.project.html" target="_blank" rel="noopener noreferrer">bachelor's thesis project plan</a>, the source of truth for research objectives, scope, candidate measures, and evaluation strategy. The <a href="fuucce_framework.docs.framework.html" target="_blank" rel="noopener noreferrer">FUUCCE framework</a> operationalises that plan, and the <a href="data_description.docs.project.html" target="_blank" rel="noopener noreferrer">data description</a> documents the ERP tables, fields, mappings, and interpretation rules. All three documents are written in English, with German thesis-title and research-question translations in the plan.</p>
+<p>Start with the <a href="bachelor_thesis_project_plan.docs.project.html" target="_self">bachelor's thesis project plan</a>, the source of truth for research objectives, scope, core measures, and evaluation strategy. The <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE framework</a> operationalises that plan, and the <a href="data_description.docs.project.html" target="_self">data description</a> defines the raw, interim, and processed schemas, mappings, and interpretation rules. The <a href="notebook_template.docs.project.html" target="_self">notebook template</a> provides the shared structure for the six phase notebooks. These documents are written in English, with German thesis-title and research-question translations in the plan.</p>
 <hr />
 <h2 id="project-status">Project status</h2>
-<p><strong>Research planning and data documentation are established; analytical implementation is still pending.</strong> The repository contains the current project plan, the six-phase FUUCCE framework, the completed data description, literature notes, prompt records, and utility scripts. The public notebook directories currently contain placeholders; an end-to-end analysis pipeline and evaluation results are not yet included. Documented methods and candidate measures describe planned work, not validated findings.</p>
+<p><strong>Research planning and data specifications are established; analytical implementation requires alignment with the current scope.</strong> The repository contains the project plan, six-phase FUUCCE framework, raw and target dataset specifications, notebook and report templates, literature notes, prompt records, and utility scripts. The existing <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/src/notebooks/001_f_phase_1.ipynb" target="_blank" rel="noopener noreferrer">Phase 1 notebook</a> contains implementation code but still uses the earlier product/price input schema and measure names. It needs revision against the current header-based scope and notebook template. Later phase notebooks, an end-to-end analysis pipeline, and evaluation results are not yet included. Documented methods describe planned work, not validated findings.</p>
 <p>Python dependencies and Jupyter tools are declared in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/pyproject.toml" target="_blank" rel="noopener noreferrer">pyproject.toml</a> and resolved in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/uv.lock" target="_blank" rel="noopener noreferrer">uv.lock</a>. The <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/initial_setup.sh" target="_blank" rel="noopener noreferrer">contributor setup script</a> prepares the local environment, Git hooks, and Git LFS. Separate example and production configurations are available in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/src/config" target="_blank" rel="noopener noreferrer">src/config</a>.</p>
 <hr />
 <h2 id="methodology">Methodology</h2>
-<p><strong>The <a href="fuucce_framework.docs.framework.html" target="_blank" rel="noopener noreferrer">FUUCCE framework</a> implements the project plan through six phases:</strong></p>
+<p><strong>The <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE framework</a> implements the project plan through six phases:</strong></p>
 <table>
 <thead>
 <tr>
@@ -56,11 +57,11 @@
 <tbody>
 <tr>
 <td><strong>1. Familiarise and assess</strong></td>
-<td>Examine the ERP data, customer histories, and suitability of candidate measures; establish development and evaluation boundaries.</td>
+<td>Examine source structure, observation coverage, order eligibility, customer histories, and feasibility of the three core measures; establish development and evaluation boundaries.</td>
 </tr>
 <tr>
 <td><strong>2. Use data and prepare profiles</strong></td>
-<td>Apply eligibility and preparation rules and construct reproducible customer-period profiles.</td>
+<td>Construct the enriched order-level table and monthly customer-currency profiles, keeping technical validity, analytical eligibility, and measure assessability distinct.</td>
 </tr>
 <tr>
 <td><strong>3. Uncover and characterise changes</strong></td>
@@ -80,9 +81,11 @@
 </tr>
 </tbody>
 </table>
-<p>Time-window-based comparison of customer profiles is the planned main detection approach. Taxonomy development is researcher-led and data-informed; documented rules support reproducible automatic assignment of change events. Development is iterative, while final evaluation uses controlled cases and held-out real customer histories, with selected sensitivity analyses reported separately. The core investigation prioritises a complete workflow and its evaluation before optional extensions.</p>
+<p>Time-window-based comparison of monthly customer profiles is the planned main detection approach. A qualifying change must exceed usual variability, reach a justified minimum magnitude, and have sufficient supporting evidence; this operational definition does not itself imply statistical significance. Exploration proceeds from the data inventory and overall monthly summaries to industry summaries, customer histories, and individual events. An aggregate change is not a prerequisite for examining a customer.</p>
+<p>Taxonomy development is researcher-led and data-informed. Documented rules classify change events, allowing compatible labels and explicit ambiguous or unassigned outcomes. Standardised descriptions explain the observed differences and assignment evidence. One notebook per phase follows the <a href="notebook_template.docs.project.html" target="_self">shared template</a>, recording purpose, inputs, configuration, execution, validation, findings, exports and report, and completion and handoff.</p>
+<p>Development is iterative, while final evaluation uses controlled cases and held-out real customer histories. Preparation rules, detection settings, taxonomy criteria, and description rules are fixed before final evaluation; selected sensitivity analyses are reported separately. Description evaluation addresses factual correctness, completeness, and traceability. Without a user study, it does not establish comprehensibility or usefulness for sales staff. Optional refinements, such as ordering-gap descriptions, a second detection method, or expert feedback, follow completion of the core workflow and evaluation.</p>
 <h2 id="getting-started">Getting started</h2>
-<p>Read the <a href="bachelor_thesis_project_plan.docs.project.html" target="_blank" rel="noopener noreferrer">project plan</a> first, followed by the <a href="fuucce_framework.docs.framework.html" target="_blank" rel="noopener noreferrer">framework</a> and <a href="data_description.docs.project.html" target="_blank" rel="noopener noreferrer">data description</a> for the workflow and documented input tables. Documentation can be read without installing Python dependencies.</p>
+<p>Read the <a href="bachelor_thesis_project_plan.docs.project.html" target="_self">project plan</a> first, followed by the <a href="fuucce_framework.docs.framework.html" target="_self">framework</a> and <a href="data_description.docs.project.html" target="_self">data description</a> for the workflow and dataset contracts. Use the <a href="notebook_template.docs.project.html" target="_self">notebook template</a> when creating or aligning phase notebooks. Documentation can be read without installing Python dependencies.</p>
 <p><strong>After cloning, run the setup script from the repository root:</strong></p>
 <pre><code class="language-bash">bash setup/initial_setup.sh
 </code></pre>
@@ -104,8 +107,8 @@ bash setup/initial_setup.sh --no-color # Disable colored messages
 <p><strong>Start Jupyter from the repository root:</strong></p>
 <pre><code class="language-bash">PYTHONPATH=&quot;$PWD/src&quot; uv run --locked jupyter lab
 </code></pre>
-<p>This makes <code>src/config</code> importable as <code>config</code> from either notebook directory. Select the project interpreter at <code>.venv/bin/python</code>. For notebooks run through an editor instead, use the same interpreter and ensure the kernel's <code>PYTHONPATH</code> includes the repository's absolute <code>src</code> path.</p>
-<p>After pulling dependency changes, run <code>uv sync --locked</code> again. See the <a href="manage_uv_environment.docs.setup.html" target="_blank" rel="noopener noreferrer">environment guide</a> for dependency management and activation. Example and production notebook usage is described under <a href="#data-handling" target="_self">Data handling</a>.</p>
+<p>This makes <code>src/config</code> importable as <code>config</code> from either notebook directory. Select the project interpreter at <code>.venv/bin/python</code>. For notebooks run through an editor instead, use the same interpreter and the configuration setup cell in the <a href="notebook_template.docs.project.html#notebook-structure" target="_self">notebook template</a>, which locates <code>src</code> from the working directory and its ancestors. Alternatively, ensure the kernel's <code>PYTHONPATH</code> includes the repository's absolute <code>src</code> path.</p>
+<p>After pulling dependency changes, run <code>uv sync --locked</code> again. See the <a href="manage_uv_environment.docs.setup.html" target="_self">environment guide</a> for dependency management and activation. Example and production notebook usage is described under <a href="#data-handling" target="_self">Data handling</a>.</p>
 <p><strong>Utility help commands</strong> use only the Python standard library and do not process data or generate files. Run them from the repository root:</p>
 <pre><code class="language-bash">.venv/bin/python setup/csv_to_parquet.py --help
 .venv/bin/python setup/notebook_to_raw_python.py --help
@@ -127,7 +130,7 @@ bash setup/initial_setup.sh --no-color # Disable colored messages
 </tr>
 <tr>
 <td><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/notebook_to_raw_python.py" target="_blank" rel="noopener noreferrer">Notebook export</a></td>
-<td>Export saved source notebooks as Python mirrors without executing cells. See the <a href="create_raw_python_files.docs.setup.html" target="_blank" rel="noopener noreferrer">conversion guide</a>.</td>
+<td>Export saved source notebooks as Python mirrors without executing cells. See the <a href="create_raw_python_files.docs.setup.html" target="_self">conversion guide</a>.</td>
 <td><code>nbconvert</code></td>
 </tr>
 <tr>
@@ -152,27 +155,35 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 </thead>
 <tbody>
 <tr>
-<td><a href="bachelor_thesis_project_plan.docs.project.html" target="_blank" rel="noopener noreferrer">Project plan</a></td>
-<td>Source of truth for objectives, research questions, scope, candidate measures, and evaluation strategy.</td>
+<td><a href="bachelor_thesis_project_plan.docs.project.html" target="_self">Project plan</a></td>
+<td>Source of truth for objectives, research questions, header-based scope, eligibility principles, core measures, and evaluation strategy.</td>
 </tr>
 <tr>
-<td><a href="fuucce_framework.docs.framework.html" target="_blank" rel="noopener noreferrer">FUUCCE framework</a></td>
+<td><a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE framework</a></td>
 <td>Six-phase workflow with procedures, inputs, outputs, and completion criteria.</td>
 </tr>
 <tr>
-<td><a href="data_description.docs.project.html" target="_blank" rel="noopener noreferrer">Data description</a></td>
-<td>Completed documentation of four main ERP datasets, four lookup/mapping datasets, and their relationships.</td>
+<td><a href="data_description.docs.project.html" target="_self">Data description</a></td>
+<td>Two main raw ERP datasets, two lookup datasets, their relationships, and the order-level interim and monthly customer-currency target schemas.</td>
 </tr>
 <tr>
-<td><a href="literature_overview.docs.literature.html" target="_blank" rel="noopener noreferrer">Literature overview</a></td>
+<td><a href="notebook_template.docs.project.html" target="_self">Notebook template</a></td>
+<td>Shared eight-section structure and configuration setup for one notebook per FUUCCE phase.</td>
+</tr>
+<tr>
+<td><a href="report_template.docs.project.html" target="_self">Report template</a></td>
+<td>Structure for phase reports presenting findings, run information, validation, and supporting artifacts.</td>
+</tr>
+<tr>
+<td><a href="literature_overview.docs.literature.html" target="_self">Literature overview</a></td>
 <td>Paper summaries and their relevance to the research question.</td>
 </tr>
 <tr>
-<td><a href="bibliography.docs.literature.html" target="_blank" rel="noopener noreferrer">Bibliography</a> · <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/literature/bibliography.bib" target="_blank" rel="noopener noreferrer">BibTeX</a></td>
+<td><a href="bibliography.docs.literature.html" target="_self">Bibliography</a> · <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/literature/bibliography.bib" target="_blank" rel="noopener noreferrer">BibTeX</a></td>
 <td>References used throughout the project.</td>
 </tr>
 <tr>
-<td><a href="manage_uv_environment.docs.setup.html" target="_blank" rel="noopener noreferrer">Environment setup</a></td>
+<td><a href="manage_uv_environment.docs.setup.html" target="_self">Environment setup</a></td>
 <td>Dependency management and environment activation with uv.</td>
 </tr>
 <tr>
@@ -184,20 +195,20 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 <td>Explicit example and production data and output paths.</td>
 </tr>
 <tr>
-<td><a href="create_raw_python_files.docs.setup.html" target="_blank" rel="noopener noreferrer">Notebook mirror workflow</a></td>
+<td><a href="create_raw_python_files.docs.setup.html" target="_self">Notebook mirror workflow</a></td>
 <td>Exporting notebooks for read-only code navigation.</td>
 </tr>
 <tr>
-<td><a href="git_lfs_setup_handling.docs.setup.html" target="_blank" rel="noopener noreferrer">Git LFS setup</a></td>
+<td><a href="git_lfs_setup_handling.docs.setup.html" target="_self">Git LFS setup</a></td>
 <td>Tracking and handling large files.</td>
 </tr>
 <tr>
-<td><a href="mcp_serena_setup.docs.setup.html" target="_blank" rel="noopener noreferrer">MCP Serena setup</a></td>
+<td><a href="mcp_serena_setup.docs.setup.html" target="_self">MCP Serena setup</a></td>
 <td>Optional AI-assisted project navigation and client configuration.</td>
 </tr>
 <tr>
 <td><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/prompts" target="_blank" rel="noopener noreferrer">Prompt records</a></td>
-<td>Prompts used for literature research, framework development, and setup.</td>
+<td>Available literature-research prompt records.</td>
 </tr>
 </tbody>
 </table>
@@ -211,9 +222,11 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 │   │   └── fuucce_framework.md
 │   ├── literature/                   # Literature summaries and references
 │   │   └── .literature-source-files/ # Scientific papers and source files (ignored)
-│   ├── project/                      # Thesis plan and data description
+│   ├── project/                      # Thesis plan, schemas, and phase templates
 │   │   ├── bachelor_thesis_project_plan.md # Source of truth for the investigation
-│   │   └── data_description.md        # ERP schema, mappings, and interpretation rules
+│   │   ├── data_description.md        # Raw, interim, and processed dataset contracts
+│   │   ├── notebook_template.md       # Shared phase notebook structure and configuration
+│   │   └── report_template.md         # Shared phase report structure
 │   ├── prompts/                      # Research and development prompt records
 │   └── setup/                        # Tooling and workflow guides
 ├── setup/                            # Contributor setup, conversion, and documentation utilities
@@ -241,8 +254,8 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 └── README.md
 </code></pre>
 <h2 id="data-conventions">Data conventions</h2>
-<p>Use these conventions for prepared tables and public examples. Original ERP field names are documented in the <a href="data_description.docs.project.html" target="_blank" rel="noopener noreferrer">data description</a>.</p>
-<p>The <a href="fuucce_framework.docs.framework.html#data-formats-and-file-workflow" target="_blank" rel="noopener noreferrer">framework's file workflow</a> uses Parquet as the standard tabular input format. Export newly created or updated datasets as CSV, convert them to Parquet, and retain both formats. Verify schema and missing-value preservation, and refresh the Parquet version whenever its CSV changes. The CSV converter's folder selection is described under <a href="#getting-started" target="_self">Getting started</a>.</p>
+<p>Use these conventions for prepared tables and public examples. Original ERP field names are documented in the <a href="data_description.docs.project.html" target="_self">data description</a>.</p>
+<p>The <a href="fuucce_framework.docs.framework.html#data-formats-and-file-workflow" target="_self">framework's file workflow</a> uses Parquet as the standard tabular input format. Export newly created or updated datasets as CSV, convert them to Parquet, and retain both formats. Verify schema and missing-value preservation, and refresh the Parquet version whenever its CSV changes. The CSV converter's folder selection is described under <a href="#getting-started" target="_self">Getting started</a>.</p>
 <table>
 <thead>
 <tr>
@@ -254,8 +267,8 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 <tbody>
 <tr>
 <td><strong>CSV column separator</strong></td>
-<td>Comma</td>
-<td><code>,</code></td>
+<td>Semicolon for prepared outputs</td>
+<td><code>;</code></td>
 </tr>
 <tr>
 <td><strong>Encoding</strong></td>
@@ -264,11 +277,33 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 </tr>
 <tr>
 <td><strong>Column names</strong></td>
-<td>English, All caps</td>
-<td><code>MONTHLYREVENUE</code></td>
+<td>Uppercase; preserve ERP codes and documented derived names</td>
+<td><code>CUSTOMER_ID</code>, <code>TOTALORDERNETVALUE</code></td>
+</tr>
+<tr>
+<td><strong>Dates</strong></td>
+<td>ISO calendar dates</td>
+<td><code>2026-03-01</code></td>
+</tr>
+<tr>
+<td><strong>Monetary values</strong></td>
+<td>Decimal point, no thousands separators</td>
+<td><code>1234.50</code></td>
+</tr>
+<tr>
+<td><strong>Missing values</strong></td>
+<td>Empty CSV fields</td>
+<td>Preserve missingness when reloading</td>
+</tr>
+<tr>
+<td><strong>Identifiers and codes</strong></td>
+<td>Load as strings, preserving leading zeros</td>
+<td><code>000123</code></td>
 </tr>
 </tbody>
 </table>
+<p>Preserve raw extracts in their original format and verify their actual import settings. For prepared profiles, count distinct eligible orders and retain each order's header amount once. An eligible order with a missing amount still contributes to the count, but its affected total and average remain missing. Broader monetary aggregates also remain missing when a required contributing total is unavailable. Recompute aggregate averages from complete totals and counts.</p>
+<p>Record zero count and total only where observation coverage supports zero eligible activity; leave the average missing for zero-order periods. Missing coverage is not inactivity. Keep monetary summaries within a currency and retain customers with missing industry assignments. Detailed eligibility, calculation, and validation rules remain in the project plan and data description.</p>
 <h2 id="data-handling">Data handling</h2>
 <p>Public examples must use fully synthetic data. The two configurations in <code>src/config</code> expose the same properties, so notebook analysis code can use a single <code>CONFIG</code> object:</p>
 <table>
@@ -299,18 +334,23 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 </tbody>
 </table>
 <p>Paths resolve from the repository root, independently of the notebook's working directory. Configuration imports do not read data or create directories. Neither configuration selects a profile through environment variables or machine detection.</p>
-<p><strong>Workflow across development and production PCs:</strong>
-1. Develop the source notebook in <code>src/notebooks/</code> with <code>from config.example import CONFIG</code> and fully synthetic inputs.
-2. Pull the source notebook on the production PC and copy it into the ignored <code>src/.notebooks/</code> directory.
-3. Change only the private copy's import to <code>from config.production import CONFIG</code>. Use a separate kernel for production work.
-4. Read datasets through <code>CONFIG.data_dir</code> and save intermediate datasets there or generated artifacts under <code>CONFIG.output_dir</code>. Create any required output subdirectories explicitly.</p>
+<p><strong>Workflow across development and production PCs:</strong></p>
+<ol>
+<li>Develop the source notebook in <code>src/notebooks/</code> with <code>from config.example import CONFIG</code> and fully synthetic inputs.</li>
+<li>Pull the source notebook on the production PC and copy it into the ignored <code>src/.notebooks/</code> directory.</li>
+<li>Select <code>from config.production import CONFIG</code> in the private copy. When using the template's path-discovery cell, also change its configuration-file check to <code>production.py</code>. Use a separate kernel for production work.</li>
+<li>Read datasets through <code>CONFIG.data_dir</code> and save intermediate datasets there or generated artifacts under <code>CONFIG.output_dir</code>. Create any required output subdirectories explicitly.</li>
+</ol>
 <p><strong>For example, the same analysis code can use either configuration:</strong></p>
-<pre><code class="language-python">orders = pd.read_parquet(CONFIG.data_dir / &quot;raw/orders.parquet&quot;)
-tables_dir = CONFIG.output_dir / &quot;tables&quot;
-tables_dir.mkdir(parents=True, exist_ok=True)
-summary.to_parquet(tables_dir / &quot;summary.parquet&quot;, index=False)
+<pre><code class="language-python">orders = pd.read_parquet(CONFIG.data_dir / &quot;interim/001_order_header_data.parquet&quot;)
+# Construct monthly_profiles from eligible orders using the documented schema.
+processed_dir = CONFIG.data_dir / &quot;processed&quot;
+processed_dir.mkdir(parents=True, exist_ok=True)
+monthly_profiles.to_csv(
+    processed_dir / &quot;001_customer_monthly_profiles.csv&quot;, sep=&quot;;&quot;, index=False
+)
 </code></pre>
-<p>This snippet assumes <code>pandas</code> is imported as <code>pd</code> and <code>summary</code> has been computed. Both configurations are version-controlled and contain generic paths; production data and results stay in the ignored directories. The repository does not use an <code>.env</code> file for this switch.</p>
+<p>This snippet assumes <code>pandas</code> is imported as <code>pd</code>, the interim Parquet input has been prepared, and <code>monthly_profiles</code> has been computed. Convert the exported CSV with <code>--folder processed</code> (adding <code>--update</code> when refreshing an existing Parquet file and <code>--prd</code> for user-run production conversion), then verify schema, identifiers, monetary precision, and missingness before reuse. Both configurations are version-controlled and contain generic paths; production data and results stay in the ignored directories. The repository does not use an <code>.env</code> file for this switch.</p>
 <p><strong>Private production notebooks, datasets, and derived exports are excluded through <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.gitignore" target="_blank" rel="noopener noreferrer">.gitignore</a>:</strong></p>
 <ul>
 <li><code>src/.notebooks/</code></li>
@@ -318,9 +358,9 @@ summary.to_parquet(tables_dir / &quot;summary.parquet&quot;, index=False)
 <li><code>outputs/.exports/</code></li>
 </ul>
 <p>The <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.githooks/pre-commit" target="_blank" rel="noopener noreferrer">pre-commit hook</a> checks Git's index for these paths and blocks a commit if any are tracked. The contributor setup script activates this guard and the existing LFS hooks locally. The guard checks paths; it does not detect production results embedded in a public notebook. Keep production imports, saved outputs, and analysis results in private notebook copies.</p>
-<p>Edit source notebooks in <code>src/notebooks/</code>. Python files in <code>src/raw-notebooks/</code> are generated mirrors for read-only inspection; the <a href="create_raw_python_files.docs.setup.html" target="_blank" rel="noopener noreferrer">mirror guide</a> documents their generation.</p>
+<p>Edit source notebooks in <code>src/notebooks/</code>. Python files in <code>src/raw-notebooks/</code> are generated mirrors for read-only inspection; the <a href="create_raw_python_files.docs.setup.html" target="_self">mirror guide</a> documents their generation.</p>
 <h2 id="ai-assistance">AI assistance</h2>
-<p>AI tools have supported literature research, framework development, and tooling. See the <a href="AI_TOOL_DISCLOSURE.html" target="_blank" rel="noopener noreferrer">AI tool disclosure</a> and <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/prompts" target="_blank" rel="noopener noreferrer">prompt records</a> for the documentation available so far. The disclosure is still being completed.</p>
+<p>AI tools have supported literature research, framework development, and tooling. See the <a href="AI_TOOL_DISCLOSURE.html" target="_self">AI tool disclosure</a> and <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/docs/prompts" target="_blank" rel="noopener noreferrer">prompt records</a> for the documentation available so far. The disclosure is still being completed.</p>
 <h2 id="license">License</h2>
 <p>No project license file is currently included.</p>
     </main>

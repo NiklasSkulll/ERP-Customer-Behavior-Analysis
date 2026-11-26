@@ -8,65 +8,67 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_self"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
 <h1 id="data-description">Data description</h1>
-<p><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/001_order_header_pos_data_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Order Header Pos Data" src="https://img.shields.io/badge/Order-Header%20and%20Pos-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/002_product_master_data_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Product Master Data" src="https://img.shields.io/badge/Product-Master-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/003_product_price_data_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Product Price Data" src="https://img.shields.io/badge/Product-Prices-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/004_customer_master_data_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Customer Master Data" src="https://img.shields.io/badge/Customer-Master-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
-<p><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/005_order_sddocumentreason_mapping_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Order SDDOCUMENTREASON Mapping" src="https://img.shields.io/badge/Order-SDDOCUMENTREASON%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/006_product_productgroup_mapping_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Product PRODUCTGROUP Mapping" src="https://img.shields.io/badge/Product-PRODUCTGROUP%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/007_product_conditiontype_mapping_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Product CONDITIONTYPE Mapping" src="https://img.shields.io/badge/Order-CONDITIONTYPE%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
-<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/008_customer_industry_mapping_eg.csv" target="_blank" rel="noopener noreferrer"><img alt="Customer INDUSTRY Mapping" src="https://img.shields.io/badge/Customer-INDUSTRY%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
+<p><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/001_order_header_pos_data.csv" target="_blank" rel="noopener noreferrer"><img alt="Order Header Pos Data" src="https://img.shields.io/badge/Order-Header%20and%20Pos-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/002_customer_master_data.csv" target="_blank" rel="noopener noreferrer"><img alt="Customer Master Data" src="https://img.shields.io/badge/Customer-Master-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/003_order_sddocumentreason_mapping.csv" target="_blank" rel="noopener noreferrer"><img alt="Order SDDOCUMENTREASON Mapping" src="https://img.shields.io/badge/Order-SDDOCUMENTREASON%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a>
+<a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/data/data-example/raw/004_customer_industry_mapping.csv" target="_blank" rel="noopener noreferrer"><img alt="Customer INDUSTRY Mapping" src="https://img.shields.io/badge/Customer-INDUSTRY%20Mapping-%23352898?style=flat&amp;labelColor=%2315934E" /></a></p>
 </div>
 <h2 id="table-of-contents">Table of Contents</h2>
 <ul>
 <li><a href="#overview" target="_self">Overview</a></li>
 <li><a href="#documentation-background" target="_self">Documentation background</a></li>
-<li><a href="#1-order-header-and-item-data" target="_self">1 Order: Header and item data</a><ul>
-<li><a href="#11-main-data-set" target="_self">1.1 Main data set</a></li>
-<li><a href="#12-lookup-and-mapping-data" target="_self">1.2 Lookup and mapping data</a></li>
+<li><a href="#1-raw-datasets" target="_self">1 Raw datasets</a><ul>
+<li><a href="#11-order-header-and-item-data" target="_self">1.1 Order: Header and item data</a><ul>
+<li><a href="#111-main-dataset" target="_self">1.1.1 Main dataset</a></li>
+<li><a href="#112-lookup-and-mapping-data" target="_self">1.1.2 Lookup and mapping data</a></li>
 </ul>
 </li>
-<li><a href="#2-product-master-data" target="_self">2 Product: Master data</a><ul>
-<li><a href="#21-main-data-set" target="_self">2.1 Main data set</a></li>
-<li><a href="#22-lookup-and-mapping-data" target="_self">2.2 Lookup and mapping data</a></li>
+<li><a href="#12-customer-master-data" target="_self">1.2 Customer: Master data</a><ul>
+<li><a href="#121-main-dataset" target="_self">1.2.1 Main dataset</a></li>
+<li><a href="#122-lookup-and-mapping-data" target="_self">1.2.2 Lookup and mapping data</a></li>
 </ul>
 </li>
-<li><a href="#3-product-price-data" target="_self">3 Product: Price data</a><ul>
-<li><a href="#31-main-data-set" target="_self">3.1 Main data set</a></li>
-<li><a href="#32-lookup-and-mapping-data" target="_self">3.2 Lookup and mapping data</a></li>
+<li><a href="#13-data-relationships" target="_self">1.3 Data relationships</a></li>
 </ul>
 </li>
-<li><a href="#4-customer-master-data" target="_self">4 Customer: Master data</a><ul>
-<li><a href="#41-main-data-set" target="_self">4.1 Main data set</a></li>
-<li><a href="#42-lookup-and-mapping-data" target="_self">4.2 Lookup and mapping data</a></li>
+<li><a href="#2-interim-datasets" target="_self">2 Interim datasets</a><ul>
+<li><a href="#21-order-header-data" target="_self">2.1 Order: Header data</a></li>
 </ul>
 </li>
-<li><a href="#data-relationships" target="_self">Data relationships</a></li>
+<li><a href="#3-processed-datasets" target="_self">3 Processed datasets</a><ul>
+<li><a href="#31-customer-monthly-profiles" target="_self">3.1 Customer: Monthly profiles</a></li>
+</ul>
+</li>
 </ul>
 <hr />
 <h2 id="overview">Overview</h2>
-<p>This document provides an overview of the datasets extracted from the ERP system for this data analytics project. It describes the structure, technical fields, and business meaning of the data, including relevant value mappings and data interpretation rules.</p>
-<p><strong>The documentation covers four main datasets:</strong></p>
+<p>This document describes the data basis for analysing changes in customer purchasing behaviour using ERP sales order data. It documents the source datasets and defines the schemas of the enriched order-level interim dataset and the monthly customer profiles by transaction currency. The behavioural analysis uses sales order header information to examine ordering activity, recorded net order values and ordering intervals. Customer industry information provides additional context for grouped analyses.</p>
+<p><strong>The raw data basis consists of two main datasets:</strong></p>
 <ul>
-<li><strong>Sales order header and item data:</strong> Sales order header and item information, including customers, products, quantities, order values, and processing statuses.</li>
-<li><strong>Product master data:</strong> Product identifiers, product groups, units of measure, and product descriptions.</li>
-<li><strong>Product price data:</strong> Pricing conditions, prices, customer-specific pricing information, and validity periods.</li>
-<li><strong>Customer master data:</strong> Customer identifiers, names, postal codes, industries, and customer price groups.</li>
+<li><strong>Sales order header and item data:</strong> Order identifiers, customer identifiers, order dates, net order values, currencies and document statuses. The item identifier is retained to assess the source structure. Item-level purchasing characteristics are outside the analytical scope.</li>
+<li><strong>Customer master data:</strong> Customer identifiers and their assigned industry codes.</li>
 </ul>
-<p>Additional <strong>lookup and mapping datasets</strong> provide human-readable descriptions for selected ERP codes, such as order reasons, product groups, pricing condition types, and customer industries.</p>
-<p>Each section documents the available fields, their meanings, and relevant considerations for data processing and analysis. The referenced CSV files contain example data corresponding to the documented structures. Textual values and descriptions are provided in German.</p>
+<p>Two lookup datasets provide human-readable descriptions of order reasons and customer industries. Document types, processing statuses and rejection statuses are described through the mappings documented below.</p>
+<p><strong>The datasets are organised into three processing stages:</strong></p>
+<ul>
+<li><strong>Raw:</strong> Source data and lookup tables used for preparation.</li>
+<li><strong>Interim:</strong> Validated order-level records enriched with descriptions and customer industry information.</li>
+<li><strong>Processed:</strong> Monthly customer profiles derived from the interim data, containing order counts, total net order values and average net order values for each customer, calendar month and transaction currency. The schema and calculation rules are specified in Section 3.1.</li>
+</ul>
+<p>The documented file paths refer to the example-data environment. Human-readable ERP descriptions are provided in German.</p>
 <hr />
 <h2 id="documentation-background">Documentation background</h2>
 <p>This documentation was compiled as part of the bachelor's thesis project. The field descriptions, value mappings, and business definitions are based on the ERP system's technical documentation and configuration settings. The relevant information was collected, consolidated, and documented to provide a consistent basis for understanding and analyzing the extracted datasets.</p>
 <hr />
-<h2 id="1-order-header-and-item-data">1 Order: Header and item data</h2>
-<h3 id="11-main-data-set">1.1 Main data set</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/001_order_header_pos_data_eg.csv</code></p>
+<h2 id="1-raw-datasets">1 Raw datasets</h2>
+<h3 id="11-order-header-and-item-data">1.1 Order: Header and item data</h3>
+<h4 id="111-main-dataset">1.1.1 Main dataset</h4>
+<p><strong>Data file:</strong> <code>data/data-example/raw/001_order_header_pos_data.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -115,14 +117,6 @@
 <td><code>SALESORDERITEM</code></td>
 <td>Sales order item number (position)</td>
 </tr>
-<tr>
-<td><code>MATERIAL</code></td>
-<td>Product ID</td>
-</tr>
-<tr>
-<td><code>CONFDDELIVQTYINORDERQTYUNIT</code></td>
-<td>Confirmed delivery quantity in the sales order quantity unit</td>
-</tr>
 </tbody>
 </table>
 <p><strong>Mapping the values for <code>OVERALLSDPROCESSSTATUS</code>:</strong></p>
@@ -133,7 +127,7 @@
 </ul>
 <p><strong>Mapping the values for <code>SDDOCUMENTREASON</code>:</strong></p>
 <ul>
-<li>view <code>data/data-example/raw/005_order_sddocumentreason_mapping_eg.csv</code></li>
+<li>view <code>data/data-example/raw/003_order_sddocumentreason_mapping.csv</code></li>
 </ul>
 <p><strong>Mapping the values for <code>OVERALLSDDOCUMENTREJECTIONSTS</code>:</strong></p>
 <ul>
@@ -147,15 +141,24 @@
 <li><code>GBP</code> : British pounds sterling</li>
 </ul>
 <blockquote>
-<p><strong>Important to note!</strong></p>
+<p><strong>Data granularity and analytical scope:</strong></p>
 <ul>
-<li><strong>Data Granularity and Structure:</strong> This dataset combines sales order header information with item-level information. Header-level attributes, such as the customer, order status, and total net amount, may be repeated across multiple rows belonging to the same sales order.</li>
-<li><code>TOTALNETAMOUNT</code> is located at the order level (order header) and may appear multiple times in the line items within this data record.</li>
+<li>The field table above lists the source columns used in this project. The source dataset contains order-item rows, so header-level attributes may be repeated across several rows belonging to the same <code>SALESORDER</code>.</li>
+<li><code>SALESORDERITEM</code> identifies the item within an order. Together with <code>SALESORDER</code>, it supports checks of the source granularity and duplicate records. It is not used as a behavioural measure and is not included in the order-level interim dataset.</li>
+<li>The analysis uses header-level information. Product identifiers, product characteristics, quantities and item-level prices are outside the selected analytical scope.</li>
 </ul>
 </blockquote>
-<p><strong>Important:</strong> When aggregating header-level values, repeated information must be considered to avoid double-counting.</p>
-<h3 id="12-lookup-and-mapping-data">1.2 Lookup and mapping data</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/005_order_sddocumentreason_mapping_eg.csv</code></p>
+<p><strong>Preparation requirements:</strong></p>
+<ul>
+<li>Verify the source granularity and investigate duplicate combinations of <code>SALESORDER</code> and <code>SALESORDERITEM</code>.</li>
+<li>Check that repeated header attributes agree within each <code>SALESORDER</code>.</li>
+<li>Resolve or explicitly record conflicting header values before constructing the order-level dataset. Do not select an arbitrary row to conceal inconsistencies.</li>
+<li>Retain <code>TOTALNETAMOUNT</code> once per order. Repeated header amounts across item rows must not be summed.</li>
+<li>Preserve the original source files and document the transformations used to construct the interim dataset.</li>
+<li>Record the extraction date, covered date range, observed source formats and any known extraction gaps during data assessment.</li>
+</ul>
+<h4 id="112-lookup-and-mapping-data">1.1.2 Lookup and mapping data</h4>
+<p><strong>Data file:</strong> <code>data/data-example/raw/003_order_sddocumentreason_mapping.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -169,161 +172,14 @@
 <td>Reason for the order (ID, Key)</td>
 </tr>
 <tr>
-<td><code>SDDOCUMENTREASONTEXT</code></td>
+<td><code>SDDOCUMENTREASON_TEXT</code></td>
 <td>Human-readable description of the order reason</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="2-product-master-data">2 Product: Master data</h2>
-<h3 id="21-main-data-set">2.1 Main data set</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/002_product_master_data_eg.csv</code></p>
-<table>
-<thead>
-<tr>
-<th><strong>Feature</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>PRODUCT</code></td>
-<td>Product ID</td>
-</tr>
-<tr>
-<td><code>PRODUCTGROUP</code></td>
-<td>Product category or group (ID, Key)</td>
-</tr>
-<tr>
-<td><code>TO_PLANT_BASEUNIT</code></td>
-<td>Base unit of measure</td>
-</tr>
-<tr>
-<td><code>TO_PRODUCTBASICTEXT_LONGTEXT</code></td>
-<td>Long product description</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Mapping the values for <code>PRODUCTGROUP</code>:</strong></p>
-<ul>
-<li>view <code>data/data-example/raw/006_product_productgroup_mapping_eg.csv</code></li>
-</ul>
-<p><strong>Mapping the values for <code>TO_PLANT_BASEUNIT</code>:</strong></p>
-<ul>
-<li><code>M</code>  : "Meter"</li>
-<li><code>PC</code> : "Stück" (Pieces)</li>
-<li><code>ROL</code>: "Rolle" (Roll)</li>
-<li><code>ZBU</code>: "Bund" (Bundle)</li>
-</ul>
-<h3 id="22-lookup-and-mapping-data">2.2 Lookup and mapping data</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/006_product_productgroup_mapping_eg.csv</code></p>
-<table>
-<thead>
-<tr>
-<th><strong>Feature</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>PRODUCTGROUP</code></td>
-<td>Product category or group (ID, Key)</td>
-</tr>
-<tr>
-<td><code>PRODUCTGROUPTEXT</code></td>
-<td>Human-readable description of the product category or group</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="3-product-price-data">3 Product: Price data</h2>
-<h3 id="31-main-data-set">3.1 Main data set</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/003_product_price_data_eg.csv</code></p>
-<table>
-<thead>
-<tr>
-<th><strong>Feature</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>MATERIAL</code></td>
-<td>Product ID</td>
-</tr>
-<tr>
-<td><code>CONDITIONVALIDITYSTARTDATE</code></td>
-<td>Start date for the validity of the catalog price or discount</td>
-</tr>
-<tr>
-<td><code>CONDITIONVALIDITYENDDATE</code></td>
-<td>End date for the validity of the catalog price or discount</td>
-</tr>
-<tr>
-<td><code>CUSTOMERPRICEGROUP</code></td>
-<td>Customer price group or category</td>
-</tr>
-<tr>
-<td><code>CUSTOMER</code></td>
-<td>Customer ID</td>
-</tr>
-<tr>
-<td><code>CONDITIONTYPE</code></td>
-<td>Pricing condition type (ID, Key)</td>
-</tr>
-<tr>
-<td><code>CONDITIONRATEVALUE</code></td>
-<td>Condition rate value</td>
-</tr>
-<tr>
-<td><code>CONDITIONRATEVALUEUNIT</code></td>
-<td>Currency or unit of the condition rate</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Mapping the values for <code>CONDITIONTYPE</code>:</strong></p>
-<ul>
-<li>view <code>data/data-example/raw/007_product_conditiontype_mapping_eg.csv</code></li>
-</ul>
-<p><strong>Mapping the values for <code>CONDITIONRATEVALUEUNIT</code>:</strong></p>
-<ul>
-<li><code>EUR</code> : Euros</li>
-</ul>
-<blockquote>
-<p><strong>Important to note!</strong></p>
-<ul>
-<li>For the <strong>"Price per item before discount"</strong>, <code>CONDITIONTYPE</code> is filtered to "List price" (<code>"Price per item before discount" = "List price"</code>).</li>
-<li>For the <strong>"Discount (Percentage)"</strong>, the "Price per item after discount" is subtracted from the "List price" and divided by the "List price" (<code>"Discount (Percentage)" = ("List price" - "Price per item after discount") / "List price" * 100</code>).</li>
-<li>For the <strong>"Discount (Amount)"</strong>, the "Price per item after discount" is subtracted from the "List price" (<code>"Discount (Amount)" = "List price" - "Price per item after discount"</code>).</li>
-<li>If <code>CONDITIONRATEVALUE</code> has the default value of <code>999999</code> or <code>999999,00</code>, this means that the price has not been maintained. This is a placeholder for a missing price.</li>
-<li>Pay attention to the validity of the values. The validity period is between <code>CONDITIONVALIDITYSTARTDATE</code> and <code>CONDITIONVALIDITYENDDATE</code>.</li>
-<li>If <strong>"List price" is null or <code>0</code></strong>, the "Discount (Amount)" and "Discount (Percentage)" cannot be calculated.</li>
-</ul>
-</blockquote>
-<h3 id="32-lookup-and-mapping-data">3.2 Lookup and mapping data</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/007_product_conditiontype_mapping_eg.csv</code></p>
-<table>
-<thead>
-<tr>
-<th><strong>Feature</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>CONDITIONTYPE</code></td>
-<td>Pricing condition type (ID, Key)</td>
-</tr>
-<tr>
-<td><code>CONDITIONTYPETEXT</code></td>
-<td>Human-readable description of the pricing condition type</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="4-customer-master-data">4 Customer: Master data</h2>
-<h3 id="41-main-data-set">4.1 Main data set</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/004_customer_master_data_eg.csv</code></p>
+<h3 id="12-customer-master-data">1.2 Customer: Master data</h3>
+<h4 id="121-main-dataset">1.2.1 Main dataset</h4>
+<p><strong>Data file:</strong> <code>data/data-example/raw/002_customer_master_data.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -335,31 +191,19 @@
 <tr>
 <td><code>CUSTOMER</code></td>
 <td>Customer ID</td>
-</tr>
-<tr>
-<td><code>CUSTOMERFULLNAME</code></td>
-<td>Full name of the customer</td>
-</tr>
-<tr>
-<td><code>POSTALCODE</code></td>
-<td>Postal code of the customer</td>
 </tr>
 <tr>
 <td><code>INDUSTRY</code></td>
 <td>Customer's industry (ID, Key)</td>
-</tr>
-<tr>
-<td><code>CUSTOMERPRICEGROUP</code></td>
-<td>Customer price group or category</td>
 </tr>
 </tbody>
 </table>
 <p><strong>Mapping the values for <code>INDUSTRY</code>:</strong></p>
 <ul>
-<li>view <code>data/data-example/raw/008_customer_industry_mapping_eg.csv</code></li>
+<li>view <code>data/data-example/raw/004_customer_industry_mapping.csv</code></li>
 </ul>
-<h3 id="42-lookup-and-mapping-data">4.2 Lookup and mapping data</h3>
-<p><strong>Data file:</strong> <code>data/data-example/raw/008_customer_industry_mapping_eg.csv</code></p>
+<h4 id="122-lookup-and-mapping-data">1.2.2 Lookup and mapping data</h4>
+<p><strong>Data file:</strong> <code>data/data-example/raw/004_customer_industry_mapping.csv</code></p>
 <table>
 <thead>
 <tr>
@@ -373,65 +217,379 @@
 <td>Customer's industry (ID, Key)</td>
 </tr>
 <tr>
-<td><code>INDUSTRYTEXT</code></td>
+<td><code>INDUSTRY_TEXT</code></td>
 <td>Human-readable description of the customer's industry</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="data-relationships">Data relationships</h2>
-<p>The following table summarizes the identified field relationships between the datasets. The uniqueness of the join keys and the corresponding relationship cardinalities will be examined during the subsequent data analysis.</p>
+<h3 id="13-data-relationships">1.3 Data relationships</h3>
+<p>The following relationships are used to enrich the order-level dataset. The expected relationship cardinalities must be verified against the available extracts before joining the tables.</p>
 <table>
 <thead>
 <tr>
 <th><strong>Initial dataset</strong></th>
 <th><strong>Target dataset</strong></th>
-<th><strong>Feature mapping</strong></th>
+<th><strong>Join fields</strong></th>
+<th><strong>Expected relationship</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Sales order header and item</td>
-<td>Product master</td>
-<td><code>MATERIAL</code> to <code>PRODUCT</code></td>
-</tr>
-<tr>
-<td>Sales order header and item</td>
-<td>Customer Master</td>
-<td><code>SOLDTOPARTY</code> to <code>CUSTOMER</code></td>
-</tr>
-<tr>
-<td>Product price</td>
-<td>Product master</td>
-<td><code>MATERIAL</code> to <code>PRODUCT</code></td>
-</tr>
-<tr>
-<td>Product price</td>
+<td>Order-level records</td>
 <td>Customer master</td>
-<td><code>CUSTOMER</code> to <code>CUSTOMER</code></td>
+<td><code>SOLDTOPARTY</code> to <code>CUSTOMER</code></td>
+<td>Many orders to one customer record</td>
 </tr>
 <tr>
-<td>Sales order header and item</td>
+<td>Order-level records</td>
 <td>Order reason mapping</td>
 <td><code>SDDOCUMENTREASON</code> to <code>SDDOCUMENTREASON</code></td>
-</tr>
-<tr>
-<td>Product master</td>
-<td>Product group mapping</td>
-<td><code>PRODUCTGROUP</code> to <code>PRODUCTGROUP</code></td>
-</tr>
-<tr>
-<td>Product price</td>
-<td>Condition type mapping</td>
-<td><code>CONDITIONTYPE</code> to <code>CONDITIONTYPE</code></td>
+<td>Many orders to one reason description</td>
 </tr>
 <tr>
 <td>Customer master</td>
 <td>Industry mapping</td>
 <td><code>INDUSTRY</code> to <code>INDUSTRY</code></td>
+<td>Many customers to one industry description</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Join requirements:</strong></p>
+<ul>
+<li>Verify the uniqueness of <code>CUSTOMER</code> in the customer master, <code>SDDOCUMENTREASON</code> in the order reason mapping, and <code>INDUSTRY</code> in the industry mapping.</li>
+<li>Resolve conflicting assignments before joining. Do not use arbitrary deduplication to select between different descriptions or industry assignments.</li>
+<li>Use left joins so that orders without a matching customer or description remain available.</li>
+<li>Do not match missing join keys to one another.</li>
+<li>Preserve identifiers and codes as strings, including leading zeros.</li>
+<li>Report unmatched keys and the number of affected orders.</li>
+<li>Verify that enrichment does not change the number of order-level records or the total net order amount within each currency.</li>
+</ul>
+<p>The customer industry is obtained from the available customer master extract. Unless historical assignments are available, it represents the industry recorded in that extract and must not be interpreted as a verified historical assignment at each order date.</p>
+<hr />
+<h2 id="2-interim-datasets">2 Interim datasets</h2>
+<h3 id="21-order-header-data">2.1 Order: Header data</h3>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li>Provide a consistent order-level basis for customer time series, grouped summaries and traceable explanations of detected changes.</li>
+</ul>
+<p><strong>Granularity:</strong></p>
+<ul>
+<li>Exactly one row per uniquely identified sales order.</li>
+</ul>
+<p><strong>Primary key:</strong></p>
+<ul>
+<li><code>SALESORDER</code>.</li>
+<li>Missing identifiers and unresolved conflicting header values must be investigated and documented before affected records can be represented in this table.</li>
+</ul>
+<p><strong>Coverage:</strong></p>
+<ul>
+<li>The table retains technically validated orders together with their document types, processing statuses and rejection statuses.</li>
+<li>Inclusion in this table does not establish analytical eligibility.</li>
+<li>Business selection rules are applied explicitly when constructing analytical measures.</li>
+</ul>
+<p><strong>Column naming:</strong></p>
+<ul>
+<li>Original ERP codes retain their field names.</li>
+<li>Human-readable descriptions use the corresponding field name followed by <code>_TEXT</code>.</li>
+</ul>
+<p><strong>Target schema:</strong></p>
+<ul>
+<li><strong>Data file:</strong> <code>data/data-example/interim/001_order_header_data.csv</code></li>
+<li>The data types below describe the logical types used during processing. CSV files store their textual representations.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SALESORDER</code></td>
+<td>String</td>
+<td>Unique sales order identifier</td>
+</tr>
+<tr>
+<td><code>SALESORDERTYPE</code></td>
+<td>String</td>
+<td>Document type code</td>
+</tr>
+<tr>
+<td><code>SALESORDERTYPE_TEXT</code></td>
+<td>String</td>
+<td>Human-readable document type description</td>
+</tr>
+<tr>
+<td><code>OVERALLSDPROCESSSTATUS</code></td>
+<td>String</td>
+<td>Overall processing status code</td>
+</tr>
+<tr>
+<td><code>OVERALLSDPROCESSSTATUS_TEXT</code></td>
+<td>String</td>
+<td>Human-readable processing status description</td>
+</tr>
+<tr>
+<td><code>SDDOCUMENTREASON</code></td>
+<td>String</td>
+<td>Order reason code</td>
+</tr>
+<tr>
+<td><code>SDDOCUMENTREASON_TEXT</code></td>
+<td>String</td>
+<td>Human-readable order reason description</td>
+</tr>
+<tr>
+<td><code>OVERALLSDDOCUMENTREJECTIONSTS</code></td>
+<td>String</td>
+<td>Overall rejection status code</td>
+</tr>
+<tr>
+<td><code>OVERALLSDDOCUMENTREJECTIONSTS_TEXT</code></td>
+<td>String</td>
+<td>Human-readable rejection status description</td>
+</tr>
+<tr>
+<td><code>SALESORDERDATE</code></td>
+<td>Date</td>
+<td>Sales order date</td>
+</tr>
+<tr>
+<td><code>TOTALNETAMOUNT</code></td>
+<td>Decimal</td>
+<td>Recorded net order amount, retained once per order</td>
+</tr>
+<tr>
+<td><code>TRANSACTIONCURRENCY</code></td>
+<td>String</td>
+<td>Currency of the recorded net order amount</td>
+</tr>
+<tr>
+<td><code>SOLDTOPARTY</code></td>
+<td>String</td>
+<td>Customer identifier of the ordering party</td>
+</tr>
+<tr>
+<td><code>INDUSTRY</code></td>
+<td>String</td>
+<td>Industry code obtained from the customer master</td>
+</tr>
+<tr>
+<td><code>INDUSTRY_TEXT</code></td>
+<td>String</td>
+<td>Human-readable industry description</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Field origins:</strong></p>
+<ul>
+<li>Order identifiers, document codes, dates, customer identifiers, amounts and currencies originate from the raw order dataset.</li>
+<li><code>INDUSTRY</code> is obtained by joining <code>SOLDTOPARTY</code> to <code>CUSTOMER</code> in the customer master.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Description field</strong></th>
+<th><strong>Source</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SALESORDERTYPE_TEXT</code></td>
+<td>Documented document-type mapping: <code>OR</code> &gt; <code>Auftrag</code></td>
+</tr>
+<tr>
+<td><code>OVERALLSDPROCESSSTATUS_TEXT</code></td>
+<td>Processing-status mapping documented in Section 1.1.1</td>
+</tr>
+<tr>
+<td><code>SDDOCUMENTREASON_TEXT</code></td>
+<td><code>data/data-example/raw/003_order_sddocumentreason_mapping.csv</code></td>
+</tr>
+<tr>
+<td><code>OVERALLSDDOCUMENTREJECTIONSTS_TEXT</code></td>
+<td>Rejection-status mapping documented in Section 1.1.1</td>
+</tr>
+<tr>
+<td><code>INDUSTRY_TEXT</code></td>
+<td><code>data/data-example/raw/004_customer_industry_mapping.csv</code></td>
+</tr>
+</tbody>
+</table>
+<p>Any additional document types require a verified mapping before their descriptions are assigned. An unknown code is retained even when its description is unavailable.</p>
+<p><strong>Construction and validation rules:</strong></p>
+<ul>
+<li>Parse identifiers, dates and monetary values according to the verified source formats.</li>
+<li>Check consistency across repeated header values before retaining one record per <code>SALESORDER</code>.</li>
+<li>Retain the existing <code>TOTALNETAMOUNT</code>. Do not calculate it by summing repeated header values across items.</li>
+<li>Apply the join requirements defined in Section 1.3.</li>
+<li>Verify the uniqueness of <code>SALESORDER</code> after construction and enrichment.</li>
+<li>Report unresolved inconsistencies, missing required values and unmatched mappings, including their effects on analytical usability.</li>
+</ul>
+<p><strong>Missing values and interpretation:</strong></p>
+<ul>
+<li>Missing customer or mapping records do not automatically remove an order. Unavailable industry assignments and descriptions remain missing and are reported. Missing monetary values are not replaced with zero.</li>
+<li><code>TOTALNETAMOUNT</code> represents the recorded net order amount. It is not automatically equivalent to invoiced or realised revenue. For partially rejected orders, the meaning of the stored amount must be clarified before it is used in affected analytical measures.</li>
+<li>Amounts in different currencies must not be summed without a documented conversion or restriction to a common currency. The original currency remains available in this table.</li>
+<li>Open or in-progress orders are not considered invalid solely because processing is incomplete. The treatment of fully and partially rejected orders in analytical measures follows the documented order-eligibility rules.</li>
+</ul>
+<p><strong>CSV representation:</strong></p>
+<ul>
+<li><strong>Encoding:</strong> UTF-8.</li>
+<li><strong>Field separator:</strong> <code>;</code>.</li>
+<li><strong>Dates:</strong> <code>YYYY-MM-DD</code>.</li>
+<li><strong>Monetary values:</strong> decimal point, no thousands separators, preserving the source precision.</li>
+<li><strong>Missing values:</strong> empty fields.</li>
+<li><strong>Identifiers and codes:</strong> loaded explicitly as strings to preserve leading zeros and valid code values.</li>
+</ul>
+<p>After export and reloading, verify that identifiers, dates, monetary values and missing values are preserved.</p>
+<hr />
+<h2 id="3-processed-datasets">3 Processed datasets</h2>
+<p>Processed datasets contain analytical measures derived from the enriched order-level interim dataset. They provide the basis for descriptive summaries, comparisons between observation periods and the subsequent detection and classification of purchasing behaviour changes.</p>
+<h3 id="31-customer-monthly-profiles">3.1 Customer: Monthly profiles</h3>
+<p><strong>Purpose:</strong></p>
+<ul>
+<li>Represent each customer's monthly ordering activity and recorded net order values.</li>
+<li>The table supports customer-level analysis and aggregation to industry-level and overall summaries.</li>
+</ul>
+<p><strong>Granularity:</strong></p>
+<ul>
+<li>One row per customer, calendar month and transaction currency.</li>
+</ul>
+<p><strong>Composite key:</strong></p>
+<ul>
+<li><code>CUSTOMER_ID</code>, <code>PERIODSTART</code>, <code>TRANSACTIONCURRENCY</code>.</li>
+</ul>
+<p>Monthly aggregation defines the basic analytical representation. It does not require change detection to compare individual months; longer comparison windows can be constructed from these profiles.</p>
+<p><strong>Target schema:</strong></p>
+<ul>
+<li><strong>Data file:</strong> <code>data/data-example/processed/001_customer_monthly_profiles.csv</code></li>
+<li><strong>Source:</strong> <code>data/data-example/interim/001_order_header_data.csv</code></li>
+<li>The data types below describe logical types used during processing. Analytical measures may contain missing values where the available data do not support their calculation.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>Feature</strong></th>
+<th><strong>Data type</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CUSTOMER_ID</code></td>
+<td>String</td>
+<td>Customer identifier, derived from <code>SOLDTOPARTY</code></td>
+</tr>
+<tr>
+<td><code>INDUSTRY</code></td>
+<td>String</td>
+<td>Customer industry code</td>
+</tr>
+<tr>
+<td><code>INDUSTRY_TEXT</code></td>
+<td>String</td>
+<td>Human-readable customer industry description</td>
+</tr>
+<tr>
+<td><code>PERIODSTART</code></td>
+<td>Date</td>
+<td>First calendar day of the represented month</td>
+</tr>
+<tr>
+<td><code>ORDERCOUNT</code></td>
+<td>Integer</td>
+<td>Number of distinct eligible orders for the customer, month and currency</td>
+</tr>
+<tr>
+<td><code>TOTALORDERNETVALUE</code></td>
+<td>Decimal</td>
+<td>Sum of recorded net amounts across those eligible orders</td>
+</tr>
+<tr>
+<td><code>AVGORDERNETVALUE</code></td>
+<td>Decimal</td>
+<td>Average recorded net amount per eligible order</td>
+</tr>
+<tr>
+<td><code>TRANSACTIONCURRENCY</code></td>
+<td>String</td>
+<td>Currency to which the order count and monetary measures refer</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Calculation rules:</strong></p>
+<ul>
+<li>Orders are assigned to customers using <code>SOLDTOPARTY</code> and to calendar months using <code>SALESORDERDATE</code>.</li>
+<li>The month is represented by its first calendar day, for example <code>2026-03-01</code>.</li>
+</ul>
+<p>Apply the documented order-eligibility rules before calculating the measures. Use the same eligible order population for all three measures within each customer-month-currency combination.</p>
+<table>
+<thead>
+<tr>
+<th><strong>Measure</strong></th>
+<th><strong>Calculation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ORDERCOUNT</code></td>
+<td>Count distinct eligible <code>SALESORDER</code> values</td>
+</tr>
+<tr>
+<td><code>TOTALORDERNETVALUE</code></td>
+<td>Sum <code>TOTALNETAMOUNT</code> once per eligible order</td>
+</tr>
+<tr>
+<td><code>AVGORDERNETVALUE</code></td>
+<td>Divide <code>TOTALORDERNETVALUE</code> by <code>ORDERCOUNT</code>, provided the total is available and the count is greater than zero</td>
+</tr>
+</tbody>
+</table>
+<p>If an eligible order has an unavailable net amount, do not silently calculate a complete total from the remaining orders. The order count may remain available, while the affected total and average are recorded as missing.</p>
+<p>The exact eligibility settings, observation boundaries and treatment of partially rejected orders must be documented before generating the analytical dataset.</p>
+<p><strong>Periods without orders and missing coverage:</strong></p>
+<ul>
+<li><em>Construct monthly profiles for relevant customer-currency combinations within a justified observation interval:</em><ul>
+<li>Where observation coverage is complete and no eligible orders are recorded, set <code>ORDERCOUNT</code> and <code>TOTALORDERNETVALUE</code> to zero.</li>
+<li>Leave <code>AVGORDERNETVALUE</code> missing when <code>ORDERCOUNT</code> is zero.</li>
+<li>Do not interpret missing extraction coverage or incomplete observation months as zero activity. Identify affected periods and document their treatment.</li>
+<li>Do not end a customer's observation interval at their last recorded order merely because no later orders exist.</li>
+<li>Do not require orders in every month or year as a condition for retaining a customer.</li>
+</ul>
+</li>
+</ul>
+<p>A zero count in one currency does not establish inactivity across all currencies.</p>
+<p><strong>Currency and industry treatment:</strong></p>
+<ul>
+<li>Keep EUR and GBP separate. Monetary totals and averages may only be combined after a documented conversion to a common currency. Order counts can be summed across currencies where each order occurs in exactly one currency group.</li>
+<li>Industry information is inherited from the customer assignment used in the interim dataset. Missing industry assignments do not exclude customers from customer-level or overall analyses. Industry summaries must identify the contribution of customers with unknown industry assignments.</li>
+<li>Unless historical customer master data are available, industry assignments describe the available master-data snapshot.</li>
+</ul>
+<p><strong>Aggregation to broader summaries:</strong></p>
+<ul>
+<li>The same table supports monthly overall summaries, monthly industry summaries and longer customer comparison windows.</li>
+<li>Sum <code>ORDERCOUNT</code> and <code>TOTALORDERNETVALUE</code> over the relevant rows, respecting currency and data-coverage requirements. Recalculate the average order value as the aggregated total order value divided by the aggregated order count. Do not use an unweighted average of customer-level or monthly averages.</li>
+<li>If any contributing <code>TOTALORDERNETVALUE</code> is missing, the aggregated <code>TOTALORDERNETVALUE</code> and the corresponding <code>AVGORDERNETVALUE</code> must remain missing. Do not silently omit missing amounts or replace them with zero when calculating complete totals. This rule applies to industry-level summaries, overall summaries and comparisons based on multiple months. Order counts may still be aggregated where the contributing counts are complete.</li>
+<li>A partial sum of available net order values may be reported separately, but it must be explicitly labelled as incomplete and accompanied by information about its coverage. It must not replace the complete aggregate or be presented as the total net order value of the entire group or period.</li>
+</ul>
+<p><strong>Validation and interpretation:</strong></p>
+<ul>
+<li>Verify the uniqueness of the composite key.</li>
+<li>Reconcile order counts and monetary totals with the eligible interim records, separately by month and currency.</li>
+<li>Verify that adding zero-activity periods does not change order counts or monetary totals.</li>
+<li>Check formulas and missing-value handling, including zero-order periods and incomplete monetary information.</li>
+<li>Preserve identifiers and codes as strings, including leading zeros.</li>
+</ul>
+<p>The measures describe recorded ordering activity and net order amounts. They do not establish realised revenue, purchased quantities or the causes of observed changes. <code>ORDERCOUNT</code>, <code>TOTALORDERNETVALUE</code> and <code>AVGORDERNETVALUE</code> are mathematically related and must not be treated as independent evidence of a behavioural change.</p>
+<p><strong>File representation:</strong></p>
+<ul>
+<li>Use UTF-8 encoding, semicolon-separated fields, dates in <code>YYYY-MM-DD</code> format and decimal points for monetary values.</li>
+<li>Represent missing values as empty fields.</li>
+<li>Preserve the monetary precision used during calculation and apply presentation rounding only when displaying results.</li>
+</ul>
     </main>
 </body>
 </html>

@@ -157,8 +157,11 @@ hr {
 }
 """
 
-def set_link_targets(html_text: str, page_path: str) -> str:
-    """Open links in new tabs, except heading links within the current page."""
+def set_link_targets(
+    html_text: str, page_path: str, site_page_paths: set[str] | None = None,
+) -> str:
+    """Keep documentation navigation in this tab; open other links in new tabs."""
+    internal_pages = {page_path} | (site_page_paths or set())
     line_offsets = [0]
     for line in html_text.splitlines(keepends=True):
         line_offsets.append(line_offsets[-1] + len(line))
@@ -173,12 +176,12 @@ def set_link_targets(html_text: str, page_path: str) -> str:
                 return
 
             url = urlsplit(urljoin(page_path, attributes["href"] or ""))
-            same_page_heading = (
-                url.fragment and not url.scheme and not url.netloc
-                and unquote(url.path) == page_path and not url.query
+            internal_link = (
+                not url.scheme and not url.netloc
+                and unquote(url.path) in internal_pages
             )
-            attributes["target"] = "_self" if same_page_heading else "_blank"
-            if not same_page_heading:
+            attributes["target"] = "_self" if internal_link else "_blank"
+            if not internal_link:
                 rel = (attributes.get("rel") or "").split()
                 attributes["rel"] = " ".join(dict.fromkeys([*rel, "noopener", "noreferrer"]))
 
@@ -274,6 +277,10 @@ def main() -> int:
 
         page_targets[source.resolve()] = pages_dir / filename
 
+    site_page_paths = {"index.html"} | {
+        path.relative_to(build_dir).as_posix() for path in page_targets.values()
+    }
+
     class DocumentationPreprocessor(Preprocessor):
         """Normalize centered wrappers and list starts without changing sources."""
 
@@ -281,21 +288,22 @@ def main() -> int:
             r'''^([ ]{0,3}<div[ \t]+align[ \t]*=[ \t]*(?:"center"|'center'|center))[ \t]*>[ \t]*$''',
             re.IGNORECASE,
         )
-        quoted_bullet = re.compile(r"^ {0,3}>[ \t]*[-+*][ \t]+\S")
+        list_item = re.compile(r"^ {0,3}(?:[-+*]|[0-9]+\.)[ \t]+\S")
+        quoted_list_item = re.compile(r"^ {0,3}>[ \t]*(?:[-+*]|[0-9]+\.)[ \t]+\S")
 
         def run(self, lines):
             # Fenced code is already stashed. Four-space-indented code and
             # wrappers with an explicit markdown attribute are left untouched.
             result = []
             for line in lines:
-                # Separate bold section labels from the bullet lists they introduce.
-                if (re.match(r"^ {0,3}[-+*][ \t]+\S", line) and result
+                # Separate bold section labels from the lists they introduce.
+                if (self.list_item.match(line) and result
                         and re.fullmatch(r" {0,3}\*\*.+\*\*[ \t]*", result[-1])):
                     result.append("")
                 # Python-Markdown needs a blank line before a quoted list.
-                if (self.quoted_bullet.match(line) and result
+                if (self.quoted_list_item.match(line) and result
                         and re.match(r"^ {0,3}>[ \t]*\S", result[-1])
-                        and not self.quoted_bullet.match(result[-1])):
+                        and not self.quoted_list_item.match(result[-1])):
                     result.append(">")
                 result.append(self.centered_div.sub(r'\1 markdown="1">', line))
             return result
@@ -385,7 +393,9 @@ def main() -> int:
 """
 
             output_path.write_text(
-                set_link_targets(html_page, output_path.relative_to(build_dir).as_posix()),
+                set_link_targets(
+                    html_page, output_path.relative_to(build_dir).as_posix(), site_page_paths,
+                ),
                 encoding="utf-8",
             )
 
@@ -432,7 +442,9 @@ def main() -> int:
     index_path = build_dir / "index.html"
 
     try:
-        index_path.write_text(set_link_targets(index_html, "index.html"), encoding="utf-8")
+        index_path.write_text(
+            set_link_targets(index_html, "index.html", site_page_paths), encoding="utf-8",
+        )
     except OSError as exc:
         parser.exit(status=1, message=f"Error: Could not write index '{index_path}': {exc}\n")
 

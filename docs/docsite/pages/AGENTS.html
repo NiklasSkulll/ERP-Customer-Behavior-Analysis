@@ -8,16 +8,16 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_self"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <!-- MANUAL -->
 <div align="center">
 <h1 id="agentsmd">AGENTS.md</h1>
 <p>This file provides guidance to AI coding agents when working with code in this repository.</p>
-<p><strong>Instructions for AI agents working on this project:</strong> Keep it brief and follow conventions. See <a href="BACKLOG.html" target="_blank" rel="noopener noreferrer">BACKLOG.md</a> for open tasks.</p>
+<p><strong>Instructions for AI agents working on this project:</strong> Keep it brief and follow conventions. See <a href="BACKLOG.html" target="_self">BACKLOG.md</a> for open tasks.</p>
 <h2 id="shift-handoff-always-read-this-first">Shift Handoff (ALWAYS read this first)</h2>
-<p><strong>Before each new session:</strong> <em>First</em>, read this <code>AGENTS.md</code>. <em>Afterward</em>, read <a href="HANDOVER.html" target="_blank" rel="noopener noreferrer">HANDOVER.md</a> (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. <em>After that</em>, consult the phase-based task checklists in <a href="BACKLOG.html" target="_blank" rel="noopener noreferrer">BACKLOG.md</a> and MCP Serena-Memory files (in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena" target="_blank" rel="noopener noreferrer">.serena/</a>).</p>
+<p><strong>Before each new session:</strong> <em>First</em>, read this <code>AGENTS.md</code>. <em>Afterward</em>, read <a href="HANDOVER.html" target="_self">HANDOVER.md</a> (the top entry) in its entirety. It contains the status of the last session, the next planned step, decisions made along with their rationale and potential pitfalls. <em>After that</em>, consult the phase-based task checklists in <a href="BACKLOG.html" target="_self">BACKLOG.md</a> and MCP Serena-Memory files (in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/.serena" target="_blank" rel="noopener noreferrer">.serena/</a>).</p>
 <blockquote>
 <p><strong>Important notes for development:</strong></p>
 <ul>
@@ -25,7 +25,7 @@
 <li>Never inspect, load, search, execute against or modify production data located <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/.notebooks" target="_blank" rel="noopener noreferrer">src/.notebooks/</a>, <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/data/data-prd" target="_blank" rel="noopener noreferrer">data/data-prd/</a> and <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/outputs/.exports" target="_blank" rel="noopener noreferrer">outputs/.exports/</a>. Do not copy production information into chat responses, code examples, documentation, handovers or Serena memories. If a task requires production access, stop and request a synthetic reproduction or data-free specification.</li>
 </ul>
 </blockquote>
-<p><strong>At the end of the session:</strong> <em>First</em>, add a new entry at the top of <a href="HANDOVER.html" target="_blank" rel="noopener noreferrer">HANDOVER.md</a>. A template is provided at the bottom of this <code>AGENTS.md</code>. <em>Afterward</em>, update the <a href="BACKLOG.html" target="_blank" rel="noopener noreferrer">BACKLOG.md</a>. <em>At the end</em>, update relevant Serena memories using its memory operations. Run onboarding only for initial setup or when a deliberate refresh is needed.</p>
+<p><strong>At the end of the session:</strong> <em>First</em>, add a new entry at the top of <a href="HANDOVER.html" target="_self">HANDOVER.md</a>. A template is provided at the bottom of this <code>AGENTS.md</code>. <em>Afterward</em>, update the <a href="BACKLOG.html" target="_self">BACKLOG.md</a>. <em>At the end</em>, update relevant Serena memories using its memory operations. Run onboarding only for initial setup or when a deliberate refresh is needed.</p>
 </div>
 <!-- END MANUAL -->
 
@@ -34,7 +34,7 @@
 <h2 id="overview">Overview</h2>
 <ul>
 <li>This repository supports a bachelor's thesis on detecting, typing and explainably describing changes in B2B wholesale customers' purchasing behaviour using ERP order data. It is a research project; an end-to-end analysis pipeline and evaluation results are not yet implemented.</li>
-<li>The <a href="bachelor_thesis_project_plan.docs.project.html" target="_blank" rel="noopener noreferrer">project plan</a> is the source of truth for objectives, scope, candidate measures and evaluation commitments. The <a href="fuucce_framework.docs.framework.html" target="_blank" rel="noopener noreferrer">FUUCCE framework</a> operationalises it; the completed <a href="data_description.docs.project.html" target="_blank" rel="noopener noreferrer">data description</a> defines the available tables, fields and mappings.</li>
+<li>The <a href="bachelor_thesis_project_plan.docs.project.html" target="_self">project plan</a> is the source of truth for objectives, scope, candidate measures and evaluation commitments. The <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE framework</a> operationalises it; the completed <a href="data_description.docs.project.html" target="_self">data description</a> defines the available tables, fields and mappings.</li>
 <li>FUUCCE has six phases: Familiarise and assess → Use data and prepare profiles → Uncover and characterise changes → Construct the taxonomy → Classify and explain → Evaluate and discuss.</li>
 <li>The plan covers a 24-month window, with time-window profile comparison as the main detection direction. Ordering activity, net order value and assortment form the core; discounts are optional. Profitability analysis, churn prediction and causal explanations are outside scope.</li>
 </ul>
@@ -102,7 +102,7 @@
 <!-- AUTO-MANAGED: architecture -->
 <h2 id="architecture">Architecture</h2>
 <ul>
-<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/project" target="_blank" rel="noopener noreferrer">docs/project/</a> contains the authoritative plan and data schema; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/framework" target="_blank" rel="noopener noreferrer">docs/framework/</a> contains the methodological workflow. <a href="README.html" target="_blank" rel="noopener noreferrer">README.md</a> is the project entry point.</li>
+<li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/project" target="_blank" rel="noopener noreferrer">docs/project/</a> contains the authoritative plan and data schema; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/framework" target="_blank" rel="noopener noreferrer">docs/framework/</a> contains the methodological workflow. <a href="README.html" target="_self">README.md</a> is the project entry point.</li>
 <li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/literature" target="_blank" rel="noopener noreferrer">docs/literature/</a> contains research notes and bibliography; <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/docs/prompts" target="_blank" rel="noopener noreferrer">docs/prompts/</a> records historical AI prompts. Preserve original prompt text when updating navigation or annotations.</li>
 <li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/setup" target="_blank" rel="noopener noreferrer">setup/</a> contains the Bash bootstrap and standalone Python utilities for CSV conversion, notebook export and documentation generation. There is no installed application package or deployment service.</li>
 <li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/tree/main/src/config" target="_blank" rel="noopener noreferrer">src/config/</a> contains the frozen <code>AnalysisConfig</code> type and explicit example/production profiles. Paths derive from the repository location; imports perform no data reads or directory creation.</li>
@@ -141,7 +141,7 @@
 <!-- AUTO-MANAGED: git-insights -->
 <h2 id="git-insights">Git Insights</h2>
 <ul>
-<li>Existing commits use Conventional Commit titles, for example <code>fix(docsite): ...</code> and <code>chore(docs): ...</code>. Keep changes focused and use the <a href="pull_request_template..github.html" target="_blank" rel="noopener noreferrer">pull request template</a> to explain motivation, results and validation.</li>
+<li>Existing commits use Conventional Commit titles, for example <code>fix(docsite): ...</code> and <code>chore(docs): ...</code>. Keep changes focused and use the <a href="pull_request_template..github.html" target="_self">pull request template</a> to explain motivation, results and validation.</li>
 <li>CSV and Parquet files use Git LFS through <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.gitattributes" target="_blank" rel="noopener noreferrer">.gitattributes</a>. Do not replace LFS pointers or download datasets merely to inspect repository structure.</li>
 <li><a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.githooks/pre-commit" target="_blank" rel="noopener noreferrer">.githooks/pre-commit</a> rejects tracked/staged paths under the three production roots. It checks paths, not notebook contents; saved outputs can still expose production information in public files.</li>
 <li>The bootstrap activates repository-local hooks and existing LFS hooks. Do not reconfigure the user's Git setup as an incidental check.</li>
@@ -165,7 +165,7 @@
 
 <!-- MANUAL -->
 <h2 id="template-for-a-handovermd-entry">Template for a HANDOVER.md-Entry</h2>
-<p>Copy and paste this template below for the next entry in <a href="HANDOVER.html" target="_blank" rel="noopener noreferrer">HANDOVER.md</a>.</p>
+<p>Copy and paste this template below for the next entry in <a href="HANDOVER.html" target="_self">HANDOVER.md</a>.</p>
 <pre><code class="language-markdown">## YYYY-MM-DD - &lt;AI model name&gt;: &lt;Short Overview-Title&gt;
 
 ### Session Summary

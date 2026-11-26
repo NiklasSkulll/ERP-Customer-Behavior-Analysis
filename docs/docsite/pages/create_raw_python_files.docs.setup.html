@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_self"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
@@ -16,7 +16,7 @@
 <p>This guide explains how to generate Python mirror files using the project's <code>notebook_to_raw_python.py</code> script within the uv-managed environment. The script uses <code>nbconvert</code> internally.</p>
 <p>The notebooks remain authoritative. Generated mirrors support read-only code navigation and inspection through MCP Serena.</p>
 <blockquote>
-<p>The environment setup uses uv, and the conversion script uses nbconvert to export notebooks as Python files (Astral, n.d.; Jupyter Development Team, n.d.a, n.d.b). The script's command-line interface, mirror naming convention, and read-only workflow are project-specific.</p>
+<p>The environment setup uses uv, and the conversion script uses nbconvert to export notebooks as Python files (Astral, n.d.; Jupyter Development Team, n.d.-a, n.d.-b). The script's command-line interface, mirror naming convention, and read-only workflow are project-specific.</p>
 </blockquote>
 </div>
 <h2 id="table-of-contents">Table of Contents</h2>
@@ -113,7 +113,7 @@
 <p>Startup errors stop the script before the conversion summary is printed. If <code>uv</code> fails before launching Python, its own error and exit status apply.</p>
 <hr />
 <h2 id="bibliography">Bibliography</h2>
-<p>See <a href="bibliography.docs.literature.html" target="_blank" rel="noopener noreferrer">docs/literature/bibliography.md</a>.</p>
+<p>See <a href="bibliography.docs.literature.html" target="_self">docs/literature/bibliography.md</a>.</p>
     </main>
 </body>
 </html>

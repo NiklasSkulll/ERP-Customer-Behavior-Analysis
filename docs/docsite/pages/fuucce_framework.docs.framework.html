@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="page-nav" aria-label="Site navigation">
-        <a class="back-link" href="../index.html" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+        <a class="back-link" href="../index.html" target="_self"><span aria-hidden="true">&larr;</span> Documentation overview</a>
     </nav>
     <main>
         <div align="center">
@@ -30,8 +30,8 @@
 <li><a href="#13-core-procedure" target="_self">1.3 Core procedure</a><ul>
 <li><a href="#131-inspect-the-datasets-and-verify-their-meaning" target="_self">1.3.1 Inspect the datasets and verify their meaning</a></li>
 <li><a href="#132-establish-development-and-evaluation-boundaries" target="_self">1.3.2 Establish development and evaluation boundaries</a></li>
-<li><a href="#133-assess-customer-histories-and-ordering-activity" target="_self">1.3.3 Assess customer histories and ordering activity</a></li>
-<li><a href="#134-explore-a-small-set-of-candidate-measures" target="_self">1.3.4 Explore a small set of candidate measures</a></li>
+<li><a href="#133-assess-observation-coverage-and-customer-histories" target="_self">1.3.3 Assess observation coverage and customer histories</a></li>
+<li><a href="#134-examine-the-core-measures-and-comparison-support" target="_self">1.3.4 Examine the core measures and comparison support</a></li>
 <li><a href="#135-consolidate-preparation-and-analysis-decisions" target="_self">1.3.5 Consolidate preparation and analysis decisions</a></li>
 </ul>
 </li>
@@ -44,11 +44,11 @@
 <li><a href="#21-purpose" target="_self">2.1 Purpose</a></li>
 <li><a href="#22-inputs" target="_self">2.2 Inputs</a></li>
 <li><a href="#23-core-procedure" target="_self">2.3 Core procedure</a><ul>
-<li><a href="#231-finalise-and-apply-preparation-rules" target="_self">2.3.1 Finalise and apply preparation rules</a></li>
-<li><a href="#232-integrate-the-relevant-tables" target="_self">2.3.2 Integrate the relevant tables</a></li>
-<li><a href="#233-calculate-the-selected-core-measures" target="_self">2.3.3 Calculate the selected core measures</a></li>
-<li><a href="#234-construct-customer-period-histories" target="_self">2.3.4 Construct customer-period histories</a></li>
-<li><a href="#235-confirm-suitability-and-verify-the-dataset" target="_self">2.3.5 Confirm suitability and verify the dataset</a></li>
+<li><a href="#231-finalise-technical-and-analytical-preparation-rules" target="_self">2.3.1 Finalise technical and analytical preparation rules</a></li>
+<li><a href="#232-construct-and-verify-the-enriched-order-level-interim-table" target="_self">2.3.2 Construct and verify the enriched order-level interim table</a></li>
+<li><a href="#233-define-eligibility-and-calculate-the-core-measures" target="_self">2.3.3 Define eligibility and calculate the core measures</a></li>
+<li><a href="#234-construct-monthly-customer-currency-histories" target="_self">2.3.4 Construct monthly customer-currency histories</a></li>
+<li><a href="#235-confirm-suitability-and-verify-the-prepared-data" target="_self">2.3.5 Confirm suitability and verify the prepared data</a></li>
 </ul>
 </li>
 <li><a href="#24-required-outputs" target="_self">2.4 Required outputs</a></li>
@@ -126,69 +126,78 @@
 </ul>
 <hr />
 <h2 id="overview-of-the-fuucce-framework">Overview of the FUUCCE framework</h2>
-<p>The <strong>FUUCCE framework</strong> operationalises the <a href="bachelor_thesis_project_plan.docs.project.html" target="_blank" rel="noopener noreferrer">thesis project plan</a>, the source of truth for research objectives, scope and evaluation strategy, through six phases: familiarising with and assessing the data, preparing customer profiles, uncovering and characterising changes, constructing a change taxonomy, classifying and explaining events, and evaluating the findings.</p>
+<p>The <strong>FUUCCE framework</strong> operationalises the <a href="bachelor_thesis_project_plan.docs.project.html" target="_self">thesis project plan</a>, the source of truth for research objectives, scope and evaluation strategy, through six phases: familiarising with and assessing the data, preparing customer profiles, uncovering and characterising changes, constructing a change taxonomy, classifying and explaining events, and evaluating the findings.</p>
 <p>It defines the core activities, expected outputs and completion criteria for a reproducible workflow, prioritising a complete core analysis before optional extensions. Development proceeds iteratively, while the final evaluation uses separate evidence to assess the individual components and the complete workflow.</p>
 <hr />
 <h2 id="data-formats-and-file-workflow">Data formats and file workflow</h2>
 <p>Parquet is the standard input format for loading, processing and analysing tabular datasets throughout the framework.</p>
-<p><strong>The file workflow is:</strong>
-1. <strong>Load:</strong> Read the required datasets from their Parquet files.
-2. <strong>Analyse:</strong> Perform preparation, calculations and analyses in the relevant notebook or script.
-3. <strong>Export:</strong> Save newly created or updated datasets as CSV.
-4. <strong>Convert:</strong> Convert the exported CSV files to Parquet using <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/csv_to_parquet.py" target="_blank" rel="noopener noreferrer">setup/csv_to_parquet.py</a>, retaining both formats.
-5. <strong>Reuse:</strong> Load the resulting Parquet files in subsequent processing steps or phases.</p>
+<p><strong>The file workflow is:</strong></p>
+<ol>
+<li><strong>Load:</strong> Read the required datasets from their Parquet files.</li>
+<li><strong>Analyse:</strong> Perform preparation, calculations and analyses in the relevant notebook or script.</li>
+<li><strong>Export:</strong> Save newly created or updated datasets as CSV.</li>
+<li><strong>Convert:</strong> Convert the exported CSV files to Parquet using <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/csv_to_parquet.py" target="_blank" rel="noopener noreferrer">setup/csv_to_parquet.py</a>, retaining both formats.</li>
+<li><strong>Reuse:</strong> Load the resulting Parquet files in subsequent processing steps or phases.</li>
+</ol>
 <p>After conversion, verify that both files represent the same dataset and that the Parquet version preserves the intended schema and missing values. Regenerate the corresponding Parquet file whenever an exported CSV dataset changes.</p>
 <p>Select the conversion stage explicitly with <code>--folder raw</code>, <code>--folder interim</code> or <code>--folder processed</code>, for example <code>uv run --locked python setup/csv_to_parquet.py --folder raw</code>. The converter reads only immediate CSV files in the selected folder under <code>data/data-example/</code>; it does not scan nested folders. Add <code>--update</code> to refresh existing Parquet files. For user-run production conversion, <code>--prd</code> selects the corresponding folder under <code>data/data-prd/</code>.</p>
 <p>Use the configured data and output directories consistently and preserve the original extracts.</p>
 <hr />
 <h2 id="phase-1-familiarise-yourself-with-the-data-and-assess-its-suitability">Phase 1 - Familiarise yourself with the data and assess its suitability</h2>
 <h3 id="11-purpose">1.1 Purpose</h3>
-<p>Establish whether the available ERP data can support the planned investigation and identify the preparation and analytical decisions needed for the core workflow.</p>
-<p>This phase combines technical inspection with focused exploration of customer histories. It examines data quality, observation coverage, ordering activity and the feasibility of candidate measures. Existing source documentation provides the starting point and is verified against the actual extracts rather than recreated.</p>
-<p>The main output is a documented assessment of suitable data, promising behavioural measures and preparation requirements. Final cleaning, systematic profile construction and change detection follow in subsequent phases.</p>
+<p>Establish whether the available ERP extracts support the planned analysis of customer ordering activity and recorded net order values. Verify the documented source structure, assess observation coverage and data quality, and identify the decisions required to prepare trustworthy order-level and monthly customer profiles.</p>
+<p>This phase combines technical inspection with focused exploration. It begins with the data inventory, then examines overall and industry-level monthly summaries, customer histories and selected individual orders. These summaries provide context and inform preparation decisions. A conspicuous aggregate change is not a prerequisite for examining an individual customer.</p>
+<p>The main output is a documented assessment of the data and a set of preparation recommendations. The definitive enriched order table, monthly profiles and systematic change detection are constructed in later phases.</p>
 <blockquote>
 <p><strong>Methodological basis:</strong> This phase adapts the inspection and exploration activities of CRISP-DM's data-understanding phase (IBM, n.d.) and exploratory data-analysis principles (Heckert &amp; Filliben, 2003). The ERP-specific checks, analytical priorities and suitability decisions are project-specific operational choices.</p>
 </blockquote>
 <h3 id="12-inputs">1.2 Inputs</h3>
 <ul>
-<li>The final project plan, including the research questions, scope and candidate measures.</li>
-<li>Available ERP extracts and information about their extraction date, filters and coverage.</li>
-<li>Existing data descriptions, field definitions and relevant business-code explanations.</li>
+<li>The project plan, including the research questions, 24-month observation window, analytical scope and order-eligibility principles.</li>
+<li>The raw order header and item extract, customer master extract, order-reason mapping and industry mapping described in the data description.</li>
+<li>Available information about the extraction date, source formats, filters, coverage and relevant ERP field meanings.</li>
+<li>The target schemas and calculation rules for the order-level interim table and monthly customer profiles.</li>
 </ul>
-<p>Record missing information and its consequences. Distinguish documented facts, observations from the extracts, provisional assumptions and unresolved questions.</p>
+<p>Record information that is unavailable and its consequences. Distinguish documented field meanings, observations from the extracts, provisional assumptions and unresolved questions. Treat the data description as the starting specification and verify consequential expectations against the available data.</p>
 <h3 id="13-core-procedure">1.3 Core procedure</h3>
 <h4 id="131-inspect-the-datasets-and-verify-their-meaning">1.3.1 Inspect the datasets and verify their meaning</h4>
-<p>Load the relevant extracts reproducibly and compare their contents with the existing data documentation.</p>
+<p>Load the extracts reproducibly while preserving identifiers and codes as strings. Inspect the recorded source formats before applying import or conversion settings.</p>
 <p><strong>Check:</strong></p>
 <ul>
-<li>the size of each table, including its row and column counts.</li>
-<li>what each table and row represent.</li>
-<li>required fields, observed data types and missing-value placeholders.</li>
-<li>identifiers, duplicate candidate keys and relationships between tables.</li>
-<li>date coverage, record counts and apparent extraction gaps.</li>
-<li>order types, processing and rejection statuses.</li>
-<li>monetary currencies, quantity units and product-group coverage.</li>
+<li>the row and column counts, fields, observed data types and missing-value representations of each dataset.</li>
+<li>the distinct order, order-item and customer counts.</li>
+<li>duplicate combinations of <code>SALESORDER</code> and <code>SALESORDERITEM</code>.</li>
+<li>repeated header values within each <code>SALESORDER</code>, including conflicting identifiers, dates, statuses, currencies or net amounts.</li>
+<li>the available order dates, extraction information, apparent coverage gaps and incomplete calendar months.</li>
+<li>observed document types, processing statuses, rejection statuses and order reasons.</li>
+<li>the distribution of <code>TRANSACTIONCURRENCY</code> and the availability of <code>TOTALNETAMOUNT</code>.</li>
+<li>the uniqueness and completeness of customer and lookup keys and the extent of unmatched assignments.</li>
 </ul>
-<p>Verify the distinction between order-level and item-level information. In particular, establish how order amounts can be retained once per order when item information is joined.</p>
-<p>Unusual values are initially recorded as investigation flags. Exclusions or corrections require evidence and a documented rationale.</p>
+<p>The raw order extract contains item rows. Repeated header attributes do not represent additional orders, and repeated <code>TOTALNETAMOUNT</code> values must not be summed across items. Investigate contradictory header values rather than selecting an arbitrary item row to construct an order.</p>
+<p>Examine the expected relationships between orders, the customer master and the two lookup datasets. Report missing matches and potentially conflicting mappings. A missing industry or text description does not, by itself, make an otherwise usable order invalid.</p>
+<p>Record unusual values as investigation flags. Neither a large order amount nor an uncommon status code automatically establishes a data error or an analytical exclusion.</p>
 <h4 id="132-establish-development-and-evaluation-boundaries">1.3.2 Establish development and evaluation boundaries</h4>
-<p>Define how evidence will be reserved for the final evaluation before inspecting individual behavioural patterns or using cases to develop analytical rules.</p>
-<p>The separation must reflect the intended evaluation claim. Customer-level separation is the starting option for assessing the approach on additional customers. If a temporal separation is chosen, overlapping observations and comparison windows must be addressed.</p>
-<p>General structural checks may cover the extracts, but behavioural exploration and decisions about features, thresholds or types must use the declared development evidence. Record any prior exposure that limits the independence of reserved cases.</p>
-<h4 id="133-assess-customer-histories-and-ordering-activity">1.3.3 Assess customer histories and ordering activity</h4>
-<p><strong>Within the agreed 24-month observation window, examine:</strong></p>
+<p>Reserve evidence for final evaluation before inspecting individual behavioural patterns to select comparison windows, thresholds or taxonomy types.</p>
+<p>Customer-level separation is the starting option for held-out real histories. Where a customer has orders in several currencies, keep all of that customer's currency histories in the same partition. If temporal separation is chosen instead, address shared observations, overlapping comparison windows and the resulting limits on independence.</p>
+<p>General structural checks may cover the full extracts. Behavioural exploration used to develop analytical rules must use the declared development evidence. Record any previous exposure to reserved cases that limits their independence.</p>
+<p>Document which cases and observations are available for development, which are reserved for evaluation and how those boundaries will be enforced in subsequent phases.</p>
+<h4 id="133-assess-observation-coverage-and-customer-histories">1.3.3 Assess observation coverage and customer histories</h4>
+<p>Establish the intended 24-month observation window from extraction information and <code>SALESORDERDATE</code>. Identify its exact boundaries, incomplete calendar months and any periods for which extraction coverage is uncertain. Do not infer complete observation solely from the first and last order dates.</p>
+<p>Examine ordering activity within development evidence at the overall, industry and customer levels. Distinguish the inventory of recorded orders from provisional summaries based on orders considered analytically eligible. Where eligibility is unresolved, label the affected summaries accordingly.</p>
+<p><strong>Use focused summaries and selected histories to examine:</strong></p>
 <ul>
-<li>distinct order counts and active periods per customer.</li>
-<li>first and last observed order dates.</li>
-<li>intervals between orders and periods without recorded activity.</li>
-<li>incomplete observation periods and uncertain coverage.</li>
-<li>the effects of relevant data-quality issues on potential comparisons.</li>
+<li>monthly recorded and provisionally eligible order counts, by currency where appropriate.</li>
+<li>monthly recorded net order values within each currency, without adding EUR and GBP amounts.</li>
+<li>industry summaries, including customers without an available industry assignment.</li>
+<li>customer activity, ordering gaps, first and last observed orders, and differences between customers with frequent and sparse orders.</li>
+<li>the distribution of excluded, unresolved and monetarily incomplete orders across months and customers.</li>
+<li>the possible influence of individual large orders on apparent monetary changes.</li>
 </ul>
-<p>Distinguish extraction coverage from observed purchasing activity. A first-to-last order span does not establish continuous coverage, and the first recorded order does not necessarily identify a newly acquired customer.</p>
-<p>The project's orientation of approximately two to four orders per year is not an inclusion rule. Assess whether histories contain enough information for the intended comparisons without requiring a minimum number of orders separately in each year.</p>
-<h4 id="134-explore-a-small-set-of-candidate-measures">1.3.4 Explore a small set of candidate measures</h4>
-<p>Prioritise ordering activity, net order value and assortment. Examine whether the documented fields support order count, total and average net order value, and product or product-group breadth.</p>
-<p>Create provisional customer-period views where needed. Use the project plan's order-eligibility principles, documenting unresolved status-code decisions and any restrictions they impose on interpretation. Monthly aggregation may serve as an initial exploratory view. Its suitability must be assessed against ordering activity. It is not a fixed requirement.</p>
+<p>An observed period without eligible orders is not automatically a period of zero ordering activity. First establish whether the period was covered and whether excluded or unresolved records affect its interpretation. The first recorded order does not by itself identify a newly acquired customer; the last recorded order does not end observation while extraction coverage continues.</p>
+<p>Use the summaries to assess whether suitable reference and subsequent periods can be formed. Do not require an order in every month or year, recent activity, or membership in an industry with an aggregate change as a condition for examining a customer.</p>
+<h4 id="134-examine-the-core-measures-and-comparison-support">1.3.4 Examine the core measures and comparison support</h4>
+<p>Focus on the three measures defined in the data description: <code>ORDERCOUNT</code>, <code>TOTALORDERNETVALUE</code> and <code>AVGORDERNETVALUE</code>. They describe distinct aspects of the recorded orders but are mathematically related; changes in all three are not independent confirmation of a behavioural change.</p>
+<p>Create provisional monthly customer-currency views where useful. Monthly profiles are the fixed basic representation of the prepared data. This phase assesses the support available for comparisons; it does not decide whether monthly aggregation itself should be adopted. Later detection may compare windows spanning several months.</p>
 <p><strong>Use a small number of tables and graphics to answer specific questions:</strong></p>
 <table>
 <thead>
@@ -199,189 +208,209 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>Which histories provide usable comparison support?</strong></td>
-<td>Order-count, active-period and ordering-interval summaries.</td>
+<td><strong>Can the measures be calculated from the available orders?</strong></td>
+<td>Checks of distinct order identities, repeated header amounts, missing net amounts and currency assignments.</td>
 </tr>
 <tr>
-<td><strong>Is the proposed temporal resolution informative?</strong></td>
-<td>Selected customer histories and the proportion of periods without orders.</td>
+<td><strong>Which histories support comparisons?</strong></td>
+<td>Eligible order counts, observed months, ordering gaps and coverage in potential reference and subsequent periods.</td>
 </tr>
 <tr>
-<td><strong>Are core measures calculable and interpretable?</strong></td>
-<td>Missingness, formula checks, value distributions and product-group coverage.</td>
+<td><strong>How do status and eligibility decisions affect the measures?</strong></td>
+<td>Counts of included, excluded and unresolved orders by reason, month and currency.</td>
 </tr>
 <tr>
-<td><strong>Could individual orders dominate apparent differences?</strong></td>
-<td>Selected histories shown alongside their underlying orders.</td>
+<td><strong>Could individual orders dominate a monetary difference?</strong></td>
+<td>Selected customer histories alongside their underlying order-level values.</td>
 </tr>
 <tr>
-<td><strong>Do preparation decisions materially affect interpretation?</strong></td>
-<td>Targeted comparisons of plausible treatments for consequential unresolved issues.</td>
+<td><strong>Which apparent zero periods or monetary totals are uncertain?</strong></td>
+<td>Coverage checks, unresolved orders and missing contributing amounts.</td>
 </tr>
 </tbody>
 </table>
-<p>Select development examples with varied activity and history characteristics. Include ordinary and difficult cases, rather than only conspicuous changes.</p>
-<p>Exploratory transformations and provisional profiles should use reusable code that can be completed in Phase 2. Preserve original extracts and record the effects of joins, conversions and temporary selection rules.</p>
+<p>Check whether a missing monetary amount can leave an order count available while making the corresponding total and average unavailable. Examine the extent of this issue before recommending comparison rules.</p>
+<p>Select development examples with varied activity and data-quality characteristics, including ordinary histories and difficult cases. Apparent changes observed during exploration are development observations, not automatically detected events or established taxonomy types.</p>
 <h4 id="135-consolidate-preparation-and-analysis-decisions">1.3.5 Consolidate preparation and analysis decisions</h4>
-<p><strong>Translate findings into recommendations for:</strong></p>
+<p>Translate the findings into explicit recommendations for Phase 2 and identify decisions that still require ERP clarification or source evidence.</p>
+<p><strong>Address:</strong></p>
 <ul>
-<li>order and item selection.</li>
-<li>treatment of missing, duplicate or questionable records.</li>
-<li>candidate measures and their interpretation limits.</li>
-<li>temporal aggregation and customer suitability.</li>
-<li>issues that require clarification before the core analysis can proceed.</li>
+<li>the exact observation boundaries and treatment of incomplete or uncovered months.</li>
+<li>the resolution or documented restriction of duplicate and conflicting order records.</li>
+<li>the interpretation of observed document types, processing statuses, rejection statuses and order reasons.</li>
+<li>the treatment of partially rejected orders and the meaning of their recorded header amounts.</li>
+<li>unmatched customer and lookup records, missing required fields and unusual monetary values.</li>
+<li>the definition of relevant customer-currency histories and periods with zero eligible orders.</li>
+<li>the availability of the three core measures and restrictions on their interpretation.</li>
+<li>development and evaluation boundaries and their effect on later exploration.</li>
 </ul>
-<p><strong>For each consequential decision, record the evidence, rationale and status:</strong> adopted for exploration, proposed for preparation or unresolved.</p>
-<p>Apparent changes observed during exploration remain development findings. They are not automatically detected events or established taxonomy types.</p>
+<p>For each consequential decision, record the supporting evidence, rationale, status and expected effect on records, customers or measures. Distinguish rules adopted for provisional exploration from rules approved for preparing the primary analytical population.</p>
 <h3 id="14-required-outputs">1.4 Required outputs</h3>
-<p><strong>Maintain one reproducible notebook containing:</strong>
-1. <strong>Data assessment:</strong> Verified source definitions, key relationships and relevant quality findings.
-2. <strong>Customer-history assessment:</strong> Coverage, activity and provisional analytical suitability.
-3. <strong>Focused exploratory findings:</strong> Selected summaries and graphics linked to the questions they answer.
-4. <strong>Preparation decisions and open issues:</strong> Recommended treatments, candidate measures, temporal representation and outstanding dependencies.
-5. <strong>Evidence-use record:</strong> Development cases, reserved evaluation evidence and any prior exposure.</p>
-<p>These outputs may be sections or tables within the same notebook. Separate files are only necessary where they support reuse in later phases. Export figures and tables to the directory specified by the project configuration in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/src/config" target="_blank" rel="noopener noreferrer">src/config</a>. The default export directory is <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/exports" target="_blank" rel="noopener noreferrer">outputs/exports</a>. Outputs derived from production data must use <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/.exports" target="_blank" rel="noopener noreferrer">outputs/.exports</a>. Use the configured path consistently throughout the notebook.</p>
+<p><strong>Maintain one reproducible notebook containing:</strong></p>
+<ol>
+<li><strong>Data inventory and structural assessment:</strong> Source granularity, order and customer counts, field meanings, keys, relationships and relevant quality findings.</li>
+<li><strong>Coverage and eligibility assessment:</strong> Observation boundaries, incomplete periods, status distributions and recorded, provisionally eligible, excluded or unresolved orders.</li>
+<li><strong>Focused exploratory findings:</strong> Overall and industry-level monthly summaries, selected customer histories and underlying orders where needed for interpretation.</li>
+<li><strong>Measure and suitability assessment:</strong> Feasibility of the three core measures, missing monetary information and support for customer-level window comparisons.</li>
+<li><strong>Preparation decisions and open issues:</strong> Recommended rules, evidence, effects and dependencies requiring clarification.</li>
+<li><strong>Evidence-use record:</strong> Development examples, reserved evaluation evidence and known prior exposure.</li>
+</ol>
+<p>These outputs may be sections and tables within the same notebook. Export figures and tables to the directory specified by the project configuration in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/src/config" target="_blank" rel="noopener noreferrer">src/config</a>. The default export directory is <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/exports" target="_blank" rel="noopener noreferrer">outputs/exports</a>. Outputs derived from production data must use <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/outputs/.exports" target="_blank" rel="noopener noreferrer">outputs/.exports</a>. Use the configured path consistently throughout the notebook.</p>
 <h3 id="15-completion-criteria">1.5 Completion criteria</h3>
 <p><strong>Phase 1 is complete when:</strong></p>
 <ul>
-<li>the meaning and relationships of the core data are sufficiently understood.</li>
-<li>relevant quality and coverage limitations are documented.</li>
-<li>the feasibility of the core candidate measures has been assessed.</li>
-<li>customer activity has been examined sufficiently to propose a temporal representation and suitability criteria.</li>
+<li>the source granularity and relationships needed for an order-level table are understood.</li>
+<li>consequential quality problems, code meanings and coverage limitations are documented.</li>
+<li>the three core measures have been assessed for calculability and interpretation.</li>
+<li>recorded, provisionally eligible, excluded and unresolved orders are distinguishable in the assessment.</li>
+<li>customer histories have been examined sufficiently to inform comparison support and preparation rules.</li>
 <li>development and evaluation boundaries are documented.</li>
-<li>Phase 2 can proceed using explicit preparation recommendations.</li>
+<li>Phase 2 can proceed using explicit recommendations and a list of issues that must be resolved before the primary profiles are generated.</li>
 </ul>
-<p>Exhaustive exploration is not required. Unresolved issues affecting optional extensions may be deferred. Issues preventing a trustworthy core analysis must be identified as blockers with a specified next action.</p>
+<p>Exhaustive exploration is not required. An unresolved issue that prevents a trustworthy core measure or comparison must be identified as a blocker with a specified next action.</p>
 <h3 id="16-optional-refinements">1.6 Optional refinements</h3>
-<p>After the core assessment, additional exploration may examine discount feasibility, product-group incidence patterns, compatible quantity measures or customer subgroups.</p>
-<p>Undertake these refinements only when they address a specific analytical question or support an agreed extension. They must not delay preparation of the core dataset merely to complete every possible descriptive analysis.</p>
+<p>After the core assessment, additional exploration may examine ordering intervals, recency at a defined reference date or more detailed industry and activity-group summaries.</p>
+<p>Undertake these refinements only when they address a specific limitation or analytical question. They do not add required columns to the monthly profile schema or expand the investigation to item-level purchasing characteristics.</p>
 <hr />
 <h2 id="phase-2-use-erp-data-to-prepare-customer-profiles">Phase 2 - Use ERP data to prepare customer profiles</h2>
 <h3 id="21-purpose">2.1 Purpose</h3>
-<p>Transform the available ERP extracts into reproducible customer-period profiles suitable for the core change analysis.</p>
-<p>This phase implements and verifies the preparation decisions developed in Phase 1. It establishes consistent order selection, validated table relationships, explicit feature definitions and a justified temporal representation.</p>
-<p>The main output is an analytical dataset accompanied by eligibility information and the documentation needed to interpret and regenerate it. Provisional preparation code from Phase 1 is refined and reused.</p>
+<p>Transform the raw ERP extracts into a reproducible order-level interim table and monthly customer profiles suitable for the core change analysis.</p>
+<p>This phase applies and verifies the preparation decisions from Phase 1. It keeps technical representation, analytical order eligibility and measure-specific assessability distinct. The interim table retains technically validated orders, including orders later excluded from analytical measures. The monthly profiles contain the documented measures for the eligible population.</p>
+<p>The main outputs are an enriched table with one row per order, profiles with one row per customer, calendar month and transaction currency, and the records needed to understand exclusions, unavailable values and observation coverage.</p>
 <blockquote>
-<p><strong>Methodological basis:</strong> This phase adapts CRISP-DM's data-selection, cleaning, integration, construction and formatting activities (IBM, n.d.), supported by tidy-data principles for organising observations and variables (Wickham, 2014). The separation of development and evaluation evidence informs the treatment of fitted transformations and empirically selected rules (Kapoor &amp; Narayanan, 2023). ERP-specific selection rules, feature definitions and aggregation choices are project-specific decisions requiring justification.</p>
+<p><strong>Methodological basis:</strong> This phase adapts CRISP-DM's data-selection, cleaning, integration, construction and formatting activities (IBM, n.d.), supported by tidy-data principles for organising observations and variables (Wickham, 2014). The separation of development and evaluation evidence informs empirically selected rules and transformations (Kapoor &amp; Narayanan, 2023). ERP-specific eligibility, coverage and calculation rules are project-specific decisions requiring justification.</p>
 </blockquote>
 <h3 id="22-inputs">2.2 Inputs</h3>
 <ul>
-<li>Original ERP extracts and reproducible loading code.</li>
-<li>Verified field definitions and table relationships.</li>
-<li>Phase 1 quality findings, customer-history assessment and preparation recommendations.</li>
-<li>The project plan's observation window, order-eligibility principles and candidate measures.</li>
-<li>The documented separation between development and final evaluation evidence.</li>
+<li>The preserved raw extracts and their verified import settings.</li>
+<li>The raw, interim and processed schemas defined in the data description.</li>
+<li>Phase 1 findings on source structure, relationships, coverage, customer histories and data quality.</li>
+<li>The project plan's observation window, order-eligibility policy and three core measures.</li>
+<li>Documented ERP clarifications needed to settle consequential status and amount interpretations.</li>
+<li>The declared separation between development evidence and final evaluation evidence.</li>
 </ul>
-<p>Resolve issues affecting the meaning or calculation of core measures before constructing the corresponding profiles. Unresolved requirements for optional measures may remain deferred.</p>
+<p>Resolve issues affecting the construction or interpretation of the primary profiles before generating them. Record any remaining restrictions explicitly.</p>
 <h3 id="23-core-procedure">2.3 Core procedure</h3>
-<h4 id="231-finalise-and-apply-preparation-rules">2.3.1 Finalise and apply preparation rules</h4>
-<p>Specify the exact boundaries of the agreed 24-month observation window using <code>SALESORDERDATE</code>. Document the treatment of incomplete periods.</p>
-<p><strong>Translate the project's requirement for valid, non-cancelled orders into explicit rules using the documented meanings of:</strong></p>
+<h4 id="231-finalise-technical-and-analytical-preparation-rules">2.3.1 Finalise technical and analytical preparation rules</h4>
+<p>Specify the exact 24-month observation boundaries using <code>SALESORDERDATE</code>. Record the extraction date, available coverage and treatment of incomplete calendar months.</p>
+<p>Define reproducible rules for parsing identifiers, dates, codes, currencies and monetary values. Preserve leading zeros in identifiers and codes. Investigate missing order identities and conflicting header values before representing an affected record as a unique order. Do not replace missing monetary values with zero.</p>
+<p><strong>Keep three decisions separate:</strong></p>
+<ol>
+<li><strong>Technical representation:</strong> Can the source rows be represented reliably as one identified order?</li>
+<li><strong>Analytical eligibility:</strong> Does that order belong to the defined population for purchasing-change analysis?</li>
+<li><strong>Measure assessability:</strong> Can the relevant count, monetary measure or comparison be calculated from the available evidence?</li>
+</ol>
+<p>Translate the project plan's working eligibility policy into an explicit, verified configuration:</p>
 <ul>
-<li><code>SALESORDERTYPE</code></li>
-<li><code>OVERALLSDPROCESSSTATUS</code></li>
-<li><code>SDDOCUMENTREASON</code></li>
-<li><code>OVERALLSDDOCUMENTREJECTIONSTS</code></li>
+<li>Treat <code>OR</code> as the documented sales-order type. Include another type only after its meaning and suitability have been verified.</li>
+<li>Include orders with rejection status <code>A</code> when other requirements are met.</li>
+<li>Exclude fully rejected orders with rejection status <code>C</code> from the primary analytical population.</li>
+<li>Settle the treatment of partially rejected orders with status <code>B</code> only after clarifying what <code>TOTALNETAMOUNT</code> represents for those orders. Until then, exclude them from the primary profiles and report their extent.</li>
+<li>Do not interpret a missing or unknown rejection status as <code>A</code>; resolve it or record the order as outside the primary eligible population.</li>
+<li>Do not exclude open or in-progress orders solely because processing is incomplete. Review unrecognised processing statuses.</li>
+<li>Use <code>SDDOCUMENTREASON</code> as context unless a verified reason code identifies a business process outside the analytical scope.</li>
+<li>Do not use order magnitude or a zero or negative amount as an automatic exclusion rule. Investigate unusual values and document any justified treatment.</li>
 </ul>
-<p>Exclude fully rejected orders. Clarify partially rejected orders and the meaning of their recorded amounts before including them in affected measures. Open or in-progress orders are not excluded solely because processing is incomplete.</p>
-<p>Apply documented treatments for identifiers, dates, duplicate representations, missing-value placeholders, currencies and categories. Preserve identifier semantics, including leading zeros.</p>
-<p>Separate technical corrections from analytical exclusions. Large orders remain included unless a justified rule requires otherwise. Their size alone is not evidence of an error or project-order status.</p>
-<p>Record consequential rules with their rationale, affected record and customer counts, and remaining limitations.</p>
-<h4 id="232-integrate-the-relevant-tables">2.3.2 Integrate the relevant tables</h4>
-<p>Construct validated order-level and item-level views using the relationships verified in Phase 1.</p>
-<p><strong>For each consequential join, check:</strong></p>
+<p>Apply the same adopted analytical order population to all three core measures. An otherwise eligible order with an unavailable amount remains in the count population, while affected monetary measures are marked unavailable.</p>
+<p>Record the number of source rows, distinct orders and affected customers for technical issues, analytical exclusions and missing amounts. Report overlapping reasons without adding their counts as if they were disjoint groups.</p>
+<h4 id="232-construct-and-verify-the-enriched-order-level-interim-table">2.3.2 Construct and verify the enriched order-level interim table</h4>
+<p>Construct <code>data/data-example/interim/001_order_header_data.csv</code> with exactly one row per reliably identified <code>SALESORDER</code>, following the schema in the data description.</p>
+<p>Check that repeated header fields agree across the order's item rows. Retain <code>TOTALNETAMOUNT</code> once per order; do not sum repeated header values across items. Preserve the original codes and attach the documented text descriptions where mappings are available.</p>
+<p>Join <code>SOLDTOPARTY</code> to the customer master, <code>SDDOCUMENTREASON</code> to its description mapping, and customer <code>INDUSTRY</code> to its description mapping. Before each join, verify the expected uniqueness of the mapping key and investigate conflicting assignments. Use left joins so that an unmatched customer or description does not silently remove an order. Do not match missing join keys to one another.</p>
+<p><strong>Verify:</strong></p>
 <ul>
-<li>expected key uniqueness and relationship cardinality.</li>
-<li>unmatched records and their treatment.</li>
-<li>changes in row counts.</li>
-<li>consistency of relevant order counts and monetary totals.</li>
+<li>uniqueness of <code>SALESORDER</code> in the completed interim table.</li>
+<li>the number of represented orders before and after enrichment.</li>
+<li>unchanged recorded net amounts within each currency after enrichment.</li>
+<li>unmatched customers, reasons and industries and their effects on the available descriptions.</li>
+<li>unresolved source conflicts and orders that could not be represented reliably.</li>
 </ul>
-<p>Retain <code>TOTALNETAMOUNT</code> once per eligible <code>SALESORDER</code>. Where necessary, aggregate item-level information before combining it with order-level measures.</p>
-<p>Apply consistent item eligibility when calculating assortment measures, including the treatment of rejected items within otherwise eligible orders. Record missing product classifications rather than silently removing their effect from the analysis.</p>
-<h4 id="233-calculate-the-selected-core-measures">2.3.3 Calculate the selected core measures</h4>
-<p>Use the candidate catalogue in the project plan to select a compact set of feasible measures covering ordering activity, net order value and assortment.</p>
-<p>Maintain one feature specification containing each selected measure's meaning, source fields, formula, unit, aggregation basis, missing-value treatment and interpretation limits.</p>
+<p>Retain technically validated orders with their types and statuses even when they will later be analytically excluded. Document records that cannot be represented in the interim table and keep them visible in the preparation report.</p>
+<p>The available customer-master assignment is not assumed to be the customer's historically verified industry at every order date. Likewise, a recorded net order amount is not automatically realised revenue.</p>
+<h4 id="233-define-eligibility-and-calculate-the-core-measures">2.3.3 Define eligibility and calculate the core measures</h4>
+<p>Apply the adopted order-eligibility rules to the interim table before constructing analytical measures. Retain a reproducible account of which orders are included, excluded or unresolved and why.</p>
+<p>Use <code>SOLDTOPARTY</code> as the customer identifier, <code>SALESORDERDATE</code> to assign a calendar month and <code>TRANSACTIONCURRENCY</code> to keep currency histories separate. Each month is represented by its first calendar day.</p>
+<p><strong>Calculate the three measures for each customer-month-currency combination:</strong></p>
 <table>
 <thead>
 <tr>
-<th><strong>Candidate measure</strong></th>
-<th><strong>Preparation requirement</strong></th>
+<th><strong>Measure</strong></th>
+<th><strong>Calculation and missing-value rule</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Order count - <code>ORDERCOUNT</code></strong></td>
-<td>Count distinct eligible orders per customer and period.</td>
+<td><strong><code>ORDERCOUNT</code></strong></td>
+<td>Count distinct eligible <code>SALESORDER</code> values.</td>
 </tr>
 <tr>
-<td><strong>Total net order value - <code>TOTALORDERVALUE</code></strong></td>
-<td>Sum eligible order-level net amounts once per order on a consistent currency basis.</td>
+<td><strong><code>TOTALORDERNETVALUE</code></strong></td>
+<td>Sum <code>TOTALNETAMOUNT</code> once per eligible order. If an eligible contributing order has an unavailable amount, mark the complete total as missing.</td>
 </tr>
 <tr>
-<td><strong>Average net order value - <code>AVGORDERVALUE</code></strong></td>
-<td>Divide total net order value by the corresponding order count. Leave undefined when the count is zero.</td>
-</tr>
-<tr>
-<td><strong>Product breadth - <code>DISTINCTPRODUCTCOUNT</code></strong></td>
-<td>Count distinct eligible products within the period.</td>
-</tr>
-<tr>
-<td><strong>Product-group breadth - <code>DISTINCTPRODUCTGROUPCOUNT</code></strong></td>
-<td>Count distinct assigned product groups and report classification coverage.</td>
+<td><strong><code>AVGORDERNETVALUE</code></strong></td>
+<td>Divide the complete <code>TOTALORDERNETVALUE</code> by <code>ORDERCOUNT</code> when the total is available and the count is greater than zero. Otherwise leave the average missing.</td>
 </tr>
 </tbody>
 </table>
-<p>The table does not require every candidate to become a detection input. Document dependencies between measures and distinguish selected detection inputs from additional descriptive measures when that decision is made.</p>
-<h4 id="234-construct-customer-period-histories">2.3.4 Construct customer-period histories</h4>
-<p>Select the temporal resolution using Phase 1 evidence. Document why it provides useful comparison support for the intended customers.</p>
-<p>Create the principal profile table with one row per customer and aggregation period, identified by <code>CUSTOMERID</code>, derived from <code>SOLDTOPARTY</code>, and <code>PERIODSTART</code>.</p>
-<p><strong>Apply the following rules:</strong></p>
+<p>Maintain a feature specification with each measure's meaning, source fields, formula, unit, eligible population, missing-value treatment and interpretation limits. State later which measures act as detection inputs and which support classification or description. The three stored measures are mathematically related and must not be treated as independent evidence.</p>
+<p>Do not add EUR and GBP monetary amounts without a documented conversion. Order counts may be combined across currencies for a separately specified analysis only if each order contributes once.</p>
+<h4 id="234-construct-monthly-customer-currency-histories">2.3.4 Construct monthly customer-currency histories</h4>
+<p>Construct <code>data/data-example/processed/001_customer_monthly_profiles.csv</code> using the schema in the data description. Its composite key is <code>CUSTOMER_ID</code>, <code>PERIODSTART</code> and <code>TRANSACTIONCURRENCY</code>. Retain <code>INDUSTRY</code> and <code>INDUSTRY_TEXT</code> as contextual attributes.</p>
+<p>Define the relevant customer-currency combinations and their observation intervals using the available extraction and coverage evidence. Do not define the end of observation as a customer's last order merely because later orders are absent.</p>
+<p><strong>For periods without eligible orders:</strong></p>
 <ul>
-<li>Represent periods without orders only within a justified observation interval.</li>
-<li>Use zero counts and totals where complete observation supports inactivity.</li>
-<li>Preserve unknown coverage and missing measurements as missing.</li>
-<li>Leave averages and shares undefined when their denominators are zero.</li>
-<li>Retain indicators for partial periods, missing classifications and other consequential quality restrictions.</li>
-<li>Preserve measures in their original units.</li>
+<li>Set <code>ORDERCOUNT</code> and <code>TOTALORDERNETVALUE</code> to zero only when observation coverage supports zero eligible activity for that customer-currency combination.</li>
+<li>Leave <code>AVGORDERNETVALUE</code> missing when <code>ORDERCOUNT</code> is zero.</li>
+<li>Do not convert missing extraction coverage, incomplete observation periods or unresolved evidence into zero activity.</li>
+<li>Do not infer inactivity across all currencies from a zero count in one currency.</li>
 </ul>
-<p>Optional scaling or other method-specific transformations may be deferred until required. Parameters estimated from data must use the declared development evidence and then be applied consistently to evaluation data.</p>
-<h4 id="235-confirm-suitability-and-verify-the-dataset">2.3.5 Confirm suitability and verify the dataset</h4>
-<p>Reassess customer suitability after cleaning and selection, because these operations may change usable activity and history.</p>
-<p>Record eligibility and restrictions for the intended analysis, including whether particular periods or measures are unassessable. A customer may support some comparisons but not others. Do not impose a minimum order count separately in each year or require recent activity merely to qualify. Document the reasons for exclusions and their consequences for the analysed population.</p>
+<p>Preserve the distinction between an observed zero, an unavailable monetary measure and an unobserved or unassessable period. Record coverage restrictions in linked preparation information if they are not columns of the documented monthly schema.</p>
+<p>Use the same monthly table to construct overall and industry summaries and longer customer comparison windows. Sum counts and complete monetary totals within the relevant currency and coverage scope. Recalculate an aggregate average as the aggregate total divided by the aggregate count; do not average monthly or customer averages without the appropriate weighting.</p>
+<p>If a required contributing monetary total is missing, the complete broader total and its average remain missing. A partial sum may be shown separately only when labelled incomplete and accompanied by its coverage. Retain customers without an industry assignment in customer-level and overall analyses, and show their contribution when reporting industry groups.</p>
+<h4 id="235-confirm-suitability-and-verify-the-prepared-data">2.3.5 Confirm suitability and verify the prepared data</h4>
+<p>Reassess suitability for the intended comparisons after technical validation and analytical selection. A prepared monthly row alone does not establish sufficient evidence for change detection.</p>
+<p>Distinguish comparisons with adequate evidence and no detected change from comparisons that cannot be assessed. Do not require activity in every month or year, a recent order, a later purchase or an available industry assignment merely to retain a customer. A history with unavailable monetary measures may still support an order-count comparison.</p>
 <p><strong>Verify:</strong></p>
 <ul>
-<li>uniqueness of customer-period identifiers.</li>
-<li>agreement of order counts and monetary totals with eligible source records.</li>
-<li>correct feature calculations and missing-value handling.</li>
-<li>expected effects of joins and exclusions.</li>
-<li>selected profiles against their underlying orders.</li>
-<li>successful regeneration and reloading of the saved outputs.</li>
+<li>uniqueness of the order-level and monthly composite keys.</li>
+<li>reconciliation of monthly <code>ORDERCOUNT</code> with eligible interim orders.</li>
+<li>reconciliation of complete monetary totals by month and currency, including propagation of missing amounts.</li>
+<li>calculation of averages and treatment of zero-order periods.</li>
+<li>unchanged observed counts and amounts after adding justified zero-activity months.</li>
+<li>the effects of exclusions, unresolved orders and incomplete coverage.</li>
+<li>selected monthly profiles against their underlying orders.</li>
+<li>correct regeneration and reloading of the exported files.</li>
 </ul>
-<p>Investigate discrepancies before using affected profiles for detection.</p>
+<p>Investigate discrepancies before using affected profiles for detection. Report how preparation decisions change the number of assessable customers, months and comparisons.</p>
 <h3 id="24-required-outputs">2.4 Required outputs</h3>
-<p><strong>Produce:</strong>
-1. <strong>Prepared customer profiles:</strong> Selected measures, period identifiers and relevant quality indicators.
-2. <strong>Eligibility and coverage information:</strong> Included customers, restricted comparisons and exclusion reasons.
-3. <strong>Preparation and feature specification:</strong> Applied rules, formulas and consequential decisions.
-4. <strong>Verification results:</strong> Reconciliation checks, identified discrepancies and their resolution.
-5. <strong>Reproducible preparation code:</strong> Input references, configuration and output schemas.</p>
-<p><strong>Export the prepared analytical datasets according to the <a href="#data-formats-and-file-workflow" target="_self">shared data-format workflow</a>:</strong> save them as CSV, convert them to Parquet and use the Parquet versions in subsequent phases. Document the CSV encoding, delimiter, decimal notation and missing-value representation. Retain additional intermediate datasets where they support verification or reuse, and preserve the original extracts.</p>
+<p><strong>Produce:</strong></p>
+<ol>
+<li><strong>Enriched order-level interim table:</strong> One validated row per represented order, including original codes, available descriptions and customer industry information.</li>
+<li><strong>Monthly customer-currency profiles:</strong> The documented composite key and three core measures.</li>
+<li><strong>Eligibility and coverage record:</strong> Technical issues, analytical exclusions, unresolved orders, observed zero periods and restrictions on measures or comparisons.</li>
+<li><strong>Preparation and feature specification:</strong> Applied rules, ERP clarifications, formulas, configuration and interpretation limits.</li>
+<li><strong>Verification results:</strong> Key checks, reconciliation, discrepancies and their resolution.</li>
+<li><strong>Reproducible preparation code:</strong> Input references, transformations, output schemas and data versions.</li>
+</ol>
+<p>Export the interim and processed datasets as CSV according to the data description: UTF-8, semicolon-separated fields, dates in <code>YYYY-MM-DD</code> format, decimal points for monetary values and empty fields for missing values. Preserve identifiers as strings and monetary precision during calculation.</p>
+<p>Convert the exported CSV files to Parquet and use the Parquet versions in subsequent phases according to the <a href="#data-formats-and-file-workflow" target="_self">shared data-format workflow</a>. Verify that conversion and reloading preserve the intended identifiers, values, types and missingness. Preserve the original extracts.</p>
 <h3 id="25-completion-criteria">2.5 Completion criteria</h3>
 <p><strong>Phase 2 is complete when:</strong></p>
 <ul>
-<li>core selection and preparation rules are explicit.</li>
-<li>joins and aggregates have been verified.</li>
-<li>selected measures have documented definitions.</li>
-<li>customer-period profiles distinguish inactivity, missing evidence and undefined values.</li>
-<li>analytical suitability and restrictions are recorded.</li>
-<li>outputs can be regenerated and reloaded correctly.</li>
-<li>the profiles are ready for the planned window comparisons.</li>
+<li>observation boundaries and primary order-eligibility rules are explicit and justified.</li>
+<li>technically representable orders and analytical exclusions remain distinguishable.</li>
+<li>the enriched interim table is unique at order level and its joins have been verified.</li>
+<li>the monthly profiles match the documented customer-month-currency schema.</li>
+<li>the three core measures reconcile with eligible orders and handle missing amounts correctly.</li>
+<li>observed zero activity, unavailable measures and uncertain coverage are distinguishable.</li>
+<li>customer and comparison suitability restrictions are recorded.</li>
+<li>the outputs can be regenerated and reloaded correctly and are ready for the planned window comparisons.</li>
 </ul>
-<p>Remaining optional preparation tasks do not block completion. Unresolved issues affecting core measures or trustworthy comparisons must be recorded as blockers.</p>
+<p>An unresolved issue affecting the primary analytical population, a core measure or trustworthy comparisons is a blocker until its treatment and consequences are documented.</p>
 <h3 id="26-optional-refinements">2.6 Optional refinements</h3>
-<p>Additional preparation may support product-group order shares, days since the last order, discount measures or quantities within compatible units.</p>
-<p>Discount integration requires verified price-condition assignment, validity periods, price bases and quantities. Missing or unmaintained prices remain missing, and discount coverage must accompany aggregate results.</p>
-<p>Introduce these refinements only when justified by the investigation. Preserve a reproducible core dataset so that optional additions do not prevent execution of the main workflow.</p>
+<p>The order-level dates may support additional temporal descriptions, such as the interval between eligible orders or days since the last eligible order at a defined reference date. Such descriptions require adequate prior observation and a stated choice between currency-specific and combined ordering activity.</p>
+<p>These refinements are not required columns of the current monthly profile schema. Introduce them only when they address an identified limitation of the core analysis, and keep their definitions and evidence requirements separate from the three core measures.</p>
 <hr />
 <h2 id="phase-3-uncover-and-characterise-changes">Phase 3 - Uncover and characterise changes</h2>
 <h3 id="31-purpose">3.1 Purpose</h3>
@@ -414,7 +443,7 @@
 <tbody>
 <tr>
 <td><strong>Target patterns</strong></td>
-<td>State which changes the initial approach addresses, such as changes in ordering frequency, net order value or assortment breadth.</td>
+<td>State which changes the initial approach addresses, such as changes in ordering activity, recorded net order values or their combination.</td>
 </tr>
 <tr>
 <td><strong>Detection inputs</strong></td>
@@ -513,7 +542,7 @@
 <ul>
 <li>changes dominated by individual large orders.</li>
 <li>recurring patterns or incomplete observation periods.</li>
-<li>missing classifications or other preparation effects.</li>
+<li>missing monetary values, excluded or unresolved orders, changes in currency use and other preparation effects.</li>
 <li>insufficient comparison support.</li>
 <li>repeated detections and unclear event boundaries.</li>
 </ul>
@@ -521,12 +550,14 @@
 <p>Assemble a manageable case collection covering different dimensions, directions, magnitudes, combined changes and ambiguous outcomes. Include selected histories without automatic detections to inspect possible omissions. Record the case-selection rationale and both event and customer counts. Avoid allowing numerous similar events from one customer to dominate taxonomy development.</p>
 <p>Manually noticed patterns retain their manual provenance. They must not be presented as automatic detections, and candidates must not be removed merely because they do not fit an anticipated type.</p>
 <h3 id="34-required-outputs">3.4 Required outputs</h3>
-<p><strong>Produce:</strong>
-1. <strong>Detection specification:</strong> Selected measures, windows, criteria, calibration rationale and consolidation rules.
-2. <strong>Candidate-event register:</strong> Event timing, detection evidence, review status and links to original detections.
-3. <strong>Feature-change evidence:</strong> Before-and-after values, differences, units and support information.
-4. <strong>Processing summary:</strong> Assessed and unassessable histories or comparisons, with reasons.
-5. <strong>Taxonomy-development case collection:</strong> Selected cases, supporting displays and selection rationale.</p>
+<p><strong>Produce:</strong></p>
+<ol>
+<li><strong>Detection specification:</strong> Selected measures, windows, criteria, calibration rationale and consolidation rules.</li>
+<li><strong>Candidate-event register:</strong> Event timing, detection evidence, review status and links to original detections.</li>
+<li><strong>Feature-change evidence:</strong> Before-and-after values, differences, units and support information.</li>
+<li><strong>Processing summary:</strong> Assessed and unassessable histories or comparisons, with reasons.</li>
+<li><strong>Taxonomy-development case collection:</strong> Selected cases, supporting displays and selection rationale.</li>
+</ol>
 <p>These outputs may be linked tables within a small number of datasets and notebooks. Preserve enough configuration and provenance information to reproduce each event.</p>
 <h3 id="35-completion-criteria">3.5 Completion criteria</h3>
 <p><strong>Phase 3 is complete when:</strong></p>
@@ -540,7 +571,7 @@
 </ul>
 <p>Completion does not require a predetermined number of events or favourable detection performance. If the available evidence cannot support defensible comparisons or taxonomy development, record the restriction and revisit the relevant preparation or analysis decisions.</p>
 <h3 id="36-optional-refinements">3.6 Optional refinements</h3>
-<p>Possible refinements include additional behavioural dimensions, alternative window designs or a second detection method such as change-point segmentation.</p>
+<p>Possible refinements include additional temporal descriptions based on eligible order dates, alternative window designs or a second detection method such as change-point segmentation.</p>
 <p>Introduce an extension only when it addresses a specific limitation or research-relevant question and sufficient time remains for its assessment. Method disagreements and applicability differences must be retained if multiple approaches are compared.</p>
 <p>The initial priority is a functioning, interpretable profile-comparison approach with usable event descriptions for the subsequent taxonomy phase.</p>
 <hr />
@@ -584,13 +615,15 @@
 <p>Record case-selection reasons and both event and customer counts. Numerous similar events from one customer should not dominate the development process.</p>
 <p>Manually identified patterns retain their provenance and require a documented event description before being used as examples. Histories without automatic detections are not automatically verified no-change cases. The number of reviewed cases is guided by pattern coverage, unresolved questions and the available workload. No fixed number of cases or types is required.</p>
 <h4 id="433-develop-and-revise-the-type-structure">4.3.3 Develop and revise the type structure</h4>
-<p><strong>Combine conceptual reasoning with systematic comparison of development cases:</strong>
-1. Propose initial distinctions from the organising perspective, behavioural measures and relevant literature.
-2. Examine a manageable batch of cases using their original histories and before-and-after evidence.
-3. Apply the provisional definitions and record matches, non-matches and uncertainty.
-4. Identify missing, redundant or unclear distinctions.
-5. Revise the definitions with documented reasons.
-6. Revisit earlier cases affected by the revision.</p>
+<p><strong>Combine conceptual reasoning with systematic comparison of development cases:</strong></p>
+<ol>
+<li>Propose initial distinctions from the organising perspective, behavioural measures and relevant literature.</li>
+<li>Examine a manageable batch of cases using their original histories and before-and-after evidence.</li>
+<li>Apply the provisional definitions and record matches, non-matches and uncertainty.</li>
+<li>Identify missing, redundant or unclear distinctions.</li>
+<li>Revise the definitions with documented reasons.</li>
+<li>Revisit earlier cases affected by the revision.</li>
+</ol>
 <p><strong>Preserve the distinction between:</strong></p>
 <ul>
 <li><strong>behavioural dimensions</strong>, such as ordering frequency.</li>
@@ -599,7 +632,6 @@
 <li><strong>evidence statuses</strong>, such as insufficient comparison support.</li>
 </ul>
 <p>The examples above illustrate the structure. They do not establish final empirical types. Compatible types may coexist within one event. Define logical exclusions where necessary, but do not create a separate named type for every possible combination. A composite type requires a distinct interpretation and explicit criteria.</p>
-<p>For composition changes, define the representation and denominator rather than applying a generic increase/decrease label to the entire mix.</p>
 <h4 id="434-specify-definitions-and-assignment-criteria">4.3.4 Specify definitions and assignment criteria</h4>
 <p>Maintain a concise type codebook that can be translated into executable rules in Phase 5.</p>
 <table>
@@ -653,12 +685,14 @@
 <p>Investigate whether an unrepresented case reflects insufficient evidence, an excluded pattern or a genuine gap in the taxonomy. Do not force every event into a type or introduce an undefined "other" category. Record revisions and their effects on previously examined cases. Complete a final development pass over the retained definitions and affected examples.</p>
 <p>Freeze the codebook version handed to Phase 5. Subsequent changes to type meaning require a documented revision. These development checks establish readiness for implementation. They do not replace the evaluation in Phase 6.</p>
 <h3 id="44-required-outputs">4.4 Required outputs</h3>
-<p><strong>Produce:</strong>
-1. <strong>Taxonomy overview:</strong> Retained dimensions, types, relationships and supporting descriptors.
-2. <strong>Type codebook:</strong> Definitions and operational assignment criteria.
-3. <strong>Development-case record:</strong> Cases examined, provisional outcomes and supporting evidence.
-4. <strong>Decision and revision record:</strong> Reasons for additions, combinations, removals and parameter choices.
-5. <strong>Phase 5 handover:</strong> The codebook version, applicable data versions and any bounded calibration tasks.</p>
+<p><strong>Produce:</strong></p>
+<ol>
+<li><strong>Taxonomy overview:</strong> Retained dimensions, types, relationships and supporting descriptors.</li>
+<li><strong>Type codebook:</strong> Definitions and operational assignment criteria.</li>
+<li><strong>Development-case record:</strong> Cases examined, provisional outcomes and supporting evidence.</li>
+<li><strong>Decision and revision record:</strong> Reasons for additions, combinations, removals and parameter choices.</li>
+<li><strong>Phase 5 handover:</strong> The codebook version, applicable data versions and any bounded calibration tasks.</li>
+</ol>
 <p>These outputs may be maintained in one specification document and linked tables. Use stable identifiers to connect types, events and revisions. Export reusable tabular datasets according to the <a href="#data-formats-and-file-workflow" target="_self">shared CSV-to-Parquet workflow</a>. Qualitative reasoning remains documented in the notebook or accompanying specification.</p>
 <h3 id="45-completion-criteria">4.5 Completion criteria</h3>
 <p><strong>Phase 4 is complete when:</strong></p>
@@ -710,11 +744,13 @@
 <p>Do not resolve an unclear definition through an undocumented coding assumption.</p>
 <h4 id="532-implement-the-assignment-rules">5.3.2 Implement the assignment rules</h4>
 <p>Translate the codebook into explicit functions and a documented parameter configuration. A general-purpose rule engine or learned classifier is not required.</p>
-<p><strong>For each event and relevant type:</strong>
-1. Determine whether the type is applicable.
-2. Check whether the required evidence is available and usable.
-3. Evaluate the assignment conditions.
-4. Record the outcome and supporting evidence.</p>
+<p><strong>For each event and relevant type:</strong></p>
+<ol>
+<li>Determine whether the type is applicable.</li>
+<li>Check whether the required evidence is available and usable.</li>
+<li>Evaluate the assignment conditions.</li>
+<li>Record the outcome and supporting evidence.</li>
+</ol>
 <p><strong>Use the following outcomes consistently:</strong></p>
 <table>
 <thead>
@@ -781,11 +817,13 @@
 </tr>
 </tbody>
 </table>
-<p><strong>Use short, standardised templates to present:</strong>
-1. the comparison periods and assigned types.
-2. the corresponding observed differences.
-3. the reasons for the assignments.
-4. limitations that materially affect interpretation.</p>
+<p><strong>Use short, standardised templates to present:</strong></p>
+<ol>
+<li>the comparison periods and assigned types.</li>
+<li>the corresponding observed differences.</li>
+<li>the reasons for the assignments.</li>
+<li>limitations that materially affect interpretation.</li>
+</ol>
 <p>Generate values and factual statements from the recorded evidence. Avoid maintaining separate manually entered numbers in the narrative.</p>
 <p>Distinguish measures that determine an assignment from additional descriptive context. Do not rank differences expressed in incompatible units as if they shared a common importance scale. For unassigned or partly assessable events, explain the relevant limitation. A non-match must not be described as proof that no behavioural change occurred.</p>
 <p>Only describe a change as sustained when the documented persistence criterion is supported. Preserve the observation boundary where the available follow-up ends.</p>
@@ -805,12 +843,14 @@
 <p>Investigate differences from Phase 4 provisional assignments rather than automatically treating those assignments as correct. These checks establish implementation conformity and readiness for evaluation. They do not independently establish the taxonomy's validity or classification performance.</p>
 <p>Freeze the relevant taxonomy, parameters, code and templates before processing reserved evaluation evidence in Phase 6. Document subsequent changes and their effects on the status of the evaluation.</p>
 <h3 id="54-required-outputs">5.4 Required outputs</h3>
-<p><strong>Produce:</strong>
-1. <strong>Classification code and configuration:</strong> Executable rules, adopted parameters and taxonomy version.
-2. <strong>Assignment records:</strong> Event-level labels, per-type outcomes and reasons for withheld assignments.
-3. <strong>Supporting rule evidence:</strong> Measurements and conditions sufficient to reconstruct each decision.
-4. <strong>Generated descriptions:</strong> Structured records, rendered text and selected supporting displays.
-5. <strong>Verification and handover record:</strong> Checks, corrections, unresolved restrictions and the fixed configuration for Phase 6.</p>
+<p><strong>Produce:</strong></p>
+<ol>
+<li><strong>Classification code and configuration:</strong> Executable rules, adopted parameters and taxonomy version.</li>
+<li><strong>Assignment records:</strong> Event-level labels, per-type outcomes and reasons for withheld assignments.</li>
+<li><strong>Supporting rule evidence:</strong> Measurements and conditions sufficient to reconstruct each decision.</li>
+<li><strong>Generated descriptions:</strong> Structured records, rendered text and selected supporting displays.</li>
+<li><strong>Verification and handover record:</strong> Checks, corrections, unresolved restrictions and the fixed configuration for Phase 6.</li>
+</ol>
 <p>Use linked tables where useful without requiring a separate file for every output. Export reusable tabular datasets as CSV, convert them to Parquet and use the Parquet versions subsequently.</p>
 <p>Export figures and tables to the configured directories. Outputs derived from production data must follow the project's production-output configuration.</p>
 <h3 id="55-completion-criteria">5.5 Completion criteria</h3>
@@ -1001,12 +1041,14 @@
 <p>Use these findings to answer the main research question. Distinguish the developed taxonomy, implemented procedure and empirical results. Discuss limitations arising from the observation window, customer selection, sparse activity, data quality, scenario assumptions, reviewer availability and the single-company context.</p>
 <p>If evaluation prompts a correction, preserve the original results and document the revision. Reassessment using the same cases is development-informed. An independent reassessment requires suitable unused evidence.</p>
 <h3 id="64-required-outputs">6.4 Required outputs</h3>
-<p><strong>Produce:</strong>
-1. <strong>Evaluation protocol:</strong> Claims, evidence roles, sampling, matching, metrics and fixed configurations.
-2. <strong>Controlled benchmark results:</strong> Scenario definitions, reference events, scores and relevant uncertainty.
-3. <strong>Real-case assessment:</strong> Taxonomy findings, assignment comparisons and description checks.
-4. <strong>Complete-workflow and sensitivity findings:</strong> Error propagation, alternative-setting results and failure cases.
-5. <strong>Research-question assessment:</strong> Supported conclusions, limitations and unresolved questions.</p>
+<p><strong>Produce:</strong></p>
+<ol>
+<li><strong>Evaluation protocol:</strong> Claims, evidence roles, sampling, matching, metrics and fixed configurations.</li>
+<li><strong>Controlled benchmark results:</strong> Scenario definitions, reference events, scores and relevant uncertainty.</li>
+<li><strong>Real-case assessment:</strong> Taxonomy findings, assignment comparisons and description checks.</li>
+<li><strong>Complete-workflow and sensitivity findings:</strong> Error propagation, alternative-setting results and failure cases.</li>
+<li><strong>Research-question assessment:</strong> Supported conclusions, limitations and unresolved questions.</li>
+</ol>
 <p>Keep results traceable to their input data and configuration. Export reusable tabular datasets according to the <a href="#data-formats-and-file-workflow" target="_self">shared CSV-to-Parquet workflow</a> and save figures and tables in the configured directories.</p>
 <h3 id="65-completion-criteria">6.5 Completion criteria</h3>
 <p><strong>Phase 6 is complete when:</strong></p>
@@ -1026,7 +1068,7 @@
 <p>Any additional claims must remain proportionate to the evidence collected.</p>
 <hr />
 <h2 id="bibliography">Bibliography</h2>
-<p>See <a href="bibliography.docs.literature.html" target="_blank" rel="noopener noreferrer">docs/literature/bibliography.md</a>.</p>
+<p>See <a href="bibliography.docs.literature.html" target="_self">docs/literature/bibliography.md</a>.</p>
     </main>
 </body>
 </html>

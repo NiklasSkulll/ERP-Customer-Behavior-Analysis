@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>report_template</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="page-nav" aria-label="Site navigation">
+        <a class="back-link" href="../index.html" target="_self"><span aria-hidden="true">&larr;</span> Documentation overview</a>
+    </nav>
+    <main>
+        <div align="center">
+<h1 id="report-template">Report template</h1>
+<p>A shared structure for the six <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE phase</a> reports, presenting key findings and linking the supporting figures, tables and datasets. <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/create_markdown_report.py" target="_blank" rel="noopener noreferrer">setup/create_markdown_report.py</a> implements this structure to generate phase reports.</p>
+</div>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview" target="_self">Overview</a></li>
+<li><a href="#report-structure" target="_self">Report structure</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>This document defines the common structure for the Markdown reports accompanying the six <a href="fuucce_framework.docs.framework.html" target="_self">FUUCCE phase</a> notebooks. Each report provides a concise account of the phase's results, the data used and the artifacts produced.</p>
+<p>The notebook documents the analytical procedure and methodological reasoning. The report presents selected findings and their supporting evidence in a form that can be read without executing or opening the notebook. Include enough context to explain what each result shows and which limitations affect its interpretation.</p>
+<p>Reports are generated from explicitly supplied results, descriptions and artifact references. Numerical summaries and file references can be populated automatically; interpretations and decisions require author review.</p>
+<p>Save each report under the configured output directory alongside its supporting exports. Reports based on production data must remain in the private production output directory.</p>
+<hr />
+<h2 id="report-structure">Report structure</h2>
+<p>Use the following structure for each phase report. Replace the placeholders with the phase number and name, and adapt the results subsections to the phase's required outputs.</p>
+<p>Embed selected figures using standard Markdown image syntax. Present small tables directly in Markdown and link larger tables or datasets. Use paths relative to the report file for local images and links.</p>
+<p>Describe each linked dataset's role and content briefly. Distinguish input datasets from newly created datasets, and identify the data version or snapshot used.</p>
+<p><strong>Report directory and file name:</strong></p>
+<ul>
+<li><em>Directory:</em> <code>outputs/exports/reports</code> or <code>outputs/.exports/reports</code></li>
+<li><em>File name:</em> <code>00&lt;phase no.&gt;_&lt;phase letter&gt;_phase_report.md</code></li>
+</ul>
+<p><strong>Report structure:</strong></p>
+<pre><code class="language-markdown"># Phase &lt;No.&gt; - &lt;Phase Name&gt;: Report
+
+## 1 Purpose and run information
+
+- Purpose and scope of the phase.
+- Source notebook.
+- Run identifier and execution date.
+- Data profile: example or production.
+- Development or evaluation context.
+- Relevant code, data and specification versions.
+- Key parameters affecting the reported results.
+
+## 2 Input data
+
+| **Dataset** | **Role and content** | **Version or snapshot** | **File**                   |
+| ----------- | -------------------- | ----------------------- | -------------------------- |
+| &lt;Name&gt;      | &lt;Description&gt;        | &lt;Version&gt;               | [Parquet](&lt;relative-path&gt;) |
+
+## 3 Results
+
+### 3.1 &lt;Result title&gt;
+
+&lt;Briefly explain the finding and its relevance.&gt;
+
+![&lt;Description of the figure&gt;](figures/&lt;filename&gt;.png)
+
+&lt;Caption explaining the figure and any relevant limitations.&gt;
+
+[Supporting table (CSV)](tables/&lt;filename&gt;.csv)
+
+### 3.2 &lt;Result title&gt;
+
+&lt;Add further findings, figures or small Markdown tables as needed.&gt;
+
+## 4 Created datasets
+
+| **Dataset** | **Content and intended use** | **Files**                                           |
+| ----------- | ---------------------------- | --------------------------------------------------- |
+| &lt;Name&gt;      | &lt;Description&gt;                | [CSV](&lt;relative-path&gt;) &gt; [Parquet](&lt;relative-path&gt;) |
+
+## 5 Validation and limitations
+
+- Relevant checks and their outcomes.
+- Failed checks and their consequences.
+- Data-quality issues, uncertainty and interpretation limits.
+- Restrictions on using the results in subsequent phases.
+
+## 6 Summary and handoff
+
+- Main findings and decisions.
+- Completion status against the phase criteria.
+- Unresolved issues and next actions.
+- Outputs required by the next phase.
+</code></pre>
+<p>Include only results and artifacts belonging to the reported run. Explain when an expected output is unavailable or not applicable. A completed execution does not by itself establish that the phase's methodological completion criteria have been met.</p>
+    </main>
+</body>
+</html>
