@@ -16,7 +16,7 @@
 
 ## Overview
 
-...
+This is the central bibliography for this repository. In-text citations throughout the repository's documentation use the APA 7 author–date format and correspond to full references listed below. The bibliography covers research, methodological and technical sources, including the AI tools disclosed in the [AI Tool Use Disclosure](AI_TOOL_DISCLOSURE.md). The accompanying [BibTeX file](docs/literature/bibliography.bib) provides citation entries for use in other documents.
 
 ---
 
