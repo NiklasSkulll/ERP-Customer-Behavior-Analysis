@@ -6,7 +6,7 @@ This guide explains how to generate Python mirror files using the project's `not
 
 The notebooks remain authoritative. Generated mirrors support read-only code navigation and inspection through MCP Serena.
 
-> The environment setup uses uv, and the conversion script uses nbconvert to export notebooks as Python files (Astral, n.d.; Jupyter Development Team, n.d.a, n.d.b). The script's command-line interface, mirror naming convention, and read-only workflow are project-specific.
+> The environment setup uses uv, and the conversion script uses nbconvert to export notebooks as Python files (Astral, n.d.; Jupyter Development Team, n.d.-a, n.d.-b). The script's command-line interface, mirror naming convention, and read-only workflow are project-specific.
 
 </div>
 

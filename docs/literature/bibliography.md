@@ -22,12 +22,14 @@
 
 ## References
 
-- Anthropic. (n.d.a). _Connect Claude Code to tools via MCP_. Claude Code Docs. Retrieved October 16, 2026, from https://code.claude.com/docs/en/mcp
-- Anthropic. (n.d.b). _Use Claude Code in VS Code_. Claude Code Docs. Retrieved October 16, 2026, from https://code.claude.com/docs/en/vs-code
+- Anthropic. (n.d.-a). _Connect Claude Code to tools via MCP_. Claude Code Docs. Retrieved October 16, 2026, from https://code.claude.com/docs/en/mcp
+- Anthropic. (n.d.-b). _Use Claude Code in VS Code_. Claude Code Docs. Retrieved October 16, 2026, from https://code.claude.com/docs/en/vs-code
 - Anthropic. (2026). _Claude Sonnet 4.6_ [Large language model]. https://www.anthropic.com/claude/sonnet
 - Artstein, R., & Poesio, M. (2008). Inter-coder agreement for computational linguistics. _Computational Linguistics, 34_(4), 555–596. https://doi.org/10.1162/coli.07-034-R2
 - Astral. (n.d.). _Working on projects_. uv documentation. Retrieved October 17, 2026, from https://docs.astral.sh/uv/guides/projects/
 - Chavelli, F., Ermshaus, A., Yang, F., Schäfer, P., Paparrizos, J., & Boniol, P. (2026). TSB-SEG: A systematic time-series segmentation benchmark [Preprint]. arXiv. https://arxiv.org/abs/2611.03039
+- Consensus. (n.d.). _Consensus_ [AI-powered research tool]. https://consensus.app/
+- Deutsche Forschungsgemeinschaft. (2023). _Stellungnahme des Präsidiums der Deutschen Forschungsgemeinschaft (DFG) zum Einfluss generativer Modelle für die Text- und Bilderstellung auf die Wissenschaften und das Förderhandeln der DFG_. https://www.dfg.de/resource/blob/289674/ff57cf46c5ca109cb18533b21fba49bd/230921-stellungnahme-praesidium-ki-ai-data.pdf
 - Gatt, A., & Krahmer, E. (2018). Survey of the state of the art in natural language generation: Core tasks, applications and evaluation. _Journal of Artificial Intelligence Research, 61_, 65–170. https://doi.org/10.1613/jair.5477
 - GitHub. (n.d.-a). _Configuring Git Large File Storage_. GitHub Docs. Retrieved October 28, 2026, from https://docs.github.com/en/repositories/working-with-files/managing-large-files/configuring-git-large-file-storage
 - GitHub. (n.d.-b). _Git Large File Storage billing_. GitHub Docs. Retrieved October 28, 2026, from https://docs.github.com/en/billing/concepts/product-billing/git-lfs
@@ -37,8 +39,8 @@
 - Git LFS. (n.d.-d). _Installing on Linux using packagecloud_. GitHub. Retrieved October 28, 2026, from https://github.com/git-lfs/git-lfs/blob/main/INSTALLING.md
 - Heckert, N. A., & Filliben, J. J. (2003). _NIST/SEMATECH e-Handbook of statistical methods: Chapter 1–Exploratory data analysis_. National Institute of Standards and Technology. https://www.itl.nist.gov/div898/handbook/eda/eda.htm
 - IBM. (n.d.). _IBM SPSS Modeler CRISP-DM guide_ (Version 18.4.0). https://www.ibm.com/docs/en/SS3RA7_18.5.0/pdf/ModelerCRISPDM.pdf
-- Jupyter Development Team. (n.d.a). _Configuration options_. nbconvert documentation. Retrieved October 17, 2026, from https://nbconvert.readthedocs.io/en/latest/config_options.html
-- Jupyter Development Team. (n.d.b). _Using as a command line tool_. nbconvert documentation. Retrieved October 17, 2026, from https://nbconvert.readthedocs.io/en/latest/usage.html
+- Jupyter Development Team. (n.d.-a). _Configuration options_. nbconvert documentation. Retrieved October 17, 2026, from https://nbconvert.readthedocs.io/en/latest/config_options.html
+- Jupyter Development Team. (n.d.-b). _Using as a command line tool_. nbconvert documentation. Retrieved October 17, 2026, from https://nbconvert.readthedocs.io/en/latest/usage.html
 - Kapoor, S., & Narayanan, A. (2023). Leakage and the reproducibility crisis in machine-learning-based science. _Patterns, 4_(9), Article 100804. https://doi.org/10.1016/j.patter.2023.100804
 - Killick, R., Fearnhead, P., & Eckley, I. A. (2012). Optimal detection of changepoints with a linear computational cost. _Journal of the American Statistical Association, 107_(500), 1590–1598. https://doi.org/10.1080/01621459.2012.737745
 - Kundisch, D., Muntermann, J., Oberländer, A. M., Rau, D., Röglinger, M., Schoormann, T., & Szopinski, D. (2022). An update for taxonomy designers: Methodological guidance from information systems research. _Business & Information Systems Engineering, 64_(4), 421–439. https://doi.org/10.1007/s12599-021-00723-x
@@ -46,14 +48,15 @@
 - Nickerson, R. C., Varshney, U., & Muntermann, J. (2013). A method for taxonomy development and its application in information systems. _European Journal of Information Systems, 22_(3), 336–359. https://doi.org/10.1057/ejis.2012.26
 - Nygard, M. (2011, November 15). _Documenting architecture decisions_. Cognitect. https://www.cognitect.com/blog/2011/11/15/documenting-architecture-decisions
 - OpenAI. (n.d.). _Model Context Protocol_. Retrieved October 16, 2026, from https://developers.openai.com/codex/mcp
-- OpenAI. (2025). _GPT-5.2-Codex_ [Large language model]. https://openai.com/index/introducing-gpt-5-2-codex/
 - OpenAI. (2026a). _GPT-5.5 Pro_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-5.5-pro
 - OpenAI. (2026b). _GPT-5.6 Sol_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-5.6-sol
 - OpenAI. (2026c). _GPT-6 Astra_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-6-astra
+- OpenAI. (2026d). _GPT-6.1 Sol_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-6.1-sol
+- OpenAI. (2026e). _GPT-6 Sol_ [Large language model]. https://developers.openai.com/api/docs/models/gpt-6-sol
 - Opitz, J. (2024). A closer look at classification evaluation metrics and a critical reflection of common evaluation practice. Transactions of the Association for Computational Linguistics, 12, 820–836. https://doi.org/10.1162/tacl_a_00675
 - Oraios AI. (2026). _Serena_ (Version 2.0.0) [Computer software]. GitHub. https://github.com/oraios/serena/releases/tag/v2.0.0
-- Oraios AI, & Oraios Software. (n.d.a). _Configuration_. Serena Documentation. Retrieved October 16, 2026, from https://oraios.github.io/serena/02-usage/050_configuration.html
-- Oraios AI, & Oraios Software. (n.d.b). _Serena documentation_. Retrieved October 16, 2026, from https://oraios.github.io/serena/
+- Oraios AI, & Oraios Software. (n.d.-a). _Configuration_. Serena Documentation. Retrieved October 16, 2026, from https://oraios.github.io/serena/02-usage/050_configuration.html
+- Oraios AI, & Oraios Software. (n.d.-b). _Serena documentation_. Retrieved October 16, 2026, from https://oraios.github.io/serena/
 - Rudin, C. (2019). Stop explaining black box machine learning models for high stakes decisions and use interpretable models instead. _Nature Machine Intelligence, 1_(5), 206–215. https://doi.org/10.1038/s42256-019-0048-x
 - Song, H., Su, H., Shalyminov, I., Cai, J., & Mansour, S. (2024). FineSurE: Fine-grained summarization evaluation using LLMs. In L.-W. Ku, A. Martins, & V. Srikumar (Eds.), Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers) (pp. 906–922). Association for Computational Linguistics. https://doi.org/10.18653/v1/2024.acl-long.51
 - Szopinski, D., Schoormann, T., & Kundisch, D. (2020). Criteria as a prelude for guiding taxonomy evaluation. In _Proceedings of the 53rd Hawaii International Conference on System Sciences_. https://aisel.aisnet.org/hicss-53/os/design_science_research/6/

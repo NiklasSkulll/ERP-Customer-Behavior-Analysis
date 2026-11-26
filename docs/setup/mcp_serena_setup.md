@@ -4,7 +4,7 @@
 
 **Serena** is an MCP server that helps AI coding assistants navigate, understand and edit this repository's Python code and Markdown documentation. This guide covers installation in WSL, project configuration, connecting AI clients and onboarding, including the notebook mirror workflow and production-data exclusions.
 
-This guide draws on the official Serena repository and the documentation for Serena, Claude Code and Codex (Anthropic, n.d.a, n.d.b; OpenAI, n.d.; Oraios AI, 2026; Oraios AI & Oraios Software, n.d.a, n.d.b). The notebook mirror workflow, production-data exclusions and session instructions are project-specific adaptations.
+This guide draws on the official Serena repository and the documentation for Serena, Claude Code and Codex (Anthropic, n.d.-a, n.d.-b; OpenAI, n.d.; Oraios AI, 2026; Oraios AI & Oraios Software, n.d.-a, n.d.-b). The notebook mirror workflow, production-data exclusions and session instructions are project-specific adaptations.
 
 </div>
 
@@ -42,14 +42,14 @@ This guide draws on the official Serena repository and the documentation for Ser
 
 Run these commands inside WSL. Install `uv` first using its official installation instructions if it is not already available.
 
-**Install Serena (Oraios AI & Oraios Software, n.d.b):**
+**Install Serena (Oraios AI & Oraios Software, n.d.-b):**
 ```bash
 uv tool install -p 3.13 serena-agent
 serena init
 serena --version
 ```
 
-**For an existing installation, update Serena instead (Oraios AI & Oraios Software, n.d.b):**
+**For an existing installation, update Serena instead (Oraios AI & Oraios Software, n.d.-b):**
 ```bash
 uv tool upgrade serena-agent
 serena --version
@@ -63,9 +63,9 @@ These instructions were validated with _Serena 2.0.0_ and _Python 3.13_.
 
 ### Initialize MCP Serena
 
-Before indexing or connecting an AI client, apply the settings in [Configuration](#configuration), including all production-data exclusions. If the configuration file for MCP Serena `.serena/project.yml` already exists, edit that file instead of initializing the project again. Merge the settings without duplicating YAML keys (Oraios AI & Oraios Software, n.d.b).
+Before indexing or connecting an AI client, apply the settings in [Configuration](#configuration), including all production-data exclusions. If the configuration file for MCP Serena `.serena/project.yml` already exists, edit that file instead of initializing the project again. Merge the settings without duplicating YAML keys (Oraios AI & Oraios Software, n.d.-b).
 
-**Initialize MCP Serena in the project root (Oraios AI & Oraios Software, n.d.b):**
+**Initialize MCP Serena in the project root (Oraios AI & Oraios Software, n.d.-b):**
 ```bash
 serena project create --name ERP-Customer-Behavior-Analysis --language python --language markdown
 ```
@@ -82,7 +82,7 @@ The notebooks remain authoritative. Mirrors support Python navigation but do not
 
 ### Index the project for MCP Serena
 
-**Index the project in the project root (Oraios AI & Oraios Software, n.d.b):**
+**Index the project in the project root (Oraios AI & Oraios Software, n.d.-b):**
 ```bash
 serena project index
 ```
@@ -109,18 +109,18 @@ Inside Codex, enter `/mcp` to check the active server (OpenAI, n.d.).
 
 #### Connect Claude Code
 
-**Register Serena once (Anthropic, n.d.a):**
+**Register Serena once (Anthropic, n.d.-a):**
 ```bash
 cd /home/USER/projects/ERP-Customer-Behavior-Analysis
 claude mcp add --transport stdio --scope local serena -- /home/USER/.local/bin/serena start-mcp-server --project "$PWD" --context claude-code
 ```
 
-**Start Claude Code (Anthropic, n.d.a):**
+**Start Claude Code (Anthropic, n.d.-a):**
 ```bash
 claude
 ```
 
-Inside Claude Code, enter `/mcp` to check the active server (Anthropic, n.d.a).
+Inside Claude Code, enter `/mcp` to check the active server (Anthropic, n.d.-a).
 
 #### Connect Codex via VSCode
 
@@ -153,7 +153,7 @@ Use either the extension UI or the TOML configuration. If `[mcp_servers.serena]`
 
 #### Connect Claude Code via VSCode
 
-**Setup from official source (Anthropic, n.d.b):**
+**Setup from official source (Anthropic, n.d.-b):**
 1. Open the Claude Code extension.
 2. Enter `/mcp` in its chat panel and select the option to add a server.
 3. Select `STDIO` and enter the information below.
@@ -166,7 +166,7 @@ Use either the extension UI or the TOML configuration. If `[mcp_servers.serena]`
 | **Command**   | `/home/USER/.local/bin/serena`                                                                   |
 | **Arguments** | `start-mcp-server`, `--project`, your repository's absolute WSL path, `--context`, `claude-code` |
 
-Adding servers through the extension's `/mcp` dialog requires _Claude Code version 2.1.261 or later_ (Anthropic, n.d.b).
+Adding servers through the extension's `/mcp` dialog requires _Claude Code version 2.1.261 or later_ (Anthropic, n.d.-b).
 
 **Alternatively, create or edit `.mcp.json` in the repository root:**
 ```json
@@ -187,11 +187,11 @@ Adding servers through the extension's `/mcp` dialog requires _Claude Code versi
 }
 ```
 
-Use either the extension UI or the JSON configuration. If `.mcp.json` already contains other servers, add `serena` to the existing `mcpServers` object without replacing those entries. Start a new conversation and approve the project MCP server if prompted. Enter `/mcp` to check the connection or reconnect Serena. If Serena was already registered through Claude Code CLI for this repository, use that existing registration instead of adding a duplicate. No separate CLI installation is required for the extension setup (Anthropic, n.d.a, n.d.b).
+Use either the extension UI or the JSON configuration. If `.mcp.json` already contains other servers, add `serena` to the existing `mcpServers` object without replacing those entries. Start a new conversation and approve the project MCP server if prompted. Enter `/mcp` to check the connection or reconnect Serena. If Serena was already registered through Claude Code CLI for this repository, use that existing registration instead of adding a duplicate. No separate CLI installation is required for the extension setup (Anthropic, n.d.-a, n.d.-b).
 
 ### Onboarding
 
-Onboarding is performed by the connected AI agent using Serena, resulting in [.serena/memories/](.serena/memories/) files (Oraios AI & Oraios Software, n.d.b).
+Onboarding is performed by the connected AI agent using Serena, resulting in [.serena/memories/](.serena/memories/) files (Oraios AI & Oraios Software, n.d.-b).
 
 **Once connected, ask the agent to:**
 > Onboard this repository using Serena. First follow the startup sequence in `AGENTS.md`. Inspect the project structure, dependency files, Python modules, notebooks and Markdown documentation. Do not execute notebooks or regenerate data.
@@ -206,7 +206,7 @@ Onboarding is performed by the connected AI agent using Serena, resulting in [.s
 
 ## Configuration
 
-**Change these properties (Oraios AI & Oraios Software, n.d.a):**
+**Change these properties (Oraios AI & Oraios Software, n.d.-a):**
 ```yml
 project_name: "ERP-Customer-Behavior-Analysis"
 
@@ -291,7 +291,7 @@ initial_prompt: |
     embedded content derived from production data.
 ```
 
-**Explanation of this configuration (Oraios AI & Oraios Software, n.d.a):**
+**Explanation of this configuration (Oraios AI & Oraios Software, n.d.-a):**
 - `agent_interface: REPL`: Lets the agent combine Serena operations in one call. It does not connect Serena to the Jupyter kernel.
 - `read_only: false`: Allows normal editing and memory updates.
 - `ignore_all_files_in_gitignore: true`: Ignores all files, which are defined in the `.gitignore`. Important ignores are defined under `ignored_paths` as well.
