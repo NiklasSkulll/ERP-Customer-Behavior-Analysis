@@ -1,4 +1,4 @@
-"""Create pseudonymized CSV copies of the four documented raw ERP datasets.
+"""Create randomized CSV copies of the four documented raw ERP datasets.
 
 All rows and table relationships are retained. Dates, statuses, currencies,
 item numbers and lookup descriptions remain unchanged. Amounts receive random
@@ -7,8 +7,8 @@ sign and missingness are preserved. Replacements do not preserve monetary trends
 IDs use SO (orders), CU (customers), R (reasons), or I (industries), followed
 by a unique random 12-digit number within each category.
 
-These copies are production-derived, not fully synthetic or guaranteed anonymous.
-Run locally against production only when authorised; mappings are never exported.
+These copies are derived from the input dataset, not fully synthetic or
+guaranteed anonymous. Mappings are never exported.
 """
 
 import argparse

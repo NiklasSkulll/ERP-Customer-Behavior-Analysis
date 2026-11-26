@@ -132,11 +132,11 @@ class DatasetTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
 
     def test_rejects_unknown_columns_without_exposing_values(self):
-        self.write(CUSTOMERS, ["CUSTOMER", "INDUSTRY", "PRIVATE_NAME"],
-                   [["001", "I1", "SECRET_TEST_VALUE"]])
+        self.write(CUSTOMERS, ["CUSTOMER", "INDUSTRY", "EXTRA_FIELD"],
+                   [["001", "I1", "TEST_MARKER"]])
         result = self.run_script()
         self.assertNotEqual(result.returncode, 0)
-        self.assertNotIn("SECRET_TEST_VALUE", result.stdout + result.stderr)
+        self.assertNotIn("TEST_MARKER", result.stdout + result.stderr)
         self.assertFalse(self.output.exists())
 
     def test_rejects_inconsistent_order_headers(self):
@@ -149,7 +149,7 @@ class DatasetTests(unittest.TestCase):
         self.assertFalse(self.output.exists())
 
     def test_rejects_invalid_and_nonfinite_amounts_without_exposing_values(self):
-        for invalid in ("PRIVATE_INVALID_AMOUNT", "NaN", "Infinity"):
+        for invalid in ("INVALID_TEST_AMOUNT", "NaN", "Infinity"):
             with self.subTest(amount=invalid):
                 rows = self.read(self.source, ORDERS)
                 rows[0]["TOTALNETAMOUNT"] = invalid
@@ -173,10 +173,10 @@ class DatasetTests(unittest.TestCase):
 
     def test_rejects_malformed_rows(self):
         with (self.source / CUSTOMERS).open("a", encoding="utf-8") as stream:
-            stream.write("004;I1;EXTRA_PRIVATE_VALUE\n")
+            stream.write("004;I1;EXTRA_TEST_VALUE\n")
         result = self.run_script()
         self.assertNotEqual(result.returncode, 0)
-        self.assertNotIn("EXTRA_PRIVATE_VALUE", result.stderr)
+        self.assertNotIn("EXTRA_TEST_VALUE", result.stderr)
         self.assertFalse(self.output.exists())
 
     def test_decimal_comma_input(self):
