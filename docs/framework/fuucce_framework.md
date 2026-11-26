@@ -21,8 +21,8 @@
     - [1.3 Core procedure](#13-core-procedure)
         - [1.3.1 Inspect the datasets and verify their meaning](#131-inspect-the-datasets-and-verify-their-meaning)
         - [1.3.2 Establish development and evaluation boundaries](#132-establish-development-and-evaluation-boundaries)
-        - [1.3.3 Assess customer histories and ordering activity](#133-assess-customer-histories-and-ordering-activity)
-        - [1.3.4 Explore a small set of candidate measures](#134-explore-a-small-set-of-candidate-measures)
+        - [1.3.3 Assess observation coverage and customer histories](#133-assess-observation-coverage-and-customer-histories)
+        - [1.3.4 Examine the core measures and comparison support](#134-examine-the-core-measures-and-comparison-support)
         - [1.3.5 Consolidate preparation and analysis decisions](#135-consolidate-preparation-and-analysis-decisions)
     - [1.4 Required outputs](#14-required-outputs)
     - [1.5 Completion criteria](#15-completion-criteria)
@@ -31,11 +31,11 @@
     - [2.1 Purpose](#21-purpose)
     - [2.2 Inputs](#22-inputs)
     - [2.3 Core procedure](#23-core-procedure)
-        - [2.3.1 Finalise and apply preparation rules](#231-finalise-and-apply-preparation-rules)
-        - [2.3.2 Integrate the relevant tables](#232-integrate-the-relevant-tables)
-        - [2.3.3 Calculate the selected core measures](#233-calculate-the-selected-core-measures)
-        - [2.3.4 Construct customer-period histories](#234-construct-customer-period-histories)
-        - [2.3.5 Confirm suitability and verify the dataset](#235-confirm-suitability-and-verify-the-dataset)
+        - [2.3.1 Finalise technical and analytical preparation rules](#231-finalise-technical-and-analytical-preparation-rules)
+        - [2.3.2 Construct and verify the enriched order-level interim table](#232-construct-and-verify-the-enriched-order-level-interim-table)
+        - [2.3.3 Define eligibility and calculate the core measures](#233-define-eligibility-and-calculate-the-core-measures)
+        - [2.3.4 Construct monthly customer-currency histories](#234-construct-monthly-customer-currency-histories)
+        - [2.3.5 Confirm suitability and verify the prepared data](#235-confirm-suitability-and-verify-the-prepared-data)
     - [2.4 Required outputs](#24-required-outputs)
     - [2.5 Completion criteria](#25-completion-criteria)
     - [2.6 Optional refinements](#26-optional-refinements)
@@ -124,123 +124,139 @@ Use the configured data and output directories consistently and preserve the ori
 
 ### 1.1 Purpose
 
-Establish whether the available ERP data can support the planned investigation and identify the preparation and analytical decisions needed for the core workflow.
+Establish whether the available ERP extracts support the planned analysis of customer ordering activity and recorded net order values. Verify the documented source structure, assess observation coverage and data quality, and identify the decisions required to prepare trustworthy order-level and monthly customer profiles.
 
-This phase combines technical inspection with focused exploration of customer histories. It examines data quality, observation coverage, ordering activity and the feasibility of candidate measures. Existing source documentation provides the starting point and is verified against the actual extracts rather than recreated.
+This phase combines technical inspection with focused exploration. It begins with the data inventory, then examines overall and industry-level monthly summaries, customer histories and selected individual orders. These summaries provide context and inform preparation decisions. A conspicuous aggregate change is not a prerequisite for examining an individual customer.
 
-The main output is a documented assessment of suitable data, promising behavioural measures and preparation requirements. Final cleaning, systematic profile construction and change detection follow in subsequent phases.
+The main output is a documented assessment of the data and a set of preparation recommendations. The definitive enriched order table, monthly profiles and systematic change detection are constructed in later phases.
 
 > **Methodological basis:** This phase adapts the inspection and exploration activities of CRISP-DM's data-understanding phase (IBM, n.d.) and exploratory data-analysis principles (Heckert & Filliben, 2003). The ERP-specific checks, analytical priorities and suitability decisions are project-specific operational choices.
 
 ### 1.2 Inputs
 
-- The final project plan, including the research questions, scope and candidate measures.
-- Available ERP extracts and information about their extraction date, filters and coverage.
-- Existing data descriptions, field definitions and relevant business-code explanations.
+- The project plan, including the research questions, 24-month observation window, analytical scope and order-eligibility principles.
+- The raw order header and item extract, customer master extract, order-reason mapping and industry mapping described in the data description.
+- Available information about the extraction date, source formats, filters, coverage and relevant ERP field meanings.
+- The target schemas and calculation rules for the order-level interim table and monthly customer profiles.
 
-Record missing information and its consequences. Distinguish documented facts, observations from the extracts, provisional assumptions and unresolved questions.
+Record information that is unavailable and its consequences. Distinguish documented field meanings, observations from the extracts, provisional assumptions and unresolved questions. Treat the data description as the starting specification and verify consequential expectations against the available data.
 
 ### 1.3 Core procedure
 
 #### 1.3.1 Inspect the datasets and verify their meaning
 
-Load the relevant extracts reproducibly and compare their contents with the existing data documentation.
+Load the extracts reproducibly while preserving identifiers and codes as strings. Inspect the recorded source formats before applying import or conversion settings.
 
 **Check:**
-- the size of each table, including its row and column counts.
-- what each table and row represent.
-- required fields, observed data types and missing-value placeholders.
-- identifiers, duplicate candidate keys and relationships between tables.
-- date coverage, record counts and apparent extraction gaps.
-- order types, processing and rejection statuses.
-- monetary currencies, quantity units and product-group coverage.
+- the row and column counts, fields, observed data types and missing-value representations of each dataset.
+- the distinct order, order-item and customer counts.
+- duplicate combinations of `SALESORDER` and `SALESORDERITEM`.
+- repeated header values within each `SALESORDER`, including conflicting identifiers, dates, statuses, currencies or net amounts.
+- the available order dates, extraction information, apparent coverage gaps and incomplete calendar months.
+- observed document types, processing statuses, rejection statuses and order reasons.
+- the distribution of `TRANSACTIONCURRENCY` and the availability of `TOTALNETAMOUNT`.
+- the uniqueness and completeness of customer and lookup keys and the extent of unmatched assignments.
 
-Verify the distinction between order-level and item-level information. In particular, establish how order amounts can be retained once per order when item information is joined.
+The raw order extract contains item rows. Repeated header attributes do not represent additional orders, and repeated `TOTALNETAMOUNT` values must not be summed across items. Investigate contradictory header values rather than selecting an arbitrary item row to construct an order.
 
-Unusual values are initially recorded as investigation flags. Exclusions or corrections require evidence and a documented rationale.
+Examine the expected relationships between orders, the customer master and the two lookup datasets. Report missing matches and potentially conflicting mappings. A missing industry or text description does not, by itself, make an otherwise usable order invalid.
+
+Record unusual values as investigation flags. Neither a large order amount nor an uncommon status code automatically establishes a data error or an analytical exclusion.
 
 #### 1.3.2 Establish development and evaluation boundaries
 
-Define how evidence will be reserved for the final evaluation before inspecting individual behavioural patterns or using cases to develop analytical rules.
+Reserve evidence for final evaluation before inspecting individual behavioural patterns to select comparison windows, thresholds or taxonomy types.
 
-The separation must reflect the intended evaluation claim. Customer-level separation is the starting option for assessing the approach on additional customers. If a temporal separation is chosen, overlapping observations and comparison windows must be addressed.
+Customer-level separation is the starting option for held-out real histories. Where a customer has orders in several currencies, keep all of that customer's currency histories in the same partition. If temporal separation is chosen instead, address shared observations, overlapping comparison windows and the resulting limits on independence.
 
-General structural checks may cover the extracts, but behavioural exploration and decisions about features, thresholds or types must use the declared development evidence. Record any prior exposure that limits the independence of reserved cases.
+General structural checks may cover the full extracts. Behavioural exploration used to develop analytical rules must use the declared development evidence. Record any previous exposure to reserved cases that limits their independence.
 
-#### 1.3.3 Assess customer histories and ordering activity
+Document which cases and observations are available for development, which are reserved for evaluation and how those boundaries will be enforced in subsequent phases.
 
-**Within the agreed 24-month observation window, examine:**
-- distinct order counts and active periods per customer.
-- first and last observed order dates.
-- intervals between orders and periods without recorded activity.
-- incomplete observation periods and uncertain coverage.
-- the effects of relevant data-quality issues on potential comparisons.
+#### 1.3.3 Assess observation coverage and customer histories
 
-Distinguish extraction coverage from observed purchasing activity. A first-to-last order span does not establish continuous coverage, and the first recorded order does not necessarily identify a newly acquired customer.
+Establish the intended 24-month observation window from extraction information and `SALESORDERDATE`. Identify its exact boundaries, incomplete calendar months and any periods for which extraction coverage is uncertain. Do not infer complete observation solely from the first and last order dates.
 
-The project's orientation of approximately two to four orders per year is not an inclusion rule. Assess whether histories contain enough information for the intended comparisons without requiring a minimum number of orders separately in each year.
+Examine ordering activity within development evidence at the overall, industry and customer levels. Distinguish the inventory of recorded orders from provisional summaries based on orders considered analytically eligible. Where eligibility is unresolved, label the affected summaries accordingly.
 
-#### 1.3.4 Explore a small set of candidate measures
+**Use focused summaries and selected histories to examine:**
+- monthly recorded and provisionally eligible order counts, by currency where appropriate.
+- monthly recorded net order values within each currency, without adding EUR and GBP amounts.
+- industry summaries, including customers without an available industry assignment.
+- customer activity, ordering gaps, first and last observed orders, and differences between customers with frequent and sparse orders.
+- the distribution of excluded, unresolved and monetarily incomplete orders across months and customers.
+- the possible influence of individual large orders on apparent monetary changes.
 
-Prioritise ordering activity, net order value and assortment. Examine whether the documented fields support order count, total and average net order value, and product or product-group breadth.
+An observed period without eligible orders is not automatically a period of zero ordering activity. First establish whether the period was covered and whether excluded or unresolved records affect its interpretation. The first recorded order does not by itself identify a newly acquired customer; the last recorded order does not end observation while extraction coverage continues.
 
-Create provisional customer-period views where needed. Use the project plan's order-eligibility principles, documenting unresolved status-code decisions and any restrictions they impose on interpretation. Monthly aggregation may serve as an initial exploratory view. Its suitability must be assessed against ordering activity. It is not a fixed requirement.
+Use the summaries to assess whether suitable reference and subsequent periods can be formed. Do not require an order in every month or year, recent activity, or membership in an industry with an aggregate change as a condition for examining a customer.
+
+#### 1.3.4 Examine the core measures and comparison support
+
+Focus on the three measures defined in the data description: `ORDERCOUNT`, `TOTALORDERNETVALUE` and `AVGORDERNETVALUE`. They describe distinct aspects of the recorded orders but are mathematically related; changes in all three are not independent confirmation of a behavioural change.
+
+Create provisional monthly customer-currency views where useful. Monthly profiles are the fixed basic representation of the prepared data. This phase assesses the support available for comparisons; it does not decide whether monthly aggregation itself should be adopted. Later detection may compare windows spanning several months.
 
 **Use a small number of tables and graphics to answer specific questions:**
 
-| **Question**                                                   | **Suggested evidence**                                                            |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| **Which histories provide usable comparison support?**         | Order-count, active-period and ordering-interval summaries.                       |
-| **Is the proposed temporal resolution informative?**           | Selected customer histories and the proportion of periods without orders.         |
-| **Are core measures calculable and interpretable?**            | Missingness, formula checks, value distributions and product-group coverage.      |
-| **Could individual orders dominate apparent differences?**     | Selected histories shown alongside their underlying orders.                       |
-| **Do preparation decisions materially affect interpretation?** | Targeted comparisons of plausible treatments for consequential unresolved issues. |
+| **Question**                                                      | **Suggested evidence**                                                                                            |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **Can the measures be calculated from the available orders?**     | Checks of distinct order identities, repeated header amounts, missing net amounts and currency assignments.       |
+| **Which histories support comparisons?**                          | Eligible order counts, observed months, ordering gaps and coverage in potential reference and subsequent periods. |
+| **How do status and eligibility decisions affect the measures?**  | Counts of included, excluded and unresolved orders by reason, month and currency.                                 |
+| **Could individual orders dominate a monetary difference?**       | Selected customer histories alongside their underlying order-level values.                                        |
+| **Which apparent zero periods or monetary totals are uncertain?** | Coverage checks, unresolved orders and missing contributing amounts.                                              |
 
-Select development examples with varied activity and history characteristics. Include ordinary and difficult cases, rather than only conspicuous changes.
+Check whether a missing monetary amount can leave an order count available while making the corresponding total and average unavailable. Examine the extent of this issue before recommending comparison rules.
 
-Exploratory transformations and provisional profiles should use reusable code that can be completed in Phase 2. Preserve original extracts and record the effects of joins, conversions and temporary selection rules.
+Select development examples with varied activity and data-quality characteristics, including ordinary histories and difficult cases. Apparent changes observed during exploration are development observations, not automatically detected events or established taxonomy types.
 
 #### 1.3.5 Consolidate preparation and analysis decisions
 
-**Translate findings into recommendations for:**
-- order and item selection.
-- treatment of missing, duplicate or questionable records.
-- candidate measures and their interpretation limits.
-- temporal aggregation and customer suitability.
-- issues that require clarification before the core analysis can proceed.
+Translate the findings into explicit recommendations for Phase 2 and identify decisions that still require ERP clarification or source evidence.
 
-**For each consequential decision, record the evidence, rationale and status:** adopted for exploration, proposed for preparation or unresolved.
+**Address:**
+- the exact observation boundaries and treatment of incomplete or uncovered months.
+- the resolution or documented restriction of duplicate and conflicting order records.
+- the interpretation of observed document types, processing statuses, rejection statuses and order reasons.
+- the treatment of partially rejected orders and the meaning of their recorded header amounts.
+- unmatched customer and lookup records, missing required fields and unusual monetary values.
+- the definition of relevant customer-currency histories and periods with zero eligible orders.
+- the availability of the three core measures and restrictions on their interpretation.
+- development and evaluation boundaries and their effect on later exploration.
 
-Apparent changes observed during exploration remain development findings. They are not automatically detected events or established taxonomy types.
+For each consequential decision, record the supporting evidence, rationale, status and expected effect on records, customers or measures. Distinguish rules adopted for provisional exploration from rules approved for preparing the primary analytical population.
 
 ### 1.4 Required outputs
 
 **Maintain one reproducible notebook containing:**
-1. **Data assessment:** Verified source definitions, key relationships and relevant quality findings.
-2. **Customer-history assessment:** Coverage, activity and provisional analytical suitability.
-3. **Focused exploratory findings:** Selected summaries and graphics linked to the questions they answer.
-4. **Preparation decisions and open issues:** Recommended treatments, candidate measures, temporal representation and outstanding dependencies.
-5. **Evidence-use record:** Development cases, reserved evaluation evidence and any prior exposure.
+1. **Data inventory and structural assessment:** Source granularity, order and customer counts, field meanings, keys, relationships and relevant quality findings.
+2. **Coverage and eligibility assessment:** Observation boundaries, incomplete periods, status distributions and recorded, provisionally eligible, excluded or unresolved orders.
+3. **Focused exploratory findings:** Overall and industry-level monthly summaries, selected customer histories and underlying orders where needed for interpretation.
+4. **Measure and suitability assessment:** Feasibility of the three core measures, missing monetary information and support for customer-level window comparisons.
+5. **Preparation decisions and open issues:** Recommended rules, evidence, effects and dependencies requiring clarification.
+6. **Evidence-use record:** Development examples, reserved evaluation evidence and known prior exposure.
 
-These outputs may be sections or tables within the same notebook. Separate files are only necessary where they support reuse in later phases. Export figures and tables to the directory specified by the project configuration in [src/config](src/config). The default export directory is [outputs/exports](outputs/exports). Outputs derived from production data must use [outputs/.exports](outputs/.exports). Use the configured path consistently throughout the notebook.
+These outputs may be sections and tables within the same notebook. Export figures and tables to the directory specified by the project configuration in [src/config](src/config). The default export directory is [outputs/exports](outputs/exports). Outputs derived from production data must use [outputs/.exports](outputs/.exports). Use the configured path consistently throughout the notebook.
 
 ### 1.5 Completion criteria
 
 **Phase 1 is complete when:**
-- the meaning and relationships of the core data are sufficiently understood.
-- relevant quality and coverage limitations are documented.
-- the feasibility of the core candidate measures has been assessed.
-- customer activity has been examined sufficiently to propose a temporal representation and suitability criteria.
+- the source granularity and relationships needed for an order-level table are understood.
+- consequential quality problems, code meanings and coverage limitations are documented.
+- the three core measures have been assessed for calculability and interpretation.
+- recorded, provisionally eligible, excluded and unresolved orders are distinguishable in the assessment.
+- customer histories have been examined sufficiently to inform comparison support and preparation rules.
 - development and evaluation boundaries are documented.
-- Phase 2 can proceed using explicit preparation recommendations.
+- Phase 2 can proceed using explicit recommendations and a list of issues that must be resolved before the primary profiles are generated.
 
-Exhaustive exploration is not required. Unresolved issues affecting optional extensions may be deferred. Issues preventing a trustworthy core analysis must be identified as blockers with a specified next action.
+Exhaustive exploration is not required. An unresolved issue that prevents a trustworthy core measure or comparison must be identified as a blocker with a specified next action.
 
 ### 1.6 Optional refinements
 
-After the core assessment, additional exploration may examine discount feasibility, product-group incidence patterns, compatible quantity measures or customer subgroups.
+After the core assessment, additional exploration may examine ordering intervals, recency at a defined reference date or more detailed industry and activity-group summaries.
 
-Undertake these refinements only when they address a specific analytical question or support an agreed extension. They must not delay preparation of the core dataset merely to complete every possible descriptive analysis.
+Undertake these refinements only when they address a specific limitation or analytical question. They do not add required columns to the monthly profile schema or expand the investigation to item-level purchasing characteristics.
 
 ---
 
@@ -248,137 +264,159 @@ Undertake these refinements only when they address a specific analytical questio
 
 ### 2.1 Purpose
 
-Transform the available ERP extracts into reproducible customer-period profiles suitable for the core change analysis.
+Transform the raw ERP extracts into a reproducible order-level interim table and monthly customer profiles suitable for the core change analysis.
 
-This phase implements and verifies the preparation decisions developed in Phase 1. It establishes consistent order selection, validated table relationships, explicit feature definitions and a justified temporal representation.
+This phase applies and verifies the preparation decisions from Phase 1. It keeps technical representation, analytical order eligibility and measure-specific assessability distinct. The interim table retains technically validated orders, including orders later excluded from analytical measures. The monthly profiles contain the documented measures for the eligible population.
 
-The main output is an analytical dataset accompanied by eligibility information and the documentation needed to interpret and regenerate it. Provisional preparation code from Phase 1 is refined and reused.
+The main outputs are an enriched table with one row per order, profiles with one row per customer, calendar month and transaction currency, and the records needed to understand exclusions, unavailable values and observation coverage.
 
-> **Methodological basis:** This phase adapts CRISP-DM's data-selection, cleaning, integration, construction and formatting activities (IBM, n.d.), supported by tidy-data principles for organising observations and variables (Wickham, 2014). The separation of development and evaluation evidence informs the treatment of fitted transformations and empirically selected rules (Kapoor & Narayanan, 2023). ERP-specific selection rules, feature definitions and aggregation choices are project-specific decisions requiring justification.
+> **Methodological basis:** This phase adapts CRISP-DM's data-selection, cleaning, integration, construction and formatting activities (IBM, n.d.), supported by tidy-data principles for organising observations and variables (Wickham, 2014). The separation of development and evaluation evidence informs empirically selected rules and transformations (Kapoor & Narayanan, 2023). ERP-specific eligibility, coverage and calculation rules are project-specific decisions requiring justification.
 
 ### 2.2 Inputs
 
-- Original ERP extracts and reproducible loading code.
-- Verified field definitions and table relationships.
-- Phase 1 quality findings, customer-history assessment and preparation recommendations.
-- The project plan's observation window, order-eligibility principles and candidate measures.
-- The documented separation between development and final evaluation evidence.
+- The preserved raw extracts and their verified import settings.
+- The raw, interim and processed schemas defined in the data description.
+- Phase 1 findings on source structure, relationships, coverage, customer histories and data quality.
+- The project plan's observation window, order-eligibility policy and three core measures.
+- Documented ERP clarifications needed to settle consequential status and amount interpretations.
+- The declared separation between development evidence and final evaluation evidence.
 
-Resolve issues affecting the meaning or calculation of core measures before constructing the corresponding profiles. Unresolved requirements for optional measures may remain deferred.
+Resolve issues affecting the construction or interpretation of the primary profiles before generating them. Record any remaining restrictions explicitly.
 
 ### 2.3 Core procedure
 
-#### 2.3.1 Finalise and apply preparation rules
+#### 2.3.1 Finalise technical and analytical preparation rules
 
-Specify the exact boundaries of the agreed 24-month observation window using `SALESORDERDATE`. Document the treatment of incomplete periods.
+Specify the exact 24-month observation boundaries using `SALESORDERDATE`. Record the extraction date, available coverage and treatment of incomplete calendar months.
 
-**Translate the project's requirement for valid, non-cancelled orders into explicit rules using the documented meanings of:**
-- `SALESORDERTYPE`
-- `OVERALLSDPROCESSSTATUS`
-- `SDDOCUMENTREASON`
-- `OVERALLSDDOCUMENTREJECTIONSTS`
+Define reproducible rules for parsing identifiers, dates, codes, currencies and monetary values. Preserve leading zeros in identifiers and codes. Investigate missing order identities and conflicting header values before representing an affected record as a unique order. Do not replace missing monetary values with zero.
 
-Exclude fully rejected orders. Clarify partially rejected orders and the meaning of their recorded amounts before including them in affected measures. Open or in-progress orders are not excluded solely because processing is incomplete.
+**Keep three decisions separate:**
+1. **Technical representation:** Can the source rows be represented reliably as one identified order?
+2. **Analytical eligibility:** Does that order belong to the defined population for purchasing-change analysis?
+3. **Measure assessability:** Can the relevant count, monetary measure or comparison be calculated from the available evidence?
 
-Apply documented treatments for identifiers, dates, duplicate representations, missing-value placeholders, currencies and categories. Preserve identifier semantics, including leading zeros.
+Translate the project plan's working eligibility policy into an explicit, verified configuration:
 
-Separate technical corrections from analytical exclusions. Large orders remain included unless a justified rule requires otherwise. Their size alone is not evidence of an error or project-order status.
+- Treat `OR` as the documented sales-order type. Include another type only after its meaning and suitability have been verified.
+- Include orders with rejection status `A` when other requirements are met.
+- Exclude fully rejected orders with rejection status `C` from the primary analytical population.
+- Settle the treatment of partially rejected orders with status `B` only after clarifying what `TOTALNETAMOUNT` represents for those orders. Until then, exclude them from the primary profiles and report their extent.
+- Do not interpret a missing or unknown rejection status as `A`; resolve it or record the order as outside the primary eligible population.
+- Do not exclude open or in-progress orders solely because processing is incomplete. Review unrecognised processing statuses.
+- Use `SDDOCUMENTREASON` as context unless a verified reason code identifies a business process outside the analytical scope.
+- Do not use order magnitude or a zero or negative amount as an automatic exclusion rule. Investigate unusual values and document any justified treatment.
 
-Record consequential rules with their rationale, affected record and customer counts, and remaining limitations.
+Apply the same adopted analytical order population to all three core measures. An otherwise eligible order with an unavailable amount remains in the count population, while affected monetary measures are marked unavailable.
 
-#### 2.3.2 Integrate the relevant tables
+Record the number of source rows, distinct orders and affected customers for technical issues, analytical exclusions and missing amounts. Report overlapping reasons without adding their counts as if they were disjoint groups.
 
-Construct validated order-level and item-level views using the relationships verified in Phase 1.
+#### 2.3.2 Construct and verify the enriched order-level interim table
 
-**For each consequential join, check:**
-- expected key uniqueness and relationship cardinality.
-- unmatched records and their treatment.
-- changes in row counts.
-- consistency of relevant order counts and monetary totals.
+Construct `data/data-example/interim/001_order_header_data.csv` with exactly one row per reliably identified `SALESORDER`, following the schema in the data description.
 
-Retain `TOTALNETAMOUNT` once per eligible `SALESORDER`. Where necessary, aggregate item-level information before combining it with order-level measures.
+Check that repeated header fields agree across the order's item rows. Retain `TOTALNETAMOUNT` once per order; do not sum repeated header values across items. Preserve the original codes and attach the documented text descriptions where mappings are available.
 
-Apply consistent item eligibility when calculating assortment measures, including the treatment of rejected items within otherwise eligible orders. Record missing product classifications rather than silently removing their effect from the analysis.
-
-#### 2.3.3 Calculate the selected core measures
-
-Use the candidate catalogue in the project plan to select a compact set of feasible measures covering ordering activity, net order value and assortment.
-
-Maintain one feature specification containing each selected measure's meaning, source fields, formula, unit, aggregation basis, missing-value treatment and interpretation limits.
-
-| **Candidate measure**                                   | **Preparation requirement**                                                                            |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| **Order count - `ORDERCOUNT`**                          | Count distinct eligible orders per customer and period.                                                |
-| **Total net order value - `TOTALORDERVALUE`**           | Sum eligible order-level net amounts once per order on a consistent currency basis.                    |
-| **Average net order value - `AVGORDERVALUE`**           | Divide total net order value by the corresponding order count. Leave undefined when the count is zero. |
-| **Product breadth - `DISTINCTPRODUCTCOUNT`**            | Count distinct eligible products within the period.                                                    |
-| **Product-group breadth - `DISTINCTPRODUCTGROUPCOUNT`** | Count distinct assigned product groups and report classification coverage.                             |
-
-The table does not require every candidate to become a detection input. Document dependencies between measures and distinguish selected detection inputs from additional descriptive measures when that decision is made.
-
-#### 2.3.4 Construct customer-period histories
-
-Select the temporal resolution using Phase 1 evidence. Document why it provides useful comparison support for the intended customers.
-
-Create the principal profile table with one row per customer and aggregation period, identified by `CUSTOMERID`, derived from `SOLDTOPARTY`, and `PERIODSTART`.
-
-**Apply the following rules:**
-- Represent periods without orders only within a justified observation interval.
-- Use zero counts and totals where complete observation supports inactivity.
-- Preserve unknown coverage and missing measurements as missing.
-- Leave averages and shares undefined when their denominators are zero.
-- Retain indicators for partial periods, missing classifications and other consequential quality restrictions.
-- Preserve measures in their original units.
-
-Optional scaling or other method-specific transformations may be deferred until required. Parameters estimated from data must use the declared development evidence and then be applied consistently to evaluation data.
-
-#### 2.3.5 Confirm suitability and verify the dataset
-
-Reassess customer suitability after cleaning and selection, because these operations may change usable activity and history.
-
-Record eligibility and restrictions for the intended analysis, including whether particular periods or measures are unassessable. A customer may support some comparisons but not others. Do not impose a minimum order count separately in each year or require recent activity merely to qualify. Document the reasons for exclusions and their consequences for the analysed population.
+Join `SOLDTOPARTY` to the customer master, `SDDOCUMENTREASON` to its description mapping, and customer `INDUSTRY` to its description mapping. Before each join, verify the expected uniqueness of the mapping key and investigate conflicting assignments. Use left joins so that an unmatched customer or description does not silently remove an order. Do not match missing join keys to one another.
 
 **Verify:**
-- uniqueness of customer-period identifiers.
-- agreement of order counts and monetary totals with eligible source records.
-- correct feature calculations and missing-value handling.
-- expected effects of joins and exclusions.
-- selected profiles against their underlying orders.
-- successful regeneration and reloading of the saved outputs.
+- uniqueness of `SALESORDER` in the completed interim table.
+- the number of represented orders before and after enrichment.
+- unchanged recorded net amounts within each currency after enrichment.
+- unmatched customers, reasons and industries and their effects on the available descriptions.
+- unresolved source conflicts and orders that could not be represented reliably.
 
-Investigate discrepancies before using affected profiles for detection.
+Retain technically validated orders with their types and statuses even when they will later be analytically excluded. Document records that cannot be represented in the interim table and keep them visible in the preparation report.
+
+The available customer-master assignment is not assumed to be the customer's historically verified industry at every order date. Likewise, a recorded net order amount is not automatically realised revenue.
+
+#### 2.3.3 Define eligibility and calculate the core measures
+
+Apply the adopted order-eligibility rules to the interim table before constructing analytical measures. Retain a reproducible account of which orders are included, excluded or unresolved and why.
+
+Use `SOLDTOPARTY` as the customer identifier, `SALESORDERDATE` to assign a calendar month and `TRANSACTIONCURRENCY` to keep currency histories separate. Each month is represented by its first calendar day.
+
+**Calculate the three measures for each customer-month-currency combination:**
+
+| **Measure**              | **Calculation and missing-value rule**                                                                                                                        |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ORDERCOUNT`**         | Count distinct eligible `SALESORDER` values.                                                                                                                  |
+| **`TOTALORDERNETVALUE`** | Sum `TOTALNETAMOUNT` once per eligible order. If an eligible contributing order has an unavailable amount, mark the complete total as missing.                |
+| **`AVGORDERNETVALUE`**   | Divide the complete `TOTALORDERNETVALUE` by `ORDERCOUNT` when the total is available and the count is greater than zero. Otherwise leave the average missing. |
+
+Maintain a feature specification with each measure's meaning, source fields, formula, unit, eligible population, missing-value treatment and interpretation limits. State later which measures act as detection inputs and which support classification or description. The three stored measures are mathematically related and must not be treated as independent evidence.
+
+Do not add EUR and GBP monetary amounts without a documented conversion. Order counts may be combined across currencies for a separately specified analysis only if each order contributes once.
+
+#### 2.3.4 Construct monthly customer-currency histories
+
+Construct `data/data-example/processed/001_customer_monthly_profiles.csv` using the schema in the data description. Its composite key is `CUSTOMER_ID`, `PERIODSTART` and `TRANSACTIONCURRENCY`. Retain `INDUSTRY` and `INDUSTRY_TEXT` as contextual attributes.
+
+Define the relevant customer-currency combinations and their observation intervals using the available extraction and coverage evidence. Do not define the end of observation as a customer's last order merely because later orders are absent.
+
+**For periods without eligible orders:**
+- Set `ORDERCOUNT` and `TOTALORDERNETVALUE` to zero only when observation coverage supports zero eligible activity for that customer-currency combination.
+- Leave `AVGORDERNETVALUE` missing when `ORDERCOUNT` is zero.
+- Do not convert missing extraction coverage, incomplete observation periods or unresolved evidence into zero activity.
+- Do not infer inactivity across all currencies from a zero count in one currency.
+
+Preserve the distinction between an observed zero, an unavailable monetary measure and an unobserved or unassessable period. Record coverage restrictions in linked preparation information if they are not columns of the documented monthly schema.
+
+Use the same monthly table to construct overall and industry summaries and longer customer comparison windows. Sum counts and complete monetary totals within the relevant currency and coverage scope. Recalculate an aggregate average as the aggregate total divided by the aggregate count; do not average monthly or customer averages without the appropriate weighting.
+
+If a required contributing monetary total is missing, the complete broader total and its average remain missing. A partial sum may be shown separately only when labelled incomplete and accompanied by its coverage. Retain customers without an industry assignment in customer-level and overall analyses, and show their contribution when reporting industry groups.
+
+#### 2.3.5 Confirm suitability and verify the prepared data
+
+Reassess suitability for the intended comparisons after technical validation and analytical selection. A prepared monthly row alone does not establish sufficient evidence for change detection.
+
+Distinguish comparisons with adequate evidence and no detected change from comparisons that cannot be assessed. Do not require activity in every month or year, a recent order, a later purchase or an available industry assignment merely to retain a customer. A history with unavailable monetary measures may still support an order-count comparison.
+
+**Verify:**
+- uniqueness of the order-level and monthly composite keys.
+- reconciliation of monthly `ORDERCOUNT` with eligible interim orders.
+- reconciliation of complete monetary totals by month and currency, including propagation of missing amounts.
+- calculation of averages and treatment of zero-order periods.
+- unchanged observed counts and amounts after adding justified zero-activity months.
+- the effects of exclusions, unresolved orders and incomplete coverage.
+- selected monthly profiles against their underlying orders.
+- correct regeneration and reloading of the exported files.
+
+Investigate discrepancies before using affected profiles for detection. Report how preparation decisions change the number of assessable customers, months and comparisons.
 
 ### 2.4 Required outputs
 
 **Produce:**
-1. **Prepared customer profiles:** Selected measures, period identifiers and relevant quality indicators.
-2. **Eligibility and coverage information:** Included customers, restricted comparisons and exclusion reasons.
-3. **Preparation and feature specification:** Applied rules, formulas and consequential decisions.
-4. **Verification results:** Reconciliation checks, identified discrepancies and their resolution.
-5. **Reproducible preparation code:** Input references, configuration and output schemas.
+1. **Enriched order-level interim table:** One validated row per represented order, including original codes, available descriptions and customer industry information.
+2. **Monthly customer-currency profiles:** The documented composite key and three core measures.
+3. **Eligibility and coverage record:** Technical issues, analytical exclusions, unresolved orders, observed zero periods and restrictions on measures or comparisons.
+4. **Preparation and feature specification:** Applied rules, ERP clarifications, formulas, configuration and interpretation limits.
+5. **Verification results:** Key checks, reconciliation, discrepancies and their resolution.
+6. **Reproducible preparation code:** Input references, transformations, output schemas and data versions.
 
-**Export the prepared analytical datasets according to the [shared data-format workflow](#data-formats-and-file-workflow):** save them as CSV, convert them to Parquet and use the Parquet versions in subsequent phases. Document the CSV encoding, delimiter, decimal notation and missing-value representation. Retain additional intermediate datasets where they support verification or reuse, and preserve the original extracts.
+Export the interim and processed datasets as CSV according to the data description: UTF-8, semicolon-separated fields, dates in `YYYY-MM-DD` format, decimal points for monetary values and empty fields for missing values. Preserve identifiers as strings and monetary precision during calculation.
+
+Convert the exported CSV files to Parquet and use the Parquet versions in subsequent phases according to the [shared data-format workflow](#data-formats-and-file-workflow). Verify that conversion and reloading preserve the intended identifiers, values, types and missingness. Preserve the original extracts.
 
 ### 2.5 Completion criteria
 
 **Phase 2 is complete when:**
-- core selection and preparation rules are explicit.
-- joins and aggregates have been verified.
-- selected measures have documented definitions.
-- customer-period profiles distinguish inactivity, missing evidence and undefined values.
-- analytical suitability and restrictions are recorded.
-- outputs can be regenerated and reloaded correctly.
-- the profiles are ready for the planned window comparisons.
+- observation boundaries and primary order-eligibility rules are explicit and justified.
+- technically representable orders and analytical exclusions remain distinguishable.
+- the enriched interim table is unique at order level and its joins have been verified.
+- the monthly profiles match the documented customer-month-currency schema.
+- the three core measures reconcile with eligible orders and handle missing amounts correctly.
+- observed zero activity, unavailable measures and uncertain coverage are distinguishable.
+- customer and comparison suitability restrictions are recorded.
+- the outputs can be regenerated and reloaded correctly and are ready for the planned window comparisons.
 
-Remaining optional preparation tasks do not block completion. Unresolved issues affecting core measures or trustworthy comparisons must be recorded as blockers.
+An unresolved issue affecting the primary analytical population, a core measure or trustworthy comparisons is a blocker until its treatment and consequences are documented.
 
 ### 2.6 Optional refinements
 
-Additional preparation may support product-group order shares, days since the last order, discount measures or quantities within compatible units.
+The order-level dates may support additional temporal descriptions, such as the interval between eligible orders or days since the last eligible order at a defined reference date. Such descriptions require adequate prior observation and a stated choice between currency-specific and combined ordering activity.
 
-Discount integration requires verified price-condition assignment, validity periods, price bases and quantities. Missing or unmaintained prices remain missing, and discount coverage must accompany aggregate results.
-
-Introduce these refinements only when justified by the investigation. Preserve a reproducible core dataset so that optional additions do not prevent execution of the main workflow.
+These refinements are not required columns of the current monthly profile schema. Introduce them only when they address an identified limitation of the core analysis, and keep their definitions and evidence requirements separate from the three core measures.
 
 ---
 
@@ -412,14 +450,14 @@ Method selection, calibration and detailed case inspection in this phase use dev
 
 Define a compact analysis configuration before systematically detecting events.
 
-| **Decision**                | **Required specification**                                                                                                        |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **Target patterns**         | State which changes the initial approach addresses, such as changes in ordering frequency, net order value or assortment breadth. |
-| **Detection inputs**        | Identify the selected measures and distinguish them from additional descriptive measures.                                         |
-| **Comparison windows**      | Define reference and subsequent window lengths, movement, boundary conventions and treatment of incomplete windows.               |
-| **Comparison support**      | Specify the observations, order activity and coverage needed to assess each measure.                                              |
-| **Change criteria**         | Define how deviation from usual variability, minimum magnitude and sufficient evidence are assessed.                              |
-| **Contextual restrictions** | Specify how recurring patterns, isolated large orders and coverage changes affect interpretation or assessability.                |
+| **Decision**                | **Required specification**                                                                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Target patterns**         | State which changes the initial approach addresses, such as changes in ordering activity, recorded net order values or their combination. |
+| **Detection inputs**        | Identify the selected measures and distinguish them from additional descriptive measures.                                                 |
+| **Comparison windows**      | Define reference and subsequent window lengths, movement, boundary conventions and treatment of incomplete windows.                       |
+| **Comparison support**      | Specify the observations, order activity and coverage needed to assess each measure.                                                      |
+| **Change criteria**         | Define how deviation from usual variability, minimum magnitude and sufficient evidence are assessed.                                      |
+| **Contextual restrictions** | Specify how recurring patterns, isolated large orders and coverage changes affect interpretation or assessability.                        |
 
 Use adjacent, non-overlapping reference and subsequent windows as the initial comparison design unless another arrangement is justified. Successive rolling comparisons may overlap. Their dependence must be considered when consolidating events and separating development from evaluation evidence.
 
@@ -484,7 +522,7 @@ Inspect selected candidates against their underlying orders and full available d
 **Prioritise checks for:**
 - changes dominated by individual large orders.
 - recurring patterns or incomplete observation periods.
-- missing classifications or other preparation effects.
+- missing monetary values, excluded or unresolved orders, changes in currency use and other preparation effects.
 - insufficient comparison support.
 - repeated detections and unclear event boundaries.
 
@@ -519,7 +557,7 @@ Completion does not require a predetermined number of events or favourable detec
 
 ### 3.6 Optional refinements
 
-Possible refinements include additional behavioural dimensions, alternative window designs or a second detection method such as change-point segmentation.
+Possible refinements include additional temporal descriptions based on eligible order dates, alternative window designs or a second detection method such as change-point segmentation.
 
 Introduce an extension only when it addresses a specific limitation or research-relevant question and sufficient time remains for its assessment. Method disagreements and applicability differences must be retained if multiple approaches are compared.
 
@@ -595,8 +633,6 @@ Manually identified patterns retain their provenance and require a documented ev
 - **evidence statuses**, such as insufficient comparison support.
 
 The examples above illustrate the structure. They do not establish final empirical types. Compatible types may coexist within one event. Define logical exclusions where necessary, but do not create a separate named type for every possible combination. A composite type requires a distinct interpretation and explicit criteria.
-
-For composition changes, define the representation and denominator rather than applying a generic increase/decrease label to the entire mix.
 
 #### 4.3.4 Specify definitions and assignment criteria
 
