@@ -1,0 +1,70 @@
+name: CI
+
+"on":
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Python 3.12 checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      MPLBACKEND: Agg
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      - name: Check out source without datasets
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          lfs: false
+          persist-credentials: false
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.13.1"
+          enable-cache: true
+
+      - name: Install project Python and locked dependencies
+        run: |
+          uv python install
+          uv sync --locked
+
+      - name: Check Python and notebook cell syntax without executing cells
+        run: |
+          uv run --locked python -B - <<'PY'
+          import ast
+          import json
+          from pathlib import Path
+          from IPython.core.inputtransformer2 import TransformerManager
+
+          for folder in (Path("setup"), Path("src/config")):
+              for path in folder.rglob("*.py"):
+                  ast.parse(path.read_text(encoding="utf-8"), filename=str(path))
+
+          transformer = TransformerManager()
+          for path in Path("src/notebooks").rglob("*.ipynb"):
+              if ".ipynb_checkpoints" in path.parts:
+                  continue
+              notebook = json.loads(path.read_text(encoding="utf-8"))
+              for index, cell in enumerate(notebook["cells"]):
+                  if cell["cell_type"] == "code":
+                      code = transformer.transform_cell("".join(cell["source"]))
+                      ast.parse(code, filename=f"{path}:cell-{index}")
+          PY
+
+      - name: Check setup shell syntax
+        run: bash -n setup/initial_setup.sh
+
+      - name: Run compatibility and utility tests with invented fixtures
+        run: uv run --locked python -B -m unittest discover -s setup/tests -v

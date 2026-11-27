@@ -19,6 +19,7 @@ Detection, typology and explainable description of purchasing changes in B2B who
 - [Project status](#project-status)
 - [Methodology](#methodology)
 - [Getting started](#getting-started)
+- [Automated checks](#automated-checks)
 - [Documentation](#documentation)
 - [Project structure](#project-structure)
 - [Data conventions](#data-conventions)
@@ -129,6 +130,19 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 
 For user-run production conversion, add `--prd` to the corresponding command. Folder selection is required for both environments; commands without `--folder` no longer convert files directly in the data root.
 
+## Automated checks
+
+The [CI workflow](.github/workflows/ci.yml) runs on pull requests targeting `main`, pushes to `main`, and manual dispatch. It uses Python 3.12 and the committed uv lockfile, checks Python/notebook-cell and Bash syntax, and runs the tests in [setup/tests](setup/tests).
+
+**Run the tests locally from the repository root after synchronizing the environment:**
+
+```bash
+uv sync --locked
+.venv/bin/python -B -m unittest discover -s setup/tests -v
+```
+
+The tests cover dataset randomization, CSV-to-Parquet conversion, documentation generation, dependency imports, and notebook HTML/Python exports. They use invented records and temporary directories or in-memory notebooks. They do not execute the analysis notebooks, regenerate repository mirrors, or use repository datasets. Documentation builds run only in isolated fixture trees. These checks verify software behavior, not empirical phase completion or methodological validity.
+
 ## Documentation
 
 | **Resource**                                                                                 | **Contents**                                                                            |
@@ -184,7 +198,7 @@ ERP-Customer-Behavior-Analysis/
 │   ├── exports/                      # Example figures, tables, and other artifacts
 │   └── .exports/                     # Private production artifacts (ignored)
 ├── .githooks/                        # Production-file guard and Git LFS hooks
-├── .github/                          # Pull request template
+├── .github/                          # Pull request template and CI workflow
 ├── .python-version                   # Project Python version selection
 ├── pyproject.toml                    # Dependencies and minimum uv version
 ├── uv.lock                           # Resolved dependency versions

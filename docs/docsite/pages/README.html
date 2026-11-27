@@ -26,6 +26,7 @@
 <li><a href="#project-status" target="_self">Project status</a></li>
 <li><a href="#methodology" target="_self">Methodology</a></li>
 <li><a href="#getting-started" target="_self">Getting started</a></li>
+<li><a href="#automated-checks" target="_self">Automated checks</a></li>
 <li><a href="#documentation" target="_self">Documentation</a></li>
 <li><a href="#project-structure" target="_self">Project structure</a></li>
 <li><a href="#data-conventions" target="_self">Data conventions</a></li>
@@ -145,6 +146,13 @@ bash setup/initial_setup.sh --no-color # Disable colored messages
 uv run --locked python setup/csv_to_parquet.py --folder interim --update
 </code></pre>
 <p>For user-run production conversion, add <code>--prd</code> to the corresponding command. Folder selection is required for both environments; commands without <code>--folder</code> no longer convert files directly in the data root.</p>
+<h2 id="automated-checks">Automated checks</h2>
+<p>The <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/.github/workflows/ci.yml" target="_blank" rel="noopener noreferrer">CI workflow</a> runs on pull requests targeting <code>main</code>, pushes to <code>main</code>, and manual dispatch. It uses Python 3.12 and the committed uv lockfile, checks Python/notebook-cell and Bash syntax, and runs the tests in <a href="https://github.com/NiklasSkulll/ERP-Customer-Behavior-Analysis/blob/main/setup/tests" target="_blank" rel="noopener noreferrer">setup/tests</a>.</p>
+<p><strong>Run the tests locally from the repository root after synchronizing the environment:</strong></p>
+<pre><code class="language-bash">uv sync --locked
+.venv/bin/python -B -m unittest discover -s setup/tests -v
+</code></pre>
+<p>The tests cover dataset randomization, CSV-to-Parquet conversion, documentation generation, dependency imports, and notebook HTML/Python exports. They use invented records and temporary directories or in-memory notebooks. They do not execute the analysis notebooks, regenerate repository mirrors, or use repository datasets. Documentation builds run only in isolated fixture trees. These checks verify software behavior, not empirical phase completion or methodological validity.</p>
 <h2 id="documentation">Documentation</h2>
 <table>
 <thead>
@@ -246,7 +254,7 @@ uv run --locked python setup/csv_to_parquet.py --folder interim --update
 │   ├── exports/                      # Example figures, tables, and other artifacts
 │   └── .exports/                     # Private production artifacts (ignored)
 ├── .githooks/                        # Production-file guard and Git LFS hooks
-├── .github/                          # Pull request template
+├── .github/                          # Pull request template and CI workflow
 ├── .python-version                   # Project Python version selection
 ├── pyproject.toml                    # Dependencies and minimum uv version
 ├── uv.lock                           # Resolved dependency versions

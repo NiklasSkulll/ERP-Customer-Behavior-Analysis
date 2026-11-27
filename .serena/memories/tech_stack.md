@@ -10,3 +10,4 @@
 - .gitattributes tracks CSV/Parquet through Git LFS, not notebooks. .githooks provides the private-path guard and LFS hooks; bootstrap sets executable permissions and repository-local core.hooksPath.
 - Serena is separately installed. .serena/project.yml selects Python+Markdown LSP, REPL and ignore handling/production exclusions. Confirm active project on the exact MCP connection before memory/symbol writes.
 - Phase 1 is a self-contained notebook with library-tagged code cells and embedded synthetic checks, not an installed module. Its older input contracts require alignment; details in `mem:core`.
+- CI: .github/workflows/ci.yml uses ubuntu-24.04, project Python 3.12, uv 0.13.1, uv sync --locked (including default dev dependencies), and standard-library unittest discovery. Third-party actions are commit-pinned; checkout disables LFS downloads and persisted credentials. No pytest/linter/type-checker dependency was added.

@@ -1,5 +1,9 @@
 """Create randomized CSV copies of the four documented raw ERP datasets.
 
+The input dataset must already be prepared for conversion: all four CSV files
+must use the documented filenames and column sets, consistent order headers,
+and input formats matching --delimiter and --decimal-mark.
+
 All rows and table relationships are retained. Dates, statuses, currencies,
 item numbers and lookup descriptions remain unchanged. Amounts receive random
 replacements, with equal numeric amounts receiving equal replacements; zero,
@@ -244,7 +248,7 @@ def cents_argument(value: str) -> int:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--input-dir", required=True, type=Path, help="Directory containing all four source CSV files.")
+    parser.add_argument("--input-dir", required=True, type=Path, help="Directory containing all four input CSV files, already prepared for conversion.")
     parser.add_argument("--output-dir", required=True, type=Path, help="New or empty directory for the four transformed CSV files.")
     parser.add_argument("--delimiter", choices=(";", ",", "\t"), default=";", help="Input CSV separator (default: semicolon). Output always uses semicolons.")
     parser.add_argument("--decimal-mark", choices=(".", ","), default=".", help="Input monetary decimal mark (default: period); no thousands separators.")
